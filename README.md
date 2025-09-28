@@ -1,4 +1,4 @@
-# SemantOS — Reproduction Kit (IJCAI Submission)
+# SemantOS — Reproduction Kit
 
 This repository provides an **executable reference pipeline** that mirrors the paper’s stages:
 
