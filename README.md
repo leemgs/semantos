@@ -1,113 +1,145 @@
-# SemantOS — Reproduction Kit
+# SemantOS: Semantic-Aware Kernel Optimization via Safe and Automated Sysctl Orchestration
 
-This repository provides an **executable reference pipeline** that mirrors the paper’s stages:
-
-1. **Telemetry** (synthetic) →
-2. **Knowledge Base** (lightweight JSON store) →
-3. **Reasoning Engine** (deterministic rule-based stub standing in for the LLM) →
-4. **Safety Guardrails** (bounds & relational checks) →
-5. **Staggered Rollout** (sandboxed sysctl file; no privileged ops) →
-6. **Monitoring** (synthetic post-check) →
-7. **Evaluation** (median p95 comparison across trials)
-
-> ⚠️ **Safety**: This kit never writes to `/proc` or `/sys`. All configuration changes are logged to `experiments/sandbox/sysctl.conf`.
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE.md)  
+[![Python](https://img.shields.io/badge/python-3.10%2B-brightgreen.svg)](#quickstart)  
+[![Status](https://img.shields.io/badge/status-reproducible-lightgrey.svg)](#reproducing-paper-results)
 
 ---
 
-## Quickstart
+## 🧠 Overview
+
+**SemantOS** is an executable reference framework that transforms low-level Linux kernel parameter tuning from a manual, heuristic-driven task into a **semantic, safe, and automated orchestration pipeline**.  
+Originally designed to reproduce the results of our research paper, this toolkit can be extended for real-world production environments — bridging the gap between academic reproducibility and operational deployment.
+
+---
+
+## 📦 Quickstart
 
 ```bash
 # 0) Python 3.10+ recommended
 python -V
 
-# 1) (Optional) create venv
+# 1) (Optional) Create a virtual environment
 python -m venv .venv && source .venv/bin/activate
 
-# 2) Install (nothing external required)
+# 2) Install (no external dependencies required)
 pip install -e .
 
-# 3) Run the full pipeline
+# 3) Run the full pipeline (sandbox mode)
 bash experiments/run_reproduction.sh
 ```
 
-Expected output includes:
-- `experiments/sandbox/sysctl.conf` — applied configs (sandbox only)
-- `experiments/results/summary.csv` — baseline vs tuned p95 and improvement percent
+Expected outputs:
+- `experiments/sandbox/sysctl.conf` — applied configurations (sandboxed)
+- `experiments/results/summary.csv` — baseline vs tuned p95 and improvement (%)
 
 ---
 
-## Structure
+## 📁 Repository Structure
 
 ```
 semantos/
-  telemetry/       # synthetic telemetry
-  kb/              # minimal KB (JSON + catalog)
-  reasoning/       # rule-based engine (LLM stand-in)
-  safety/          # guardrails + sandbox sysctl
-  rollout/         # batching + applier + monitor
-  eval/            # evaluator and CSV export
+  telemetry/       # synthetic telemetry generation
+  kb/              # minimal knowledge base (JSON + catalog)
+  reasoning/       # deterministic reasoning engine (LLM placeholder)
+  safety/          # guardrails + sandbox sysctl logic
+  rollout/         # batch rollout + applier + monitor
+  eval/            # evaluator + CSV export tools
 experiments/
-  configs/         # example configs (YAML for humans)
+  configs/         # example YAML configs
   data/            # sample telemetry CSV
-  results/         # produced by runs
-  sandbox/         # sysctl sandbox file lives here
-tests/             # tiny unit tests
+  results/         # generated results
+  sandbox/         # sandbox sysctl file lives here
+tests/             # minimal unit tests
 ```
 
 ---
 
-## Reproducing Paper Figures/Tables (Minimal)
+## 🧪 Reproducing Paper Results
 
-- **Latency Improvement**: `experiments/results/summary.csv` contains baseline and tuned median p95 across N trials.
-- You can repeat with different seeds:  
-  `python -m semantos.cli --seed 7 --trials 20`
+This repository allows you to reproduce the results and figures from the paper with minimal setup.
 
----
+- **Latency Improvement:**  
+  `experiments/results/summary.csv` shows baseline and tuned median p95 latency across multiple trials.
 
-## Extending with Real Systems
-
-1. Replace `telemetry/simulators.py` with real collectors.
-2. Swap `reasoning/engine.py` with your LLM inference (be mindful of the guardrails in `safety/guardrails.py`).
-3. Implement a privileged applier for controlled hosts (not included here).
+- **Run with custom seeds:**  
+```bash
+python -m semantos.cli --seed 7 --trials 20
+```
 
 ---
 
-## License
+## 🧩 Extending with Real Systems
 
-Apache-2.0. See `LICENSE.md`.
+SemantOS is designed for real-world applicability. You can extend it beyond synthetic benchmarks by replacing key components:
 
+1. **Telemetry:** Replace `telemetry/simulators.py` with actual eBPF or perf-based telemetry collectors.  
+2. **Reasoning Engine:** Swap `reasoning/engine.py` with an LLM inference backend — guardrails in `safety/guardrails.py` will still ensure safe recommendations.  
+3. **Applier:** Implement a privileged applier for remote or distributed hosts (not included in the base release).
 
 ---
 
-## 🔒 Real `/proc/sys` Mode (Sysctl)
+## 🔒 Real `/proc/sys` Mode (Production)
 
-> **위험성 주의:** 실서버에서 커널 파라미터를 변경하면 시스템 안정성에 영향이 있을 수 있습니다.  
-> 본 도구는 **화이트리스트 + 가드레일 + 백업/롤백**을 제공합니다. *반드시 단계적으로 적용하세요.*
+> ⚠️ **Warning:** Changing kernel parameters on a live system can impact stability.  
+> SemantOS provides **whitelisting**, **guardrails**, and **backup/rollback** support. Always deploy changes incrementally.
 
-### 드라이런(권장)
+### Dry Run (Recommended)
+
 ```bash
 bash experiments/run_sysctl_dryrun.sh
-# 또는
+# or
 python -m semantos.cli --applier sysctl
 ```
 
-### 실제 적용(루트 필요)
+### Apply Changes (Requires root)
+
 ```bash
 sudo -E bash experiments/run_sysctl_apply.sh
-# 또는
+# or
 sudo -E python -m semantos.cli --applier sysctl --apply
 ```
 
-실제 적용 시:
-- 변경 전 값을 `experiments/backup/sysctl_backup.json`에 저장합니다.
-- 화이트리스트: `vm.dirty_*`, `vm.swappiness`, `net.core.{somaxconn,netdev_max_backlog}`, `kernel.{sched_latency_ns,sched_min_granularity_ns,numa_balancing}`
-- 가드레일 위반 시 적용 중단
+During application:
+- Original values are saved to `experiments/backup/sysctl_backup.json`
+- Whitelist includes:  
+  - `vm.dirty_*`, `vm.swappiness`  
+  - `net.core.{somaxconn, netdev_max_backlog}`  
+  - `kernel.{sched_latency_ns, sched_min_granularity_ns, numa_balancing}`
+- Operations abort on any guardrail violation.
 
-### 롤백(루트 필요)
+### Rollback (Requires root)
+
 ```bash
 sudo -E bash experiments/run_sysctl_rollback.sh
-# 또는
+# or
 sudo -E python -m semantos.cli --applier sysctl --rollback
 ```
 
 ---
+
+## 📊 Output Artifacts
+
+| Artifact | Description |
+|----------|------------|
+| `sysctl.conf` | Recommended kernel parameter settings (sandboxed) |
+| `summary.csv` | p95 latency comparison before/after tuning |
+| `sysctl_backup.json` | Auto-generated backup of original kernel parameters |
+| `logs/` | Optional logs for rollout and validation |
+
+---
+
+## 🪄 Roadmap
+
+- [ ] Plug-and-play integration with large language models (LLMs)  
+- [ ] Support for remote kernel configuration via SSH and Ansible  
+- [ ] Reinforcement learning–based policy optimization  
+- [ ] Extended telemetry collectors (eBPF, perf, cgroup metrics)  
+
+---
+
+## 📜 License
+
+This project is licensed under the **Apache 2.0 License**. See [LICENSE.md](./LICENSE.md) for details.
+
+
