@@ -1,0 +1,11 @@
+[project]
+name = "semantos-reproduction"
+version = "0.1.0"
+description = "Reproduction kit for the SemantOS paper (telemetry->reasoning->safety->rollout->eval)."
+authors = [{name="SemantOS Authors"}]
+readme = "README.md"
+requires-python = ">=3.10"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
