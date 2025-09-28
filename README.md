@@ -1,4 +1,4 @@
-# SemantOS: Semantic-Aware Kernel Optimization via Safe and Automated Sysctl Orchestration
+# SemantOS: Semantic-Aware Kernel Optimization via Safe and Automated Sysctl Orchestration [Reproducibile Kit]
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE.md)  
 [![Python](https://img.shields.io/badge/python-3.10%2B-brightgreen.svg)](#quickstart)  
