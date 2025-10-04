@@ -7,11 +7,11 @@ SemantOS는 gRPC로 통신하는 5개의 모듈형 구성 요소로 이루어진
   
 | 구성 요소 | 기술 스택 | 주요 기능 |
 | :--- | :--- | :--- |
-| **Telemetry Agent** | Python, C/eBPF | [cite_start]커널 및 워크로드 메트릭을 초당 1% 미만의 CPU 오버헤드로 수집[cite: 953, 1003]. |
-| **Semantic Knowledge Base (KB)** | Python, Neo4j, FAISS | [cite_start]튜닝 설정의 메타데이터, 의존성 그래프, 역사적 결과를 저장합니다[cite: 946, 1007]. |
-| **Reasoner Engine** | Python, FastAPI, LLaMA-3.1-13B | [cite_start]KB 및 실시간 텔레메트리를 기반으로 설정 변경 사항과 자연어 설명을 생성합니다. |
-| **Safety Runtime** | Go | [cite_start]단계별 롤아웃(staged rollouts), SLO(Service Level Objective) 모니터링 및 회귀 감지 시 자동 롤백을 수행합니다. |
-| **Developer Interface** | TypeScript, Vue.js (시뮬레이션됨) | [cite_start]CLI/웹 대시보드를 통해 운영자가 설명을 검토하고 결정을 승인/거부할 수 있도록 합니다[cite: 964, 1017]. |
+| **Telemetry Agent** | Python, C/eBPF | 커널 및 워크로드 메트릭을 초당 1% 미만의 CPU 오버헤드로 수집[cite: 953, 1003]. |
+| **Semantic Knowledge Base (KB)** | Python, Neo4j, FAISS | 튜닝 설정의 메타데이터, 의존성 그래프, 역사적 결과를 저장합니다[cite: 946, 1007]. |
+| **Reasoner Engine** | Python, FastAPI, LLaMA-3.1-13B | KB 및 실시간 텔레메트리를 기반으로 설정 변경 사항과 자연어 설명을 생성합니다. |
+| **Safety Runtime** | Go | 단계별 롤아웃(staged rollouts), SLO(Service Level Objective) 모니터링 및 회귀 감지 시 자동 롤백을 수행합니다. |
+| **Developer Interface** | TypeScript, Vue.js (시뮬레이션됨) | CLI/웹 대시보드를 통해 운영자가 설명을 검토하고 결정을 승인/거부할 수 있도록 합니다[cite: 964, 1017]. |
 
 ## SemantOS 프로젝트 파일 구조
 요청하신 형식에 맞춰 SemantOS 프로젝트의 모든 생성 파일 및 폴더를 포함한 최종 구조를 출력합니다.
