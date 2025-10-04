@@ -1,6 +1,6 @@
 # SemantOS: Semantic Reasoning for Continual, Explainable, and Safe Kernel Auto-Tuning
 
-본 저장소는 ICJAI '25에 발표된 "SemantOS" 논문의 재현 코드입니다. SemantOS는 eBPF 텔레메트리, 시맨틱 지식 기반(Knowledge Base), 그리고 미세 조정된 대규모 언어 모델(LLM)을 결합하여 설명 가능하고 안전한 커널 설정 자동 튜닝을 제공하는 프레임워크입니다.
+본 저장소는 "SemantOS" 논문의 재현 코드입니다. SemantOS는 eBPF 텔레메트리, 시맨틱 지식 기반(Knowledge Base), 그리고 미세 조정된 대규모 언어 모델(LLM)을 결합하여 설명 가능하고 안전한 커널 설정 자동 튜닝을 제공하는 프레임워크입니다.
 
 
 # 아키텍처 개요
