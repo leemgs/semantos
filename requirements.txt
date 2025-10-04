@@ -1,2 +1,0 @@
-# Pure stdlib; kept for clarity if you later extend.
-# No external packages required.
