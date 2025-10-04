@@ -5,8 +5,8 @@
 
 # 아키텍처 개요
 
-[cite_start]SemantOS는 gRPC로 통신하는 5개의 모듈형 구성 요소로 이루어진 지속적인 제어 루프입니다[cite: 929, 953].
-
+SemantOS는 gRPC로 통신하는 5개의 모듈형 구성 요소로 이루어진 지속적인 제어 루프입니다.
+* 5개의 주요 컴포넌트
 | 구성 요소 | 기술 스택 | 주요 기능 |
 | :--- | :--- | :--- |
 | **Telemetry Agent** | Python, C/eBPF | [cite_start]커널 및 워크로드 메트릭을 초당 1% 미만의 CPU 오버헤드로 수집[cite: 953, 1003]. |
@@ -16,44 +16,45 @@
 | **Developer Interface** | TypeScript, Vue.js (시뮬레이션됨) | [cite_start]CLI/웹 대시보드를 통해 운영자가 설명을 검토하고 결정을 승인/거부할 수 있도록 합니다[cite: 964, 1017]. |
 
 * 프로젝트 파일 구조 (semantos/)
+요청하신 형식에 맞춰 SemantOS 프로젝트의 모든 생성 파일 및 폴더를 포함한 최종 구조를 출력합니다.
 
+## SemantOS 프로젝트 파일 구조
 
-## SemantOS 프로젝트 파일 구조 분석
-
-| 파일/폴더 | 설명 | 아키텍처 역할 |
-| :--- | :--- | :--- |
-| **`├── LICENSE.md`** | **Apache-2.0** 라이센스 전문 파일. 프로젝트의 사용 및 배포 조건을 명시합니다. | 프로젝트 표준 |
-| **`├── Makefile`** | **빌드 및 재현 스크립트**를 포함합니다. `make reproduce.all`과 같은 단일 명령으로 전체 시스템을 빌드하고 실험을 실행하는 데 사용됩니다. | 운영/재현성 |
-| **`├── README.md`** | **프로젝트 문서화** 파일. 아키텍처 개요, 설치 전제 조건, 그리고 실험 재현 방법을 안내합니다. | 프로젝트 표준 |
-| **`├── developer-interface`** | **웹 기반 운영자 대시보드** 모듈 (Vue.js/TypeScript). LLM의 추론 결과를 시각화하고 승인/거부 제어를 담당합니다. | Developer Interface |
-| `│   ├── Dockerfile` | Developer Interface를 빌드하고 Nginx를 통해 서빙하기 위한 **Docker 빌드 환경**을 정의합니다. | 빌드/배포 |
-| `│   ├── nginx.conf` | **Nginx 웹 서버 설정** 파일. Vue 앱을 호스팅하고 gRPC-Web 요청을 Safety Runtime으로 프록시(전달)합니다. | 배포/통신 |
-| `│   └── src` | Vue.js 애플리케이션의 **소스 코드 루트**입니다. | Developer Interface |
-| `│       ├── App.vue` | Vue.js 앱의 **최상위 루트 컴포넌트**입니다. | Developer Interface |
-| `│       ├── components` | 재사용 가능한 Vue 컴포넌트들을 담는 디렉토리입니다. | Developer Interface |
-| `│       │   └── TuningApproval.vue` | **핵심 컴포넌트**. LLM의 튜닝 권장 사항을 표시하고 운영자의 **승인(Approve) 및 거부(Reject)** 로직을 구현합니다. | Developer Interface |
-| `│       ├── main.ts` | Vue.js 애플리케이션의 **진입점** (초기 설정 및 마운트). | Developer Interface |
-| `│       └── proto` | gRPC-Web 통신을 위한 **TypeScript 스텁 파일**이 위치합니다. | 통신 표준 |
-| `│           ├── semantos_grpc_web_pb.d.ts` | gRPC 클라이언트 서비스(예: `SemantosControlClient`)의 **TypeScript 타입 정의**입니다. | 통신 표준 |
-| `│           └── semantos_pb.d.ts` | Protobuf 메시지(예: `TuningRecommendation`)의 **TypeScript 타입 정의**입니다. | 통신 표준 |
-| **`├── kb-service`** | **Semantic Knowledge Base (KB)** 모듈입니다. Neo4j (그래프) 및 FAISS (벡터) 검색 기능을 시뮬레이션하여 LLM의 RAG(Retrieval-Augmented Generation) 컨텍스트를 제공합니다. | Knowledge Base |
-| `│   ├── Dockerfile` | KB 서비스를 위한 Python 환경을 설정하는 **Docker 빌드 파일**입니다. | 빌드/배포 |
-| `│   └── kb_service.py` | KB의 핵심 로직 (트레이스 로깅, 그래프/벡터 검색 시뮬레이션)을 구현한 **Python 코드**입니다. | Knowledge Base |
-| **`├── proto`** | 프로젝트 전체에서 사용되는 **gRPC 서비스 정의 파일** 디렉토리입니다. | 통신 표준 |
-| `│   └── semantos.proto` | **Protobuf 정의 파일**. Telemetry Snapshot, Tuning Recommendation, Apply Response 등 모든 서비스 간의 통신 메시지와 API를 정의합니다. | 통신 표준 |
-| **`├── reasoner-engine`** | **LLM Reasoning Engine** 모듈입니다. Telemetry와 KB 컨텍스트를 받아 **튜닝 권장 사항과 설명(Rationale)**을 생성하는 역할을 합니다. | LLM Reasoner |
-| `│   └── reasoner_api.py` | LLM 추론 및 KB 검색 통합을 시뮬레이션하는 **Python FastAPI** 기반의 API 코드입니다. | LLM Reasoner |
-| **`├── safety-runtime`** | **Safety Runtime** 모듈입니다. 커널 설정 적용, **SLO(Service Level Objective) 감시**, 회귀 발생 시 **자동 롤백** 로직을 담당합니다. | Safety Runtime |
-| `│   ├── Dockerfile` | Go 언어로 작성된 Safety Runtime을 빌드하고 실행하기 위한 **멀티 스테이지 Docker 빌드 파일**입니다. | 빌드/배포 |
-| `│   └── cmd` | Go 애플리케이션의 메인 실행 코드를 담는 디렉토리입니다. | Safety Runtime |
-| `│       └── safety-runtime.go` | SLO 감시, 롤백, 그리고 튜닝 적용 제어 루프를 구현한 **Go 코드**입니다. | Safety Runtime |
-| **`└── telemetry-agent`** | **eBPF 기반 Telemetry Agent** 모듈입니다. 커널 레벨 메트릭을 고성능으로 수집합니다. | Telemetry Agent |
-| `    ├── Dockerfile` | Telemetry Agent를 빌드하고 eBPF 툴체인을 설정하는 **Docker 빌드 파일**입니다. | 빌드/배포 |
-| `    └── src` | Telemetry Agent의 소스 코드 루트입니다. | Telemetry Agent |
-| `        ├── agent.py` | eBPF 맵을 읽고 사용자 공간 메트릭을 통합하여 gRPC로 스냅샷을 전송하는 **Python 에이전트** 코드입니다. | Telemetry Agent |
-| `        └── bpf` | eBPF C 코드를 담는 디렉토리입니다. | Telemetry Agent |
-| `            └── trace_metrics.c` | 커널 추적점(tracepoints)에 부착되어 메트릭을 수집하는 **eBPF C 코드 골격**입니다. | Telemetry Agent |
-
+```bash
+semantos/
+├── LICENSE.md              # Apache-2.0 라이센스 전문
+├── README.md               # 프로젝트 아키텍처, 설정, 재현 방법을 담은 문서
+├── Makefile                # 빌드 및 배포 자동화 스크립트 (e.g., make reproduce.all)
+├── proto/                  # gRPC 통신 프로토콜 정의 디렉토리
+│   └── semantos.proto      # 모든 서비스 간의 통신 메시지 및 API를 정의하는 gRPC 파일
+├── telemetry-agent/        # eBPF 기반 커널 메트릭 수집 및 전송 모듈
+│   ├── src/                # Python 에이전트 소스 코드
+│   │   ├── bpf/            # eBPF C 코드 디렉토리
+│   │   │   └── trace_metrics.c  # 커널 메트릭 수집을 위한 eBPF C 코드 골격
+│   │   └── agent.py             # Python Telemetry Agent (메트릭 수집 및 gRPC 전송)
+│   └── Dockerfile          # Telemetry Agent 컨테이너 빌드 파일
+├── kb-service/             # Semantic Knowledge Base (Neo4j/FAISS 시뮬레이션)
+│   ├── kb_service.py       # Knowledge Base 로직 (트레이스 로깅 및 RAG 컨텍스트 검색)
+│   └── Dockerfile          # KB 서비스 컨테이너 빌드 파일
+├── reasoner-engine/        # LLM Reasoning Engine (추론 및 설명 생성)
+│   ├── reasoner_api.py     # FastAPI 기반 LLM 서비스 API 코드
+│   └── Dockerfile          # Reasoner Engine 컨테이너 빌드 파일
+├── safety-runtime/         # Go 기반 Safety Runtime (제어 루프 및 안전 장치)
+│   ├── cmd/                # Go 애플리케이션 메인 코드 디렉토리
+│   │   └── safety-runtime.go  # SLO 감시, 자동 롤백, 튜닝 적용 제어 로직
+│   └── Dockerfile          # Safety Runtime 컨테이너 빌드 파일
+└── developer-interface/    # Vue.js 기반 운영자 대시보드 (Human-in-the-Loop)
+    ├── src/                # Vue.js/TypeScript 소스 코드
+    │   ├── components/     # Vue 컴포넌트 디렉토리
+    │   │   └── TuningApproval.vue    # 핵심 튜닝 권장 사항 표시 및 승인/거부 컴포넌트
+    │   ├── proto/          # gRPC-Web 통신을 위한 TypeScript 스텁 파일
+    │   │   ├── semantos_grpc_web_pb.d.ts  # gRPC 클라이언트 서비스 TypeScript 정의
+    │   │   └── semantos_pb.d.ts           # gRPC 메시지 TypeScript 정의
+    │   ├── App.vue             # Vue 애플리케이션 루트 컴포넌트
+    │   └── main.ts             # Vue 애플리케이션 진입점
+    ├── nginx.conf          # Nginx 설정 (Vue 서빙 및 gRPC-Web 프록시 설정)
+    └── Dockerfile          # Developer Interface (Nginx 포함) 컨테이너 빌드 파일
+```
 -----
 
 # Getting Started
