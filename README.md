@@ -16,7 +16,7 @@
 | **Developer Interface** | TypeScript, Vue.js (시뮬레이션됨) | [cite_start]CLI/웹 대시보드를 통해 운영자가 설명을 검토하고 결정을 승인/거부할 수 있도록 합니다[cite: 964, 1017]. |
 
 * 프로젝트 파일 구조 (semantos/)
-'''bash
+```bash
 semantos/
 ├── LICENSE.md              # Apache-2.0 라이센스
 ├── README.md               # 프로젝트 문서화
@@ -39,8 +39,7 @@ semantos/
     ├── cmd/
     │   └── safety-runtime.go  # SLO 감시 및 자동 롤백 로직
     └── Dockerfile
-
-'''
+```
 
 -----
 
