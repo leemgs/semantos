@@ -16,30 +16,43 @@
 | **Developer Interface** | TypeScript, Vue.js (시뮬레이션됨) | [cite_start]CLI/웹 대시보드를 통해 운영자가 설명을 검토하고 결정을 승인/거부할 수 있도록 합니다[cite: 964, 1017]. |
 
 * 프로젝트 파일 구조 (semantos/)
-```bash
-semantos/
-├── LICENSE.md              # Apache-2.0 라이센스
-├── README.md               # 프로젝트 문서화
-├── Makefile                # 빌드 및 재현 스크립트 (make reproduce.all)
-├── proto/
-│   └── semantos.proto      # gRPC 서비스 정의
-├── telemetry-agent/        # eBPF 기반 커널 메트릭 수집
-│   ├── src/
-│   │   ├── bpf/
-│   │   │   └── trace_metrics.c  # eBPF C 코드 (골격)
-│   │   └── agent.py             # Python Telemetry Agent (gRPC 클라이언트/서버)
-│   └── Dockerfile
-├── kb-service/             # Semantic Knowledge Base (Neo4j + FAISS 시뮬레이션)
-│   ├── kb_service.py
-│   └── Dockerfile
-├── reasoner-engine/        # LLM Reasoning Engine (Fine-tuned LLaMA 시뮬레이션)
-│   ├── reasoner_api.py     # FastAPI 기반 LLM 서비스
-│   └── Dockerfile
-└── safety-runtime/         # Go 기반 Safety Runtime
-    ├── cmd/
-    │   └── safety-runtime.go  # SLO 감시 및 자동 롤백 로직
-    └── Dockerfile
-```
+
+
+## SemantOS 프로젝트 파일 구조 분석
+
+| 파일/폴더 | 설명 | 아키텍처 역할 |
+| :--- | :--- | :--- |
+| **`├── LICENSE.md`** | **Apache-2.0** 라이센스 전문 파일. 프로젝트의 사용 및 배포 조건을 명시합니다. | 프로젝트 표준 |
+| **`├── Makefile`** | **빌드 및 재현 스크립트**를 포함합니다. `make reproduce.all`과 같은 단일 명령으로 전체 시스템을 빌드하고 실험을 실행하는 데 사용됩니다. | 운영/재현성 |
+| **`├── README.md`** | **프로젝트 문서화** 파일. 아키텍처 개요, 설치 전제 조건, 그리고 실험 재현 방법을 안내합니다. | 프로젝트 표준 |
+| **`├── developer-interface`** | **웹 기반 운영자 대시보드** 모듈 (Vue.js/TypeScript). LLM의 추론 결과를 시각화하고 승인/거부 제어를 담당합니다. | Developer Interface |
+| `│   ├── Dockerfile` | Developer Interface를 빌드하고 Nginx를 통해 서빙하기 위한 **Docker 빌드 환경**을 정의합니다. | 빌드/배포 |
+| `│   ├── nginx.conf` | **Nginx 웹 서버 설정** 파일. Vue 앱을 호스팅하고 gRPC-Web 요청을 Safety Runtime으로 프록시(전달)합니다. | 배포/통신 |
+| `│   └── src` | Vue.js 애플리케이션의 **소스 코드 루트**입니다. | Developer Interface |
+| `│       ├── App.vue` | Vue.js 앱의 **최상위 루트 컴포넌트**입니다. | Developer Interface |
+| `│       ├── components` | 재사용 가능한 Vue 컴포넌트들을 담는 디렉토리입니다. | Developer Interface |
+| `│       │   └── TuningApproval.vue` | **핵심 컴포넌트**. LLM의 튜닝 권장 사항을 표시하고 운영자의 **승인(Approve) 및 거부(Reject)** 로직을 구현합니다. | Developer Interface |
+| `│       ├── main.ts` | Vue.js 애플리케이션의 **진입점** (초기 설정 및 마운트). | Developer Interface |
+| `│       └── proto` | gRPC-Web 통신을 위한 **TypeScript 스텁 파일**이 위치합니다. | 통신 표준 |
+| `│           ├── semantos_grpc_web_pb.d.ts` | gRPC 클라이언트 서비스(예: `SemantosControlClient`)의 **TypeScript 타입 정의**입니다. | 통신 표준 |
+| `│           └── semantos_pb.d.ts` | Protobuf 메시지(예: `TuningRecommendation`)의 **TypeScript 타입 정의**입니다. | 통신 표준 |
+| **`├── kb-service`** | **Semantic Knowledge Base (KB)** 모듈입니다. Neo4j (그래프) 및 FAISS (벡터) 검색 기능을 시뮬레이션하여 LLM의 RAG(Retrieval-Augmented Generation) 컨텍스트를 제공합니다. | Knowledge Base |
+| `│   ├── Dockerfile` | KB 서비스를 위한 Python 환경을 설정하는 **Docker 빌드 파일**입니다. | 빌드/배포 |
+| `│   └── kb_service.py` | KB의 핵심 로직 (트레이스 로깅, 그래프/벡터 검색 시뮬레이션)을 구현한 **Python 코드**입니다. | Knowledge Base |
+| **`├── proto`** | 프로젝트 전체에서 사용되는 **gRPC 서비스 정의 파일** 디렉토리입니다. | 통신 표준 |
+| `│   └── semantos.proto` | **Protobuf 정의 파일**. Telemetry Snapshot, Tuning Recommendation, Apply Response 등 모든 서비스 간의 통신 메시지와 API를 정의합니다. | 통신 표준 |
+| **`├── reasoner-engine`** | **LLM Reasoning Engine** 모듈입니다. Telemetry와 KB 컨텍스트를 받아 **튜닝 권장 사항과 설명(Rationale)**을 생성하는 역할을 합니다. | LLM Reasoner |
+| `│   └── reasoner_api.py` | LLM 추론 및 KB 검색 통합을 시뮬레이션하는 **Python FastAPI** 기반의 API 코드입니다. | LLM Reasoner |
+| **`├── safety-runtime`** | **Safety Runtime** 모듈입니다. 커널 설정 적용, **SLO(Service Level Objective) 감시**, 회귀 발생 시 **자동 롤백** 로직을 담당합니다. | Safety Runtime |
+| `│   ├── Dockerfile` | Go 언어로 작성된 Safety Runtime을 빌드하고 실행하기 위한 **멀티 스테이지 Docker 빌드 파일**입니다. | 빌드/배포 |
+| `│   └── cmd` | Go 애플리케이션의 메인 실행 코드를 담는 디렉토리입니다. | Safety Runtime |
+| `│       └── safety-runtime.go` | SLO 감시, 롤백, 그리고 튜닝 적용 제어 루프를 구현한 **Go 코드**입니다. | Safety Runtime |
+| **`└── telemetry-agent`** | **eBPF 기반 Telemetry Agent** 모듈입니다. 커널 레벨 메트릭을 고성능으로 수집합니다. | Telemetry Agent |
+| `    ├── Dockerfile` | Telemetry Agent를 빌드하고 eBPF 툴체인을 설정하는 **Docker 빌드 파일**입니다. | 빌드/배포 |
+| `    └── src` | Telemetry Agent의 소스 코드 루트입니다. | Telemetry Agent |
+| `        ├── agent.py` | eBPF 맵을 읽고 사용자 공간 메트릭을 통합하여 gRPC로 스냅샷을 전송하는 **Python 에이전트** 코드입니다. | Telemetry Agent |
+| `        └── bpf` | eBPF C 코드를 담는 디렉토리입니다. | Telemetry Agent |
+| `            └── trace_metrics.c` | 커널 추적점(tracepoints)에 부착되어 메트릭을 수집하는 **eBPF C 코드 골격**입니다. | Telemetry Agent |
 
 -----
 
@@ -127,6 +140,68 @@ Telemetry Agent는 **eBPF** 접근이 필요하므로, 호스트의 **`--privile
 # Telemetry Agent를 시작하여 커널 메트릭 수집 루프를 시작합니다.
 docker-compose up -d telemetry-agent
 ```
+
+**D. Developer Interface 실행**
+
+```bash
+docker-compose up -d
+```
+웹 브라우저에서 **http://localhost:8080**으로 접속하여 Developer Interface에 접근합니다. 
+(이때, gRPC-Web 통신은 Nginx Proxy를 통해 Safety Runtime으로 전달됩니다.)
+이 화면은 SemantOS의 Human-in-the-Loop 메커니즘을 시각화하며, Safety Runtime이 운영자의 최종 승인을 기다리는 동안 표시됩니다.
+ 아래의 테이블은 Vue.js/TypeScript 컴포넌트인 TuningApproval.vue의 실행 결과를 보여주며, 논문의 핵심 요구 사항인 **설명 가능성(Explainability)**과 **안전성(Safety)**을 반영합니다.
+
+### 
+
+## 💻 SemantOS Developer Interface 실행 화면 (시뮬레이션)
+
+제가 코드로 구현한 **Developer Interface (Vue.js/TypeScript)**를 실제로 빌드하고 실행했을 때, 사용자에게 보이게 될 웹 화면의 모습을 Markdown 형식으로 시뮬레이션하여 보여드립니다. 이 화면은 **SemantOS** 아키텍처의 핵심인 **Human-in-the-Loop** 제어 메커니즘을 나타냅니다.
+
+---
+
+
+### 1. 화면 구성 요소
+
+이 데모 화면은 Vue.js/TypeScript 컴포넌트인 `TuningApproval.vue`의 실행 결과를 보여주며, 논문의 핵심 요구 사항인 **설명 가능성(Explainability)**과 **안전성(Safety)**을 반영합니다.
+
+| 영역 | 설명 | 연관 백엔드 모듈 |
+| :--- | :--- | :--- |
+| **Pending Action** | 현재 시스템에 적용 대기 중인 커널 튜닝 매개변수를 표시합니다. 이 예시에서는 메모리 관리 노브인 `vm.swappiness`의 값을 낮추는 것을 제안합니다. | **Reasoner Engine**이 생성한 `TuningRecommendation` |
+| **Uncertainty Score** | **LLM**이 이 특정 추론에 대해 느끼는 불확실성을 백분율로 표시합니다. 운영자는 이 점수를 통해 위험도를 직관적으로 평가할 수 있습니다. (예: 8.00%는 낮은 불확실성) | **Reasoner Engine** |
+| **LLM Rationale (Explainability)** | **Semantic Knowledge Base (KB)**에서 검색된 과거 트레이스(Vector Retrieval)를 근거로 하여, 왜 이 변경이 필요한지 자연어로 설명합니다. 이 부분이 SemantOS의 핵심 강점입니다. | **Reasoner Engine** & **Knowledge Base** |
+| **Approve & Apply** | 운영자가 튜닝을 승인할 경우, **Safety Runtime**의 `ApplyConfiguration` gRPC 엔드포인트가 호출되어 설정이 적용되고 SLO 모니터링이 시작됩니다. | **Safety Runtime** |
+| **Reject & Log Fail** | 운영자가 튜닝을 거부할 경우, **Safety Runtime**을 통해 거부 트레이스가 **Knowledge Base**의 `LogOutcome`에 기록됩니다. 이는 LLM이 **실패 경험**으로부터 학습하여 다음 권장 사항의 정확도를 높이는 데 사용됩니다. | **Safety Runtime** & **Knowledge Base** |
+
+이 인터페이스를 통해 SemantOS는 완전 자동화와 수동 제어 사이의 균형을 유지하며, 최종 결정권은 항상 숙련된 시스템 운영자에게 부여됩니다.
+
+### 2. 화면 시뮬레이션 
+
+| 요소 | 설명 |
+| :--- | :--- |
+| **타이틀** | **SemantOS Developer Interface: Critical Action Pending** |
+| **상태** | **Pending Action: Kernel Knob Tuning** |
+| **Knob Name** | `vm.swappiness` |
+| **Proposed Value** | `1` (기존 값: `60`) |
+| **Uncertainty Score** | **8.00%** (낮은 불확실성/높은 신뢰도) |
+| **Predicted Impact** | P95 Latency: **-15%** / Throughput: **+5%** |
+| **LLM Rationale (Explainability)** | **"Knowledge Base의 벡터 트레이스 검색 결과 및 현재 높은 I/O 대기열 상태 분석에 따르면, 메모리 집약적인 OLTP 워크로드에서 `vm.swappiness`를 1로 설정하는 것이 P95 지연 시간을 15% 감소시키며 SLO 위반 위험이 낮음을 입증했습니다."** |
+| **제어 버튼** | **✅ Approve & Apply** (녹색) |
+| **제어 버튼** | **❌ Reject & Log Fail** (빨간색) |
+
+---
+
+### 3. 화면 구성 요소별 역할 분석
+
+이 인터페이스는 운영자가 LLM의 결정에 대해 **최종적인 안전 점검**을 수행할 수 있도록 설계되었습니다.
+
+#### 설명 가능성 (Explainability) 제공
+* **Rationale** 필드가 핵심입니다. **Reasoner Engine (LLM)**은 **Knowledge Base (KB)**에서 가져온 **과거 경험**을 근거로 제시하므로, 운영자는 단순히 '왜?'라는 질문에 대한 답변을 넘어, **'어떤 증거'**에 기반한 결정인지 이해할 수 있습니다.
+
+#### 안전성 (Safety) 확보
+* **Uncertainty Score**와 **Predicted Impact**를 통해 LLM의 자신감과 예상되는 결과를 사전에 알 수 있습니다.
+* **Approve & Apply** 버튼은 **Safety Runtime**의 `ApplyConfiguration` gRPC API를 호출하여 설정 적용을 시작합니다.
+* **Reject & Log Fail** 버튼은 거부 결정을 KB에 **'실패 트레이스'**로 기록하여, LLM이 다음 번 추론 시 이 부정적인 경험을 학습에 반영하도록 합니다.
+
 
 ## 🧹 Cleanup (정리)
 
