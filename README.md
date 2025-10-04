@@ -191,7 +191,7 @@ docker-compose up -d
 
 ---
 
-### 3. 화면 구성 요소별 역할 분석
+### 3. 화면 구성 요소별 역할
 
 이 인터페이스는 운영자가 LLM의 결정에 대해 **최종적인 안전 점검**을 수행할 수 있도록 설계되었습니다.
 
@@ -202,6 +202,25 @@ docker-compose up -d
 * **Uncertainty Score**와 **Predicted Impact**를 통해 LLM의 자신감과 예상되는 결과를 사전에 알 수 있습니다.
 * **Approve & Apply** 버튼은 **Safety Runtime**의 `ApplyConfiguration` gRPC API를 호출하여 설정 적용을 시작합니다.
 * **Reject & Log Fail** 버튼은 거부 결정을 KB에 **'실패 트레이스'**로 기록하여, LLM이 다음 번 추론 시 이 부정적인 경험을 학습에 반영하도록 합니다.
+
+
+### 4. 실행 및 운영 중 생성/수정되는 파일 목록
+SemantOS의 5개 컴포넌트(`telemetry-agent`, `kb-service`, `reasoner-engine`, `safety-runtime`, `developer-interface`)를 실행하고 운영하는 과정에서 **지속적인 학습(Continual Learning) 결과**, **운영 로그**, **실험 결과** 등의 파일들을 생성합니다. 
+
+| 컴포넌트 | 생성/수정 파일 | 설명 | 연관성 |
+| :--- | :--- | :--- | :--- |
+| **Knowledge Base (`kb-service`)** | `kb/data/optimization_traces.db` (또는 `.jsonl`) | **Safety Runtime**이 `LogOutcome` gRPC를 호출할 때마다 기록되는 **과거 튜닝 경험(트레이스)** 데이터베이스 파일입니다. LLM의 재학습(Continual Learning)에 사용됩니다. | **지속적 학습 데이터** |
+| | `kb/data/faiss_index.bin` | KB 서비스가 튜닝 트레이스의 임베딩 벡터를 저장하는 **FAISS 벡터 인덱스 파일**입니다. | **RAG 검색 인덱스** |
+| | `kb/data/audit_log.csv` | 시스템의 모든 튜닝 시도, 롤백, SLO 위반 여부 등이 기록되는 **감사 로그 파일**입니다. | **운영/감사 로그** |
+| **Safety Runtime** | `/proc/sys/vm/swappiness` 등 커널 파일 | `ApplyConfiguration` gRPC가 승인될 때 **실제로 값이 변경되는** 커널 매개변수 파일입니다. | **시스템 설정 변경** |
+| **Telemetry Agent** | `/tmp/semantos_ebpf_metrics` (pipe/socket) | eBPF 프로그램(`trace_metrics.c`)이 수집한 커널 레벨 메트릭을 사용자 공간의 `agent.py`로 전달하기 위해 사용하는 **임시 통신 파일** (파이프 또는 소켓)입니다. | **실시간 데이터** |
+| **Reasoner Engine** | `reasoner/models/llama_ft_latest.gguf` | 지속적인 학습을 통해 KB에 새로 기록된 트레이스 데이터로 **LLM이 미세 조정(Fine-tuning)될 경우** 업데이트되는 모델 파일입니다. | **업데이트된 LLM** |
+| **Makefile/실험** | `results/results_summary.csv` | `make reproduce.all` 명령을 실행했을 때, 모든 컴포넌트의 제어 루프가 종료된 후 **실험 결과를 집계**하여 저장하는 최종 파일입니다. (논문의 **Table 2** 해당) | **최종 실험 결과** |
+
+* **Telemetry Agent**: 데이터를 생성하여 메모리/네트워크를 통해 전송하며, 영구적인 파일을 생성하지 않습니다 (임시 파이프/소켓 사용).
+* **Safety Runtime**: 시스템 파일(`proc/sys/`)을 직접 수정하고, 그 결과를 **KB 서비스**를 통해 로깅합니다.
+* **Developer Interface**: 브라우저에서 실행되는 프론트엔드이므로, 서버 측에 영구적인 파일을 생성하지 않습니다.
+* **Knowledge Base**: 시스템의 영구적인 기억 장치로서 **데이터 파일**을 주로 생성하고 관리합니다.
 
 
 ## 🧹 Cleanup (정리)
