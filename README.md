@@ -2,11 +2,9 @@
 
 본 저장소는 "SemantOS" 논문의 재현 코드입니다. SemantOS는 eBPF 텔레메트리, 시맨틱 지식 기반(Knowledge Base), 그리고 미세 조정된 대규모 언어 모델(LLM)을 결합하여 설명 가능하고 안전한 커널 설정 자동 튜닝을 제공하는 프레임워크입니다.
 
-
-# 아키텍처 개요
-
+## 아키텍처 개요
 SemantOS는 gRPC로 통신하는 5개의 모듈형 구성 요소로 이루어진 지속적인 제어 루프입니다.
-* 5개의 주요 컴포넌트
+  
 | 구성 요소 | 기술 스택 | 주요 기능 |
 | :--- | :--- | :--- |
 | **Telemetry Agent** | Python, C/eBPF | [cite_start]커널 및 워크로드 메트릭을 초당 1% 미만의 CPU 오버헤드로 수집[cite: 953, 1003]. |
@@ -15,10 +13,8 @@ SemantOS는 gRPC로 통신하는 5개의 모듈형 구성 요소로 이루어진
 | **Safety Runtime** | Go | [cite_start]단계별 롤아웃(staged rollouts), SLO(Service Level Objective) 모니터링 및 회귀 감지 시 자동 롤백을 수행합니다. |
 | **Developer Interface** | TypeScript, Vue.js (시뮬레이션됨) | [cite_start]CLI/웹 대시보드를 통해 운영자가 설명을 검토하고 결정을 승인/거부할 수 있도록 합니다[cite: 964, 1017]. |
 
-* 프로젝트 파일 구조 (semantos/)
-요청하신 형식에 맞춰 SemantOS 프로젝트의 모든 생성 파일 및 폴더를 포함한 최종 구조를 출력합니다.
-
 ## SemantOS 프로젝트 파일 구조
+요청하신 형식에 맞춰 SemantOS 프로젝트의 모든 생성 파일 및 폴더를 포함한 최종 구조를 출력합니다.
 
 ```bash
 semantos/
@@ -58,7 +54,6 @@ semantos/
 -----
 
 # Getting Started
-
 이 문서는 **SemantOS** 프로젝트를 설정하고 논문에서 제시된 **커널 자동 튜닝 실험**을 재현하는 방법을 안내합니다. SemantOS는 eBPF, Semantic Knowledge Base, 그리고 LLM 기반 Reasoner Engine으로 구성된 전체 스택 프레임워크입니다.
 
 ## 📋 Prerequisites (선행 조건)
@@ -152,9 +147,8 @@ docker-compose up -d
 이 화면은 SemantOS의 Human-in-the-Loop 메커니즘을 시각화하며, Safety Runtime이 운영자의 최종 승인을 기다리는 동안 표시됩니다.
  아래의 테이블은 Vue.js/TypeScript 컴포넌트인 TuningApproval.vue의 실행 결과를 보여주며, 논문의 핵심 요구 사항인 **설명 가능성(Explainability)**과 **안전성(Safety)**을 반영합니다.
 
-### 
 
-## 💻 SemantOS Developer Interface 실행 화면 (시뮬레이션)
+## SemantOS Developer Interface 실행 화면 (시뮬레이션)
 
 제가 코드로 구현한 **Developer Interface (Vue.js/TypeScript)**를 실제로 빌드하고 실행했을 때, 사용자에게 보이게 될 웹 화면의 모습을 Markdown 형식으로 시뮬레이션하여 보여드립니다. 이 화면은 **SemantOS** 아키텍처의 핵심인 **Human-in-the-Loop** 제어 메커니즘을 나타냅니다.
 
@@ -221,6 +215,7 @@ SemantOS의 5개 컴포넌트(`telemetry-agent`, `kb-service`, `reasoner-engine`
 * **Safety Runtime**: 시스템 파일(`proc/sys/`)을 직접 수정하고, 그 결과를 **KB 서비스**를 통해 로깅합니다.
 * **Developer Interface**: 브라우저에서 실행되는 프론트엔드이므로, 서버 측에 영구적인 파일을 생성하지 않습니다.
 * **Knowledge Base**: 시스템의 영구적인 기억 장치로서 **데이터 파일**을 주로 생성하고 관리합니다.
+
 
 
 ## 🧹 Cleanup (정리)
