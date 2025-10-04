@@ -209,7 +209,7 @@ SemantOS의 5개 컴포넌트(`telemetry-agent`, `kb-service`, `reasoner-engine`
 | **Safety Runtime** | `/proc/sys/vm/swappiness` 등 커널 파일 | `ApplyConfiguration` gRPC가 승인될 때 **실제로 값이 변경되는** 커널 매개변수 파일입니다. | **시스템 설정 변경** |
 | **Telemetry Agent** | `/tmp/semantos_ebpf_metrics` (pipe/socket) | eBPF 프로그램(`trace_metrics.c`)이 수집한 커널 레벨 메트릭을 사용자 공간의 `agent.py`로 전달하기 위해 사용하는 **임시 통신 파일** (파이프 또는 소켓)입니다. | **실시간 데이터** |
 | **Reasoner Engine** | `reasoner/models/llama_ft_latest.gguf` | 지속적인 학습을 통해 KB에 새로 기록된 트레이스 데이터로 **LLM이 미세 조정(Fine-tuning)될 경우** 업데이트되는 모델 파일입니다. | **업데이트된 LLM** |
-| **Makefile/실험** | `results/results_summary.csv, per_workload_results.csv` | `make reproduce.all` 명령을 실행했을 때, 모든 컴포넌트의 제어 루프가 종료된 후 **실험 결과를 집계**하여 저장하는 최종 파일입니다. (논문의 **Table 2** 해당) | **최종 실험 결과** |
+| **Makefile/실험** | `results/results_summary.csv` | `make reproduce.all` 명령을 실행했을 때, 모든 컴포넌트의 제어 루프가 종료된 후 , per_workload_results와 같은 **실험 결과들을 집계**하여 저장하는 최종 파일입니다. (논문의 **Table 2** 해당) | **최종 실험 결과** |
 
 * **Telemetry Agent**: 데이터를 생성하여 메모리/네트워크를 통해 전송하며, 영구적인 파일을 생성하지 않습니다 (임시 파이프/소켓 사용).
 * **Safety Runtime**: 시스템 파일(`proc/sys/`)을 직접 수정하고, 그 결과를 **KB 서비스**를 통해 로깅합니다.
