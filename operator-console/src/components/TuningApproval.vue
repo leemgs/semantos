@@ -36,7 +36,7 @@ import { RpcError } from 'grpc-web';
 
 // Safety Runtime gRPC-Web 게이트웨이 주소
 // (Docker 환경에서는 Envoy 또는 별도 Proxy를 통해 접근해야 함)
-const SAFETY_RUNTIME_URL = 'http://localhost:8080'; // Envoy Proxy 주소 가정
+const SAFETY_RUNTIME_URL = 'http://localhost:9988'; // Envoy Proxy 주소 가정
 
 export default defineComponent({
   name: 'TuningApproval',
