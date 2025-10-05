@@ -1,14 +1,17 @@
-# Operator Console (Debian-base NGINX with grpc_web built-in)
-FROM nginx:1.27-bookworm
+FROM python:3.11-slim
 
-# 기본 서버블록 제거 후 우리의 설정 적용
-RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1     PIP_NO_CACHE_DIR=1
 
-# 정적 파일(빌드 산출물)이 있다면 /usr/share/nginx/html/ 로 복사
-# (현재는 외부에서 넣는다고 가정. 필요 시 아래 주석 해제)
-# COPY dist/ /usr/share/nginx/html/
+# System deps
+RUN apt-get update && apt-get install -y --no-install-recommends     curl ca-certificates &&     rm -rf /var/lib/apt/lists/*
 
-EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+WORKDIR /app
 
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+
+COPY . .
+
+EXPOSE 9988
+
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "9988"]

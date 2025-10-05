@@ -1,79 +1,57 @@
-version: '3.8'
-
+version: '3.9'
 services:
-  # 1. Knowledge Base (KB) Service
   kb-service:
     build:
-      context: .
-      dockerfile: kb-service/Dockerfile
+      context: ./kb-service
     container_name: kb-service
     ports:
-      - "50052:50052"  # gRPC 포트
-    volumes:
-      - ./data/kb:/app/data  # 영구 데이터를 호스트에 저장
-    # command: python kb_service.py  # Dockerfile의 CMD 사용
-
-  # 2. Reasoner (LLM 추론)
+    - 7001:7001
+    environment: {}
   reasoner:
     build:
-      context: .
-      dockerfile: reasoner/Dockerfile
+      context: ./reasoner
     container_name: reasoner
     ports:
-      - "50053:50053"  # gRPC 포트
+    - 7002:7002
+    environment:
+      KB_URL: http://kb-service:7001
     depends_on:
-      - kb-service
-    # 실제 환경에서는 GPU 접근을 위한 runtime: nvidia 옵션이 필요할 수 있습니다.
-
-  # 3. Safety Runtime (SLO 감시 및 제어)
+    - kb-service
   safety-runtime:
     build:
-      context: .
-      dockerfile: safety-runtime/Dockerfile
+      context: ./safety-runtime
     container_name: safety-runtime
-    privileged: true  # 커널 노브 제어 및 eBPF 맵 접근 시 필요
     ports:
-      - "50051:50051"  # gRPC 포트
-    depends_on:
-      - kb-service
-      - reasoner
-
-  # 4. Telemetry Agent (eBPF 커널 메트릭 수집)
+    - 7003:7003
+    environment:
+      UQ_THRESHOLD: '0.55'
   telemetry-agent:
     build:
-      context: .
-      dockerfile: telemetry-agent/Dockerfile
+      context: ./telemetry-agent
     container_name: telemetry-agent
-    privileged: true
-    pid: "host"  # PID 네임스페이스 공유 (eBPF가 모든 프로세스 접근 가능)
-    volumes:
-      - /sys/kernel/debug:/sys/kernel/debug:ro    # BPF 파일시스템 접근
-      - /lib/modules:/lib/modules:ro              # 커널 모듈 접근
-      - /usr/src:/usr/src:ro                      # ⬅️ 커널 헤더 접근 (clang 빌드용)
+    ports:
+    - 7000:7000
+    environment:
+      KB_URL: http://kb-service:7001
+      REASONER_URL: http://reasoner:7002
+      SAFETY_URL: http://safety-runtime:7003
     depends_on:
-      - safety-runtime  # 수집된 메트릭을 Safety Runtime으로 전송
-
-  # 5. Operator Console (Vue.js/TypeScript + gRPC-Web Proxy)
+    - kb-service
+    - reasoner
+    - safety-runtime
   operator-console:
     build:
       context: ./operator-console
-      dockerfile: Dockerfile
     container_name: operator-console
     ports:
-      - "9988:8080"
+    - 9988:9988
+    environment:
+      TELEMETRY_URL: http://telemetry-agent:7000
+      KB_URL: http://kb-service:7001
+      REASONER_URL: http://reasoner:7002
+      SAFETY_URL: http://safety-runtime:7003
     depends_on:
-      - safety-runtime
-      - grpc-web-proxy
-
-  # 6. Envoy Service
-  grpc-web-proxy:
-    image: envoyproxy/envoy-distroless:v1.30.3
-    container_name: grpc-web-proxy
-    volumes:
-      - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
-    expose:
-      - "8080"      # 내부용 (operator-console -> envoy)
-      - "9901"      # (옵션) Envoy admin
-    depends_on:
-      - reasoner
-
+    - telemetry-agent
+    - kb-service
+    - reasoner
+    - safety-runtime
