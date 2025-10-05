@@ -8,10 +8,10 @@ services:
       dockerfile: kb-service/Dockerfile
     container_name: kb-service
     ports:
-      - "50052:50052" # gRPC 포트
+      - "50052:50052"  # gRPC 포트
     volumes:
-      - ./data/kb:/app/data # 영구 데이터를 호스트에 저장
-    # command: python kb_service.py # Dockerfile의 CMD 사용
+      - ./data/kb:/app/data  # 영구 데이터를 호스트에 저장
+    # command: python kb_service.py  # Dockerfile의 CMD 사용
 
   # 2. Reasoner (LLM 추론)
   reasoner-engine:
@@ -20,7 +20,7 @@ services:
       dockerfile: reasoner/Dockerfile
     container_name: reasoner
     ports:
-      - "50053:50053" # gRPC 포트
+      - "50053:50053"  # gRPC 포트
     depends_on:
       - kb-service
     # 실제 환경에서는 GPU 접근을 위한 runtime: nvidia 옵션이 필요할 수 있습니다.
@@ -31,9 +31,9 @@ services:
       context: .
       dockerfile: safety-runtime/Dockerfile
     container_name: safety-runtime
-    privileged: true # 커널 노브 제어 및 eBPF 맵 접근 시 필요
+    privileged: true  # 커널 노브 제어 및 eBPF 맵 접근 시 필요
     ports:
-      - "50051:50051" # gRPC 포트
+      - "50051:50051"  # gRPC 포트
     depends_on:
       - kb-service
       - reasoner-engine
@@ -45,14 +45,15 @@ services:
       dockerfile: telemetry-agent/Dockerfile
     container_name: telemetry-agent
     privileged: true
-    pid: "host" # PID 네임스페이스 공유 (eBPF가 모든 프로세스 접근 가능)
+    pid: "host"  # PID 네임스페이스 공유 (eBPF가 모든 프로세스 접근 가능)
     volumes:
-      - /sys/kernel/debug:/sys/kernel/debug:ro # BPF 파일시스템 접근
-      - /lib/modules:/lib/modules:ro # 커널 모듈 접근
+      - /sys/kernel/debug:/sys/kernel/debug:ro    # BPF 파일시스템 접근
+      - /lib/modules:/lib/modules:ro              # 커널 모듈 접근
+      - /usr/src:/usr/src:ro                      # ⬅️ 커널 헤더 접근 (clang 빌드용)
     depends_on:
-      - safety-runtime # 수집된 메트릭을 Safety Runtime으로 전송
+      - safety-runtime  # 수집된 메트릭을 Safety Runtime으로 전송
 
-  # 5. Operator Console (Vue.js/TypeScript) 및 gRPC-Web Proxy (Nginx)
+  # 5. Operator Console (Vue.js/TypeScript + gRPC-Web Proxy)
   operator-console:
     build:
       context: ./operator-console

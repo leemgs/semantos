@@ -16,6 +16,6 @@ RUN mkdir -p /usr/share/nginx/html
 RUN printf '<!doctype html><html><head><meta charset="utf-8"><title>Operator Console</title><meta name="viewport" content="width=device-width, initial-scale=1"></head><body style="font-family:sans-serif;padding:24px;"><h1>Operator Console</h1><p>UI build artifacts not present. Nginx + gRPC-Web proxy are running.</p><p>Place your built <code>dist/</code> here or switch to the multi-stage Node build (see README note).</p></body></html>' > /usr/share/nginx/html/index.html
 
 # 포트 노출 (compose에서 매핑됨)
-EXPOSE 8080
+EXPOSE 9988 
 
 CMD ["nginx", "-g", "daemon off;"]
