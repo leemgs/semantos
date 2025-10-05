@@ -5,17 +5,19 @@
 
 FROM nginx:alpine
 
-# 기본 서버 블록 제거
-RUN rm /etc/nginx/conf.d/default.conf
+# grpc_web 모듈 설치
+RUN apk add --no-cache nginx-mod-http-grpc-web
 
-# 프로젝트 내 설정 적용
+# 기본 conf 제거 및 적용
+RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 
 # 간단한 플레이스홀더 UI (필요 시 실제 빌드 아티팩트로 대체)
 RUN mkdir -p /usr/share/nginx/html
 RUN printf '<!doctype html><html><head><meta charset="utf-8"><title>Operator Console</title><meta name="viewport" content="width=device-width, initial-scale=1"></head><body style="font-family:sans-serif;padding:24px;"><h1>Operator Console</h1><p>UI build artifacts not present. Nginx + gRPC-Web proxy are running.</p><p>Place your built <code>dist/</code> here or switch to the multi-stage Node build (see README note).</p></body></html>' > /usr/share/nginx/html/index.html
 
 # 포트 노출 (compose에서 매핑됨)
-EXPOSE 9988 
+EXPOSE 8080 
 
 CMD ["nginx", "-g", "daemon off;"]

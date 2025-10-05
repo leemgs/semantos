@@ -26,3 +26,5 @@ echo "✅ All services started."
 echo "📜 [3/3] Tailing logs (Ctrl-C to stop)..."
 "${COMPOSE_CMD[@]}" -f "${COMPOSE_FILE}" logs -f
 
+sudo lsof -i -P -n | grep 9988
+

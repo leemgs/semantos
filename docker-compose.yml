@@ -60,7 +60,7 @@ services:
       dockerfile: Dockerfile
     container_name: operator-console
     ports:
-      - "9988:9988"
+      - "9988:8080"
     depends_on:
       - safety-runtime
 

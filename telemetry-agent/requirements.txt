@@ -3,3 +3,4 @@
 bcc==0.28.0 
 grpcio==1.59.0
 grpcio-tools==1.59.0
+psutil>=5.9.0
