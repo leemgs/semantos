@@ -16,41 +16,55 @@ SemantOS는 gRPC로 통신하는 5개의 모듈형 구성 요소로 이루어진
 ## SemantOS 프로젝트 파일 구조
 요청하신 형식에 맞춰 SemantOS 프로젝트의 모든 생성 파일 및 폴더를 포함한 최종 구조를 출력합니다.
 
-```bash
 semantos/
-├── LICENSE.md              # Apache-2.0 라이센스 전문
-├── README.md               # 프로젝트 아키텍처, 설정, 재현 방법을 담은 문서
-├── Makefile                # 빌드 및 배포 자동화 스크립트 (e.g., make reproduce.all)
-├── proto/                  # gRPC 통신 프로토콜 정의 디렉토리
-│   └── semantos.proto      # 모든 서비스 간의 통신 메시지 및 API를 정의하는 gRPC 파일
-├── telemetry-agent/        # eBPF 기반 커널 메트릭 수집 및 전송 모듈
-│   ├── src/                # Python 에이전트 소스 코드
-│   │   ├── bpf/            # eBPF C 코드 디렉토리
-│   │   │   └── trace_metrics.c  # 커널 메트릭 수집을 위한 eBPF C 코드 골격
-│   │   └── agent.py             # Python Telemetry Agent (메트릭 수집 및 gRPC 전송)
-│   └── Dockerfile          # Telemetry Agent 컨테이너 빌드 파일
-├── kb-service/             # Knowledge Base (Neo4j/FAISS 시뮬레이션)
-│   ├── kb_service.py       # Knowledge Base 로직 (트레이스 로깅 및 RAG 컨텍스트 검색)
-│   └── Dockerfile          # KB 서비스 컨테이너 빌드 파일
-├── reasoner/        # Reasoner (추론 및 설명 생성)
-│   ├── reasoner_api.py     # FastAPI 기반 LLM 서비스 API 코드
-│   └── Dockerfile          # Reasoner 컨테이너 빌드 파일
-├── safety-runtime/         # Go 기반 Safety Runtime (제어 루프 및 안전 장치)
-│   ├── cmd/                # Go 애플리케이션 메인 코드 디렉토리
-│   │   └── safety-runtime.go  # SLO 감시, 자동 롤백, 튜닝 적용 제어 로직
-│   └── Dockerfile          # Safety Runtime 컨테이너 빌드 파일
-└── operator-console/    # Vue.js 기반 운영자 대시보드 (Human-in-the-Loop)
-    ├── src/                # Vue.js/TypeScript 소스 코드
-    │   ├── components/     # Vue 컴포넌트 디렉토리
-    │   │   └── TuningApproval.vue    # 핵심 튜닝 권장 사항 표시 및 승인/거부 컴포넌트
-    │   ├── proto/          # gRPC-Web 통신을 위한 TypeScript 스텁 파일
-    │   │   ├── semantos_grpc_web_pb.d.ts  # gRPC 클라이언트 서비스 TypeScript 정의
-    │   │   └── semantos_pb.d.ts           # gRPC 메시지 TypeScript 정의
-    │   ├── App.vue             # Vue 애플리케이션 루트 컴포넌트
-    │   └── main.ts             # Vue 애플리케이션 진입점
-    ├── nginx.conf          # Nginx 설정 (Vue 서빙 및 gRPC-Web 프록시 설정)
-    └── Dockerfile          # Operator Console (Nginx 포함) 컨테이너 빌드 파일
-```
+├── LICENSE.md                   # 프로젝트 라이선스 (Apache-2.0)
+├── README.md                    # 프로젝트 개요, 아키텍처 및 사용 방법 문서
+├── Makefile                     # 빌드 및 재현 자동화 스크립트 (예: make reproduce.all)
+├── base_requirements.txt        # 공통 Python 패키지 의존성 정의
+├── docker-compose.yml           # 전체 마이크로서비스 오케스트레이션 설정
+├── run.sh                       # 빌드 및 서비스 전체 실행용 스크립트
+│
+├── proto/                       # gRPC 서비스 인터페이스 정의 디렉토리
+│   ├── semantos.proto           # 서비스 간 메시지 및 API 인터페이스 정의
+│   ├── semantos_pb2.py          # Python용 gRPC 메시지 스텁 (자동 생성)
+│   └── semantos_pb2_grpc.py     # Python용 gRPC 서비스 스텁 (자동 생성)
+│
+├── kb-service/                  # Knowledge Base 서비스 (Neo4j/FAISS 시뮬레이션)
+│   ├── kb_service.py            # 트레이스 로깅 및 RAG 기반 컨텍스트 검색 로직
+│   └── Dockerfile               # KB 서비스 컨테이너 빌드 설정
+│
+├── reasoner/                    # LLM Reasoner 서비스 (추론 및 설명 생성)
+│   ├── reasoner_api.py          # FastAPI 기반 LLM 추론 API 서버
+│   └── Dockerfile               # Reasoner 컨테이너 빌드 설정
+│
+├── safety-runtime/              # Go 기반 Safety Runtime (SLO 감시 및 자동 제어)
+│   ├── cmd/
+│   │   └── safety-runtime.go    # SLO 모니터링, 롤백, 커널 튜닝 제어 루프 로직
+│   └── Dockerfile               # Safety Runtime 컨테이너 빌드 설정
+│
+├── telemetry-agent/             # eBPF 기반 커널 메트릭 수집 및 전송 모듈
+│   ├── requirements.txt         # Telemetry Agent 전용 Python 의존성
+│   ├── Dockerfile               # Telemetry Agent 컨테이너 빌드 설정
+│   └── src/
+│       ├── agent.py             # 커널 메트릭 수집 및 gRPC 전송 Python 에이전트
+│       └── bpf/
+│           └── trace_metrics.c  # eBPF C 코드 (커널 트레이스 수집)
+│
+├── operator-console/            # 운영자 대시보드 (Vue.js + gRPC-Web)
+│   ├── nginx.conf               # Nginx 설정 (정적 파일 서빙 및 gRPC-Web 프록시)
+│   ├── Dockerfile               # Operator Console 컨테이너 빌드 설정
+│   └── src/                     # Vue.js 프론트엔드 애플리케이션
+│       ├── App.vue              # 루트 컴포넌트
+│       ├── main.ts              # Vue 애플리케이션 진입점
+│       ├── components/
+│       │   └── TuningApproval.vue  # 튜닝 권장사항 승인/거부 UI 컴포넌트
+│       └── proto/
+│           ├── semantos_grpc_web_pb.d.ts  # gRPC-Web 클라이언트 서비스 타입 정의
+│           └── semantos_pb.d.ts           # gRPC 메시지 타입 정의
+│
+└── workloads/                   # 벤치마크 및 실험 워크로드 실행 스크립트
+    └── run_workload.sh          # 실험 워크로드 자동화 실행 스크립트
+
 -----
 
 # Getting Started
