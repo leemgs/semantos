@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>SemantOS Developer Interface</h1>
+    <h1>SemantOS Operator Console</h1>
     <TuningApproval />
   </div>
 </template>

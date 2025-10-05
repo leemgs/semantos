@@ -68,4 +68,4 @@ def generate_recommendation(data: dict):
 if __name__ == "__main__":
     # gRPC 서버와 FastAPI 웹 서버를 함께 실행하여 LLaMA 모델을 서빙합니다.
     # uvicorn.run(app, host="0.0.0.0", port=8000)
-    print("Reasoner Engine is running (Simulated)")
+    print("Reasoner is running (Simulated)")

@@ -6,7 +6,7 @@ import * as semantos_pb from './semantos_pb';
 export class SemantosControlClient {
   constructor(hostname: string, credentials?: null | { [index: string]: string; }, options?: null | { [index: string]: any; });
 
-  // 1. Reasoner Engine에 권장 사항을 요청 (Safety Runtime API를 통해 라우팅될 수 있음)
+  // 1. Reasoner에 권장 사항을 요청 (Safety Runtime API를 통해 라우팅될 수 있음)
   getRecommendations(
     request: semantos_pb.TelemetrySnapshot,
     metadata: grpcWeb.Metadata | null,

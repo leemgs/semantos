@@ -74,7 +74,7 @@ class TelemetryAgent:
         #     current_knobs=current_knobs
         # )
 
-        # Reasoner Engine에 전송 및 권장 사항 수신 시뮬레이션
+        # Reasoner에 전송 및 권장 사항 수신 시뮬레이션
         # response = self.stub.GetRecommendations(snapshot)
         print(f"[{time.strftime('%H:%M:%S')}] Collected {len(full_metrics)} metrics and sent to Reasoner.")
         # print(f"Received recommendations: {response}")
@@ -89,6 +89,6 @@ class TelemetryAgent:
             time.sleep(COLLECTION_INTERVAL)
 
 if __name__ == "__main__":
-    # gRPC 서버 타겟 (Reasoner Engine)
+    # gRPC 서버 타겟 (Reasoner)
     AGENT = TelemetryAgent(grpc_target_host="reasoner-engine:50051")
     AGENT.run()

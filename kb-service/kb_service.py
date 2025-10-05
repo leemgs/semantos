@@ -26,7 +26,7 @@ class SemanticKnowledgeBase:
         # self.faiss_index = IndexFlatL2(self.embedding_size)
         self.trace_log = [] # 기록된 트레이스 데이터를 저장하는 리스트
 
-        print("Semantic Knowledge Base Initialized.")
+        print("Knowledge Base Initialized.")
         self._initialize_sample_data()
 
     def _initialize_sample_data(self):
@@ -72,7 +72,7 @@ class SemanticKnowledgeBase:
         # return semantos_pb2.LogResponse(success=True)
 
     def retrieve_context(self, current_telemetry):
-        """Reasoner Engine이 RAG 컨텍스트를 검색합니다."""
+        """Reasoner이 RAG 컨텍스트를 검색합니다."""
         
         # 1. Graph Retrieval (Neo4j 시뮬레이션)
         # Cypher: MATCH (k:Knob)-[:DEPENDS_ON]->(d:Knob) WHERE k.name = '...' RETURN d
@@ -103,11 +103,11 @@ class SemanticKnowledgeBase:
 if __name__ == "__main__":
     KB = SemanticKnowledgeBase()
     
-    # Reasoner Engine이 컨텍스트를 검색하는 시뮬레이션
+    # Reasoner이 컨텍스트를 검색하는 시뮬레이션
     sample_telemetry = {"metrics": {"p95_latency_ms": 110.0, "cpu_run_queue_len": 4.1}}
     context = KB.retrieve_context(sample_telemetry)
     
-    print("\n--- RAG Context Provided to Reasoner Engine ---")
+    print("\n--- RAG Context Provided to Reasoner ---")
     print(context)
     print("----------------------------------------------\n")
 

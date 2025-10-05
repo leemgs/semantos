@@ -141,7 +141,7 @@ func main() {
 	
 	// 간단한 실행 테스트
 	log.Println("Safety Runtime is running in simulation mode.")
-	// Reasoner Engine이 권장 사항을 보냈다고 가정하고 적용을 시작합니다.
+	// Reasoner이 권장 사항을 보냈다고 가정하고 적용을 시작합니다.
 	ApplyConfiguration("vm.swappiness", "1")
 	
 	// 서버가 종료되지 않도록 무한 루프 유지 (실제 서버에서는 grpcServer.Serve가 루프를 담당)
