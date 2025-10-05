@@ -156,7 +156,7 @@ docker-compose up -d telemetry-agent
 ```bash
 docker-compose up -d
 ```
-웹 브라우저에서 **http://localhost:8080**으로 접속하여 Operator Console에 접근합니다. 
+웹 브라우저에서 **http://localhost:9988**으로 접속하여 Operator Console에 접근합니다. 
 (이때, gRPC-Web 통신은 Nginx Proxy를 통해 Safety Runtime으로 전달됩니다.)
 이 화면은 SemantOS의 Human-in-the-Loop 메커니즘을 시각화하며, Safety Runtime이 운영자의 최종 승인을 기다리는 동안 표시됩니다.
  아래의 테이블은 Vue.js/TypeScript 컴포넌트인 TuningApproval.vue의 실행 결과를 보여주며, 논문의 핵심 요구 사항인 **설명 가능성(Explainability)**과 **안전성(Safety)**을 반영합니다.
