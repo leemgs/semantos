@@ -15,7 +15,7 @@ SemantOS는 gRPC로 통신하는 5개의 모듈형 구성 요소로 이루어진
 
 ## SemantOS 프로젝트 파일 구조
 요청하신 형식에 맞춰 SemantOS 프로젝트의 모든 생성 파일 및 폴더를 포함한 최종 구조를 출력합니다.
-
+```bash
 semantos/
 ├── LICENSE.md                   # 프로젝트 라이선스 (Apache-2.0)
 ├── README.md                    # 프로젝트 개요, 아키텍처 및 사용 방법 문서
@@ -64,7 +64,7 @@ semantos/
 │
 └── workloads/                   # 벤치마크 및 실험 워크로드 실행 스크립트
     └── run_workload.sh          # 실험 워크로드 자동화 실행 스크립트
-
+```
 -----
 
 # Getting Started
