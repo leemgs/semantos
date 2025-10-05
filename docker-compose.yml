@@ -1,70 +1,83 @@
 version: '3.8'
 
 services:
-  # 1) Knowledge Base (KB) Service
   kb-service:
     build:
       context: .
       dockerfile: kb-service/Dockerfile
     container_name: kb-service
-    restart: unless-stopped
     ports:
-      - "50052:50052"     # gRPC
+      - "50052:50052"
     volumes:
       - ./data/kb:/app/data
+    # networks: [semantos-net]
 
-  # 2) Reasoner (LLM 추론)
   reasoner:
     build:
       context: .
       dockerfile: reasoner/Dockerfile
     container_name: reasoner
-    restart: unless-stopped
     ports:
-      - "50053:50053"     # gRPC
+      - "50053:50053"
     depends_on:
       - kb-service
+    # networks: [semantos-net]
 
-  # 3) Safety Runtime (SLO 감시 및 제어)
   safety-runtime:
     build:
       context: .
       dockerfile: safety-runtime/Dockerfile
     container_name: safety-runtime
-    restart: unless-stopped
-    privileged: true        # eBPF/커널 노브 제어 필요 시
+    privileged: true
     ports:
-      - "50051:50051"       # gRPC
+      - "50051:50051"
     depends_on:
       - kb-service
       - reasoner
+    # networks: [semantos-net]
 
-  # 4) Telemetry Agent (eBPF 커널 메트릭 수집)
   telemetry-agent:
     build:
       context: .
       dockerfile: telemetry-agent/Dockerfile
     container_name: telemetry-agent
-    restart: unless-stopped
     privileged: true
-    pid: "host"             # eBPF에서 전체 PID 접근
+    pid: "host"
     volumes:
       - /sys/kernel/debug:/sys/kernel/debug:ro
       - /lib/modules:/lib/modules:ro
     depends_on:
       - safety-runtime
+    # networks: [semantos-net]
 
-  # 5) Operator Console (Vue 빌드 → Nginx 정적 서빙, gRPC-Web 프록시)
+  envoy:
+    image: envoyproxy/envoy:v1.31-latest
+    container_name: grpc-web-gateway
+    command: ["-c", "/etc/envoy/envoy.yaml", "-l", "info"]
+    volumes:
+      - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
+    ports:
+      - "9900:9900"   # Envoy admin (옵션)
+      - "18080:18080" # Envoy HTTP listener (grpc-web 진입점)
+    depends_on:
+      - reasoner
+      - safety-runtime
+    # networks: [semantos-net]
+
   operator-console:
     build:
       context: .
       dockerfile: operator-console/Dockerfile
     container_name: operator-console
-    restart: unless-stopped
     ports:
-      - "9988:8080"         # 로컬 접속: http://localhost:9988/
+      - "9988:80"   # UI는 9988
     depends_on:
-      - reasoner
-      - kb-service
-      - safety-runtime
+      - envoy   # 또는 grpc-web-gateway 이름 (당신의 compose 설정에 맞게)
+    volumes:
+      - ./operator-console/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    # networks: [semantos-net]
+
+# networks:
+#   semantos-net:
+#     driver: bridge
 

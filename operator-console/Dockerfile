@@ -1,59 +1,67 @@
-# =========================
-# Builder: Node + Vite + protoc
-# =========================
-FROM node:20-alpine AS builder
+# syntax=docker/dockerfile:1.6
 
-# protoc, curl 설치 (protoc은 alpine 패키지 이름이 protobuf)
-RUN apk add --no-cache protobuf curl
+#############################################
+# Stage 1: Builder (Node + protoc toolchain)
+#############################################
+FROM node:20-bookworm-slim AS operator-console-builder
+
+# 기본 유틸 설치
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    curl unzip ca-certificates git which && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# 1) 패키지 설치(캐시 활용)
+# Node 의존성 설치 (캐시 사용)
 COPY operator-console/package*.json ./
-# CI 환경에 package-lock이 없을 수도 있어 대비
 RUN --mount=type=cache,target=/root/.npm (npm ci || npm install)
 
-# 2) 소스 반영
+# 소스 및 proto 복사
 COPY operator-console/ ./
-
-# 3) proto 복사 (리포지토리 루트의 proto/ → /proto)
 COPY proto /proto
 
-# 4) gRPC-Web 플러그인 설치 (사전 컴파일 바이너리 다운로드)
-#   최신 릴리스는 필요시 버전을 바꾸세요(아래는 1.5.0 예시)
-RUN curl -L -o /usr/local/bin/protoc-gen-grpc-web \
-      https://github.com/grpc/grpc-web/releases/download/1.5.0/protoc-gen-grpc-web-1.5.0-linux-x86_64 \
- && chmod +x /usr/local/bin/protoc-gen-grpc-web
+# ===== protoc & grpc-web 설치 =====
+# protoc (내장 js 코드생성기 포함)
+ARG PROTOC_VERSION="26.1"
+RUN curl -sSL -o /tmp/protoc.zip \
+      "https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip" \
+    && unzip -q /tmp/protoc.zip -d /usr/local \
+    && rm /tmp/protoc.zip
 
-# 5) gRPC-Web JS/TS 스텁 생성
-#   - JS(message) + d.ts : semantos_pb.js / semantos_pb.d.ts
-#   - TS(client)        : semantos_grpc_web_pb.ts
-#   산출물을 Vite가 import할 경로로 생성: src/proto/
+# gRPC-Web 플러그인
+ARG GRPC_WEB_VERSION="1.5.0"
+RUN curl -sSL -o /usr/local/bin/protoc-gen-grpc-web \
+      "https://github.com/grpc/grpc-web/releases/download/${GRPC_WEB_VERSION}/protoc-gen-grpc-web-${GRPC_WEB_VERSION}-linux-x86_64" \
+    && chmod +x /usr/local/bin/protoc-gen-grpc-web
+
+# JS 런타임 라이브러리 (google-protobuf) 설치
+ARG GOOGLE_PROTOBUF_VERSION="3.21.2"
+RUN npm install google-protobuf@${GOOGLE_PROTOBUF_VERSION}
+
+# ===== 코드 생성 =====
+# ⚠️ 주의: --plugin=protoc-gen-js=... 사용 금지!
+# JS 생성기는 protoc 내장이라 --js_out 만 쓰면 됩니다.
+# gRPC-Web은 PATH 에 있는 protoc-gen-grpc-web 바이너리를 사용합니다.
 RUN mkdir -p src/proto && \
     protoc -I /proto /proto/semantos.proto \
-      --js_out=import_style=commonjs:src/proto \
+      --js_out=import_style=commonjs,binary:src/proto \
       --grpc-web_out=import_style=typescript,mode=grpcwebtext:src/proto
 
-# 6) 런타임 의존성 (grpc-web, google-protobuf)이 없으면 추가 설치
-#    package.json에 이미 있다면 이 단계는 스킵해도 됩니다.
-RUN npm install grpc-web google-protobuf
+# ===== 프론트엔드 빌드 =====
+RUN --mount=type=cache,target=/root/.npm/_cacache (npm run build --if-present)
 
-# 7) 정식 빌드
-RUN npm run build
+#############################################
+# Stage 2: Runtime (Nginx)
+#############################################
+FROM nginx:1.27-bookworm AS operator-console
 
-
-# =========================
-# Runtime: Nginx로 정적 서빙 + gRPC-Web 프록시(Nginx 설정)
-# =========================
-FROM nginx:1.27-bookworm AS runtime
-
-# 기본 conf 제거 후 우리 conf 반영
-RUN rm -f /etc/nginx/conf.d/default.conf
+# Nginx 설정
 COPY operator-console/nginx.conf /etc/nginx/conf.d/default.conf
 
-# 빌드 산출물 복사
-COPY --from=builder /app/dist /usr/share/nginx/html
+# 정적 산출물 배포
+COPY --from=operator-console-builder /app/dist /usr/share/nginx/html
 
-EXPOSE 8080
+EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 
