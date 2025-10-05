@@ -16,7 +16,8 @@ services:
   # 2. Reasoner (LLM 추론)
   reasoner-engine:
     build:
-      context: ./reasoner
+      context: .
+      dockerfile: reasoner/Dockerfile
     container_name: reasoner
     ports:
       - "50053:50053" # gRPC 포트
