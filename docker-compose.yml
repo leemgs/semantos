@@ -43,7 +43,8 @@ services:
   # 4. Telemetry Agent (eBPF 커널 메트릭 수집)
   telemetry-agent:
     build:
-      context: ./telemetry-agent
+      context: .
+      dockerfile: telemetry-agent/Dockerfile
     container_name: telemetry-agent
     # eBPF 실행을 위해 반드시 privileged 모드와 호스트 커널 헤더 접근이 필요합니다.
     privileged: true
@@ -57,11 +58,11 @@ services:
   # 5. Operator Console (Vue.js/TypeScript) 및 gRPC-Web Proxy (Nginx)
   operator-console:
     build:
-      context: ./operator-console
+      context: .
+      dockerfile: operator-console/Dockerfile
     container_name: operator-console
     # 8080 포트를 통해 웹 인터페이스와 gRPC-Web 프록시를 제공
     ports:
-      - "8080:8080" 
+      - "8080:8080"
     depends_on:
       - safety-runtime
-    # operator-console의 nginx.conf는 safety-runtime:50051로 프록시합니다.

@@ -1,13 +1,28 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# 캐시 날리고 reasoner만 먼저 확인
-docker compose -f docker-compose.yml build --no-cache reasoner-engine
+# Pick Compose CLI: prefer `docker compose`, fallback to `docker-compose`
+if docker compose version >/dev/null 2>&1; then
+  COMPOSE_CMD=("docker" "compose")
+elif command -v docker-compose >/dev/null 2>&1; then
+  COMPOSE_CMD=("docker-compose")
+else
+  echo "❌ Docker Compose not found. Install docker-compose v2 or enable 'docker compose' plugin."
+  exit 1
+fi
 
-# 전체 빌드
-make build.all
+COMPOSE_FILE="docker-compose.yml"
 
-# 서비스 기동
-make run.services
+echo "🚀 [1/3] Building all SemantOS Docker images..."
+"${COMPOSE_CMD[@]}" -f "${COMPOSE_FILE}" build --no-cache
 
-# 재현 파이프라인
-make reproduce.all
+echo "✅ Build complete."
+
+echo "🔧 [2/3] Starting all SemantOS services (KB, Reasoner, Safety, Telemetry, UI)..."
+"${COMPOSE_CMD[@]}" -f "${COMPOSE_FILE}" up -d
+
+echo "✅ All services started."
+
+echo "📜 [3/3] Tailing logs (Ctrl-C to stop)..."
+"${COMPOSE_CMD[@]}" -f "${COMPOSE_FILE}" logs -f
+
