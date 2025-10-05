@@ -4,7 +4,8 @@ services:
   # 1. Knowledge Base (KB) Service
   kb-service:
     build:
-      context: ./kb-service
+      context: .
+      dockerfile: kb-service/Dockerfile
     container_name: kb-service
     ports:
       - "50052:50052" # gRPC 포트
