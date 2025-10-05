@@ -14,7 +14,7 @@ services:
     # command: python kb_service.py  # Dockerfile의 CMD 사용
 
   # 2. Reasoner (LLM 추론)
-  reasoner-engine:
+  reasoner:
     build:
       context: .
       dockerfile: reasoner/Dockerfile
@@ -36,7 +36,7 @@ services:
       - "50051:50051"  # gRPC 포트
     depends_on:
       - kb-service
-      - reasoner-engine
+      - reasoner
 
   # 4. Telemetry Agent (eBPF 커널 메트릭 수집)
   telemetry-agent:
@@ -63,4 +63,17 @@ services:
       - "9988:8080"
     depends_on:
       - safety-runtime
+      - grpc-web-proxy
+
+  # 6. Envoy Service
+  grpc-web-proxy:
+    image: envoyproxy/envoy-distroless:v1.30.3
+    container_name: grpc-web-proxy
+    volumes:
+      - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
+    expose:
+      - "8080"      # 내부용 (operator-console -> envoy)
+      - "9901"      # (옵션) Envoy admin
+    depends_on:
+      - reasoner
 
