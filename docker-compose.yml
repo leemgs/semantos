@@ -31,8 +31,6 @@ services:
       context: .
       dockerfile: safety-runtime/Dockerfile
     container_name: safety-runtime
-    # Safety Runtime은 커널 제어를 위해 호스트 네트워크에 접근하거나 권한이 필요할 수 있습니다.
-    # network_mode: "host" # 커널 매개변수 직접 변경 시 필요
     privileged: true # 커널 노브 제어 및 eBPF 맵 접근 시 필요
     ports:
       - "50051:50051" # gRPC 포트
@@ -46,7 +44,6 @@ services:
       context: .
       dockerfile: telemetry-agent/Dockerfile
     container_name: telemetry-agent
-    # eBPF 실행을 위해 반드시 privileged 모드와 호스트 커널 헤더 접근이 필요합니다.
     privileged: true
     pid: "host" # PID 네임스페이스 공유 (eBPF가 모든 프로세스 접근 가능)
     volumes:
@@ -58,11 +55,11 @@ services:
   # 5. Operator Console (Vue.js/TypeScript) 및 gRPC-Web Proxy (Nginx)
   operator-console:
     build:
-      context: .
-      dockerfile: operator-console/Dockerfile
+      context: ./operator-console
+      dockerfile: Dockerfile
     container_name: operator-console
-    # 8080 포트를 통해 웹 인터페이스와 gRPC-Web 프록시를 제공
     ports:
       - "8080:8080"
     depends_on:
       - safety-runtime
+
