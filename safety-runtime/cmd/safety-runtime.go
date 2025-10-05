@@ -1,16 +1,15 @@
 package main
 
 import (
-	"context"
-	"fmt"
 	"log"
-	"net"
-	"os"
 	"time"
-	
-	// 실제 환경에서는 gRPC 라이브러리와 proto 파일을 import 합니다.
+	// TODO: gRPC 사용 시 아래를 해제하고 실제 구현에 맞춰 사용하세요.
+	// "context"
+	// "fmt"
+	// "net"
+	// "os"
 	// "google.golang.org/grpc"
-	// pb "semantos/proto" 
+	// pb "semantos/proto"
 )
 
 const (

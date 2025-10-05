@@ -28,7 +28,8 @@ services:
   # 3. Safety Runtime (SLO 감시 및 제어)
   safety-runtime:
     build:
-      context: ./safety-runtime
+      context: .
+      dockerfile: safety-runtime/Dockerfile
     container_name: safety-runtime
     # Safety Runtime은 커널 제어를 위해 호스트 네트워크에 접근하거나 권한이 필요할 수 있습니다.
     # network_mode: "host" # 커널 매개변수 직접 변경 시 필요
@@ -54,13 +55,13 @@ services:
       - safety-runtime # 수집된 메트릭을 Safety Runtime으로 전송
 
   # 5. Operator Console (Vue.js/TypeScript) 및 gRPC-Web Proxy (Nginx)
-  operation-console:
+  operator-console:
     build:
-      context: ./operation-console
-    container_name: operation-console
+      context: ./operator-console
+    container_name: operator-console
     # 8080 포트를 통해 웹 인터페이스와 gRPC-Web 프록시를 제공
     ports:
       - "8080:8080" 
     depends_on:
       - safety-runtime
-    # operation-console의 nginx.conf는 safety-runtime:50051로 프록시합니다.
+    # operator-console의 nginx.conf는 safety-runtime:50051로 프록시합니다.
