@@ -1,57 +1,96 @@
-version: '3.9'
+version: "3.9"
 services:
-  kb-service:
-    build:
-      context: ./kb-service
-    container_name: kb-service
-    ports:
-    - 7001:7001
-    environment: {}
-  reasoner:
-    build:
-      context: ./reasoner
-    container_name: reasoner
-    ports:
-    - 7002:7002
+  neo4j:
+    image: neo4j:5.23
     environment:
-      KB_URL: http://kb-service:7001
-    depends_on:
-    - kb-service
-  safety-runtime:
-    build:
-      context: ./safety-runtime
-    container_name: safety-runtime
+      - NEO4J_AUTH=neo4j/password
+      - NEO4J_server_memory_pagecache_size=512M
+      - NEO4J_server_memory_heap_initial__size=512M
+      - NEO4J_server_memory_heap_max__size=512M
     ports:
-    - 7003:7003
-    environment:
-      UQ_THRESHOLD: '0.55'
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+
   telemetry-agent:
-    build:
-      context: ./telemetry-agent
-    container_name: telemetry-agent
-    ports:
-    - 7000:7000
+    build: ./telemetry-agent
+    image: semantos/telemetry-agent:local
     environment:
-      KB_URL: http://kb-service:7001
-      REASONER_URL: http://reasoner:7002
-      SAFETY_URL: http://safety-runtime:7003
+      - USE_EBPF=auto
+      - SAMPLE_WINDOW=60
+    # To enable eBPF, you may need extra privileges and mounts:
+    # privileged: true
+    # pid: "host"
+    # volumes:
+    #   - /lib/modules:/lib/modules:ro
+    #   - /sys/kernel/debug:/sys/kernel/debug
+    ports:
+      - "9101:8000"
     depends_on:
-    - kb-service
-    - reasoner
-    - safety-runtime
+      - neo4j
+
+  kb-service:
+    build: ./kb-service
+    image: semantos/kb-service:local
+    environment:
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASS=password
+      - DATA_DIR=/data
+    volumes:
+      - kb_data:/data
+    ports:
+      - "9102:8000"
+    depends_on:
+      - neo4j
+
+  reasoner:
+    build: ./reasoner
+    image: semantos/reasoner:local
+    environment:
+      - KB_URL=http://kb-service:8000
+      - TELEMETRY_URL=http://telemetry-agent:8000
+      # - OPENAI_API_KEY=sk-...
+      # - OPENAI_MODEL=gpt-4o-mini
+      # - OLLAMA_HOST=http://host.docker.internal:11434
+      # - OLLAMA_MODEL=llama3.1
+    ports:
+      - "9103:8000"
+    depends_on:
+      - kb-service
+      - telemetry-agent
+
+  safety-runtime:
+    build: ./safety-runtime
+    image: semantos/safety-runtime:local
+    environment:
+      - TAU=0.55
+      - ROLLOUT_STEPS=5,25,50,100
+      - SLO_MAX_P95=35
+      - LOG_DIR=/app/outputs
+    volumes:
+      - ./outputs:/app/outputs
+    ports:
+      - "9104:8000"
+    depends_on:
+      - reasoner
+
   operator-console:
-    build:
-      context: ./operator-console
-    container_name: operator-console
+    build: ./operator-console
+    image: semantos/operator-console:local
     ports:
-    - 9988:9988
-    environment:
-      TELEMETRY_URL: http://telemetry-agent:7000
-      KB_URL: http://kb-service:7001
-      REASONER_URL: http://reasoner:7002
-      SAFETY_URL: http://safety-runtime:7003
+      - "9988:9988"
+    volumes:
+      - ./outputs:/app/outputs
     depends_on:
-    - telemetry-agent
-    - kb-service
-    - reasoner
-    - safety-runtime
+      - telemetry-agent
+      - kb-service
+      - reasoner
+      - safety-runtime
+
+volumes:
+  neo4j_data:
+  neo4j_logs:
+  kb_data:

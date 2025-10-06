@@ -26,4 +26,3 @@ echo "✅ All services started."
 # 3️⃣ Tail logs (Ctrl+C to stop)
 echo "📜 [3/3] Tailing logs (Ctrl+C to stop)..."
 docker-compose -f "${COMPOSE_FILE}" logs -f
-

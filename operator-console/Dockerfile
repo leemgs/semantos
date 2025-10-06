@@ -1,17 +1,9 @@
+# Operator Console: FastAPI
 FROM python:3.11-slim
-
-ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1     PIP_NO_CACHE_DIR=1
-
-# System deps
-RUN apt-get update && apt-get install -y --no-install-recommends     curl ca-certificates &&     rm -rf /var/lib/apt/lists/*
-
 WORKDIR /app
-
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
-
-COPY . .
-
+COPY requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+COPY app ./app
+# Copy outputs as a volume mount location; at runtime, docker-compose will mount ./outputs:/app/outputs
 EXPOSE 9988
-
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "9988"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "9988"]
