@@ -1,5 +1,11 @@
 # SemantOS
 
+<p align="center">
+  <img src="semantos_logo01.png" alt="SemantOS Logo" width="300"/>
+</p>
+
+
+
 A lightweight, containerized **semantic OS tuning** playground that closes the loop between **eBPF-style telemetry**, a **graph-backed knowledge base (Neo4j + FAISS)**, a **Reasoner** that can talk to external LLMs, and a **Safety Runtime** that enforces staged rollouts/automatic rollback. An **Operator Console** (FastAPI) glues the services together.
 
 > This repository is intended for local experimentation, demos, and reproducible benchmarks—not for production hardening.
