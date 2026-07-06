@@ -4,12 +4,50 @@ from fastapi.responses import JSONResponse
 
 USE_EBPF = os.environ.get("USE_EBPF", "auto")  # "auto" | "on" | "off"
 SAMPLE_WINDOW = int(os.environ.get("SAMPLE_WINDOW", "30"))  # seconds to keep
+ANOMALY_MAD_K = float(os.environ.get("ANOMALY_MAD_K", "3.0"))  # robust z cutoff
 
-app = FastAPI(title="telemetry-agent")
+app = FastAPI(title="telemetry-agent", version="1.0.0")
 hist_lock = threading.Lock()
 latency_ms = []  # sliding window storage (sched switch proxy)
 io_latency = []  # sliding window of block I/O complete durations (ms)
 sys_enter_rate = []  # syscalls/sec in window
+_net_prev = {"ts": None, "bytes": 0}  # for throughput derivation
+
+
+def _robust_anomaly_rate(p95s) -> float:
+    """Fraction of recent p95 samples that are statistical outliers.
+
+    Uses a median + k*MAD robust threshold so a few tail spikes register as
+    anomalies without a trained model.  This is the `anomaly_rate` signal the
+    reasoner and safety-runtime consume (and the quantity the paper's Table 2 /
+    tau-sweep report reductions on).
+    """
+    vals = [v for v in p95s if v is not None]
+    if len(vals) < 5:
+        return 0.0
+    med = statistics.median(vals)
+    mad = statistics.median([abs(v - med) for v in vals]) or 1e-9
+    thresh = med + ANOMALY_MAD_K * 1.4826 * mad
+    return sum(1 for v in vals if v > thresh) / len(vals)
+
+
+def _throughput_rps() -> float:
+    """Network throughput (KB/s) derived from psutil counters as a workload
+    throughput proxy; complements sys_enter rate."""
+    global _net_prev
+    try:
+        io = psutil.net_io_counters()
+        now = time.time()
+        cur = io.bytes_sent + io.bytes_recv
+        if _net_prev["ts"] is None:
+            _net_prev = {"ts": now, "bytes": cur}
+            return 0.0
+        dt = max(1e-3, now - _net_prev["ts"])
+        rate = max(0.0, (cur - _net_prev["bytes"]) / dt / 1024.0)
+        _net_prev = {"ts": now, "bytes": cur}
+        return rate
+    except Exception:
+        return 0.0
 
 def try_init_bcc():
     if USE_EBPF == "off":
@@ -176,6 +214,8 @@ def snapshot():
     p95 = statistics.median(p95s) if p95s else 0.0
     p95_io = statistics.median(iop) if iop else 0.0
     rate = statistics.median(rps) if rps else 0.0
+    anomaly_rate = _robust_anomaly_rate(p95s)
+    throughput = _throughput_rps()
     load1, load5, load15 = psutil.getloadavg()
     return JSONResponse({
         "host_id": "host-001",
@@ -187,6 +227,8 @@ def snapshot():
             "p95_latency_ms": float(p95),
             "p95_block_io_ms": float(p95_io),
             "sys_enter_rps": float(rate),
+            "anomaly_rate": float(anomaly_rate),
+            "throughput_kbps": float(throughput),
         },
         "ts": time.time()
     })

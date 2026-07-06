@@ -12,20 +12,60 @@ A lightweight, containerized **semantic OS tuning** playground that closes the l
 
 ---
 
+## 📊 Reproducing the paper (offline, no Docker)
+
+The `reproduce/` package regenerates **every table and figure** of the SemantOS
+paper from a self-contained, seeded harness (pure `numpy`/`scipy`/`matplotlib`).
+It implements the paper's mechanisms causally — the typed/signed dependency
+graph, the conformal safety threshold with cost-based selection, ADWIN drift +
+sliding-window recalibration, and the theory checks — then prints a PASS/FAIL
+report against the paper's numbers with seeds and confidence intervals.
+
+```bash
+./reproduce.sh            # installs deps, runs the harness, renders figures
+# or:
+make reproduce           # harness only (PASS/FAIL vs paper)
+make figures             # fig1/fig3/tau-sweep/drift PNGs
+```
+
+Expected tail of the run:
+
+```
+REPRODUCTION SUMMARY: 34/34 checks passed
+```
+
+What it covers: **Table 2** (reductions vs baseline), **Table 3** (KB/RAG/Safety
+ablation), **Figure 1** (super-additive knob-pair synergy), **Figure 3**
+(anomaly/latency Pareto frontier), the **τ-sweep** (rollback precision/recall/
+anomaly + cost-selected τ*), **exploration efficiency**, the **30-day drift
+study**, and **Theorem 1 / Proposition 1**. Outputs (CSVs + PNGs) land in
+`reproduce/results/`. See `reproduce/README.md` for the module map.
+
+> The reproduction does **not** require Neo4j, an LLM, or any Docker service —
+> it is the reproducibility centerpiece. The live services below implement the
+> same semantics for interactive use.
+
+---
+
 ## ✨ What’s inside
 
 ```
 semantos/
 ├─ docker-compose.yml                 # one-command bring-up of all services
 ├─ docker-compose.ebpf.yml            # extra privileges/mounts for eBPF sampling
+├─ Makefile / reproduce.sh            # reproduce + service convenience targets
 ├─ manual.sh                          # build, up, and tail logs helper
-├─ proto/semantos-control.v1.yaml     # REST/OpenAPI for the control plane
-├─ kb-service/                        # Neo4j + FAISS-backed knowledge base APIs
-├─ reasoner/                          # LLM-backed (or heuristic) recommendation service
-├─ safety-runtime/                    # staged rollout & auto-rollback gatekeeper
-├─ telemetry-agent/                   # psutil + (optional) eBPF-derived metrics
+├─ proto/semantos-control.v1.yaml     # REST/OpenAPI for the control plane (typed edges, u/tau)
+├─ reproduce/                         # OFFLINE paper reproduction (tables/figures + PASS/FAIL)
+├─ kb/                                # induce_edges.py + seed_edges.json (typed dependency graph)
+├─ data/                              # generate_pairs.py -> 1000 workload×hardware training pairs
+├─ kb-service/                        # Neo4j + FAISS KB: typed/signed/weighted edges, γ-decay, RAG
+├─ reasoner/                          # graph-grounded joint reasoning, k=3 self-consistency u
+│  └─ train/                          # Llama-3.1-13B 5-stage pipeline (SFT + DPO), config + README
+├─ safety-runtime/                    # conformal τ, cost-based selection, staged rollout, drift recal
+├─ telemetry-agent/                   # psutil + (optional) eBPF metrics incl. anomaly_rate, throughput
 ├─ operator-console/                  # simple FastAPI UI (port 9988)
-└─ workloads/                         # log-generating workload simulators
+└─ workloads/                         # log-generating workload simulators (illustrative)
 ```
 
 **Core services & default ports**

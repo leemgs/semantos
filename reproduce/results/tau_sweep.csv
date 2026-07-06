@@ -1,0 +1,4 @@
+tau,rollback_precision,rollback_recall,anomaly%
+0.3,0.785,0.951,3.55
+0.55,0.861,0.871,2.79
+0.7,0.903,0.791,2.37

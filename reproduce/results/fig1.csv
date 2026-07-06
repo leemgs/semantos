@@ -1,0 +1,4 @@
+condition,latency_change%,ci%
+sched_min_granularity_ns_only,-5.1,0.5
+sched_wake_affinity_only,-8.2,0.7
+combined,-38.2,0.4

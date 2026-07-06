@@ -1,0 +1,5 @@
+controller,anomaly_rate%,p95_latency_ms
+Baseline,6.28,27.99
+Expert,4.99,24.05
+BO/RL,4.17,22.97
+SemantOS,3.06,20.04

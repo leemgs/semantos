@@ -1,23 +1,167 @@
 openapi: 3.0.0
 info:
   title: SemantOS Control API
-  version: "0.1.0"
+  version: "1.0.0"
+  description: >-
+    Control-plane contract between the SemantOS services (telemetry-agent,
+    kb-service, reasoner, safety-runtime, operator-console). Recommendations
+    carry a typed rationale, an expected impact, and a calibrated uncertainty u
+    that the safety runtime gates on with a conformally derived threshold tau.
+
+components:
+  schemas:
+
+    Recommendation:
+      type: object
+      required: [id, knob, proposed_value, uncertainty]
+      properties:
+        id:             {type: string, description: unique recommendation id}
+        knob:           {type: string, example: sched_min_granularity_ns}
+        proposed_value: {type: string, example: "15000000"}
+        bundle:         {type: string, description: tag grouping co-tuned knobs}
+        rationale:      {type: string, description: one-line reason}
+        expected_impact:
+          type: object
+          properties:
+            delta_median_pct: {type: number, example: -0.18}
+            delta_p95_pct:    {type: number, example: -0.28}
+            delta_anomaly_pct: {type: number, example: -0.31}
+        uncertainty:
+          type: number
+          minimum: 0.0
+          maximum: 1.0
+          description: calibrated u; safety runtime vetoes when u >= tau
+        provenance:
+          type: object
+          description: audit trail for why this was proposed
+          properties:
+            self_consistency:
+              type: object
+              properties:
+                votes:     {type: integer}
+                k:         {type: integer, example: 3}
+                agreement: {type: number}
+            kb_neighbors:
+              type: array
+              items: {$ref: '#/components/schemas/TypedEdge'}
+            retrieved_traces:
+              type: array
+              items: {type: string}
+            telemetry_cue: {type: object}
+        explanation: {type: string}
+
+    TypedEdge:
+      type: object
+      required: [edge_type, neighbor, sign, weight]
+      properties:
+        edge_type:
+          type: string
+          enum: [synergizes_with, conflicts_with, depends_on]
+        neighbor: {type: string}
+        sign:     {type: integer, enum: [-1, 1]}
+        weight:   {type: number, minimum: 0.0, maximum: 1.0}
+        evidence: {type: integer}
+
+    OutcomeRecord:
+      type: object
+      required: [rec_id, u, unsafe]
+      properties:
+        rec_id: {type: string}
+        u:      {type: number}
+        unsafe: {type: boolean, description: realized SLO breach after apply}
+        delta_p95:  {type: number}
+        anomaly:    {type: number}
+
+    ApplyResult:
+      type: object
+      properties:
+        applied: {type: array, items: {type: string}}
+        vetoed:  {type: array, items: {type: string}}
+        tau:     {type: number, description: conformal veto threshold in effect}
+
 paths:
+
   /get_recommendations:
     post:
-      summary: Get recommendations from reasoner
+      summary: Reasoner — graph-grounded, self-consistency-scored recommendations
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recommendations:
+                    type: array
+                    items: {$ref: '#/components/schemas/Recommendation'}
+
   /apply:
     post:
-      summary: Apply a configuration via Safety Runtime
+      summary: Safety Runtime — gate on tau, then canary→ramp→full rollout
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                recommendations:
+                  type: array
+                  items: {$ref: '#/components/schemas/Recommendation'}
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApplyResult'}
+
+  /calibrate:
+    post:
+      summary: Safety Runtime — feed D_cal records and recompute tau
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  u:      {type: number}
+                  unsafe: {type: boolean}
+      responses:
+        "200": {description: "returns tau, precision, recall, n"}
+
   /log_outcome:
     post:
-      summary: Log optimization outcome to KB
+      summary: Log realized outcome (updates KB traces + safety D_cal)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/OutcomeRecord'}
+      responses:
+        "200": {description: OK}
+
+  /kb/typed_neighborhood:
+    get:
+      summary: KB — typed/signed/weighted neighborhood of a knob (gamma-decayed)
+      parameters:
+        - {name: knob, in: query, required: true, schema: {type: string}}
+        - name: edge_type
+          in: query
+          schema: {type: string, enum: [synergizes_with, conflicts_with, depends_on]}
+        - {name: min_weight, in: query, schema: {type: number}}
+        - {name: decayed, in: query, schema: {type: boolean, default: true}}
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  knob: {type: string}
+                  edges:
+                    type: array
+                    items: {$ref: '#/components/schemas/TypedEdge'}

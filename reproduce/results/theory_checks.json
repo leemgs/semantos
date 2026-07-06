@@ -1,0 +1,21 @@
+{
+  "theorem1": {
+    "pi": 0.45,
+    "alpha": 0.08725157537566651,
+    "beta_fp": 0.16365513680949922,
+    "exp_dslo": 0.4322988715634418,
+    "safety_risk": 0.1570528356761997,
+    "efficiency_loss": 0.5400619514713475,
+    "perf_degradation": 0.2161494357817209,
+    "bound": 0.913264222929268,
+    "empirical_cost": 0.7669790715044226,
+    "bound_holds": true
+  },
+  "proposition1": {
+    "m": 200,
+    "target_alpha": 0.1,
+    "bound_alpha_prime": 0.10497512437810946,
+    "realized_alpha_prime_post_drift": 0.08577210841840985,
+    "recovered": true
+  }
+}

@@ -1,0 +1,138 @@
+[
+  {
+    "from": "sched_min_granularity_ns",
+    "to": "sched_wake_affinity",
+    "edge_type": "synergizes_with",
+    "sign": 1,
+    "weight": 0.7143,
+    "evidence": 10
+  },
+  {
+    "from": "sched_wake_affinity",
+    "to": "sched_min_granularity_ns",
+    "edge_type": "synergizes_with",
+    "sign": 1,
+    "weight": 0.7143,
+    "evidence": 10
+  },
+  {
+    "from": "sched_latency_ns",
+    "to": "vm.dirty_ratio",
+    "edge_type": "synergizes_with",
+    "sign": 1,
+    "weight": 0.2571,
+    "evidence": 10
+  },
+  {
+    "from": "vm.dirty_ratio",
+    "to": "sched_latency_ns",
+    "edge_type": "synergizes_with",
+    "sign": 1,
+    "weight": 0.2571,
+    "evidence": 10
+  },
+  {
+    "from": "sched_latency_ns",
+    "to": "dirty_ratio",
+    "edge_type": "synergizes_with",
+    "sign": 1,
+    "weight": 0.2571,
+    "evidence": 10
+  },
+  {
+    "from": "dirty_ratio",
+    "to": "sched_latency_ns",
+    "edge_type": "synergizes_with",
+    "sign": 1,
+    "weight": 0.2571,
+    "evidence": 10
+  },
+  {
+    "from": "dirty_background_ratio",
+    "to": "vm.dirty_ratio",
+    "edge_type": "synergizes_with",
+    "sign": 1,
+    "weight": 0.1143,
+    "evidence": 10
+  },
+  {
+    "from": "vm.dirty_ratio",
+    "to": "dirty_background_ratio",
+    "edge_type": "synergizes_with",
+    "sign": 1,
+    "weight": 0.1143,
+    "evidence": 10
+  },
+  {
+    "from": "vm.swappiness",
+    "to": "numa_balancing",
+    "edge_type": "conflicts_with",
+    "sign": -1,
+    "weight": 0.0857,
+    "evidence": 10
+  },
+  {
+    "from": "numa_balancing",
+    "to": "vm.swappiness",
+    "edge_type": "conflicts_with",
+    "sign": -1,
+    "weight": 0.0857,
+    "evidence": 10
+  },
+  {
+    "from": "sched_latency_ns",
+    "to": "numa_balancing",
+    "edge_type": "conflicts_with",
+    "sign": -1,
+    "weight": 0.4286,
+    "evidence": 10
+  },
+  {
+    "from": "numa_balancing",
+    "to": "sched_latency_ns",
+    "edge_type": "conflicts_with",
+    "sign": -1,
+    "weight": 0.4286,
+    "evidence": 10
+  },
+  {
+    "from": "dirty_background_ratio",
+    "to": "vm.swappiness",
+    "edge_type": "conflicts_with",
+    "sign": -1,
+    "weight": 0.2857,
+    "evidence": 10
+  },
+  {
+    "from": "vm.swappiness",
+    "to": "dirty_background_ratio",
+    "edge_type": "conflicts_with",
+    "sign": -1,
+    "weight": 0.2857,
+    "evidence": 10
+  },
+  {
+    "from": "sched_min_granularity_ns",
+    "to": "sched_latency_ns",
+    "edge_type": "depends_on",
+    "sign": 1,
+    "weight": 0.5,
+    "evidence": 10
+  },
+  {
+    "from": "dirty_background_ratio",
+    "to": "vm.dirty_ratio",
+    "edge_type": "depends_on",
+    "sign": 1,
+    "weight": 0.5,
+    "evidence": 10
+  },
+  {
+    "from": "dirty_background_ratio",
+    "to": "dirty_ratio",
+    "edge_type": "depends_on",
+    "sign": 1,
+    "weight": 0.5,
+    "evidence": 10
+  }
+]

@@ -1,0 +1,89 @@
+# SemantOS reasoner — 5-stage training pipeline (paper Sec. 5.2).
+#
+# Base model is guard-rail fine-tuned to emit typed, graph-grounded, calibrated
+# tuning recommendations. Data comes from data/generate_pairs.py; whole
+# workloads/servers are held out (audio, S3) for the generalization study.
+
+base_model:
+  name: meta-llama/Llama-3.1-13B
+  dtype: bfloat16
+  context_length: 8192
+  attn_implementation: flash_attention_2
+
+data:
+  pairs: ../../data/pairs.jsonl
+  meta:  ../../data/pairs_meta.json
+  seed_edges: ../../kb/seed_edges.json      # typed graph exposed in the prompt
+  splits:
+    train: train
+    val: val
+    heldout: heldout                        # unseen workloads/servers
+  max_examples: 1000
+
+# The five stages run in order; each consumes the previous checkpoint.
+stages:
+
+  - id: 1_domain_sft
+    kind: sft                               # supervised fine-tuning
+    objective: >-
+      Teach the base model the output schema (id/knob/proposed/rationale/
+      expected_impact/uncertainty/bundle/explanation) and the typed-edge
+      grammar (SYNERGIZES_WITH / CONFLICTS_WITH / DEPENDS_ON).
+    epochs: 3
+    lr: 1.0e-5
+    batch_size: 16
+    grad_accum: 4
+    lora: {r: 32, alpha: 16, dropout: 0.05, target: [q_proj, k_proj, v_proj, o_proj]}
+
+  - id: 2_graph_grounding_sft
+    kind: sft
+    objective: >-
+      Condition generations on the retrieved typed neighborhood so the model
+      co-tunes along SYNERGIZES_WITH edges and never co-proposes a
+      CONFLICTS_WITH pair. Prompts include the KB neighborhood + RAG traces.
+    epochs: 2
+    lr: 8.0e-6
+    freeze_below_layer: 8
+
+  - id: 3_uncertainty_calibration
+    kind: regression_head                   # self-consistency target
+    objective: >-
+      Fit the reported uncertainty to realized disagreement: target u is
+      (1 - self_consistency_agreement) blended with KB edge-weight confidence,
+      so downstream conformal calibration is well-behaved.
+    epochs: 2
+    lr: 5.0e-6
+    self_consistency_k: 3
+    temperatures: [0.2, 0.5, 0.8]
+
+  - id: 4_dpo_safety
+    kind: dpo                               # direct preference optimization
+    objective: >-
+      Prefer safe, SLO-respecting bundles over aggressive ones. Preference pairs
+      are built from outcome.slo_safe in the dataset (safe = chosen).
+    beta_dpo: 0.1
+    epochs: 1
+    lr: 3.0e-6
+    pairs_from: outcome.slo_safe
+
+  - id: 5_guardrail_distill
+    kind: sft
+    objective: >-
+      Distill refusal / abstain behavior: when telemetry is healthy or evidence
+      is weak, emit an empty recommendation set rather than speculative changes.
+    epochs: 1
+    lr: 3.0e-6
+
+evaluation:
+  report:
+    - table3_ablation          # full / wo_depgraph / wo_rag / wo_safety / kb_only
+    - heldout_generalization   # audio workload, S3 server
+    - uncertainty_ece          # expected calibration error of u
+  gates:
+    min_heldout_slo_safe_rate: 0.85
+    max_uncertainty_ece: 0.08
+
+output:
+  dir: ./checkpoints
+  export_gguf: true            # for the Ollama-served runtime (OLLAMA_MODEL)
+  quantization: q4_K_M
