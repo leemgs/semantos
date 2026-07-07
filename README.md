@@ -12,6 +12,89 @@ A lightweight, containerized **semantic OS tuning** playground that closes the l
 
 ---
 
+## 🧩 한눈에 보기 (At a Glance)
+
+**SemantOS**는 시스템 신호를 관찰하고(telemetry) → 그래프 지식 베이스에 근거해 튜닝 후보를 추론하고(reasoner) → 안전하게 단계적으로 적용/롤백하는(safety-runtime) **닫힌 제어 루프(closed control loop)** 를 한 번의 `docker compose`로 띄우는 실험용 스택입니다. `operator-console`이 이 모든 서비스를 묶습니다.
+
+```mermaid
+flowchart LR
+    subgraph SRC["📥 신호 소스 (Signals)"]
+        TEL["📡 telemetry-agent<br/>psutil · eBPF<br/>p95 · syscall rate · anomaly"]
+    end
+    subgraph KB["🧠 지식 베이스 (Knowledge Base)"]
+        NEO["🕸️ Neo4j<br/>typed/signed edges · γ-decay"]
+        FAISS["🔎 FAISS<br/>vector retrieval (RAG)"]
+    end
+    subgraph LOOP["♻️ 튜닝 루프 (Control Loop)"]
+        RSN["🤖 reasoner<br/>graph-grounded · k=3 self-consistency (u)"]
+        SAFE["🛡️ safety-runtime<br/>conformal τ · Canary→Ramp→Full · rollback"]
+    end
+    CON["🖥️ operator-console<br/>FastAPI UI :9988"]
+
+    TEL --> RSN
+    NEO --> RSN
+    FAISS --> RSN
+    CON -->|"POST /get_recommendations"| RSN
+    RSN -->|"candidate + rationale"| CON
+    CON -->|"POST /apply"| SAFE
+    SAFE -->|"staged rollout / rollback"| CON
+    SAFE -->|"POST /log_outcome"| KB
+    TEL -.->|"live metrics"| CON
+
+    style SRC fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a
+    style KB fill:#dcfce7,stroke:#22c55e,color:#14532d
+    style LOOP fill:#fef9c3,stroke:#eab308,color:#713f12
+    style CON fill:#f3e8ff,stroke:#a855f7,color:#581c87
+```
+
+| 컴포넌트 | 한줄 역할 (Role) | 포트 |
+|----------|------------------|------|
+| 📡 `telemetry-agent` | 슬라이딩 윈도우 메트릭 수집 (median/p95, syscall rate, anomaly) | 9100 |
+| 🧠 `kb-service` (Neo4j + FAISS) | 타입/부호/가중치가 있는 의존성 그래프 + RAG 검색 | 9101 / 7474 / 7687 |
+| 🤖 `reasoner` | 그래프에 근거한 튜닝 후보 생성, k=3 self-consistency 신뢰도 `u` | 9102 |
+| 🛡️ `safety-runtime` | conformal τ 기반 단계적 롤아웃(Canary→Ramp→Full)·SLO 가드·자동 롤백 | 9103 |
+| 🖥️ `operator-console` | 서비스 오케스트레이션 및 최소 웹 UI/API | **9988** |
+
+---
+
+## 🔄 데이터 흐름 (Data Flow)
+
+한 번의 튜닝 사이클에서 서비스 간 요청/응답이 오가는 순서입니다. 관측(telemetry) → 근거 조회(KB) → 후보 추론(reasoner) → 단계적 적용/롤백(safety-runtime) → 결과 학습(KB)의 흐름을 따릅니다.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant OP as 👤 Operator
+    participant CON as 🖥️ operator-console
+    participant RSN as 🤖 reasoner
+    participant TEL as 📡 telemetry-agent
+    participant KB as 🧠 kb-service
+    participant SAFE as 🛡️ safety-runtime
+
+    OP->>CON: 튜닝 요청 (Tune)
+    CON->>RSN: POST /get_recommendations
+    RSN->>TEL: 슬라이딩 윈도우 메트릭 조회
+    TEL-->>RSN: median / p95 / throughput / anomaly_rate
+    RSN->>KB: 의존성 그래프 + RAG 컨텍스트 조회
+    KB-->>RSN: typed/signed edges · 이웃·경로 · 근거 문서
+    RSN-->>CON: 후보 knob 업데이트 + 근거 (신뢰도 u)
+    CON->>SAFE: POST /apply (candidate)
+    loop 단계적 롤아웃 5→25→50→100%
+        SAFE->>TEL: 각 단계 SLO / anomaly 관측
+        alt anomaly ≥ conformal τ 또는 SLO 위반
+            SAFE-->>CON: 🔴 자동 롤백 (rollback)
+        else 안전 구간
+            SAFE-->>CON: 🟢 다음 단계로 승격 (promote)
+        end
+    end
+    SAFE->>KB: POST /log_outcome (결과 기록)
+    Note over KB: 엣지 가중치 γ-decay · ADWIN 드리프트 재보정
+```
+
+> 위 다이어그램은 `proto/semantos-control.v1.yaml` 의 제어 평면(`/get_recommendations`, `/apply`, `/log_outcome`) 엔드포인트와 일대일로 대응합니다.
+
+---
+
 ## 📊 Reproducing the paper (offline, no Docker)
 
 The `reproduce/` package regenerates **every table and figure** of the SemantOS
