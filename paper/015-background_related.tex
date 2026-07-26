@@ -1,0 +1,55 @@
+\section{Background and Related Work}
+\label{sec:background}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ### How to get # of tunable parameters to govern core subsystems
+% echo "VM:" $(find /proc/sys/vm -type f | wc -l)
+% echo "Kernel (sched/irq):" $(find /proc/sys/kernel -type f | wc -l)
+% echo "IRQ affinity:" $(find /proc/irq -name smp_affinity | wc -l)
+% echo "Block I/O queue params:" $(find /sys/block -path '*queue*' -type f | wc -l)
+%
+% Linux u2404 6.14.0-37-generic #37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC 
+% VM: 52
+% Kernel (sched/irq): 143
+% IRQ affinity: 27
+% Block I/O queue params: 0
+%
+
+The Linux kernel exposes a vast configuration surface: hundreds of tunable parameters govern memory reclamation (\texttt{vm.swappiness}, \texttt{dirty\_ratio}, \texttt{min\_free\_kbytes}), CPU scheduling (\texttt{sched\_latency\_ns}, \texttt{sched\_min\_granularity\_ns}, \texttt{sched\_wake\_affinity}), interrupt handling, I/O prioritization, NUMA placement, and power management~\cite{Dean2013CACM,Ousterhout2015NSDI,Li2018PVLDB}. These controls let administrators specialize behavior to specific hardware and workload demands.
+
+\paragraph{Traditional Tuning Paradigms.} Static profiles and rule-based heuristics are vulnerable to changing workloads and operator interactions, which limits their usefulness for adaptive tuning and post-hoc diagnosis.
+
+\paragraph{Learning-based optimizers.}
+Black-box methods---Bayesian optimization, evolutionary strategies, and reinforcement learning~\cite{Roman2016CEC,Mao2019SIGCOMM,Lee2022AppliedSciences}---propose configurations and update surrogates or policies~\cite{Maas2020IeeeMicro,Roman2019Access}, but typically require hundreds of trials, assume stationary objectives, and offer limited interpretability~\cite{Lee2022AppliedSciences}. SemantOS adds domain-structured, uncertainty-aware safety gates on top of such techniques, enabling stable optimization as workloads and hardware change.
+
+\paragraph{Large Language Models (LLMs) for systems reasoning.}
+LLMs have recently shown strong reasoning, multi-objective optimization, and knowledge synthesis abilities~\cite{Brown2020NeurIPS,Touvron2023LLaMA,OpenAI2024GPT4,Lee2025TIST}. Augmented with structured domain knowledge---graphs capturing tunable dependencies, schemas describing hardware/workload characteristics, and telemetry summarizing recent performance---they can interpret complex system states, infer cause--effect relationships, and propose coherent configuration strategies with human-readable justifications that aid operator trust~\cite{Mialon2023AugmentedLM,Chen2024ICML,Jiang2025EMNLP}. The closest such efforts differ from SemantOS in axis and lifecycle: AutoOS~\cite{Chen2024ICML} uses an LLM to search build-time kernel \texttt{.config} options offline, and OS-R1~\cite{Lin2025OSR1} applies RL agents to runtime tuning---neither grounds reasoning in a \emph{typed inter-knob dependency graph}, exposes \emph{calibrated uncertainty}, nor gates changes through a \emph{conformal, staged-rollout safety runtime}. SemantOS targets \emph{online} \texttt{sysctl} adjustment where safety, explanation provenance, and uncertainty-gated automation are first-class.
+%\vspace{2pt}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{0.95}
+\begin{table}[t]
+\centering
+\caption{\textbf{Positioning vs. SOTA (condensed).} SemantOS uniquely combines
+knowledge-centric reasoning, uncertainty-aware safety, and explainability.
+\textit{K+L} denotes a knowledge-retrieval-augmented LLM reasoner, and
+\textit{KB/RAG} denotes a structured knowledge base (KB) with retrieval-augmented generation (RAG). Baselines include prior systems such as AdaptiveKernel, OS-R1, and Machine-Learning (ML)-Guided optimization. Sup.\ ML = Supervised ML.}
+
+\label{tab:related-compare}
+\scriptsize
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{System} & \textbf{Approach} & \textbf{Safety} & \textbf{Explain.} & \textbf{KB/RAG} & \textbf{Adapt.} & \textbf{Reprod.} \\
+\midrule
+AdaptiveKernel & RL/BO & $\times$ & $\times$ & $\times$ & $\checkmark$ & $\triangle$ \\
+OS-R1 & BO+ML & $\times$ & $\times$ & $\times$ & $\triangle$ & $\checkmark$ \\
+ML-Guided & Sup.\ ML & $\times$ & $\triangle$ & $\times$ & $\times$ & $\triangle$ \\
+BO/RL & BO/RL & $\times$ & $\times$ & $\times$ & $\triangle$ & $\checkmark$ \\
+\textbf{SemantOS} & \textit{K+L} & $\mathbf{\checkmark}$ & $\mathbf{\checkmark}$ & $\mathbf{\checkmark}$ & $\mathbf{\checkmark}$ & $\mathbf{\checkmark}$ \\
+\bottomrule
+\end{tabular}
+\vspace{0.5pt}
+\end{table}
+\normalsize
+
+\paragraph{Summary.}
+The complexity of kernel configuration, the shortcomings of static and black-box approaches, and the rise of LLMs for structured reasoning motivate combining telemetry, domain knowledge, and language-model reasoning; since kernel behavior varies across hardware, versions, and workload mixes, naive transfer of a single profile is unreliable. Table~\ref{tab:related-compare} positions SemantOS against AdaptiveKernel~\cite{Lee2022AppliedSciences}, OS-R1~\cite{Lin2025OSR1}, ML-Guided~\cite{Biswas2023SE4SafeML}, and BO/RL~\cite{Herodotou2021CSUR}, highlighting its integration of knowledge-centric reasoning, uncertainty-aware safety, and explainability.

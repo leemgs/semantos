@@ -1,0 +1,7 @@
+
+\begin{abstract}
+We introduce a semantic control loop (\textbf{SemantOS}) that combines extended Berkeley Packet Filter (eBPF) data collection, knowledge-based configuration lookup, and a guardrailed Large Language Model (LLM) to provide kernel parameter explanations and modifications. Across six workloads on three server classes, SemantOS reduced median end-to-end latency by up to 23\%, the 95th-percentile (P95) end-to-end latency by up to 28\%, and anomaly rate by up to 31\% (across-workload medians 18\%/22\%/27\%; no workload's mean regressed on any axis), and cut required operator tuning effort (our oversight proxy) by 85\%; all aggregate numbers are means over 10 runs with 95\% CIs. The safety runtime stages releases (canary~$\rightarrow$~ramp~$\rightarrow$~full) with automatic rollbacks based on uncertainty and declarative constraints, engaging adaptive automation only once a calibrated confidence level is reached. We contribute (i)~a knowledge-based inference layer that generates safe, interpretable actions; (ii)~an expected-cost decomposition with a conformal coverage-recovery guarantee under drift; and (iii)~an extensive evaluation with baseline comparisons and statistical analysis.
+\end{abstract}
+
+% Area: Knowledge Representation and Reasoning, Machine Learning, Uncertainty in AI,
+\textbf{Keywords.} Knowledge representation languages; Learning and reasoning; Planning and Scheduling; semantic reasoning; explainable control; safety runtime

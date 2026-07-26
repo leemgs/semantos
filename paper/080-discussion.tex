@@ -1,0 +1,7 @@
+\section{Discussion}
+\label{sec:discussion}
+
+Modeling tunable interactions as a typed knowledge graph captures causal couplings that black-box optimizers miss; staged rollout with rollback prevents catastrophic regressions under workload shift; and adaptive weight decay suppresses stale correlations. Unlike black-box BO/RL and RL-only systems (e.g., AdaptiveKernel, OS-R1), SemantOS combines graph-grounded reasoning with conformal, uncertainty-gated safety and provenance-carrying explanations, yielding Pareto-superior trade-offs and faster \emph{online} convergence under drift. Empirically the guarantees held: after each drift, recalibration restored coverage and rollback precision within the window predicted by Prop.~\ref{prop:recal}. Extending these ideas to database, network-scheduling, and compiler optimization is promising.
+
+\paragraph{Limitations.}
+(i)~\emph{Exchangeability}: conformal coverage assumes within-window exchangeability; sustained fast drift can briefly violate this until recalibration completes (Prop.~\ref{prop:recal}). (ii)~\emph{Residual LLM risk}: despite retrieval grounding, constrained decoding, and provenance checks, residual hallucination is non-zero, so the safety runtime---not a correctness proof---is the last line of defense. (iii)~\emph{Generality}: results cover Linux~6.4 on three server classes and six workload families; embedded, hard-real-time, and edge deployments where the 13B reasoner's cost (a 26\,GB A100 side-car) dominates remain future work~\cite{Jeary2024NeurIPS,Correia2024NeurIPS}.

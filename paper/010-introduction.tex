@@ -1,0 +1,31 @@
+\section{Introduction}
+\label{sec:introduction}
+The operating system (OS) kernel controls the system computing stack through
+process reservation, memory release, interrupt response, and Input/Output (I/O)
+management. There are hundreds of tunable OS kernel parameters, including
+Central Processing Unit (CPU) scheduling granularity, memory reclamation
+thresholds, interrupt affinity, and I/O scheduling, among others, stored in
+\texttt{/proc} and \texttt{/sys}. These kernel parameters are highly
+interconnected, and even small errors in their configuration can cause latency
+spikes, unpredictable tail behavior, and resource contention
+(e.g., \citeauthor{Dean2013CACM}~\citeyear{Dean2013CACM}; \citeauthor{Ousterhout2015NSDI}~\citeyear{Ousterhout2015NSDI}; \citeauthor{Li2018PVLDB}~\citeyear{Li2018PVLDB}).
+Thus, achieving minimal tail latency (or good performance) in heterogeneous
+systems continues to be an important problem. Current solutions only partially
+address it. Static baseline profiles fail under workload
+drift~\cite{VanAken2017SIGMOD,Moser2021DecisionIntelligence}.
+Rule-of-thumb heuristics and configuration tuners focus on single parameters,
+largely ignoring their interactions~\cite{Herodotou2021CSUR,Velez2020ASE}.
+Automated black-box methods, such as Bayesian Optimization (BO) and
+Reinforcement Learning (RL)-based tuners (collectively, BO/RL), have improved
+heuristic searches~\cite{Roman2016CEC,Lee2022AppliedSciences,Lin2025OSR1}, but
+they still offer little to no formal guarantees, often explore dangerous
+configurations without sufficient human control, and regress the
+system~\cite{Fingler2023ASPLOS}.
+
+
+SemantOS builds an AI-based control loop for continuous, interactive kernel tuning, comprising (i)~an eBPF telemetry pipeline, (ii)~a semantic KB capturing tunable metadata and typed dependencies, and (iii)~a safety-aware reasoning LLM that emits explanations and calibrated uncertainties with each recommendation~\cite{Brown2020NeurIPS,Touvron2023LLaMA,OpenAI2024GPT4}. Unlike systems that treat the kernel as a black box and reason \textit{only} about the objective~\cite{Lee2022AppliedSciences,Mialon2023AugmentedLM,Chen2024ICML}, SemantOS grounds reasoning semantically: it controls model uncertainty, makes inter-knob dependencies first-class, and confines unexplored configurations to staged, auditable rollouts---engaging adaptive automation only when trust conditions are met, thereby reducing operator involvement without compromising safety~\cite{Biswas2023SE4SafeML}.
+
+
+\textbf{Scope.} This version augments SemantOS with Pareto-aware control, risk-gate control, drift detection, and KB freshness policies~\cite{Maas2020IeeeMicro,Mialon2023AugmentedLM,Moser2021DecisionIntelligence}. We deliberately avoid aggressive search-based optimization~\cite{Herodotou2021CSUR,Roman2016CEC} that may compromise stability~\cite{Dean2013CACM,Ousterhout2015NSDI}, offering multi-objective co-tuning with safety guarantees instead.
+
+\paragraph{Contributions.} (i)~We formulate kernel tuning as a constrained, knowledge-grounded sequential decision problem, coupling a typed dependency graph with retrieval-augmented LLM reasoning to produce \emph{explainable} actions with provenance. (ii)~We provide an expected-cost decomposition (Theorem~\ref{thm:pac-cost}) for a conformal-calibration-gated, staged-rollout safety runtime, together with a coverage-recovery guarantee under drift (Proposition~\ref{prop:recal}) that bounds how quickly sliding-window recalibration restores the target unsafe-acceptance rate. (iii)~We validate the framework over six workloads on three server classes with 10 runs each (95\% CIs), showing Pareto-superior latency/anomaly trade-offs against expert and BO/RL baselines, and quantify operator-effort reduction in a 32-participant within-subjects user study.

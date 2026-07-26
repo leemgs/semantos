@@ -1,0 +1,99 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AAAI-27 Anonymous Submission --- built on the official AuthorKit27 preamble
+% (aaai2027.sty / aaai2027.bst). Font, bibliographystyle, and copyright text
+% are handled automatically by aaai2027.sty. DO NOT add times/helvet/courier,
+% hyperref/navigator, titlesec, geometry, setspace, or any link-embedding code.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+\usepackage[submission]{aaai2027}  % DO NOT CHANGE THIS
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+\setlength{\pdfpagewidth}{8.5in} % DO NOT CHANGE THIS
+\setlength{\pdfpageheight}{11in} % DO NOT CHANGE THIS
+
+% Algorithms (used by Algorithm 1)
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% Better-looking tables
+\usepackage{booktabs}
+
+\pdfinfo{
+/TemplateVersion (2027.1)
+}
+
+\setcounter{secnumdepth}{0} % AAAI style: unnumbered sections
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Project-specific packages/macros (all AAAI-27 allowed)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{threeparttable}
+\usepackage{xspace}
+\usepackage{pifont}
+\usepackage{enumitem}
+\usepackage{textcomp}
+
+\newtheorem{example}{Example}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{\mathrm{Var}}
+\newcommand{\Xsafe}{\mathcal{X}_{\mathrm{safe}}}
+\newcommand{\given}{\;\vert\;}
+\newcommand{\cmark}{\ding{51}} % check mark (tables)
+\newcommand{\xmark}{\ding{55}} % cross mark (tables)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Reference web links (single-line toggle).
+%   1 = DEBUG/REVIEW-ONLY: show each reference's URL as a BLUE CLICKABLE
+%       link. Implemented with the pdfTeX primitives \pdfstartlink/\pdfendlink
+%       (NOT hyperref, which aaai2027.sty blocks), so it compiles, but the
+%       resulting PDF embeds link annotations and MUST NOT be submitted --
+%       it is only for the author to click-check every reference URL.
+%   0 = SUBMISSION/CAMERA-READY: no colors, no links, URLs hidden. Fully
+%       AAAI-27 compliant (no hyperref, no link annotations).
+% Each .bib entry carries note={\refurl{<url>}}; the bst is unmodified.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\debugenablereferencelink}{0} % <-- MUST be 0 for the submitted PDF
+\ifnum\debugenablereferencelink=1
+  \usepackage{xcolor}
+  \newcommand{\refurl}[1]{%
+    \newblock
+    \pdfstartlink
+      height \ht\strutbox depth \dp\strutbox
+      attr {/Border [0 0 0]}%                 hide the link border box
+      user {/Subtype /Link
+            /A << /S /URI /URI (#1) >>}%      clickable URI annotation
+    \textcolor{blue}{\urlstyle{rm}\url{#1}}%   blue URL text
+    \pdfendlink}
+\else
+  \newcommand{\refurl}[1]{}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{./000-title}
+
+\begin{document}
+\maketitle
+
+\input{./005-abstract}
+\input{./010-introduction}
+\input{./015-background_related}
+\input{./020-motivation}
+\input{./040-design}
+\input{./070-evaluation}
+\input{./080-discussion}
+\input{./085-ethics}
+\input{./100-conclusion}
+
+\bibliography{reference-data}
+\end{document}
