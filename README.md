@@ -2,13 +2,15 @@
 
 **Safe and Explainable Kernel Tuning via Semantic Reasoning and Guardrailed LLMs**
 
-This repository accompanies the SemantOS paper. It is organized into two
-top-level directories: the research **paper** and the reference **code**.
+This repository accompanies the SemantOS paper. It is organized into three
+top-level directories: the research **paper**, the reference **code**, and
+sharing materials (**ppt**).
 
 ```
 .
-├── paper/   # AAAI-27 submission sources (LaTeX) and the built PDF
-└── code/    # SemantOS prototype: telemetry → KB → reasoner → safety runtime
+├── paper/   # AAAI-27 submission sources (LaTeX) and the built PDFs
+├── code/    # SemantOS prototype: telemetry → KB → reasoner → safety runtime
+└── ppt/     # Talk deck (Korean) and one-page poster (English) for sharing
 ```
 
 ---
@@ -62,7 +64,7 @@ benchmarks — not production hardening. See `code/README.md` for full details.
 |------|------|
 | `telemetry-agent/` | Collects kernel/system signals (psutil, eBPF-style) — p95 latency, syscall rate, anomaly indicators. |
 | `kb/`, `kb-service/` | Knowledge base: typed/signed dependency edges (Neo4j) with γ-decay, plus FAISS vector retrieval (RAG). |
-| `reasoner/` | Graph-grounded reasoner; emits knob/value/rationale and calibrated uncertainty (`k=3` self-consistency). |
+| `reasoner/` | Graph-grounded reasoner; emits knob/value/rationale and calibrated uncertainty (`k=3` self-consistency). Serves the three loop endpoints `/get_recommendations`, `/apply`, `/log_outcome`. |
 | `safety-runtime/` | Conformal threshold `τ`, staged rollout (canary → ramp → full), automatic rollback. |
 | `operator-console/` | FastAPI console that surfaces telemetry, evidence, and suggestions with override/rollback controls. |
 | `reproduce/` | Scripts and result CSVs/figures to reproduce the paper's experiments. |
@@ -71,4 +73,24 @@ benchmarks — not production hardening. See `code/README.md` for full details.
 | `docker-compose.yml`, `docker-compose.ebpf.yml`, `Makefile` | One-command bring-up and reproduction targets. |
 
 **Quick start:** `cd code && docker compose up` (see `code/README.md` and
-`code/reproduce/README.md` for reproduction steps).
+`code/reproduce/README.md` for reproduction steps). The offline reproduction
+harness regenerates every table, figure, and theory check with `python -m
+reproduce.run_all` (34/34 checks pass against the paper's reported CIs).
+
+---
+
+## `./ppt/` — Sharing materials
+
+Presentation and poster for sharing SemantOS with OS researchers and
+practitioners. Both are generated from small [`pptxgenjs`](https://gitbrent.github.io/PptxGenJS/)
+scripts and reuse a single navy/teal design system.
+
+| Path | Description |
+|------|-------------|
+| `semantos_ko.pptx` | **Talk deck (Korean)** — 12 slides: motivation, architecture, semantic KB, safety runtime, theory, results, ablation/Pareto, user study, conclusion. |
+| `semantos_poster_en.ppt` | **Poster (English)** — a single 48″×36″ landscape slide summarizing problem, method, guarantees, and results for a poster session. |
+| `gen_ko.js` / `gen_poster.js` | Generator scripts (source of truth for the two artifacts). |
+
+**Rebuild:** `cd ppt && npm install pptxgenjs && node gen_ko.js && node gen_poster.js`.
+The poster is authored as `.pptx` and exported to legacy `.ppt` with LibreOffice
+(`soffice --headless --convert-to ppt:"MS PowerPoint 97" semantos_poster_en.pptx`).
