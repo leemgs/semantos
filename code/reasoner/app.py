@@ -28,6 +28,7 @@ from fastapi.responses import JSONResponse
 
 KB_URL = os.environ.get("KB_URL", "http://kb-service:8000")
 TELEMETRY_URL = os.environ.get("TELEMETRY_URL", "http://telemetry-agent:8000")
+SAFETY_URL = os.environ.get("SAFETY_URL", "http://safety-runtime:8000")
 
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
@@ -234,8 +235,10 @@ def healthz():
     return {"ok": True, "self_consistency_k": SELF_CONSISTENCY_K}
 
 
-@app.post("/get_recommendations")
-async def get_recommendations():
+async def _recommend():
+    """Core of the reasoning step: telemetry+KB retrieval -> k self-consistency
+    samples -> aggregated, uncertainty-tagged recommendations. Returns a dict so
+    both /get_recommendations and /apply can reuse it."""
     ctx = await rag_context()
     prompt = json.dumps(ctx)[:12000]
 
@@ -249,8 +252,33 @@ async def get_recommendations():
         fb = graph_grounded_fallback(ctx)
         samples = [fb, fb, fb]
 
-    out = aggregate_self_consistency(samples, ctx)
-    return JSONResponse(out)
+    return aggregate_self_consistency(samples, ctx)
+
+
+@app.post("/get_recommendations")
+async def get_recommendations():
+    return JSONResponse(await _recommend())
+
+
+@app.post("/apply")
+async def apply(body: dict = Body(default=None)):
+    """Deployment step of the control loop (paper Sec. 4.4 / Alg. 1): hand the
+    approved recommendations to the safety-runtime, which gates each on the
+    conformally calibrated threshold (u >= tau -> veto) and stages survivors
+    through canary -> ramp -> full with SLO-guarded auto-rollback.
+
+    If the caller supplies no recommendations, a fresh set is generated first,
+    so /apply can close telemetry -> recommendation -> deployment in one call."""
+    recs = (body or {}).get("recommendations")
+    if not recs:
+        recs = (await _recommend()).get("recommendations", [])
+    async with httpx.AsyncClient(timeout=30) as client:
+        r = await client.post(f"{SAFETY_URL}/apply",
+                              json={"recommendations": recs})
+        r.raise_for_status()
+        result = r.json()
+    return JSONResponse({"forwarded_to": "safety-runtime",
+                         "submitted": len(recs), **result})
 
 
 @app.post("/log_outcome")
