@@ -1,0 +1,6 @@
+node_modules/
+package-lock.json
+# QA / build artifacts (regenerate from gen_*.js)
+*.pdf
+slide-*.jpg
+poster-*.jpg
