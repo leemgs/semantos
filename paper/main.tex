@@ -53,30 +53,27 @@
 \newcommand{\xmark}{\ding{55}} % cross mark (tables)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Reference web links (single-line toggle).
-%   1 = DEBUG/REVIEW-ONLY: show each reference's URL as a BLUE CLICKABLE
-%       link. Implemented with the pdfTeX primitives \pdfstartlink/\pdfendlink
-%       (NOT hyperref, which aaai2027.sty blocks), so it compiles, but the
-%       resulting PDF embeds link annotations and MUST NOT be submitted --
-%       it is only for the author to click-check every reference URL.
-%   0 = SUBMISSION/CAMERA-READY: no colors, no links, URLs hidden. Fully
-%       AAAI-27 compliant (no hyperref, no link annotations).
-% Each .bib entry carries note={\refurl{<url>}}; the bst is unmodified.
+% Reference web links -- AAAI-27 compliance hardening.
+%   AAAI-27 forbids embedded link annotations / hyperref in submissions.
+%   The previous \pdfstartlink/\pdfendlink code embedded clickable
+%   /Subtype /Link /URI annotations, which made it possible to submit a
+%   NON-COMPLIANT PDF (and in fact one such build was produced). That code
+%   has been REMOVED so that NO build of this source can ever emit a link
+%   annotation, regardless of the toggle below.
+%
+%   Toggle behaviour (both settings emit ZERO link annotations):
+%     0 = SUBMISSION/CAMERA-READY: \refurl prints nothing; reference URLs
+%         are hidden. Fully AAAI-27 compliant. <-- keep this for submission.
+%     1 = REVIEW-ONLY: \refurl prints each URL as PLAIN, NON-CLICKABLE text
+%         (no color, no annotation) so authors can eyeball every URL. Still
+%         AAAI-27 compliant, but do not submit this build (URLs add length).
+%   Each .bib entry carries note={\refurl{<url>}}; the bst is unmodified.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\debugenablereferencelink}{0} % <-- MUST be 0 for the submitted PDF
+\newcommand{\debugenablereferencelink}{0} % 0 = submission (URLs hidden, no links)
 \ifnum\debugenablereferencelink=1
-  \usepackage{xcolor}
-  \newcommand{\refurl}[1]{%
-    \newblock
-    \pdfstartlink
-      height \ht\strutbox depth \dp\strutbox
-      attr {/Border [0 0 0]}%                 hide the link border box
-      user {/Subtype /Link
-            /A << /S /URI /URI (#1) >>}%      clickable URI annotation
-    \textcolor{blue}{\urlstyle{rm}\url{#1}}%   blue URL text
-    \pdfendlink}
+  \newcommand{\refurl}[1]{\newblock\url{#1}} % plain non-clickable text only
 \else
-  \newcommand{\refurl}[1]{}
+  \newcommand{\refurl}[1]{} % submission: no URL, no annotation
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
