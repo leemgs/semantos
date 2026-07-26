@@ -25,19 +25,29 @@ Double-blind LaTeX sources built on the official AAAI-27 Author Kit
 | `reference-data.bib` | Bibliography (references to pre-existing, third-party resources only). |
 | `aaai2027.sty` / `aaai2027.bst` / `aaai2027.bib` | Official AAAI-27 Author Kit files (unmodified). |
 | `figures/` | Architecture, pairwise-effects, and Pareto-frontier figures. |
-| `main.pdf` | Compiled submission PDF (7 content pages + references; **0 embedded link annotations**). |
-| `README.txt` | Build instructions and the reference-URL review toggle. |
-| `semantos_7p_aaai_20260705_2010.zip` | Self-contained supplementary/source archive. |
+| `Makefile` | Builds **both** PDFs below (`make`). |
+| `main.pdf` | **Submission PDF** — 7 content pages + references; **0 embedded link annotations**. Upload this. |
+| `main_bluelink.pdf` | **Debug PDF** — same content but reference URLs are blue clickable links, for pre-submission link checking only. **Not for submission.** |
+| `README.txt` | Build instructions and the reference-URL modes. |
+| `semantos_7p_aaai_20260705_2010.zip` | Self-contained supplementary/source archive (compliant `main.pdf` only). |
 
-**Build:** `pdflatex main` → `bibtex main` → `pdflatex main` → `pdflatex main`
+**Build:** `cd paper && make` — produces two files from the single source:
+
+| Output | `\debugenablereferencelink` | Reference URLs | AAAI-27 |
+|--------|------|------|---------|
+| `main.pdf` | `0` (default) | hidden, no link annotations | ✅ compliant — **submit this** |
+| `main_bluelink.pdf` | `1` | blue clickable links (debug) | ❌ do not submit |
+
+A plain `pdflatex main.tex` also works and yields the compliant `main.pdf`
+(the toggle defaults to `0`). The debug build is written to a *separate*
+filename on purpose, so the submission file `main.pdf` is always the
+link-free build.
 
 **AAAI-27 compliance notes.** The author block is anonymized via the
-`[submission]` option; the reference-URL toggle in `main.tex` never emits
-clickable link annotations (toggle `0` hides URLs for submission, toggle `1`
-prints them as plain, non-clickable text for author review only); and no part
-of the paper or supplement links to the authors' own web material. Reference
-URLs point exclusively to pre-existing third-party resources (ACM, NeurIPS,
-arXiv, IEEE, etc.).
+`[submission]` option; the submission PDF (`main.pdf`) embeds no clickable
+link annotations; and no part of the paper or supplement links to the authors'
+own web material. Reference URLs point exclusively to pre-existing third-party
+resources (ACM, NeurIPS, arXiv, IEEE, etc.).
 
 ---
 

@@ -53,27 +53,40 @@
 \newcommand{\xmark}{\ding{55}} % cross mark (tables)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Reference web links -- AAAI-27 compliance hardening.
-%   AAAI-27 forbids embedded link annotations / hyperref in submissions.
-%   The previous \pdfstartlink/\pdfendlink code embedded clickable
-%   /Subtype /Link /URI annotations, which made it possible to submit a
-%   NON-COMPLIANT PDF (and in fact one such build was produced). That code
-%   has been REMOVED so that NO build of this source can ever emit a link
-%   annotation, regardless of the toggle below.
+% Reference web-link mode. TWO output PDFs are produced from THIS source,
+% selected by \debugenablereferencelink (default 0). Build BOTH with `make`
+% (see the Makefile), which overrides the default on the command line via
+% \def and writes distinct jobnames:
 %
-%   Toggle behaviour (both settings emit ZERO link annotations):
-%     0 = SUBMISSION/CAMERA-READY: \refurl prints nothing; reference URLs
-%         are hidden. Fully AAAI-27 compliant. <-- keep this for submission.
-%     1 = REVIEW-ONLY: \refurl prints each URL as PLAIN, NON-CLICKABLE text
-%         (no color, no annotation) so authors can eyeball every URL. Still
-%         AAAI-27 compliant, but do not submit this build (URLs add length).
+%   0 = SUBMISSION  ->  main.pdf
+%       No URLs, no link annotations. Fully AAAI-27 compliant. UPLOAD THIS.
+%   1 = DEBUG/REVIEW-ONLY  ->  main_bluelink.pdf
+%       Each reference URL is shown as a BLUE, CLICKABLE link so authors can
+%       click-check every reference. Implemented with the pdfTeX primitives
+%       \pdfstartlink/\pdfendlink (NOT hyperref, which aaai2027.sty blocks).
+%       This PDF embeds link annotations and MUST NOT be submitted to AAAI --
+%       that is why it is written to a SEPARATE file (main_bluelink.pdf), so
+%       the submission file main.pdf is always the compliant, link-free build.
+%
+%   \providecommand keeps 0 as the default for a plain `pdflatex main.tex`
+%   (safe: produces the compliant main.pdf), while `make` passes
+%   \def\debugenablereferencelink{1} to build main_bluelink.pdf.
 %   Each .bib entry carries note={\refurl{<url>}}; the bst is unmodified.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\debugenablereferencelink}{0} % 0 = submission (URLs hidden, no links)
+\providecommand{\debugenablereferencelink}{0} % 0 = submission (default); 1 = blue links
 \ifnum\debugenablereferencelink=1
-  \newcommand{\refurl}[1]{\newblock\url{#1}} % plain non-clickable text only
+  \usepackage{xcolor}
+  \newcommand{\refurl}[1]{%
+    \newblock
+    \pdfstartlink
+      height \ht\strutbox depth \dp\strutbox
+      attr {/Border [0 0 0]}%                 hide the link border box
+      user {/Subtype /Link
+            /A << /S /URI /URI (#1) >>}%      clickable URI annotation
+    \textcolor{blue}{\urlstyle{rm}\url{#1}}%   blue URL text
+    \pdfendlink}
 \else
-  \newcommand{\refurl}[1]{} % submission: no URL, no annotation
+  \newcommand{\refurl}[1]{}%                  submission: no URL, no annotation
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
