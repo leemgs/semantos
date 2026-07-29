@@ -75,8 +75,9 @@ rows = [
    "제출 시스템에서 저자 본인 확인 필요 (파일로 판단 불가)."),
  ("2a", "익명성 — 현재형 자기인용 없음", "pass",
    "모든 인용이 3인칭(예: AdaptiveKernel~[Lee 2022]). \"our previous work\" 류 표현 0건."),
- ("2b", "익명성 — 부록 README 식별정보 없음", "pass",
-   "부록 zip 21개 파일 전체 텍스트 스캔 — 이름·소속·이메일 0건."),
+ ("2b", "익명성 — 부록 README", "pass",
+   "PC가 위험요소로 명시한 항목. 부록 zip에서 README.txt를 아예 제거(리스크 0). "
+   "남은 20개 파일 전체 텍스트 스캔 — 이름·소속·이메일 0건."),
  ("2c", "익명성 — PDF 메타데이터", "pass",
    "Author/Title/Subject/Keywords 모두 비어 있음. Creator=TeX, Producer=pdfTeX (무해)."),
  ("2d", "익명성 — 저자 블록", "pass",
