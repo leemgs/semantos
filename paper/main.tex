@@ -86,7 +86,11 @@
     \textcolor{blue}{\urlstyle{rm}\url{#1}}%   blue URL text
     \pdfendlink}
 \else
-  \newcommand{\refurl}[1]{}%                  submission: no URL, no annotation
+  % submission: no URL, no annotation. The bst emits `\newblock \refurl{URL}.';
+  % also swallow that trailing period so entries do not end in ". .".
+  \makeatletter
+  \newcommand{\refurl}[1]{\@ifnextchar.{\@gobble}{}}%
+  \makeatother
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
