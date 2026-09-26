@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'evaluation'))
 import controlled_kernel as ck
 from analyze_controlled import analyze
-from model_audit import experiment, validate_answer
+from model_audit import experiment, heldout, validate_answer
 
 
 class ControlledTests(unittest.TestCase):
@@ -56,6 +56,20 @@ class ControlledTests(unittest.TestCase):
         self.assertEqual(faithfulness['status'], 'valid')
         self.assertFalse(faithfulness['cited_action_changed'])
         self.assertNotEqual(faithfulness['cited_deleted'], faithfulness['uncited_deleted'])
+
+    def test_heldout_scoring_matches_selector_replay(self):
+        root = ROOT/'evaluation/results/controlled-2026-09-26'
+        reported = {(c['period_ms'], c['method']): c for c in
+                    json.loads((root/'analysis.json').read_text())['comparisons']}
+        scored = heldout(root, [{'status': 'valid', 'variant': 'full', 'seed': 1,
+                                 'answer': {'config': 's50000_aall'}},
+                                {'status': 'failed', 'variant': 'full', 'seed': 2}])
+        self.assertEqual(len(scored), 2)  # failed calls are never scored
+        for row in scored:
+            ref = reported[row['period_ms'], 'control']
+            self.assertAlmostEqual(row['p95_us']['mean'], ref['p95_us']['mean'], places=6)
+            self.assertEqual(row['reduction_pct']['mean'], 0.0)
+            self.assertTrue(row['same_as_control'])
 
     def test_raw_tampering_prevents_analysis(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -226,3 +226,34 @@ and [CPU affinity](https://man7.org/linux/man-pages/man2/sched_setaffinity.2.htm
 from `results/controlled-2026-09-26/`. It first runs the same hash, lineage and
 freeze checks as `analyze_controlled.py`, and refuses to plot if its recomputed
 FN/TP counts differ from `analysis.json`.
+
+## Running the LLM audit (paper: "Model and explanation audit")
+
+`model_audit.py` gives a model exactly the frozen training table, interaction
+graph and retrieval runs, never test outcomes. For each of five seeds it runs
+full / no-graph / no-retrieval / model-only prompts plus cited vs. matched
+uncited context deletion, validates every citation, and then scores each valid
+choice on the held-out grid with the same paired-replay rule used for the
+non-LLM selectors (`heldout.json`). Decoding is constrained by a JSON-schema
+grammar: `config` must be an allowed name and citations must be supplied IDs.
+
+```
+pip install -r evaluation/requirements-llm.txt
+# official Qwen GGUF (Apache-2.0); any instruct GGUF works
+huggingface-cli download Qwen/Qwen2.5-7B-Instruct-GGUF \
+    qwen2.5-7b-instruct-q4_k_m.gguf --local-dir models/
+python3 evaluation/model_audit.py evaluation/results/controlled-2026-09-26 \
+    --backend llamacpp --gguf models/qwen2.5-7b-instruct-q4_k_m.gguf \
+    --model Qwen2.5-7B-Instruct-Q4_K_M \
+    --out evaluation/results/model-audit-qwen2.5-7b
+```
+
+The run records the GGUF SHA-256 and its `general.*` metadata in `plan.json`.
+A 7B Q4 model needs about 6 GB RAM; on four CPU cores expect roughly one to
+two hours for the 30 calls. `--backend ollama --manifest <file>` targets a
+local Ollama server instead. Use `--purpose pipeline-check` for plumbing tests
+with toy models; such runs must not be reported as results.
+
+Downloading weights requires network access to `huggingface.co` and its file
+CDN. The 2026-09-26 cloud environment blocked these hosts, so no model result
+exists yet; the harness was exercised end to end only as a pipeline check.
