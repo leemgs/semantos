@@ -16,21 +16,14 @@ Both informed selectors chose 50\,$\mu$s slack and all CPUs, identical to contro
 \paragraph{Independent labels and gate misses.}
 For this experiment only, the score is a configuration's training deadline-miss fraction, fixed before calibration; it is not the REST reasoner's self-consistency score. A run is labeled unsafe when more than 10\% of its 40 observed events exceed the predeclared 200\,$\mu$s deadline. Thus the label depends on measured timing, independently of a veto or rollback. Every candidate is executed in an isolated owned process, permitting gate replay with observed outcomes for accepted and vetoed candidates. Calibration uses only 4\,ms runs. The three prespecified $\alpha$ values $\{.05,.10,.20\}$ all yield $\tau=.9225$ because the unsafe-score order statistics are tied.
 
-\begin{table}[t]
-\centering\small
-\caption{Gate replay counts at each tested $\alpha$. Positive means unsafe; a gate-positive decision is veto. Forty bundles are evaluated at each period. This is a held-out diagnostic, not prevented production harm.}
-\label{tab:gate-counts}
-\begin{tabular}{rrrrrrr}
-\toprule
-Period & Accept & Veto & TP & FP & FN & TN\\
-\midrule
-5\,ms & 20 & 20 & 20 & 0 & 5 & 15\\
-8\,ms & 20 & 20 & 20 & 0 & 4 & 16\\
-\bottomrule
-\end{tabular}
-\end{table}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/gate_replay.pdf}
+\caption{Frozen-gate replay on the 80 held-out test runs; each point is one run. Positive means unsafe (dashed line) and a gate-positive decision is veto. Counts at every tested $\alpha$ (all give $\tau=.9225$): 5\,ms, 20 accepted / 20 vetoed, TP~20, FP~0, FN~5, TN~15; 8\,ms, 20 / 20, TP~20, FP~0, FN~4, TN~16. Blue points above the line are the accepted unsafe runs. This is a held-out diagnostic, not prevented production harm. Generated from raw logs by \texttt{plot\_gate\_replay.py}.}
+\label{fig:gate-replay}
+\end{figure}
 
-Unsafe acceptance is $5/25=20.0\%$ and $4/24=16.7\%$ among unsafe runs; unsafe fractions among accepted runs are $5/20=25.0\%$ and $4/20=20.0\%$. Veto precision is $20/20$ in each period, which is not rollback precision. The observed miss rates exceed the nominal 5\% and 10\% levels. Calibration and test periods differ, runs share a host, and the proposition is marginal under exchangeability; these results neither verify its deployment assumptions nor establish recovery. The gate is frozen throughout test, with no retrospective adjustment. The two test periods are different operating conditions, not a drift-recovery trajectory. All counts, thresholds and per-run scores are retained rather than replacing unfavorable outcomes with calibrated claims.
+Figure~\ref{fig:gate-replay} shows every test run. Unsafe acceptance is $5/25=20.0\%$ and $4/24=16.7\%$ among unsafe runs; unsafe fractions among accepted runs are $5/20=25.0\%$ and $4/20=20.0\%$. Veto precision is $20/20$ in each period, which is not rollback precision. The observed miss rates exceed the nominal 5\% and 10\% levels. Calibration and test periods differ, runs share a host, and the proposition is marginal under exchangeability; these results neither verify its deployment assumptions nor establish recovery. The gate is frozen throughout test, with no retrospective adjustment. The two test periods are different operating conditions, not a drift-recovery trajectory. All counts, thresholds and per-run scores are retained rather than replacing unfavorable outcomes with calibrated claims.
 
 \paragraph{Actual staged application and restoration.}
 A separate adapter snapshots the child thread's timer slack and affinity, validates the target, applies both settings, verifies readback, and restores both originals in a \texttt{finally} path, including partial-application failures. These per-thread controls are documented Linux interfaces~\cite{LinuxTimerSlack,LinuxAffinity}. Updates are sequential, not an atomic kernel transaction. The driver observes stages of 8, 16 and 32 events and stops when a stage's deadline-miss fraction exceeds 10\%. Stages are observation counts, not fractions of production traffic. All four configurations are exercised in ten blocks at each test period, independently of the gate replay.

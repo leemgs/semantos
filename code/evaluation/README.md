@@ -219,3 +219,10 @@ SemantOS recommendations. No LLM or graph optimizer result follows from this.
 
 Interface definitions: [Linux timer slack](https://man7.org/linux/man-pages/man2/PR_SET_TIMERSLACK.2const.html)
 and [CPU affinity](https://man7.org/linux/man-pages/man2/sched_setaffinity.2.html).
+
+## Paper figure
+
+`plot_gate_replay.py --out <pdf>` draws the frozen-gate replay (paper Figure 2)
+from `results/controlled-2026-09-26/`. It first runs the same hash, lineage and
+freeze checks as `analyze_controlled.py`, and refuses to plot if its recomputed
+FN/TP counts differ from `analysis.json`.

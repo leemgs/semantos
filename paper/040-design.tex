@@ -10,15 +10,31 @@ $u=0.7(1-v/k)+0.3(1-w)$, clipped to $[0.02,1]$, where $w$ is the strongest retri
 The aggregator chooses a modal complete bundle actually present in a model response, rather than splicing independently winning knob values into an unseen combination. Backend failures retain their type and failed samples remain in the score denominator. Responses expose the complete supplied context, prompt hash and raw samples; exceeding the context budget causes abstention instead of truncating evidence. A model name in this record does not by itself establish immutable checkpoint provenance.
 
 \begin{figure}[t]
-\centering\small
-\fbox{\parbox{.91\columnwidth}{Measured workload snapshot + frozen graph/traces\\
-$\downarrow$\quad validity check; invalid input $\rightarrow$ abstain\\
-Synchronous model samples + recorded failures\\
-$\downarrow$\quad choose one observed bundle; heuristic score\\
-Joint policy checks + separately supplied calibration\\
-$\downarrow$\quad veto or in-memory stage/cancel\\
-Decision trace; outcomes are not automatic training labels}}
-\caption{REST decision path. The telemetry demo is marked invalid for end-to-end latency, so it abstains. Versioned objective preferences and automatic graph/calibration refresh are future requirements; the separate per-thread experiment uses a fixed latency objective and frozen artifacts.}
+\centering
+\begin{tikzpicture}[font=\scriptsize, >={Stealth[length=1.6mm]}, x=1mm, y=1mm,
+  box/.style={draw, rounded corners=1.2pt, align=center, inner sep=1.8pt, minimum height=7mm},
+  ev/.style={box, fill=black!6}, en/.style={box, fill=black!16, line width=0.6pt},
+  tag/.style={font=\tiny\itshape, text=black!60}]
+\node[ev, text width=33mm] (tel) at (-19.5,0) {Workload telemetry\\(validity-checked)};
+\node[ev, text width=33mm] (kb)  at (19.5,0)  {Frozen typed graph\\+ retrieved traces};
+\node[box, text width=76mm] (rsn) at (0,-12) {\textbf{Reasoner}: $k{=}3$ model samples $\rightarrow$ one \emph{observed} complete bundle,\\heuristic score $u$ = max over members; abstains on invalid input};
+\node[en, text width=50mm] (val) at (-13,-24) {\textbf{Runtime}: validate the whole bundle\\(allowlist, bounds, joint constraints)};
+\node[ev, text width=20mm] (cal) at (29,-24) {Calibration\\labels $\rightarrow$ $\tau$};
+\node[box, text width=30mm] (veto)  at (-23,-36) {Veto every member\\($u{\ge}\tau$ or invalid)};
+\node[box, text width=40mm] (stage) at (17,-36) {Stage $5{\to}25{\to}50{\to}100\%$\\in memory only (dry run)};
+\node[box, text width=76mm] (trace) at (0,-48) {Decision trace: inputs, prompt hash, raw samples, $u$, $\tau$, decision};
+\draw[->] (tel) -- (tel |- rsn.north);
+\draw[->] (kb) -- (kb |- rsn.north);
+\draw[->] (rsn.south -| val) -- (val.north);
+\draw[->] (cal) -- (val);
+\draw[->] (val.south -| veto) -- (veto.north);
+\draw[->] (val.south) ++(12,0) -- (stage.north -| {$(val.south)+(12,0)$});
+\draw[->] (veto) -- (veto |- trace.north);
+\draw[->] (stage) -- (stage |- trace.north);
+\node[tag, anchor=south west] at (tel.north west) {evidence};
+\node[tag, anchor=south east] at (cal.north east) {independent labels};
+\end{tikzpicture}
+\caption{SemantOS decision path as implemented. Evidence, proposal and enforcement are separate components, so the same evidence can be given to a non-LLM optimizer and gate errors can be counted against independently defined labels. The REST runtime never writes kernel settings; a separate per-thread actuator (evaluated later) applies, verifies and restores timer slack and affinity in owned child processes.}
 \label{fig:runtime-path}
 \end{figure}
 

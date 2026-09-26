@@ -12,6 +12,11 @@ Measured evidence used by the paper (paths under ../code/evaluation/results/):
   is copied from that directory's generated table.tex).
 The matching analyze*.py scripts verify hashes and regenerate the tables.
 
+Figures: Figure 1 (decision path) is TikZ inside 040-design.tex. Figure 2,
+figures/gate_replay.pdf, is regenerated from the raw controlled log by
+  python3 ../code/evaluation/plot_gate_replay.py --out figures/gate_replay.pdf
+which re-runs the hash/lineage checks and asserts its counts match analysis.json.
+
 The follow-up covers one workload family on one host. Selector comparisons are
 paired offline replay. The model audit failed before inference; its status is
 stored under results/model-audit-2026-09-26/. No LLM-superiority,
