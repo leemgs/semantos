@@ -61,9 +61,10 @@ same number and kind of uncited items; missing controls are non-estimable. A val
 response alone is not an effect estimate. This frozen-input audit is retrospective
 and specific to the four measured per-thread configurations, not a VM-sysctl run.
 
-The [recorded attempt](results/model-audit-2026-09-26/status.json) produced zero
-responses: the local socket was forbidden. Its failure is not a measured zero
-effect. The installed Llama 3.2 manifest does not replace historical Llama 3.1
+The first [recorded attempt](results/model-audit-2026-09-26/status.json) produced
+zero responses: the local socket was forbidden. Its failure is not a measured zero
+effect. Completed Qwen2.5-7B and Llama-3.1-8B runs are summarized under
+"Running the LLM audit" below. The installed Llama 3.2 manifest does not replace historical Llama 3.1
 provenance. Tests use explicit fixtures for failure/citation handling and never
 count fixture output as model evidence.
 
@@ -238,22 +239,58 @@ non-LLM selectors (`heldout.json`). Decoding is constrained by a JSON-schema
 grammar: `config` must be an allowed name and citations must be supplied IDs.
 
 ```
-pip install -r evaluation/requirements-llm.txt
-# official Qwen GGUF (Apache-2.0); any instruct GGUF works
+pip install -r evaluation/requirements-llm.txt   # builds llama.cpp from source if no wheel
+# the official Qwen GGUF is published as two shards; pass the first
 huggingface-cli download Qwen/Qwen2.5-7B-Instruct-GGUF \
-    qwen2.5-7b-instruct-q4_k_m.gguf --local-dir models/
+    --include 'qwen2.5-7b-instruct-q4_k_m-0000?-of-00002.gguf' --local-dir models/
+huggingface-cli download bartowski/Meta-Llama-3.1-8B-Instruct-GGUF \
+    Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf --local-dir models/
 python3 evaluation/model_audit.py evaluation/results/controlled-2026-09-26 \
-    --backend llamacpp --gguf models/qwen2.5-7b-instruct-q4_k_m.gguf \
+    --backend llamacpp --gguf models/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf \
     --model Qwen2.5-7B-Instruct-Q4_K_M \
     --out evaluation/results/model-audit-qwen2.5-7b
+# exploratory, post hoc: partially matched cited-deletion probe (one seed)
+python3 evaluation/cited_deletion_probe.py evaluation/results/controlled-2026-09-26 \
+    evaluation/results/model-audit-qwen2.5-7b --gguf models/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf \
+    --out evaluation/results/model-audit-qwen2.5-7b/probe-cited-deletion
+python3 evaluation/summarize_model_audit.py evaluation/results/model-audit-qwen2.5-7b \
+    evaluation/results/model-audit-llama3.1-8b --out evaluation/results/model-audit-summary \
+    --tex ../paper/model-audit.tex
 ```
 
-The run records the GGUF SHA-256 and its `general.*` metadata in `plan.json`.
-A 7B Q4 model needs about 6 GB RAM; on four CPU cores expect roughly one to
-two hours for the 30 calls. `--backend ollama --manifest <file>` targets a
-local Ollama server instead. Use `--purpose pipeline-check` for plumbing tests
-with toy models; such runs must not be reported as results.
+The run records the SHA-256 of every GGUF shard and its `general.*` metadata in
+`plan.json`. A 7B Q4 model needs about 6 GB RAM. `--backend ollama --manifest
+<file>` targets a local Ollama server instead. Use `--purpose pipeline-check` for
+plumbing tests with toy models; such runs must not be reported as results, and the
+summarizer refuses them.
 
-Downloading weights requires network access to `huggingface.co` and its file
-CDN. The 2026-09-26 cloud environment blocked these hosts, so no model result
-exists yet; the harness was exercised end to end only as a pipeline check.
+### Recorded results (2026-09-26)
+
+[`results/model-audit-summary/summary.md`](results/model-audit-summary/summary.md)
+summarizes two runs, both on a four-core CPU container with llama-cpp-python
+0.3.35 and weights whose SHA-256 equal the publishers' Hugging Face LFS hashes:
+
+| Model | Weights SHA-256 | Calls | Mean s/call |
+|---|---|---|---|
+| Qwen2.5-7B-Instruct Q4_K_M (2 shards) | `dfce12e3…` + `539cf93f…` | 20/20 valid | 80.2 |
+| Llama-3.1-8B-Instruct Q4_K_M | `7b064f58…` | 30/30 valid | 77.5 |
+
+* Responses were byte-identical across the five seeds (greedy decoding), so the
+  seeds are not independent replicates.
+* Qwen chose the explicit control in the full, no-graph and no-retrieval contexts
+  (paired improvement exactly zero, as for the non-LLM selectors) and 50 us slack
+  on one CPU without evidence (-145 +- 125 % and -180 +- 156 % at 5/8 ms).
+* Llama chose 50 us slack on one CPU in all four contexts, i.e. worse than control
+  on replay even when given only the training table.
+* Faithfulness: Qwen cites the single training table, which has no same-kind
+  control, so it is non-estimable. For Llama, deleting cited and matched uncited
+  runs both changed the action, so its sensitivity is not citation-specific.
+  The post hoc probe (`probe-cited-deletion/`) found citation-specific sensitivity
+  for Qwen in one deterministic response; this is not a faithfulness estimate.
+* [`claim-audit.json`](results/model-audit-summary/claim-audit.json) checks all 12
+  quantitative claims in the ten distinct explanations by hand: 1 correct, 1 partly
+  wrong, 2 unsupported priors, 8 wrong, misattributed or overstated. All quoted
+  decimals occur in the prompt, so citation checks verify provenance, not
+  correctness.
+
+`results/model-audit-2026-09-26/` keeps the earlier failed Ollama attempt as history.

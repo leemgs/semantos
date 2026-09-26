@@ -1,0 +1,48 @@
+{
+  "model": "Meta-Llama-3.1-8B-Instruct-Q4_K_M",
+  "backend": "llamacpp",
+  "purpose": "experiment",
+  "manifest": {
+    "format": "gguf",
+    "file": "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+    "bytes": 4920739232,
+    "sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+    "gguf_general_metadata": {
+      "general.quantization_version": "2",
+      "general.file_type": "15",
+      "general.architecture": "llama",
+      "general.basename": "Meta-Llama-3.1",
+      "general.name": "Meta Llama 3.1 8B Instruct",
+      "general.finetune": "Instruct",
+      "general.type": "model",
+      "general.size_label": "8B",
+      "general.license": "llama3.1"
+    },
+    "shards": [
+      {
+        "file": "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+        "bytes": 4920739232,
+        "sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c"
+      }
+    ],
+    "runtime": "llama-cpp-python 0.3.35",
+    "n_ctx": 8192,
+    "response_format": "JSON schema grammar: config enum; <=6 citations restricted to supplied IDs; <=400-char explanation",
+    "max_tokens": 384
+  },
+  "manifest_sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+  "endpoint": null,
+  "seeds": [
+    4088,
+    4089,
+    4090,
+    4091,
+    4092
+  ],
+  "temperature": 0,
+  "num_predict": 256,
+  "source_sha256": "bb49f2ab8e2ec5b2631bdfdd96aa42e36ffca2dcfc5fa48335e5acf0a7a4fab6",
+  "input_hashes_sha256": "d5a1ec2d425fd9ea1ea45b5e65b2cca91f87ca88eff3b3cf879e80435d130b2c",
+  "scope": "retrospective frozen-input selection audit; no test outcomes in prompts",
+  "started_utc_ns": 1790433011554038444
+}

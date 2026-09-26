@@ -12,7 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'evaluation'))
 import controlled_kernel as ck
 from analyze_controlled import analyze
-from model_audit import experiment, heldout, validate_answer
+from model_audit import evidence, experiment, heldout, validate_answer
+from cited_deletion_probe import controls_for
+from summarize_model_audit import numbers_grounded
 
 
 class ControlledTests(unittest.TestCase):
@@ -70,6 +72,23 @@ class ControlledTests(unittest.TestCase):
             self.assertAlmostEqual(row['p95_us']['mean'], ref['p95_us']['mean'], places=6)
             self.assertEqual(row['reduction_pct']['mean'], 0.0)
             self.assertTrue(row['same_as_control'])
+
+    def test_probe_controls_match_cited_retrieval_kind_and_config(self):
+        _, items = evidence(ROOT/'evaluation/results/controlled-2026-09-26')
+        retrieval = [i for i in items if i['kind'] == 'retrieval']
+        cited = {'training-table', retrieval[0]['id'], retrieval[1]['id']}
+        controls = controls_for(cited, items)
+        self.assertEqual(len(controls), 2)
+        self.assertTrue(all(c['kind'] == 'retrieval' and c['id'] not in cited for c in controls))
+        self.assertEqual(len({c['id'] for c in controls}), 2)
+        by_id = {i['id']: i for i in items}
+        self.assertEqual(sorted(c['config'] for c in controls),
+                         sorted(by_id[i]['config'] for i in cited if i != 'training-table'))
+
+    def test_numbers_grounded_is_lexical(self):
+        record = {'prompt': '{"p95_us": 126.36}',
+                  'answer': {'explanation': 'mean 126.36 us, not 99.9 us'}}
+        self.assertEqual(numbers_grounded(record), (2, 1))
 
     def test_raw_tampering_prevents_analysis(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -16,8 +16,12 @@ per-process kernel experiment, and a prospective role-separated follow-up with
 | [code/evaluation/results/local-2026-09-26/](code/evaluation/results/local-2026-09-26/) | 3,000 measured operations, environment, hashes and statistics |
 | [Kernel experiment](code/evaluation/results/kernel-local-2026-09-26/summary.md) | Per-process timer-slack/affinity interventions |
 | [Controlled follow-up](code/evaluation/results/controlled-2026-09-26/summary.md) | Frozen selectors, gate confusion counts, real restoration and source lineage |
-| [Model audit status](code/evaluation/results/model-audit-2026-09-26/status.json) | Recorded backend failure; no LLM or faithfulness result |
+| [Model audit](code/evaluation/results/model-audit-summary/summary.md) | Qwen2.5-7B and Llama-3.1-8B on the frozen follow-up evidence, held-out replay, deletion controls and a manual claim check |
+| [Earlier audit attempt](code/evaluation/results/model-audit-2026-09-26/status.json) | Recorded backend failure (kept as history) |
 
 Training selected the baseline configuration in both kernel experiments; no
-selected-policy gain was observed. The LLM's incremental value and explanation
-faithfulness remain unverified.
+selected-policy gain was observed. Two open-weight LLMs given the same frozen evidence did not
+improve on the default either: Qwen2.5-7B chose it, Llama-3.1-8B chose a
+configuration that is worse on held-out replay, and 8 of 12 quantitative
+explanation claims misstate the evidence despite valid citations. Explanation
+faithfulness remains unestablished.

@@ -1,0 +1,52 @@
+{
+  "model": "Qwen2.5-7B-Instruct-Q4_K_M",
+  "backend": "llamacpp",
+  "purpose": "experiment",
+  "manifest": {
+    "format": "gguf",
+    "file": "qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf",
+    "bytes": 4683073632,
+    "sha256": "dfce12e3862a5283ccfb88221b48480e58745165de856439950d0f22590580db",
+    "gguf_general_metadata": {
+      "general.file_type": "15",
+      "general.architecture": "qwen2",
+      "general.name": "qwen2.5-7b-instruct",
+      "general.version": "v0.1",
+      "general.finetune": "qwen2.5-7b-instruct",
+      "general.type": "model",
+      "general.size_label": "7.6B",
+      "general.quantization_version": "2"
+    },
+    "shards": [
+      {
+        "file": "qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf",
+        "bytes": 3993201344,
+        "sha256": "dfce12e3862a5283ccfb88221b48480e58745165de856439950d0f22590580db"
+      },
+      {
+        "file": "qwen2.5-7b-instruct-q4_k_m-00002-of-00002.gguf",
+        "bytes": 689872288,
+        "sha256": "539cf93f78e887edea1c04e2d7d8cdaca9d01dae9c9025bcb8accbe29df3d72a"
+      }
+    ],
+    "runtime": "llama-cpp-python 0.3.35",
+    "n_ctx": 8192,
+    "response_format": "JSON schema grammar: config enum; <=6 citations restricted to supplied IDs; <=400-char explanation",
+    "max_tokens": 384
+  },
+  "manifest_sha256": "dfce12e3862a5283ccfb88221b48480e58745165de856439950d0f22590580db",
+  "endpoint": null,
+  "seeds": [
+    4088,
+    4089,
+    4090,
+    4091,
+    4092
+  ],
+  "temperature": 0,
+  "num_predict": 256,
+  "source_sha256": "bb49f2ab8e2ec5b2631bdfdd96aa42e36ffca2dcfc5fa48335e5acf0a7a4fab6",
+  "input_hashes_sha256": "d5a1ec2d425fd9ea1ea45b5e65b2cca91f87ca88eff3b3cf879e80435d130b2c",
+  "scope": "retrospective frozen-input selection audit; no test outcomes in prompts",
+  "started_utc_ns": 1790431383172425861
+}

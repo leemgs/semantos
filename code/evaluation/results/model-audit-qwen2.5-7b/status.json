@@ -1,0 +1,8 @@
+{
+  "full_valid": 5,
+  "full_planned": 5,
+  "completed": true,
+  "purpose": "experiment",
+  "llm_effect_established": false,
+  "note": "valid outputs alone do not establish an effect; failures are not measurements"
+}

@@ -163,8 +163,15 @@ def llamacpp_backend(path, n_ctx, threads):
             response_format={'type': 'json_object', 'schema': schema})
         return out['choices'][0]['message']['content']
 
-    manifest = {'format': 'gguf', 'file': path.name, 'bytes': path.stat().st_size,
+    # llama.cpp loads split GGUFs (name-00001-of-0000N.gguf) from the first shard;
+    # hash every shard so the recorded weights are complete.
+    shards = [path]
+    if '-00001-of-' in path.name:
+        count = int(path.stem.rsplit('-of-', 1)[1])
+        shards = [path.with_name(path.name.replace('-00001-of-', f'-{i:05d}-of-')) for i in range(1, count+1)]
+    manifest = {'format': 'gguf', 'file': path.name, 'bytes': sum(s.stat().st_size for s in shards),
                 'sha256': digest(path), 'gguf_general_metadata': meta,
+                'shards': [{'file': s.name, 'bytes': s.stat().st_size, 'sha256': digest(s)} for s in shards],
                 'runtime': 'llama-cpp-python ' + llama_cpp_version, 'n_ctx': n_ctx,
                 'response_format': 'JSON schema grammar: config enum; <=6 citations restricted to supplied IDs; <=400-char explanation', 'max_tokens': 384}
     return backend, manifest

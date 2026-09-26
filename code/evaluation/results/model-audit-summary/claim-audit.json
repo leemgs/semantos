@@ -1,0 +1,124 @@
+{
+  "method": "Manual check, one annotator (the authors), of every quantitative or comparative claim in each distinct explanation against the supplied prompt evidence. Responses were byte-identical across the five seeds for every variant, so each distinct explanation is audited once. Explanations are capped at 400 characters by the decoding grammar.",
+  "evidence_facts": {
+    "training_means_p95_us": {
+      "s50000_aall": 132.9413,
+      "s50000_aone": 277.4647,
+      "s1000000_aall": 954.7558,
+      "s1000000_aone": 1080.6555
+    },
+    "retrieval_p95_us_mean_min_max": {
+      "s50000_aall": [
+        110.458,
+        82.488,
+        183.217
+      ],
+      "s50000_aone": [
+        227.446,
+        85.033,
+        571.84
+      ],
+      "s1000000_aall": [
+        953.054,
+        748.404,
+        1023.152
+      ],
+      "s1000000_aone": [
+        1013.992,
+        817.997,
+        1419.669
+      ]
+    },
+    "retrieval_block_winner_counts": {
+      "s50000_aall": 8,
+      "s50000_aone": 2
+    },
+    "retrieval_blocks": 10
+  },
+  "claims": [
+    {
+      "model": "Qwen2.5-7B",
+      "variant": "full",
+      "claim": "training table gives s50000_aall an average P95 of 126.36 us",
+      "verdict": "wrong attribution",
+      "check": "126.36 is retrieval-3-0-s50000_aall; the training mean is 132.94"
+    },
+    {
+      "model": "Qwen2.5-7B",
+      "variant": "full",
+      "claim": "retrieval runs consistently show s50000_aall lowest",
+      "verdict": "overstated",
+      "check": "lowest in 8 of 10 retrieval blocks"
+    },
+    {
+      "model": "Qwen2.5-7B",
+      "variant": "no_graph",
+      "claim": "s50000_aall has the lowest P95 with a value of 93.049 us",
+      "verdict": "wrong",
+      "check": "93.049 is one run; its minimum is 82.488"
+    },
+    {
+      "model": "Qwen2.5-7B",
+      "variant": "no_retrieval",
+      "claim": "s50000_aall has the lowest training P95, 132.9413",
+      "verdict": "correct",
+      "check": "matches the table"
+    },
+    {
+      "model": "Qwen2.5-7B",
+      "variant": "model_only",
+      "claim": "single active core reduces latency",
+      "verdict": "unsupported prior",
+      "check": "no evidence supplied; held-out replay is worse than control"
+    },
+    {
+      "model": "Llama-3.1-8B",
+      "variant": "full",
+      "claim": "s50000_aone has the lowest P95, 571.84 us",
+      "verdict": "wrong",
+      "check": "571.84 is the maximum s50000_aone retrieval run"
+    },
+    {
+      "model": "Llama-3.1-8B",
+      "variant": "full",
+      "claim": "lowest in 6 of 9 retrieval runs",
+      "verdict": "wrong",
+      "check": "10 blocks; s50000_aone lowest in 2"
+    },
+    {
+      "model": "Llama-3.1-8B",
+      "variant": "no_graph",
+      "claim": "lowest average across retrieval runs, 272.927 us",
+      "verdict": "wrong",
+      "check": "272.927 is one run; mean is 227.446 versus 110.458 for s50000_aall"
+    },
+    {
+      "model": "Llama-3.1-8B",
+      "variant": "no_retrieval",
+      "claim": "lowest training summary value, 277.4647",
+      "verdict": "wrong",
+      "check": "132.9413 (s50000_aall) is lower"
+    },
+    {
+      "model": "Llama-3.1-8B",
+      "variant": "model_only",
+      "claim": "'one' suggests a more aggressive approach",
+      "verdict": "unsupported prior",
+      "check": "self-declared assumption without evidence"
+    },
+    {
+      "model": "Llama-3.1-8B",
+      "variant": "delete_cited",
+      "claim": "s1000000_aall has the lowest P95, 748.404 us",
+      "verdict": "wrong",
+      "check": "remaining s50000_aall runs go down to 82.488"
+    },
+    {
+      "model": "Llama-3.1-8B",
+      "variant": "delete_uncited",
+      "claim": "s50000_aall lowest at 82.488; all five cited runs below 100 us",
+      "verdict": "partly wrong",
+      "check": "82.488 is the global minimum, but one cited run (retrieval-3-6) is 109.519"
+    }
+  ]
+}
