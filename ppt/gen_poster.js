@@ -166,7 +166,7 @@ s.addText([
 
 // ============================ FOOTER =====================================
 s.addShape(p.ShapeType.roundRect, { x: 1.0, y: 34.75, w: 46, h: 0.95, rectRadius: 0.12, fill: { color: DEEP }, line: { type: "none" } });
-s.addText("Reproducibility: a seed-fixed offline harness regenerates every table, figure, and theory check (34/34 pass).      Geunsik Lim · leemgs@gmail.com",
+s.addText("Reproducibility: a provenance validator aggregates only independently collected hardware runs.      Geunsik Lim · leemgs@gmail.com",
   { x: 1.0, y: 34.75, w: 46, h: 0.95, align: "center", valign: "middle", fontFace: SANS, fontSize: 16, italic: true, color: ICE, margin: 0 });
 
 p.writeFile({ fileName: "semantos_poster_en.pptx" }).then(f => console.log("wrote", f));

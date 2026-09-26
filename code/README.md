@@ -102,31 +102,19 @@ paper from a self-contained, seeded harness (pure `numpy`/`scipy`/`matplotlib`).
 It implements the paper's mechanisms causally — the typed/signed dependency
 graph, the conformal safety threshold with cost-based selection, ADWIN drift +
 sliding-window recalibration, and the theory checks — then prints a PASS/FAIL
-report against the paper's numbers with seeds and confidence intervals.
+## 🔬 Provenance-first evaluation
+
+The artifact does not synthesize measurements or reproduce manuscript targets.
+Supply independently collected run-level CSV using `reproduce/raw_runs.schema.csv`:
 
 ```bash
-./reproduce.sh            # installs deps, runs the harness, renders figures
-# or:
-make reproduce           # harness only (PASS/FAIL vs paper)
-make figures             # fig1/fig3/tau-sweep/drift PNGs
+RAW_RUNS=/secure/export/raw_runs.csv ./reproduce.sh
+# or
+make reproduce RAW_RUNS=/secure/export/raw_runs.csv
 ```
 
-Expected tail of the run:
-
-```
-REPRODUCTION SUMMARY: 34/34 checks passed
-```
-
-What it covers: **Table 2** (reductions vs baseline), **Table 3** (KB/RAG/Safety
-ablation), **Figure 1** (super-additive knob-pair synergy), **Figure 3**
-(anomaly/latency Pareto frontier), the **τ-sweep** (rollback precision/recall/
-anomaly + cost-selected τ*), **exploration efficiency**, the **30-day drift
-study**, and **Theorem 1 / Proposition 1**. Outputs (CSVs + PNGs) land in
-`reproduce/results/`. See `reproduce/README.md` for the module map.
-
-> The reproduction does **not** require Neo4j, an LLM, or any Docker service —
-> it is the reproducibility centerpiece. The live services below implement the
-> same semantics for interactive use.
+The validator records the input SHA-256, checks unique run IDs and denominators,
+and aggregates only the held-out `test` split. See `reproduce/README.md`.
 
 ---
 
@@ -136,15 +124,14 @@ study**, and **Theorem 1 / Proposition 1**. Outputs (CSVs + PNGs) land in
 semantos/
 ├─ docker-compose.yml                 # one-command bring-up of all services
 ├─ docker-compose.ebpf.yml            # extra privileges/mounts for eBPF sampling
-├─ Makefile / reproduce.sh            # reproduce + service convenience targets
+├─ Makefile / reproduce.sh            # provenance validation + service targets
 ├─ manual.sh                          # build, up, and tail logs helper
 ├─ proto/semantos-control.v1.yaml     # REST/OpenAPI for the control plane (typed edges, u/tau)
-├─ reproduce/                         # OFFLINE paper reproduction (tables/figures + PASS/FAIL)
-├─ kb/                                # induce_edges.py + seed_edges.json (typed dependency graph)
-├─ data/                              # generate_pairs.py -> 1000 workload×hardware training pairs
+├─ reproduce/                         # raw-run schema, validation, and aggregation
+├─ kb/                                # evidence-backed dependency edges (empty until induced)
 ├─ kb-service/                        # Neo4j + FAISS KB: typed/signed/weighted edges, γ-decay, RAG
 ├─ reasoner/                          # graph-grounded joint reasoning, k=3 self-consistency u
-│  └─ train/                          # Llama-3.1-13B 5-stage pipeline (SFT + DPO), config + README
+│  └─ train/                          # audited Meta-Llama-3.1-8B-Instruct configuration
 ├─ safety-runtime/                    # conformal τ, cost-based selection, staged rollout, drift recal
 ├─ telemetry-agent/                   # psutil + (optional) eBPF metrics incl. anomaly_rate, throughput
 ├─ operator-console/                  # simple FastAPI UI (port 9988)
@@ -235,7 +222,7 @@ The `telemetry-agent` will attempt to auto-detect eBPF (`USE_EBPF=auto`). You ca
 
 ## 🧪 Reproducible workloads
 
-Synthetic workload simulators live in `workloads/`. They log CSV-like lines into `./outputs/<workload>/…` with fields such as median, p95, throughput, and anomaly-rate (basis points).
+Illustrative smoke-test workload generators live in `workloads/`. Their output is not paper evidence. They log CSV-like lines into `./outputs/<workload>/…` with fields such as median, p95, throughput, and anomaly-rate (basis points).
 
 Run them all:
 

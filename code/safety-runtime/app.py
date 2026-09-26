@@ -139,20 +139,29 @@ def calibrate(records: list = Body(default=None)):
 
 @app.post("/apply")
 def apply(body: dict = Body(...)):
-    """Gate recommendations on the calibrated tau; start staged rollout."""
+    """Gate one multi-knob transaction atomically, then stage it.
+
+    A transaction is vetoed in full when any member exceeds the threshold.  We
+    never apply the safe-looking subset of a co-tuned bundle because that would
+    invalidate its dependency assumptions.
+    """
     recs = body.get("recommendations", [])
     tau = calibrator.tau
-    applied, vetoed = [], []
+    transaction_id = body.get("transaction_id") or (
+        recs[0].get("bundle") if recs else None) or "unidentified-transaction"
+    failed = [r for r in recs if float(r.get("uncertainty", 1.0)) >= tau]
+    decision = "veto" if failed or not recs else "apply"
     for r in recs:
         u = float(r.get("uncertainty", 1.0))
-        decision = "veto" if u >= tau else "apply"
-        _trace("gate", {"rec_id": r.get("id"), "knob": r.get("knob"),
+        _trace("gate", {"transaction_id": transaction_id,
+                        "rec_id": r.get("id"), "knob": r.get("knob"),
                         "u": u, "tau": tau, "decision": decision,
                         "bundle": r.get("bundle")})
-        (vetoed if decision == "veto" else applied).append(r.get("id"))
+    ids = [r.get("id") for r in recs]
+    applied, vetoed = ([], ids) if decision == "veto" else (ids, [])
 
     if applied and not state["active"]:
-        state.update(active=True, rec_id=applied[0], percent=ROLL[0],
+        state.update(active=True, rec_id=transaction_id, percent=ROLL[0],
                      stage=STAGE_NAMES.get(0, "canary"))
         p95 = latest_p95_from_outputs()
         ok = p95 <= SLO_MAX_P95 or p95 == 0.0
@@ -164,7 +173,8 @@ def apply(body: dict = Body(...)):
         alert(f"SemantOS: canary started for {state['rec_id']} "
               f"({state['percent']}%, p95={p95}ms, tau={tau:.3f})")
     state["vetoed"].extend(vetoed)
-    return JSONResponse({"applied": applied, "vetoed": vetoed, "tau": tau})
+    return JSONResponse({"transaction_id": transaction_id, "atomic": True,
+                         "applied": applied, "vetoed": vetoed, "tau": tau})
 
 
 @app.post("/rollout/advance")

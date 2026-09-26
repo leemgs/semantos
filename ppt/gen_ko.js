@@ -71,7 +71,7 @@ s.addText("리눅스 커널은 스케줄링·메모리·I/O·IRQ·NUMA에 걸쳐
   { x: 0.6, y: 1.55, w: 12.1, h: 0.7, fontFace: BODY, fontSize: 15, color: TEXT, lineSpacingMultiple: 1.15 });
 const chal = [
   ["문맥 민감성", "동일 knob도 워크로드·단계마다 최적값이 달라진다. sched_latency_ns 축소는 web에서 P95 21% 개선하지만 mixed streaming에서 공정성 20% 저하."],
-  ["강한 상호의존", "파라미터는 독립적이지 않다. sched_wake_affinity와 sched_min_granularity_ns를 동시에 조정하면 테일 지연을 30% 이상 낮추는 비선형 시너지."],
+  ["강한 상호의존", "파라미터는 독립적이지 않다. 상호작용은 원시 로그에서 재검증하고, 근거가 있는 edge만 그래프에 등록한다."],
   ["다목적 트레이드오프", "지연을 낮추면 기아(starvation)가 늘고, 처리량을 높이면 공정성이 나빠진다. Pareto 최적 사이에서 명시적 선택이 필요하다."],
 ];
 chal.forEach((c, i) => {
@@ -341,7 +341,7 @@ con.forEach((c, i) => {
   s.addText(c[0], { x: 1.75, y: y + 0.12, w: 4.3, h: 0.9, valign: "middle", fontFace: HEAD, fontSize: 16, bold: true, color: WHITE, margin: 0 });
   s.addText(c[1], { x: 6.1, y: y + 0.12, w: 6.3, h: 0.9, valign: "middle", fontFace: BODY, fontSize: 13, color: ICE, lineSpacingMultiple: 1.12, margin: 0 });
 });
-s.addText("재현: seed 고정 오프라인 하니스로 모든 표·그림·이론 검증을 재생성 (34/34 PASS).   Geunsik Lim · leemgs@gmail.com",
+s.addText("재현: 독립 수집한 하드웨어 실행만 provenance 검증 후 집계.   Geunsik Lim · leemgs@gmail.com",
   { x: 0.7, y: 6.55, w: 12, h: 0.5, fontFace: BODY, fontSize: 12.5, italic: true, color: "8296C0" });
 
 p.writeFile({ fileName: "semantos_ko.pptx" }).then(f => console.log("wrote", f));

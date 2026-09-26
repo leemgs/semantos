@@ -1,7 +1,14 @@
-\section{Discussion}
-\label{sec:discussion}
+\section{Discussion and Limitations}
+The central design hypothesis is that typed dependency evidence can constrain
+multi-knob recommendations while an LLM may help combine unfamiliar telemetry
+and explain the result. The planned matched ablation is necessary to determine
+whether the LLM adds recommendation quality beyond rules, BO, RL, or graph
+lookup; explanation fluency alone is not evidence of optimization value.
 
-Modeling tunable interactions as a typed knowledge graph captures causal couplings that black-box optimizers miss; staged rollout with rollback prevents catastrophic regressions under workload shift; and adaptive weight decay suppresses stale correlations. Unlike black-box BO/RL and RL-only systems (e.g., AdaptiveKernel, OS-R1), SemantOS combines graph-grounded reasoning with conformal, uncertainty-gated safety and provenance-carrying explanations, yielding Pareto-superior trade-offs and faster \emph{online} convergence under drift. Empirically the guarantees held: after each drift, recalibration restored coverage and rollback precision within the window predicted by Prop.~\ref{prop:recal}. Extending these ideas to database, network-scheduling, and compiler optimization is promising.
-
-\paragraph{Limitations.}
-(i)~\emph{Exchangeability}: conformal coverage assumes within-window exchangeability; sustained fast drift can briefly violate this until recalibration completes (Prop.~\ref{prop:recal}). (ii)~\emph{Residual LLM risk}: despite retrieval grounding, constrained decoding, and provenance checks, residual hallucination is non-zero, so the safety runtime---not a correctness proof---is the last line of defense. (iii)~\emph{Generality}: results cover Linux~6.4 on three server classes and six workload families; embedded, hard-real-time, and edge deployments where the 13B reasoner's cost (a 26\,GB A100 side-car) dominates remain future work~\cite{Jeary2024NeurIPS,Correia2024NeurIPS}.
+The dependency graph records observed associations, not causal couplings.
+Retrieved evidence may be stale, uncertainty may be miscalibrated under drift,
+and staging can expose canary traffic before rollback. Accordingly, the safety
+runtime is defense in depth rather than a correctness proof. Generality is also
+unestablished until held-out workload-family experiments are completed from
+traceable hardware logs. Production deployments, hard-real-time systems, and
+cross-kernel portability remain future work.

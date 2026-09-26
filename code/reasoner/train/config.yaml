@@ -1,23 +1,23 @@
 # SemantOS reasoner — 5-stage training pipeline (paper Sec. 5.2).
 #
 # Base model is guard-rail fine-tuned to emit typed, graph-grounded, calibrated
-# tuning recommendations. Data comes from data/generate_pairs.py; whole
-# workloads/servers are held out (audio, S3) for the generalization study.
+# tuning recommendations. # Data must be supplied by the experiment owner with disjoint workload-family splits.
 
 base_model:
-  name: meta-llama/Llama-3.1-13B
+  name: meta-llama/Meta-Llama-3.1-8B-Instruct
   dtype: bfloat16
   context_length: 8192
   attn_implementation: flash_attention_2
 
 data:
-  pairs: ../../data/pairs.jsonl
-  meta:  ../../data/pairs_meta.json
+  pairs: REQUIRED_CONTEXT_ACTION_OUTCOME_JSONL
+  meta:  REQUIRED_SPLIT_MANIFEST_JSON
   seed_edges: ../../kb/seed_edges.json      # typed graph exposed in the prompt
   splits:
     train: train
-    val: val
-    heldout: heldout                        # unseen workloads/servers
+    val: validation
+    calibration: calibration
+    heldout: test                           # unseen workload families
   max_examples: 1000
 
 # The five stages run in order; each consumes the previous checkpoint.
