@@ -1,0 +1,90 @@
+[
+  {
+    "period_ms": 2.0,
+    "config": "slack50000_all",
+    "selected": true,
+    "mean_p95_us": 89.4919,
+    "ci95_halfwidth_us": 9.191594000473286,
+    "paired_delta_us": 0.0,
+    "paired_delta_ci95_us": 0.0,
+    "late_events": 2,
+    "events": 800
+  },
+  {
+    "period_ms": 2.0,
+    "config": "slack50000_one",
+    "selected": false,
+    "mean_p95_us": 109.386,
+    "ci95_halfwidth_us": 36.42996296608782,
+    "paired_delta_us": 19.894099999999998,
+    "paired_delta_ci95_us": 36.748979734766365,
+    "late_events": 18,
+    "events": 800
+  },
+  {
+    "period_ms": 2.0,
+    "config": "slack1000000_all",
+    "selected": false,
+    "mean_p95_us": 1016.8118,
+    "ci95_halfwidth_us": 16.401719472708844,
+    "paired_delta_us": 927.3199,
+    "paired_delta_ci95_us": 16.40615602264993,
+    "late_events": 800,
+    "events": 800
+  },
+  {
+    "period_ms": 2.0,
+    "config": "slack1000000_one",
+    "selected": false,
+    "mean_p95_us": 968.9022,
+    "ci95_halfwidth_us": 77.49869628357634,
+    "paired_delta_us": 879.4103,
+    "paired_delta_ci95_us": 74.34478209535088,
+    "late_events": 771,
+    "events": 800
+  },
+  {
+    "period_ms": 5.0,
+    "config": "slack50000_all",
+    "selected": true,
+    "mean_p95_us": 94.1876,
+    "ci95_halfwidth_us": 6.859264496157742,
+    "paired_delta_us": 0.0,
+    "paired_delta_ci95_us": 0.0,
+    "late_events": 2,
+    "events": 800
+  },
+  {
+    "period_ms": 5.0,
+    "config": "slack50000_one",
+    "selected": false,
+    "mean_p95_us": 133.8257,
+    "ci95_halfwidth_us": 64.20140885802155,
+    "paired_delta_us": 39.6381,
+    "paired_delta_ci95_us": 62.60899155670209,
+    "late_events": 22,
+    "events": 800
+  },
+  {
+    "period_ms": 5.0,
+    "config": "slack1000000_all",
+    "selected": false,
+    "mean_p95_us": 1022.5602,
+    "ci95_halfwidth_us": 6.107851360476208,
+    "paired_delta_us": 928.3726,
+    "paired_delta_ci95_us": 9.999841301773264,
+    "late_events": 663,
+    "events": 800
+  },
+  {
+    "period_ms": 5.0,
+    "config": "slack1000000_one",
+    "selected": false,
+    "mean_p95_us": 1073.7063,
+    "ci95_halfwidth_us": 95.87604217157444,
+    "paired_delta_us": 979.5187,
+    "paired_delta_ci95_us": 101.57736235622892,
+    "late_events": 680,
+    "events": 800
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "n": 1000,
+  "seed": 20260705,
+  "counts": {
+    "train": 489,
+    "val": 60,
+    "heldout": 451
+  },
+  "heldout_workloads": [
+    "audio"
+  ],
+  "heldout_servers": [
+    "S3"
+  ],
+  "workloads": [
+    "web",
+    "oltp",
+    "streaming",
+    "sensor",
+    "hpc_ml",
+    "audio"
+  ],
+  "servers": [
+    "S1",
+    "S2",
+    "S3"
+  ]
+}
