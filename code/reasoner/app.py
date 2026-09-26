@@ -4,6 +4,7 @@ No trained checkpoint or performance claim is supplied. Runtime is dry-run only.
 import os
 import json
 import statistics
+import hashlib
 from collections import Counter
 
 import httpx
@@ -26,6 +27,9 @@ SYSTEM_PROMPT = """You are SemantOS Reasoner.
 Generate guarded, explainable Linux kernel tuning recommendations from the
 provided telemetry, retrieved traces, and the TYPED dependency neighborhood.
 Rules:
+- Return exactly one bundle, using the same bundle identifier for every member.
+- Allowed controls: vm.swappiness, vm.dirty_ratio, vm.dirty_background_ratio.
+- If changing either dirty ratio include both, with background < foreground.
 - Prefer co-tuning knobs joined by a SYNERGIZES_WITH edge in the same bundle.
 - Never co-propose two knobs joined by a CONFLICTS_WITH edge.
 - Respect DEPENDS_ON ordering (tune the prerequisite first).
@@ -111,15 +115,19 @@ async def call_ollama(prompt: str, temperature: float):
 
 
 async def sample_model(prompt: str, temperature: float):
+    attempts = []
     if OPENAI_API_KEY:
         try:
-            return await call_openai(prompt, temperature)
-        except Exception:
-            pass
+            result = await call_openai(prompt, temperature)
+            return {**result, 'backend_attempts': [{'backend': 'openai', 'status': 'returned'}]}
+        except Exception as exc:
+            attempts.append({'backend': 'openai', 'status': 'failed', 'error_type': type(exc).__name__})
     try:
-        return await call_ollama(prompt, temperature)
-    except Exception:
-        return None
+        result = await call_ollama(prompt, temperature)
+        return {**result, 'backend_attempts': attempts + [{'backend': 'ollama', 'status': 'returned'}]}
+    except Exception as exc:
+        attempts.append({'backend': 'ollama', 'status': 'failed', 'error_type': type(exc).__name__})
+        return {'recommendations': [], 'backend_attempts': attempts}
 
 
 # --------------------------------------------------------------------------- #
@@ -159,11 +167,32 @@ def aggregate_self_consistency(samples, ctx):
     graph = ctx.get("dependency_graph", {})
     out = []
     chosen_knobs = set()
+    # Select an actually proposed complete bundle; never splice incompatible
+    # members from different samples into a new, unobserved combination.
+    bundles = Counter()
+    bundle_examples = {}
+    for sample in samples:
+        if not sample:
+            continue
+        recs = sample.get('recommendations', [])
+        if not recs or len({_key(r)[0] for r in recs}) != len(recs):
+            continue
+        if len({r.get('bundle', '') for r in recs}) != 1:
+            continue
+        signature = tuple(sorted(_key(r) for r in recs))
+        bundles[signature] += 1
+        bundle_examples.setdefault(signature, recs)
+    if not bundles:
+        return {'recommendations': [], 'reason': 'no_coherent_bundle'}
+    signature = bundles.most_common(1)[0][0]
+    chosen = {_key(r): r for r in bundle_examples[signature]}
     for key, count in votes.most_common():
+        if key not in chosen:
+            continue
         if key[0] in chosen_knobs:
             continue
         chosen_knobs.add(key[0])
-        rec = dict(exemplar[key])
+        rec = dict(chosen[key])
         agreement = count / k
         # KB confidence: strongest synergizing edge weight for this knob
         edges = graph.get(key[0], [])
@@ -202,7 +231,10 @@ async def _recommend():
     ctx = await rag_context()
     if not ctx["telemetry"].get("end_to_end_latency_valid", False):
         return {"recommendations": [], "reason": "measured_workload_telemetry_required"}
-    prompt = json.dumps(ctx)[:12000]
+    # Preserve complete evidence and its identifiers in the decision record.
+    prompt = json.dumps(ctx, sort_keys=True)
+    if len(prompt) > 12000:
+        return {'recommendations': [], 'reason': 'context_budget_exceeded'}
 
     samples = []
     for i in range(SELF_CONSISTENCY_K):
@@ -210,11 +242,16 @@ async def _recommend():
         s = await sample_model(prompt, temp)
         samples.append(s)
 
-    if not any(samples):              # no model reachable -> graph fallback
-        fb = graph_grounded_fallback(ctx)
-        samples = [fb]
-
-    return aggregate_self_consistency(samples, ctx)
+    result = aggregate_self_consistency(samples, ctx)
+    result['decision_trace'] = {
+        'context': ctx, 'system_prompt': SYSTEM_PROMPT, 'prompt': prompt,
+        'prompt_sha256': hashlib.sha256(prompt.encode()).hexdigest(),
+        'samples': samples, 'sample_count': SELF_CONSISTENCY_K,
+        'model_configuration': {'openai': OPENAI_MODEL if OPENAI_API_KEY else None,
+                                'ollama': OLLAMA_MODEL or None},
+        'scope': 'model proposals only; model digest and independent outcome still required',
+    }
+    return result
 
 
 @app.post("/get_recommendations")
@@ -224,13 +261,11 @@ async def get_recommendations():
 
 @app.post("/apply")
 async def apply(body: dict = Body(default=None)):
-    """Deployment step of the control loop (paper Sec. 4.4 / Alg. 1): hand the
-    approved recommendations to the safety-runtime, which gates each on the
-    conformally calibrated threshold (u >= tau -> veto) and stages survivors
-    through canary -> ramp -> full with SLO-guarded auto-rollback.
+    """Forward one complete bundle to the dry-run gate.
 
-    If the caller supplies no recommendations, a fresh set is generated first,
-    so /apply can close telemetry -> recommendation -> deployment in one call."""
+    This proxy performs no kernel writes, traffic staging or automatic rollback.
+    An absent recommendations field requests fresh proposals; an empty list does not.
+    """
     recs = (body or {}).get("recommendations")
     if recs is None:
         recs = (await _recommend()).get("recommendations", [])

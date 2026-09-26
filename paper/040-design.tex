@@ -7,6 +7,21 @@ The intended architecture contains telemetry, a graph and trace store, a reasone
 The reasoner retrieves typed neighbors and trace text, then requests $k=3$ model samples. For a knob--value pair proposed in $v$ samples, its current heuristic score is
 $u=0.7(1-v/k)+0.3(1-w)$, clipped to $[0.02,1]$, where $w$ is the strongest retrieved synergy weight (zero when absent). This is neither predictive entropy nor a calibrated probability. Backend failure must be recorded; repeated copies of a fallback do not constitute independent model votes. The implementation abstains when no configured model produces recommendations. Supplied evidence is recorded as provenance, not certified as a faithful explanation.
 
+The revised aggregator chooses a modal complete bundle actually present in a model response, rather than splicing independently winning knob values into an unseen combination. Backend failures retain their type and failed samples remain in the score denominator. Responses expose the complete supplied context, prompt hash and raw samples; exceeding the context budget causes abstention instead of truncating evidence. A model name in this record does not by itself establish immutable checkpoint provenance.
+
+\begin{figure}[t]
+\centering\small
+\fbox{\parbox{.91\columnwidth}{Measured workload snapshot + frozen graph/traces\\
+$\downarrow$\quad validity check; invalid input $\rightarrow$ abstain\\
+Synchronous model samples + recorded failures\\
+$\downarrow$\quad choose one observed bundle; heuristic score\\
+Joint policy checks + separately supplied calibration\\
+$\downarrow$\quad veto or in-memory stage/cancel\\
+Decision trace; outcomes are not automatic training labels}}
+\caption{Current REST path. The telemetry demo is marked invalid for end-to-end latency, so it abstains. Versioned objective preferences and automatic graph/calibration refresh are future requirements; the separate per-thread experiment uses a fixed latency objective and frozen artifacts.}
+\label{fig:runtime-path}
+\end{figure}
+
 \paragraph{Bundle contract.}
 A request contains a nonempty bundle identifier and a list of recommendations with \texttt{id}, \texttt{knob}, \texttt{proposed}, \texttt{uncertainty}, and optional rationale and provenance. Each request submits one bundle. Duplicate knobs, nonfinite scores, unsupported controls, and example-policy bound violations reject the entire request. Dirty-ratio changes must supply both values and satisfy the example policy that the background ratio is less than the foreground ratio. This is a declared policy, not proof that a configuration improves any workload. If any score satisfies $u\ge\tau$, all members are vetoed; otherwise all are staged together. A concurrent bundle receives a conflict response. Dry-run results return \texttt{applied=[]} and list simulated members separately.
 

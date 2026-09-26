@@ -1,5 +1,5 @@
 \section{Ethical and Responsible Deployment}
 \label{sec:ethics}
-The new measurements run local software workloads and collect no participant data. No human study or IRB approval is claimed in this revision. The current runtime performs no kernel writes. Future interventions require an isolated testbed, documented rollback limits and appropriate authorization. Human studies, if pursued, require prospective institutional review as applicable and informed consent; these cannot be inferred from software tests.
+The new measurements run local software workloads and collect no participant data. No human study or IRB approval is claimed in this revision. The REST runtime performs no kernel writes; the separate experimental adapter changes only its owned child thread's timer slack and affinity and restores both settings. It performs no host-wide sysctl writes. Broader interventions require an isolated testbed, documented rollback limits and appropriate authorization. Human studies, if pursued, require prospective institutional review as applicable and informed consent; these cannot be inferred from software tests.
 
 An AI coding assistant assisted this revision's code, prose and analysis. Measurement provenance, source hashes and explicit evidence limits are retained for author verification. Generated values are not substituted for unavailable observations.

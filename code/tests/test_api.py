@@ -83,6 +83,23 @@ class ReasonerTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(result['recommendations'][0]['provenance']['self_consistency']['k'],3)
         self.assertGreater(result['recommendations'][0]['uncertainty'],.7)
 
+    async def test_aggregation_keeps_a_complete_observed_bundle(self):
+        def bundle(values, name):
+            return {'recommendations': [dict(id=k, knob=k, proposed=str(v), bundle=name)
+                                        for k, v in zip(['vm.dirty_background_ratio', 'vm.dirty_ratio'], values)]}
+        samples = [bundle([5, 15], 'a'), bundle([10, 20], 'b'), bundle([5, 20], 'c')]
+        result = reasoner.aggregate_self_consistency(samples, {'telemetry': {'metrics': {}}, 'dependency_graph': {}})
+        pairs = {(r['knob'], r['proposed']) for r in result['recommendations']}
+        self.assertIn(pairs, [{(r['knob'], r['proposed']) for r in s['recommendations']} for s in samples])
+        self.assertEqual(len({r['bundle'] for r in result['recommendations']}), 1)
+
+    async def test_backend_failure_is_retained_in_trace(self):
+        with patch.object(reasoner, 'OPENAI_API_KEY', ''), \
+             patch.object(reasoner, 'call_ollama', AsyncMock(side_effect=PermissionError('blocked'))):
+            sample = await reasoner.sample_model('{}', .2)
+        self.assertEqual(sample['recommendations'], [])
+        self.assertEqual(sample['backend_attempts'][0]['error_type'], 'PermissionError')
+
 class ConsoleTests(unittest.IsolatedAsyncioTestCase):
     async def test_console_forwards_all_bundle_members(self):
         with tempfile.TemporaryDirectory() as d, patch.dict(os.environ,{'CONSOLE_DATA_DIR':d}):

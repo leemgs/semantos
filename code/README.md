@@ -3,7 +3,9 @@
 **Runtime scope: dry run.** `/apply` validates and gates one complete bundle,
 returns `applied: []`, and reports simulated members separately. Staging and
 cancellation affect process memory only. The console must not be read as evidence
-that kernel settings changed. Real actuation and traffic isolation remain absent.
+that kernel settings changed. VM-sysctl actuation and traffic isolation remain absent.
+The separate `evaluation/controlled_kernel.py` adapter applies and restores only
+timer slack and affinity in fresh owned child threads; it is not a REST deployment actuator.
 
 ## Measurement and verification
 
@@ -43,6 +45,9 @@ console 9988. Internal services listen on 8000 (console 9988).
 
 `make reproduce RAW_RUNS=/path/to/raw_runs.csv` preserves the upstream raw-run
 validator. It consumes supplied measurements and does not synthesize results.
+Its `--raw-log-dir` option verifies content-addressed raw bytes against the CSV's
+digests. Without that option, digest syntax alone is checked. Results remain
+separate by workload, server and kernel; pooled anomaly CIs are not manufactured.
 `make figures`, `make data`, and `make kb-seed` fail deliberately:
 the former workflow generated table-matching synthetic values, not measurements.
 Unchanged historical material is retained under [legacy/](legacy/).

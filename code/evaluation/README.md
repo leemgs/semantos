@@ -4,6 +4,69 @@ The tools here never import manuscript targets or `legacy/`. The checked-in
 `results/local-2026-09-26/` contains **measured local baselines**, not tuning gains.
 All writes by the local measurement runner are confined to its output directory.
 
+## Prospective controlled follow-up
+
+```bash
+python -B evaluation/controlled_kernel.py --out evaluation/results/new-controlled-run
+python -B evaluation/analyze_controlled.py evaluation/results/new-controlled-run
+```
+
+The output directory must be new. This bounded Linux experiment changes only the
+calling thread in fresh children, snapshots both settings, checks applied values,
+and restores/readbacks both original values in a `finally` path. It does not write
+host sysctls, change the parent, or create production traffic canaries. Timerslack
+and affinity are sequential writes, not atomic kernel state.
+
+The checked-in [follow-up](results/controlled-2026-09-26/summary.md) has 280 child
+executions: 200 fixed-window measurements (8,000 events) and 80 staged runs (1,696
+events). Train/retrieval/calibration/test periods are 2/3/4/{5,8} ms, with ten
+blocks of all four configurations each. This is a declared period-level split
+within one workload family/host, not evidence of hardware or family generalization.
+The plan precedes acquisition, score and selector freeze precedes calibration,
+and gate freeze precedes test; the analyzer validates their timestamps and source
+lineage. SHA-256 is an integrity check, not independent authentication of execution.
+
+The empirical minimum and saturated two-factor representation use exactly the
+same four training means and both select control. Their paired replay improvement
+is zero. This is a no-LLM comparison on shared test outcomes, not BO/RL, a fresh
+live-controller experiment or LLM ablation. Graph induction emitted no significant
+interaction edge. Offline training/retrieval/calibration costs are retained.
+
+A candidate run is unsafe when >10% of its 40 events exceed 200us lateness. A
+configuration's training miss fraction is the frozen score; it is not the REST
+model score. Held-out gate replay supplies all confusion counts and denominators,
+including 5/25 and 4/24 unsafe misses. Three predeclared alpha values give the same
+threshold due to ties. No exchangeability, nominal empirical coverage, drift
+recovery, or production-harm reduction is inferred.
+
+Separate staged executions observe 8/16/32 events, stop on a >10% miss fraction,
+and restore both original settings. Of 80 runs, 66 stop and 14 complete; all 80
+restore. Stage-trigger labels are not independent rollback ground truth. The
+analyzer deliberately reports rollback precision as null. The sample count
+depends on early stopping, so raw fractions cannot measure causal safety benefit.
+
+## Executable model and context audit
+
+```bash
+python -B evaluation/model_audit.py evaluation/results/controlled-2026-09-26 \
+  --out evaluation/results/new-model-audit --model INSTALLED_MODEL \
+  --manifest /path/to/its/ollama/manifest
+```
+
+The command records model manifest, exact system/input prompts, fixed seeds,
+decoding limits, raw responses, citation validation and elapsed time. It never
+sends calibration or test outcomes to the model. Five seeds compare full, no-graph,
+no-retrieval and model-only context. Cited-context deletion is compared with the
+same number and kind of uncited items; missing controls are non-estimable. A valid
+response alone is not an effect estimate. This frozen-input audit is retrospective
+and specific to the four measured per-thread configurations, not a VM-sysctl run.
+
+The [recorded attempt](results/model-audit-2026-09-26/status.json) produced zero
+responses: the local socket was forbidden. Its failure is not a measured zero
+effect. The installed Llama 3.2 manifest does not replace historical Llama 3.1
+provenance. Tests use explicit fixtures for failure/citation handling and never
+count fixture output as model evidence.
+
 ## Run and analyze actual local work
 
 From `code/`, with Python 3.10+ and `evaluation/requirements.txt` installed:
