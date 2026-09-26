@@ -52,7 +52,7 @@ telemetry stats and KB edges; no markdown). Strictly parseable JSON only."""
 
 # Candidate knobs the reasoner considers (seed set; the KB expands via edges).
 CANDIDATE_KNOBS = [
-    "sched_min_granularity_ns", "sched_wake_affinity", "sched_latency_ns",
+    "vm.swappiness", "vm.dirty_ratio", "vm.dirty_background_ratio",
     "vm.dirty_ratio", "vm.dirty_background_ratio", "vm.swappiness",
     "net.core.rmem_max", "net.ipv4.tcp_rmem",
 ]
@@ -153,7 +153,7 @@ def graph_grounded_fallback(ctx):
         return {"recommendations": []}   # healthy: no action
 
     # seed on the tail-latency lever, then pull in synergistic partners
-    seed = "sched_min_granularity_ns"
+    seed = "vm.swappiness"
     bundle = [seed]
     for e in graph.get(seed, []):
         if e["edge_type"] == "synergizes_with" and e["sign"] > 0 and e["weight"] > 0.3:
@@ -161,7 +161,7 @@ def graph_grounded_fallback(ctx):
     bundle = list(dict.fromkeys(bundle))[:3]
     proposals = {
         "sched_min_granularity_ns": "15000000",
-        "sched_wake_affinity": "1",
+        "vm.dirty_background_ratio": "5",
         "sched_latency_ns": "12000000",
     }
     for knob in bundle:
@@ -170,7 +170,7 @@ def graph_grounded_fallback(ctx):
             "knob": knob,
             "proposed": proposals.get(knob, "auto"),
             "rationale": f"co-tune for tail latency (p95≈{p95:.1f}ms)",
-            "expected_impact": "-8%~-38% p95 when applied jointly",
+            "expected_impact": "unknown; measure during canary",
             "bundle": "tail_latency_bundle",
         })
     return {"recommendations": recs}

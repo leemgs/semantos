@@ -50,6 +50,20 @@ components:
             telemetry_cue: {type: object}
         explanation: {type: string}
 
+    ActionTransaction:
+      type: object
+      required: [transaction_id, recommendations]
+      properties:
+        transaction_id: {type: string, description: immutable multi-knob action id}
+        recommendations:
+          type: array
+          minItems: 1
+          items: {$ref: '#/components/schemas/Recommendation'}
+        atomic:
+          type: boolean
+          enum: [true]
+          description: all changes are validated, staged, and rolled back together
+
     TypedEdge:
       type: object
       required: [edge_type, neighbor, sign, weight]
@@ -105,10 +119,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties:
-                recommendations:
-                  type: array
-                  items: {$ref: '#/components/schemas/Recommendation'}
+              $ref: '#/components/schemas/ActionTransaction'
       responses:
         "200":
           description: OK
