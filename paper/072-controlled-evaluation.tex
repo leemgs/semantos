@@ -1,0 +1,41 @@
+\subsection{Prospective Role-Separated Follow-up}
+To exercise more of the review's evaluation requirements, we collected a separate prospective dataset using the same four timer-slack/affinity configurations. The plan was saved before acquisition. Training, retrieval, calibration and test used periods of 2, 3, 4 and $\{5,8\}$\,ms, respectively. Each period had ten randomized four-configuration blocks, with five warm-ups and 40 recorded events per fresh child. This produces 200 measurement processes and 8,000 events. Roles are period-disjoint, not workload-family- or hardware-independent: all runs use the same periodic workload on one shared host. The acquisition manifest validates declared groups, run hashes and graph/calibrator lineage; the analyzer additionally checks freeze timestamps, record completeness and kernel readbacks.
+
+\paragraph{Shared-information non-LLM comparison.}
+The empirical selector minimizes mean training-run P95 over the four configurations. A saturated two-factor representation encodes the same four means as a baseline, two main effects and their interaction; minimizing it adds no information to table lookup. Both selectors have the same 40 training runs and zero online search trials. An unchanged-control selector and a seeded uniform-random selector provide references. Choices are frozen before calibration and test. We evaluate these fixed selectors by paired \emph{offline replay} on the same measured test grid, not by separate closed-loop executions. A block is the uncertainty unit, and paired reductions are calculated within each period against its explicit control.
+
+\begin{table}[t]
+\centering\small
+\caption{Follow-up selector replay: mean of ten test-run P95 values. Misses are observed lateness above 200\,$\mu$s. Shared rows across selectors are intentional: selectors choosing the same configuration use the same held-out observations.}
+\label{tab:controlled-selectors}
+\input{controlled-measurements.tex}
+\end{table}
+
+Both informed selectors chose 50\,$\mu$s slack and all CPUs, identical to control; their paired improvement is exactly zero in this replay. Control P95 is $179.7\pm102.0$ and $155.7\pm64.4\,\mu$s at 5 and 8\,ms (95\% Student-$t$ half-width across ten blocks). The large intervals illustrate shared-host variability. The training interaction contrast is $-18.6\,\mu$s; the prespecified normalized-contrast bootstrap emitted no edge because its interval included zero. We do not turn a nonsignificant contrast into a dependency rule or a semantic-reasoning gain. Acquisition took 6.54\,s for training, 8.29\,s for retrieval and 10.15\,s for calibration; graph construction and selection took 0.10\,s, included in calibration-phase wall time. These are measured local costs, not a comparison against LLM inference costs. Retrieval records are retained for the model audit but are not needed by the table selector.
+
+\paragraph{Independent labels and gate misses.}
+For this experiment only, the score is a configuration's training deadline-miss fraction, fixed before calibration; it is not the REST reasoner's self-consistency score. A run is labeled unsafe when more than 10\% of its 40 observed events exceed the predeclared 200\,$\mu$s deadline. Thus the label depends on measured timing, independently of a veto or rollback. Every candidate is executed in an isolated owned process, permitting gate replay with observed outcomes for accepted and vetoed candidates. Calibration uses only 4\,ms runs. The three prespecified $\alpha$ values $\{.05,.10,.20\}$ all yield $\tau=.9225$ because the unsafe-score order statistics are tied.
+
+\begin{table}[t]
+\centering\small
+\caption{Gate replay counts at each tested $\alpha$. Positive means unsafe; a gate-positive decision is veto. Forty bundles are evaluated at each period. This is a held-out diagnostic, not prevented production harm.}
+\label{tab:gate-counts}
+\begin{tabular}{rrrrrrr}
+\toprule
+Period & Accept & Veto & TP & FP & FN & TN\\
+\midrule
+5\,ms & 20 & 20 & 20 & 0 & 5 & 15\\
+8\,ms & 20 & 20 & 20 & 0 & 4 & 16\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Unsafe acceptance is $5/25=20.0\%$ and $4/24=16.7\%$ among unsafe runs; unsafe fractions among accepted runs are $5/20=25.0\%$ and $4/20=20.0\%$. Veto precision is $20/20$ in each period, which is not rollback precision. The observed miss rates exceed the nominal 5\% and 10\% levels. Calibration and test periods differ, runs share a host, and the proposition is marginal under exchangeability; these results neither verify its deployment assumptions nor establish recovery. The gate is frozen throughout test, with no retrospective adjustment. The two test periods are different operating conditions, not a demonstrated 30-day drift-recovery trajectory. All counts, thresholds and per-run scores are retained rather than replacing unfavorable outcomes with calibrated claims.
+
+\paragraph{Actual staged application and restoration.}
+A separate adapter snapshots the child thread's timer slack and affinity, validates the target, applies both settings, verifies readback, and restores both originals in a \texttt{finally} path, including partial-application failures. These per-thread controls are documented Linux interfaces~\cite{LinuxTimerSlack,LinuxAffinity}. Updates are sequential, not an atomic kernel transaction. The driver observes stages of 8, 16 and 32 events and stops when a stage's deadline-miss fraction exceeds 10\%. Stages are observation counts, not fractions of production traffic. All four configurations are exercised in ten blocks at each test period, independently of the gate replay.
+
+Across 80 fresh executions, 66 stop on a stage breach and 14 complete all stages; all 80 restore and read back both original values. At 5 and 8\,ms, observed deadline misses are respectively $186/816$ and $190/880$; summed exposure durations are 4.106 and 7.066\,s. Early stops reduce the number of observed events, so these fractions cannot be compared directly with fixed-duration, no-stop runs to claim an anomaly reduction. The stop criterion itself is not independent ground truth for rollback precision. The adapter demonstrates bounded actuation and restoration in an owned child; it is not wired into the REST VM-sysctl runtime and does not establish traffic isolation, recovery from irreversible effects or production safety.
+
+\paragraph{Model and explanation audit.}
+The executable audit supplies only frozen training and retrieval evidence, records exact prompts, responses, model manifest, seeds, decoding limits and elapsed time, and checks every cited identifier. It compares full context, no graph, no retrieval and model-only inputs. For a valid full-context response it deletes cited context and same-kind, equal-count uncited controls using the same seed; absent matched controls are reported as non-estimable. This tests action sensitivity, not operator preference. A local Llama 3.2 manifest was recorded for an attempted run; the endpoint was blocked by the execution environment before any inference. No valid model response was obtained, and no checkpoint is substituted for the earlier claimed Llama 3.1 experiment. The stored failure is evidence of an unexecuted experiment, not a zero LLM effect or a faithfulness result. These two research questions remain unresolved.

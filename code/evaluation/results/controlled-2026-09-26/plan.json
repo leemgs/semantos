@@ -1,0 +1,85 @@
+{
+  "seed": 4090,
+  "blocks": 10,
+  "samples": 40,
+  "warmup": 5,
+  "deadline_ns": 200000,
+  "unsafe_fraction": 0.1,
+  "stage_samples": [
+    8,
+    16,
+    32
+  ],
+  "roles_ms": {
+    "train": [
+      2
+    ],
+    "retrieval": [
+      3
+    ],
+    "calibration": [
+      4
+    ],
+    "test": [
+      5,
+      8
+    ]
+  },
+  "alphas": [
+    0.05,
+    0.1,
+    0.2
+  ],
+  "configs": [
+    {
+      "name": "s50000_aall",
+      "slack_ns": 50000,
+      "cpus": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "s50000_aone",
+      "slack_ns": 50000,
+      "cpus": [
+        0
+      ]
+    },
+    {
+      "name": "s1000000_aall",
+      "slack_ns": 1000000,
+      "cpus": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "s1000000_aone",
+      "slack_ns": 1000000,
+      "cpus": [
+        0
+      ]
+    }
+  ],
+  "clock": "monotonic_ns",
+  "kernel": "6.17.0-23-generic",
+  "python": "3.12.3",
+  "cpuinfo": ": Intel(R) Core(TM) i5-3570 CPU @ 3.40GHz",
+  "created_utc_ns": 1790418368071519252,
+  "source_sha256": "20a5a8c9c1509b292bc84c4a6728719a5dc9937c85d19a1de93c8c6251fabdfe",
+  "support_hashes": {
+    "induce_graph.py": "e49ab001bcb516c4a03d3f1ccc84877ac97d1a02ab2f5606b1b858da4efc215d",
+    "validate_split.py": "f4bc8cfe933fb670e67299785a648c8d863409a023d562bcbd6e2efef81dd3d8",
+    "../safety-runtime/safety_core.py": "4f09d17ea07e03d206c986145e5577e6a2914deccbc7e7b89433bec54b058a73"
+  },
+  "base_commit": "d471d407df8a5a91213bf2ef7c51acbaee973160",
+  "scope": "single shared host, one periodic workload family; period-disjoint roles, no host/family holdout",
+  "policy_comparison": "paired offline replay on common measured outcomes; zero online search trials",
+  "objective": "minimize mean training run P95; no energy objective",
+  "llm_status": "not_run: local model socket forbidden; no configured external model credential"
+}
