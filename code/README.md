@@ -33,7 +33,7 @@ console 9988. Internal services listen on 8000 (console 9988).
   volumes may still contain historical edges: use a fresh experiment namespace
   and a frozen evidence manifest. Never silently mix historical seed data.
 - Configure `OLLAMA_MODEL` explicitly for an installed model and retain its digest;
-  the previous Llama 3.1 13B default did not exist. No trained checkpoint is supplied.
+  there is no built-in default model. No trained checkpoint is supplied.
 - The reasoner abstains without usable measured telemetry or a configured model.
   Its agreement/edge-weight score is heuristic, not a calibrated probability.
 - Runtime calibration starts at tau=0 (veto all); calibration records require
@@ -49,5 +49,5 @@ Its `--raw-log-dir` option verifies content-addressed raw bytes against the CSV'
 digests. Without that option, digest syntax alone is checked. Results remain
 separate by workload, server and kernel; pooled anomaly CIs are not manufactured.
 `make figures`, `make data`, and `make kb-seed` fail deliberately:
-the former workflow generated table-matching synthetic values, not measurements.
-Unchanged historical material is retained under [legacy/](legacy/).
+they belong to an early synthetic-simulator workflow that produced no measurements.
+That material is retained under [legacy/](legacy/) and is excluded from packaging.

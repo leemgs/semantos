@@ -41,6 +41,24 @@ OpenReview 답변 제출이나 외부 PDF 교체를 수행한 것은 아니다.
   맞춰 수정했다. 14% 외부 집계는 초록/결론의 증거에서 제외하되 기존 저자 보고
   부록은 provenance와 unresolved 사항을 유지했다. 전체 REST 경로 그림도 추가했다.
 
+## 후속 정리 — 2026-09-26 (재제출 준비)
+
+- **부록 삭제:** `paper/110-reported-results.tex`(원시 로그 없는 저자 보고 수치, 내부 불일치
+  14.0% vs 11.8%)를 원고에서 제거하고 본문·초록·결론의 관련 언급도 삭제했다.
+- **논문 어투 정리:** "earlier/withdrawn/this revision/prior 13B" 등 수정 이력 서술을 모두
+  제거했다. 제목을 결과 범위에 맞게 변경했다
+  ("SemantOS: Toward Auditable, Knowledge-Grounded Kernel Tuning with Bundle-Level Risk Gating").
+  affiliations의 "Research revision" 문구를 제거하고, 절 번호가 없는 AAAI 양식에서 비어 보이던
+  `Section~\ref{}`를 절 이름 참조로 바꿨다.
+- **관련 연구 복원:** 참고문헌 9개 → 24개(모두 본문에서 인용). 각 항목의 제목·저자·학회·연도를
+  출판사/학회 기록으로 확인했다. OS-R1은 현재 TuneAgent(arXiv:2508.12551)로 제목이 바뀌었고
+  **Kconfig(빌드 타임) 튜닝**임을 확인해 정확히 서술했다.
+- **저장소 정리:** 루트의 `semantos-main-integration.patch`, `semantos-review-revision.zip` 삭제
+  및 `.gitignore` 추가. 패키지 스크립트가 `REVIEW_RESPONSE.md`를 더 이상 포함하지 않으며,
+  보조자료로 들어가는 README 문서들의 수정 이력·리뷰 언급을 중립 문구로 바꿨다.
+- 검증: 테스트 35개 통과, PDF 8쪽(본문 7쪽 이내), 제출용 PDF 링크 0개, undefined
+  reference/citation·overfull 경고 없음.
+
 ## 리뷰별 현재 상태
 
 | 지적 | 처리 | 실제로 남은 사항 |

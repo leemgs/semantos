@@ -1,9 +1,9 @@
 # Proposed training configuration
 
 `config.yaml` is a design example, not an executed pipeline. There is no released
-trained checkpoint, training log or verified model revision. Llama 3.1 has 8B,
-70B and 405B variants; the former 13B claim was erroneous. The 8B-Instruct example
-does not assert that it was used for the rejected paper.
+trained checkpoint, training log or verified model revision. Llama 3.1 is released
+in 8B, 70B and 405B variants; the 8B-Instruct entry is only an example, not a
+record of an executed experiment.
 
 Before any experiment, record the actual model ID, immutable revision/digest,
 license, tokenizer, prompt, inference parameters and input-data hashes. If using

@@ -14,7 +14,7 @@ reproduce:
 	@test -n "$(RAW_RUNS)" || (echo "RAW_RUNS is required" >&2; exit 2)
 	$(PY) -B -m reproduce.run_all "$(RAW_RUNS)"
 figures kb-seed data:
-	@echo "Withdrawn target-matching synthetic workflow; see legacy/README.md" >&2
+	@echo "Disabled synthetic-simulator workflow; see legacy/README.md" >&2
 	@exit 1
 up:
 	docker compose up -d --build

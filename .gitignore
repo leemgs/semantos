@@ -9,3 +9,7 @@ paper/*.blg
 paper/*.log
 paper/*.out
 paper/*.synctex.gz
+
+# Local build/packaging outputs (never commit)
+/*.patch
+/*.zip

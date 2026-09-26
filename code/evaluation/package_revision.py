@@ -13,7 +13,7 @@ SUFFIXES={'.py','.md','.txt','.yaml','.yml','.sh','.json','.jsonl','.csv','.tex'
 def main():
     p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);a=p.parse_args()
     if a.out.exists():p.error('choose a new output path')
-    selected=[ROOT/'README.md',ROOT/'REVIEW_RESPONSE.md']
+    selected=[ROOT/'README.md']
     for base in ['code','paper']:
         for f in (ROOT/base).rglob('*'):
             rel=f.relative_to(ROOT)

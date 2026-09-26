@@ -1,4 +1,4 @@
-# Measurement and review remediation
+# Measurement and evaluation tools
 
 The tools here never import manuscript targets or `legacy/`. The checked-in
 `results/local-2026-09-26/` contains **measured local baselines**, not tuning gains.
@@ -183,9 +183,9 @@ python3 evaluation/package_revision.py --out /tmp/semantos-revision.zip
 ```
 
 Regression-test fixtures are synthetic by design and test mathematics/data handling;
-they are not used in the measured result table. Packaging excludes legacy/rejected
+they are not used in the measured result table. Packaging excludes legacy
 artifacts, Git history, caches, credentials and unapproved live output directories.
-The ZIP is a working artifact; conference-specific anonymity/format review is separate.
+Check the ZIP against the target venue's anonymity rules before uploading it.
 
 ## Executed per-process kernel intervention experiment
 

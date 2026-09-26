@@ -1,13 +1,13 @@
-\section{SemantOS Design and Implemented Scope}
+\section{SemantOS Design}
 \label{sec:semantos}
 \subsection{Control Contract}
-The intended architecture contains telemetry, a graph and trace store, a reasoner, a runtime and an operator console. The current REST prototype connects these components, but its runtime is explicitly a \emph{dry run}: it stages an in-memory bundle and never writes a kernel setting, routes traffic or demonstrates a kernel rollback.
+The architecture contains telemetry, a graph and trace store, a reasoner, a runtime and an operator console. The REST prototype connects these components, but its runtime is a \emph{dry run}: it stages an in-memory bundle and never writes a kernel setting, routes traffic or demonstrates a kernel rollback.
 
 \paragraph{Evidence and score.}
-The reasoner retrieves typed neighbors and trace text, then requests $k=3$ model samples. For a knob--value pair proposed in $v$ samples, its current heuristic score is
+The reasoner retrieves typed neighbors and trace text~\cite{Lewis2020RAG}, then requests $k=3$ model samples~\cite{Wang2023SelfConsistency}. For a knob--value pair proposed in $v$ samples, its heuristic score is
 $u=0.7(1-v/k)+0.3(1-w)$, clipped to $[0.02,1]$, where $w$ is the strongest retrieved synergy weight (zero when absent). This is neither predictive entropy nor a calibrated probability. Backend failure must be recorded; repeated copies of a fallback do not constitute independent model votes. The implementation abstains when no configured model produces recommendations. Supplied evidence is recorded as provenance, not certified as a faithful explanation.
 
-The revised aggregator chooses a modal complete bundle actually present in a model response, rather than splicing independently winning knob values into an unseen combination. Backend failures retain their type and failed samples remain in the score denominator. Responses expose the complete supplied context, prompt hash and raw samples; exceeding the context budget causes abstention instead of truncating evidence. A model name in this record does not by itself establish immutable checkpoint provenance.
+The aggregator chooses a modal complete bundle actually present in a model response, rather than splicing independently winning knob values into an unseen combination. Backend failures retain their type and failed samples remain in the score denominator. Responses expose the complete supplied context, prompt hash and raw samples; exceeding the context budget causes abstention instead of truncating evidence. A model name in this record does not by itself establish immutable checkpoint provenance.
 
 \begin{figure}[t]
 \centering\small
@@ -18,7 +18,7 @@ $\downarrow$\quad choose one observed bundle; heuristic score\\
 Joint policy checks + separately supplied calibration\\
 $\downarrow$\quad veto or in-memory stage/cancel\\
 Decision trace; outcomes are not automatic training labels}}
-\caption{Current REST path. The telemetry demo is marked invalid for end-to-end latency, so it abstains. Versioned objective preferences and automatic graph/calibration refresh are future requirements; the separate per-thread experiment uses a fixed latency objective and frozen artifacts.}
+\caption{REST decision path. The telemetry demo is marked invalid for end-to-end latency, so it abstains. Versioned objective preferences and automatic graph/calibration refresh are future requirements; the separate per-thread experiment uses a fixed latency objective and frozen artifacts.}
 \label{fig:runtime-path}
 \end{figure}
 
@@ -52,10 +52,10 @@ A real actuator must snapshot all old values, validate the full target configura
 \paragraph{One illustrative decision trace.}
 Consider supplied context with example values 5 and 15 for the two dirty ratios, and retrieved evidence IDs $e_1,t_1$. Suppose all three model samples agree on this pair and $w=0$, giving $u=0.30$. If an independently obtained threshold is $\tau=0.25$, the whole bundle is vetoed; if $\tau=0.35$, it can enter the dry-run canary after joint validation. The audit record includes the values, scores, threshold and decision. These numbers illustrate the contract and are not a measured recommendation or calibrated operating point. The initial artifact threshold is zero until calibration data is explicitly supplied.
 
-\paragraph{Unimplemented scheduling claims.}
-The earlier 94\% fast-path, 6\% asynchronous LLM path, 10\,ms latency and resource-footprint claims are withdrawn. The current reasoner awaits model samples. A future nonblocking deployment path should separate synchronous policy enforcement from asynchronous proposals, record the objective weights and policy version per decision, and refresh graph and calibration snapshots with versioned evidence. No \emph{delay} state or immutable audit storage is claimed: logs are append-only files within a process, without tamper resistance.
+\paragraph{Scheduling scope.}
+The reasoner awaits model samples synchronously, and we make no fast-path latency or resource-footprint claim. A future nonblocking deployment path should separate synchronous policy enforcement from asynchronous proposals, record the objective weights and policy version per decision, and refresh graph and calibration snapshots with versioned evidence. No \emph{delay} state or immutable audit storage is claimed: logs are append-only files within a process, without tamper resistance.
 
-\subsection{Corrected Probability Statements}
+\subsection{Probability Statements for Gated Acceptance}
 \label{subsec:theorem}
 Let $Y=1$ denote an independently defined unsafe outcome and $A=1$ acceptance. An outcome label is not defined by whether a rollback happened. For example, a benchmark can predeclare a request deadline, count observed failures or deadline exceedances, and define an action-level breach from these raw observations in a fixed window. Rejected actions have unknown counterfactual outcomes unless evaluated in an isolated experiment; they must not automatically be labeled safe or unsafe.
 
@@ -81,7 +81,7 @@ Fix a score function before calibration. Suppose $n$ unsafe calibration scores a
 
 For bundle-level calibration, $u$ denotes the maximum member score and $Y$ the independently observed bundle outcome. Per-knob labels alone do not establish a bundle-level guarantee.
 
-Selecting a smaller threshold by a cost rule cannot enlarge the acceptance event. Selecting a larger threshold can invalidate the bound; therefore the implementation uses a minimum, not the former maximum, of the rank threshold and optional cost-selected cap. No unsafe calibration examples implies veto-all. Calibration-window diagnostics are not test-set estimates.
+Selecting a smaller threshold by a cost rule cannot enlarge the acceptance event. Selecting a larger threshold can invalidate the bound; therefore the implementation uses the minimum of the rank threshold and optional cost-selected cap. No unsafe calibration examples implies veto-all. Calibration-window diagnostics are not test-set estimates.
 
 \paragraph{Drift and selective observation.}
-Sliding windows and a drift detector do not guarantee exchangeability or a deterministic recovery time. The earlier recovery inequality and 30-day confirmation are withdrawn. Under an explicitly justified total-variation bound on the \emph{joint calibration--test law}, the probability of the same event changes by at most that bound; a marginal score-distance statement alone does not establish it. This revision neither estimates that distance nor claims recovery. Online labels selected by acceptance introduce additional selection bias. The runtime holds its threshold at zero on detected change until an explicit refresh; refresh remains an exploratory operation, not proof of safety.
+Sliding windows and a drift detector~\cite{Bifet2007ADWIN} do not guarantee exchangeability or a deterministic recovery time. Under an explicitly justified total-variation bound on the \emph{joint calibration--test law}, the probability of the same event changes by at most that bound; a marginal score-distance statement alone does not establish it. We neither estimate that distance nor claim recovery. Online labels selected by acceptance introduce additional selection bias. The runtime holds its threshold at zero on detected change until an explicit refresh; refresh remains an exploratory operation, not proof of safety.
