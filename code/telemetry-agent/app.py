@@ -219,6 +219,8 @@ def snapshot():
     load1, load5, load15 = psutil.getloadavg()
     return JSONResponse({
         "host_id": "host-001",
+        "measurement_kind": "demonstration_proxy",
+        "end_to_end_latency_valid": False,
         "metrics": {
             "cpu_load_1": load1,
             "cpu_load_5": load5,

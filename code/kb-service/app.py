@@ -10,8 +10,7 @@ Two coupled stores (paper Sec. 4.2):
   2. A FAISS trace index for retrieval-augmented grounding (RAG) of past
      (context, action, outcome) tuples.
 
-The typed neighborhood the reasoner queries is the object the ablation calls the
-"dep-graph"; removing it corresponds to the `wo_depgraph` row of Table 3.
+No measured graph ablation is claimed. Seeds are empty pending validated evidence.
 """
 import os
 import json

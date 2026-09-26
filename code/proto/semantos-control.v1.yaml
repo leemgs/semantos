@@ -1,104 +1,52 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
-  title: SemantOS Control API
-  version: "1.0.0"
+  title: SemantOS dry-run control contract
+  version: 2.0.0
   description: >-
-    Control-plane contract between the SemantOS services (telemetry-agent,
-    kb-service, reasoner, safety-runtime, operator-console). Recommendations
-    carry a typed rationale, an expected impact, and a calibrated uncertainty u
-    that the safety runtime gates on with a conformally derived threshold tau.
-
+    Runtime only. No kernel writes or empirical safety guarantee. Reasoner
+    /get_recommendations returns the same Recommendation items. Its /apply proxy
+    forwards this contract; reasoner /log_outcome instead accepts context/action/outcome
+    for KB storage and is distinct from the runtime outcome endpoint below.
 components:
   schemas:
-
     Recommendation:
       type: object
-      required: [id, knob, proposed_value, uncertainty]
+      required: [id, bundle, knob, proposed, uncertainty]
       properties:
-        id:             {type: string, description: unique recommendation id}
-        knob:           {type: string, example: sched_min_granularity_ns}
-        proposed_value: {type: string, example: "15000000"}
-        bundle:         {type: string, description: tag grouping co-tuned knobs}
-        rationale:      {type: string, description: one-line reason}
-        expected_impact:
-          type: object
-          properties:
-            delta_median_pct: {type: number, example: -0.18}
-            delta_p95_pct:    {type: number, example: -0.28}
-            delta_anomaly_pct: {type: number, example: -0.31}
+        id: {type: string, minLength: 1}
+        bundle: {type: string, minLength: 1, description: One shared bundle ID per request}
+        knob:
+          type: string
+          enum: [vm.dirty_ratio, vm.dirty_background_ratio, vm.swappiness]
+        proposed:
+          oneOf: [{type: string, pattern: '^[+-]?[0-9]+$'}, {type: integer}]
         uncertainty:
           type: number
-          minimum: 0.0
-          maximum: 1.0
-          description: calibrated u; safety runtime vetoes when u >= tau
-        provenance:
-          type: object
-          description: audit trail for why this was proposed
-          properties:
-            self_consistency:
-              type: object
-              properties:
-                votes:     {type: integer}
-                k:         {type: integer, example: 3}
-                agreement: {type: number}
-            kb_neighbors:
-              type: array
-              items: {$ref: '#/components/schemas/TypedEdge'}
-            retrieved_traces:
-              type: array
-              items: {type: string}
-            telemetry_cue: {type: object}
+          minimum: 0
+          maximum: 1
+          description: Finite heuristic score, not a calibrated probability
+        rationale: {type: string}
+        expected_impact: {type: string, description: Unverified model prediction}
         explanation: {type: string}
-
-    TypedEdge:
-      type: object
-      required: [edge_type, neighbor, sign, weight]
-      properties:
-        edge_type:
-          type: string
-          enum: [synergizes_with, conflicts_with, depends_on]
-        neighbor: {type: string}
-        sign:     {type: integer, enum: [-1, 1]}
-        weight:   {type: number, minimum: 0.0, maximum: 1.0}
-        evidence: {type: integer}
-
-    OutcomeRecord:
-      type: object
-      required: [rec_id, u, unsafe]
-      properties:
-        rec_id: {type: string}
-        u:      {type: number}
-        unsafe: {type: boolean, description: realized SLO breach after apply}
-        delta_p95:  {type: number}
-        anomaly:    {type: number}
-
+        provenance: {type: object}
     ApplyResult:
       type: object
+      required: [mode, applied, simulated, vetoed, tau]
       properties:
-        applied: {type: array, items: {type: string}}
-        vetoed:  {type: array, items: {type: string}}
-        tau:     {type: number, description: conformal veto threshold in effect}
-
+        mode: {type: string, enum: [dry_run]}
+        applied: {type: array, maxItems: 0, items: {type: string}}
+        simulated: {type: array, items: {type: string}}
+        vetoed: {type: array, items: {type: string}}
+        tau: {type: number, minimum: 0, maximum: 1}
 paths:
-
-  /get_recommendations:
-    post:
-      summary: Reasoner — graph-grounded, self-consistency-scored recommendations
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  recommendations:
-                    type: array
-                    items: {$ref: '#/components/schemas/Recommendation'}
-
   /apply:
     post:
-      summary: Safety Runtime — gate on tau, then canary→ramp→full rollout
+      summary: Validate and gate a complete dry-run bundle
+      description: >-
+        Duplicate knobs, missing bundle IDs, unsupported controls, nonfinite scores,
+        out-of-policy values or joint-constraint violations reject the whole request.
+        Dirty ratio edits require both values with background < foreground.
+        Any member u >= tau vetoes the entire bundle. An empty list is a no-op.
       requestBody:
         required: true
         content:
@@ -110,58 +58,56 @@ paths:
                   type: array
                   items: {$ref: '#/components/schemas/Recommendation'}
       responses:
-        "200":
-          description: OK
+        '200':
+          description: Dry-run gate result, never an actual deployment
           content:
             application/json:
               schema: {$ref: '#/components/schemas/ApplyResult'}
-
+        '409': {description: Another bundle is active}
+        '422': {description: Invalid bundle}
   /calibrate:
     post:
-      summary: Safety Runtime — feed D_cal records and recompute tau
+      summary: Explicit exploratory calibration from external labels
       requestBody:
+        required: true
         content:
           application/json:
             schema:
               type: array
               items:
                 type: object
+                required: [u, unsafe]
                 properties:
-                  u:      {type: number}
+                  u: {type: number, minimum: 0, maximum: 1}
                   unsafe: {type: boolean}
       responses:
-        "200": {description: "returns tau, precision, recall, n"}
-
+        '200': {description: In-sample confusion counts and diagnostic rates; undefined rates are null}
+        '422': {description: Invalid records}
   /log_outcome:
     post:
-      summary: Log realized outcome (updates KB traces + safety D_cal)
+      summary: Archive an unverified dry-run outcome without training the gate
       requestBody:
         required: true
         content:
           application/json:
-            schema: {$ref: '#/components/schemas/OutcomeRecord'}
+            schema: {type: object}
       responses:
-        "200": {description: OK}
-
-  /kb/typed_neighborhood:
+        '200': {description: used_for_calibration is false}
+  /rollout/advance:
+    post:
+      summary: Advance the complete simulated bundle through 5/25/50/100 percent states
+      responses:
+        '200': {description: Simulated stage or no_active_bundle}
+  /rollback:
+    post:
+      summary: Cancel all members of the staged simulation; no kernel rollback occurs
+      responses:
+        '200': {description: kernel_rollback is false}
+  /status:
     get:
-      summary: KB — typed/signed/weighted neighborhood of a knob (gamma-decayed)
-      parameters:
-        - {name: knob, in: query, required: true, schema: {type: string}}
-        - name: edge_type
-          in: query
-          schema: {type: string, enum: [synergizes_with, conflicts_with, depends_on]}
-        - {name: min_weight, in: query, schema: {type: number}}
-        - {name: decayed, in: query, schema: {type: boolean, default: true}}
       responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  knob: {type: string}
-                  edges:
-                    type: array
-                    items: {$ref: '#/components/schemas/TypedEdge'}
+        '200': {description: Dry-run state, trace history and calibration diagnostics}
+  /healthz:
+    get:
+      responses:
+        '200': {description: mode is dry_run and kernel_writes is false}

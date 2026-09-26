@@ -1,3 +1,5 @@
 \section{Conclusion}
 \label{sec:conclusion}
-SemantOS turns kernel tuning into a systematic control loop combining graph-grounded semantic reasoning, retrieval-augmented LLM inference, and conformal-calibrated safety. Across diverse workloads it reduces tail latency, anomaly rate, and operator effort while emitting provenance-grounded explanations; the same principles extend to database and network tuning.
+SemantOS is a research prototype for inspectable, knowledge-grounded kernel-tuning proposals and independent bundle gating. This revision corrects the risk statements, separates simulation from measurement, and reports auditable local baselines and actual per-process kernel interventions. Whether the LLM improves decisions over an equally informed optimizer, and whether staged deployment reduces independently measured harm, remain questions for the specified controlled experiments.
+
+A separate author-reported hardware evaluation describes lower tail latency for Graph + LLM and Full SemantOS. Its aggregate estimates are included with their provenance, while unresolved aggregation, missing run-level uncertainty and absent raw logs limit the strength of comparative conclusions.

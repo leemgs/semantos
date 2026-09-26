@@ -1,85 +1,87 @@
-"""
-safety_core.py — conformal safety primitives for the SemantOS safety runtime.
+"""Class-conditional rank gate; empirical diagnostics, not deployment guarantees.
 
-Dependency-light (numpy only) re-implementation of the same math validated by the
-offline reproduction harness (reproduce/conformal.py, reproduce/adwin.py), so the
-*live* service gates on identically-derived thresholds:
-
-  * conformal_threshold : split-conformal veto threshold at miscoverage alpha.
-  * select_tau_by_cost  : operating tau minimising expected mis-veto cost C(tau).
-  * ADWIN               : streaming drift detector over the uncertainty signal.
-  * SlidingCalibrator   : maintains D_cal, recalibrates tau on drift / on schedule.
-
-A calibration record is (u, unsafe) where u in [0,1] is the reasoner's reported
-uncertainty and `unsafe` is whether the applied action actually breached the SLO.
+The score function must be fixed before calibration. Unsafe calibration examples
+and the next unsafe example must be exchangeable. Selectively observed deployment
+outcomes generally do not meet that assumption. Smaller tau accepts fewer actions.
 """
 from __future__ import annotations
-
 import math
 from collections import deque
-
 import numpy as np
 
 
-def conformal_threshold(u, y, alpha: float) -> float:
-    """Split-conformal veto threshold.
+def validate_records(u, y):
+    u, y = np.asarray(u, dtype=float), np.asarray(y)
+    if u.ndim != 1 or y.ndim != 1 or u.shape != y.shape:
+        raise ValueError("scores and labels must be aligned one-dimensional arrays")
+    if not np.all(np.isfinite(u)) or np.any((u < 0) | (u > 1)):
+        raise ValueError("scores must be finite and in [0, 1]")
+    if y.size and y.dtype.kind != 'b':
+        raise ValueError("unsafe labels must be booleans, not strings or numbers")
+    return u, y.astype(bool)
 
-    Nonconformity of an *unsafe* action is (1 - u): unsafe actions should score
-    high u.  We take the empirical (1-alpha) quantile over unsafe scores with the
-    standard finite-sample correction, giving a threshold tau such that, under
-    exchangeability, the probability an unsafe action is *not* vetoed is <= alpha.
+
+def conformal_threshold(u, y, alpha):
+    """tau=unsafe order statistic floor(alpha*(n+1)); veto all if rank is zero.
+
+    Under the assumptions above, P(U_new < tau | Y_new=unsafe) <= alpha,
+    marginal over the calibration set and test example. This is NOT
+    P(unsafe | accepted), nor a realized-window or drift recovery bound.
+    Strict '<' acceptance is conservative under ties.
     """
-    u = np.asarray(u, float)
-    y = np.asarray(y, bool)
-    unsafe = u[y]
-    if unsafe.size == 0:
-        return 0.5
-    n = unsafe.size
-    q = min(1.0, math.ceil((n + 1) * (1 - alpha)) / n)
-    return float(np.quantile(unsafe, 1 - q, method="lower"))
+    if not 0 < alpha < 1:
+        raise ValueError("alpha must be strictly between zero and one")
+    u, y = validate_records(u, y)
+    bad = np.sort(u[y])
+    rank = math.floor(alpha * (len(bad) + 1))
+    return float(bad[rank - 1]) if rank else 0.0
 
 
-def rollback_precision_recall(u, y, tau: float):
-    u = np.asarray(u, float)
-    y = np.asarray(y, bool)
-    vetoed = u >= tau
-    tp = int(np.sum(vetoed & y))
-    fp = int(np.sum(vetoed & ~y))
-    fn = int(np.sum(~vetoed & y))
-    precision = tp / (tp + fp) if (tp + fp) else 1.0
-    recall = tp / (tp + fn) if (tp + fn) else 1.0
-    return precision, recall
+def gate_counts(u, y, tau):
+    u, y = validate_records(u, y)
+    accept = u < tau
+    return dict(tp=int(np.sum(~accept & y)), fp=int(np.sum(~accept & ~y)),
+                fn=int(np.sum(accept & y)), tn=int(np.sum(accept & ~y)))
 
 
-def select_tau_by_cost(u, y, dslo_of_tau, cost: dict, grid=None) -> float:
-    """Pick tau minimising C(tau)=c_fn*FN + c_fp*FP + lam*SLO_debt(tau).
+def ratio(n, d):
+    return n / d if d else None
 
-    FN = unsafe action let through (expensive); FP = safe action needlessly
-    vetoed; SLO_debt grows as tau rises (more conservative -> more missed wins).
-    """
-    u = np.asarray(u, float)
-    y = np.asarray(y, bool)
+
+def rollback_precision_recall(u, y, tau):
+    """Legacy function name: these are gate veto metrics, NOT rollback metrics."""
+    c = gate_counts(u, y, tau)
+    return ratio(c['tp'], c['tp'] + c['fp']), ratio(c['tp'], c['tp'] + c['fn'])
+
+
+def select_tau_by_cost(u, y, dslo_of_tau, cost, grid=None):
+    """Empirical optimization with a hard SLO constraint; infeasible => veto all."""
+    u, y = validate_records(u, y)
+    if not len(u):
+        return 0.0
     if grid is None:
-        grid = np.round(np.arange(0.30, 0.86, 0.01), 2)
-    n = max(1, u.size)
-    best_tau, best_c = 0.55, math.inf
+        grid = np.linspace(0, 1, 101)
+    best_tau, best = 0.0, math.inf
     for tau in grid:
-        vetoed = u >= tau
-        fn = float(np.sum(~vetoed & y)) / n
-        fp = float(np.sum(vetoed & ~y)) / n
-        debt = max(0.0, dslo_of_tau(float(tau)) - cost.get("slo_budget_delta", 0.5))
-        c = (cost["c_fn"] * fn + cost["c_fp"] * fp + cost["lam"] * debt)
-        if c < best_c - 1e-9:
-            best_c, best_tau = c, float(tau)
+        if not math.isfinite(tau) or not 0 <= tau <= 1:
+            raise ValueError("invalid threshold grid")
+        debt = float(dslo_of_tau(float(tau)))
+        if not math.isfinite(debt) or debt < 0 or debt > cost['slo_budget_delta']:
+            continue
+        c = gate_counts(u, y, tau)
+        value = (cost['c_fn'] * c['fn'] + cost['c_fp'] * c['fp']) / len(u) + cost['lam'] * debt
+        if value < best:
+            best, best_tau = value, float(tau)
     return best_tau
 
 
 class ADWIN:
-    """O(n)-per-update ADWIN drift detector (prefix-sum split test)."""
-
-    def __init__(self, delta: float = 0.002, max_buckets: int = 500):
+    """Bounded-window split detector inspired by ADWIN; not a recovery theorem."""
+    def __init__(self, delta=0.002, max_buckets=500):
+        if not 0 < delta < 1 or max_buckets < 8:
+            raise ValueError("invalid detector parameters")
         self.delta = delta
-        self.window: deque[float] = deque(maxlen=max_buckets)
+        self.window = deque(maxlen=max_buckets)
         self.total = 0.0
         self.drift_detected = False
 
@@ -87,83 +89,73 @@ class ADWIN:
     def width(self):
         return len(self.window)
 
-    def _cut(self, n0, n1, var):
-        if n0 == 0 or n1 == 0:
-            return math.inf
-        m = 1.0 / n0 + 1.0 / n1
-        dd = math.log(2.0 * math.log(max(2, self.width)) / self.delta)
-        return math.sqrt(2.0 * m * var * dd) + (2.0 / 3.0) * m * dd
-
-    def update(self, value: float) -> bool:
+    def update(self, value):
+        if not math.isfinite(value):
+            raise ValueError("nonfinite observation")
+        if len(self.window) == self.window.maxlen:
+            self.total -= self.window[0]
         self.window.append(value)
         self.total += value
         self.drift_detected = False
         n = self.width
         if n < 8:
             return False
-        vals = list(self.window)
-        mean = self.total / n
-        var = sum((v - mean) ** 2 for v in vals) / n
+        vals = np.asarray(self.window)
+        var = float(np.var(vals))
+        dd = math.log(2 * math.log(max(2, n)) / self.delta)
         prefix = 0.0
         for i in range(1, n):
             prefix += vals[i - 1]
-            m0 = prefix / i
-            m1 = (self.total - prefix) / (n - i)
-            if abs(m0 - m1) > self._cut(i, n - i, var):
+            m = 1 / i + 1 / (n - i)
+            cut = math.sqrt(2 * m * var * dd) + 2 / 3 * m * dd
+            if abs(prefix / i - (self.total - prefix) / (n - i)) > cut:
                 for _ in range(i):
                     self.total -= self.window.popleft()
                 self.drift_detected = True
-                return True
-        return False
+                break
+        return self.drift_detected
 
 
 class SlidingCalibrator:
-    """Maintains D_cal over a sliding window and (re)derives the operating tau.
+    """Exploratory sliding calibration. tau_floor is a legacy name for a CAP.
 
-    tau = max(cost-selected tau, conformal coverage threshold, tau_floor).  The
-    floor guarantees the runtime never loosens below the vetted default operating
-    point, which is what keeps rollback precision > 0.85 through drift.
+    Cost tuning can only tighten the rank threshold. No score labels => veto all.
+    Window refresh does not establish exchangeability or bound recovery time.
     """
-
-    def __init__(self, alpha=0.10, window=400, tau_floor=0.55,
+    def __init__(self, alpha=0.1, window=400, tau_floor=0.55,
                  dslo_of_tau=None, cost=None, delta=0.002):
-        self.alpha = alpha
-        self.window = window
-        self.tau_floor = tau_floor
-        self.dslo_of_tau = dslo_of_tau or (lambda t: 0.15 + 0.6 * t)
-        self.cost = cost or {"c_fn": 4.0, "c_fp": 6.0, "lam": 0.5,
-                             "slo_budget_delta": 0.5}
-        self._u: deque[float] = deque(maxlen=window)
-        self._y: deque[bool] = deque(maxlen=window)
+        if not 0 < alpha < 1 or window < 1 or not 0 <= tau_floor <= 1:
+            raise ValueError("invalid calibration parameters")
+        self.alpha, self.window, self.tau_cap = alpha, window, tau_floor
+        self.dslo_of_tau, self.cost = dslo_of_tau, cost
+        self._u, self._y = deque(maxlen=window), deque(maxlen=window)
         self.adwin = ADWIN(delta=delta)
-        self.tau = tau_floor
-        self.recalibrations = 0
+        self.tau, self.recalibrations = 0.0, 0
 
-    def observe(self, u: float, unsafe: bool) -> bool:
-        """Add a calibration record; return True if drift triggered recalibration."""
-        self._u.append(float(u))
-        self._y.append(bool(unsafe))
+    def observe(self, u, unsafe):
+        validate_records([u], [unsafe])
+        self._u.append(float(u)); self._y.append(unsafe)
         drift = self.adwin.update(float(u))
         if drift:
-            self.recalibrate()
+            # Old/new mixtures cannot justify a guarantee: hold until explicit refresh.
+            self.tau = 0.0
         return drift
 
-    def recalibrate(self) -> float:
-        if len(self._u) < 10:
-            self.tau = self.tau_floor
-            return self.tau
-        u = np.fromiter(self._u, float)
-        y = np.fromiter(self._y, bool)
-        tau_star = select_tau_by_cost(u, y, self.dslo_of_tau, self.cost)
-        tau_conf = conformal_threshold(u, y, self.alpha)
-        self.tau = max(tau_star, tau_conf, self.tau_floor)
+    def recalibrate(self):
+        u, y = np.asarray(self._u), np.asarray(self._y, dtype=bool)
+        tau = conformal_threshold(u, y, self.alpha)
+        if self.dslo_of_tau is not None and self.cost is not None:
+            tau = min(tau, select_tau_by_cost(u, y, self.dslo_of_tau, self.cost))
+        self.tau = min(self.tau_cap, tau)
         self.recalibrations += 1
         return self.tau
 
     def metrics(self):
-        if not self._u:
-            return {"tau": self.tau, "precision": 1.0, "recall": 1.0, "n": 0}
-        u = np.fromiter(self._u, float)
-        y = np.fromiter(self._y, bool)
+        u, y = np.asarray(self._u), np.asarray(self._y, dtype=bool)
+        c = gate_counts(u, y, self.tau)
         p, r = rollback_precision_recall(u, y, self.tau)
-        return {"tau": self.tau, "precision": p, "recall": r, "n": int(u.size)}
+        return dict(tau=self.tau, precision=p, recall=r, n=len(u), **c,
+                    unsafe_given_accepted=ratio(c['fn'], c['fn'] + c['tn']),
+                    acceptance_given_unsafe=ratio(c['fn'], c['fn'] + c['tp']),
+                    veto_given_safe=ratio(c['fp'], c['fp'] + c['tn']),
+                    scope='in_sample_diagnostic_not_a_guarantee')

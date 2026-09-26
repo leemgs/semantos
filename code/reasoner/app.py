@@ -1,21 +1,5 @@
-"""
-reasoner — SemantOS guarded LLM reasoner (paper Sec. 4.3).
-
-Turns telemetry + KB retrieval into typed, explainable, *jointly*-tuned kernel
-recommendations.  Three mechanisms distinguish it from a bare LLM call:
-
-  1. Graph-grounded joint reasoning.  Before prompting, we pull the typed/signed/
-     weighted neighborhood of each candidate knob from kb-service and expose it to
-     the model, so it can co-tune synergistic knobs together and avoid conflicting
-     pairs.  This is the component ablated in Table 3's `wo_depgraph` row.
-  2. Retrieval augmentation (RAG).  Nearest past traces are retrieved from FAISS
-     and attached as evidence (`wo_rag` row of Table 3).
-  3. Self-consistency uncertainty.  The model is sampled k=3 times; the reported
-     per-knob uncertainty is 1 - agreement across samples, blended with the KB
-     edge-weight confidence.  The safety runtime consumes this u.
-
-Every recommendation carries `provenance` (telemetry cues, KB neighbors, retrieved
-traces, self-consistency vote) so operators can audit *why*.
+"""Experimental graph/RAG reasoner. Scores are heuristics, not probabilities.
+No trained checkpoint or performance claim is supplied. Runtime is dry-run only.
 """
 import os
 import json
@@ -33,7 +17,7 @@ SAFETY_URL = os.environ.get("SAFETY_URL", "http://safety-runtime:8000")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
 OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://ollama:11434")
-OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.1:13b")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "")
 SELF_CONSISTENCY_K = int(os.environ.get("SELF_CONSISTENCY_K", "3"))
 
 app = FastAPI(title="reasoner", version="1.0.0")
@@ -51,11 +35,7 @@ bundle (string tag grouping co-tuned knobs), explanation (2-4 sentences citing
 telemetry stats and KB edges; no markdown). Strictly parseable JSON only."""
 
 # Candidate knobs the reasoner considers (seed set; the KB expands via edges).
-CANDIDATE_KNOBS = [
-    "sched_min_granularity_ns", "sched_wake_affinity", "sched_latency_ns",
-    "vm.dirty_ratio", "vm.dirty_background_ratio", "vm.swappiness",
-    "net.core.rmem_max", "net.ipv4.tcp_rmem",
-]
+CANDIDATE_KNOBS = ["vm.dirty_ratio", "vm.dirty_background_ratio", "vm.swappiness"]
 
 
 async def fetch_json(client, method, url, **kwargs):
@@ -114,6 +94,8 @@ async def call_openai(prompt: str, temperature: float):
 
 
 async def call_ollama(prompt: str, temperature: float):
+    if not OLLAMA_MODEL:
+        raise RuntimeError("Set OLLAMA_MODEL to an installed model with a recorded digest")
     async with httpx.AsyncClient(timeout=90) as client:
         r = await client.post(
             f"{OLLAMA_HOST}/api/generate",
@@ -144,36 +126,9 @@ async def sample_model(prompt: str, temperature: float):
 # Graph-grounded fallback: propose synergistic bundles directly from KB edges.
 # --------------------------------------------------------------------------- #
 def graph_grounded_fallback(ctx):
-    m = ctx["telemetry"]["metrics"]
-    p95 = m.get("p95_latency_ms", 0)
-    anomaly = m.get("anomaly_rate", 0)
-    graph = ctx.get("dependency_graph", {})
-    recs = []
-    if p95 < 20 and anomaly < 0.03:
-        return {"recommendations": []}   # healthy: no action
-
-    # seed on the tail-latency lever, then pull in synergistic partners
-    seed = "sched_min_granularity_ns"
-    bundle = [seed]
-    for e in graph.get(seed, []):
-        if e["edge_type"] == "synergizes_with" and e["sign"] > 0 and e["weight"] > 0.3:
-            bundle.append(e["neighbor"])
-    bundle = list(dict.fromkeys(bundle))[:3]
-    proposals = {
-        "sched_min_granularity_ns": "15000000",
-        "sched_wake_affinity": "1",
-        "sched_latency_ns": "12000000",
-    }
-    for knob in bundle:
-        recs.append({
-            "id": f"rec-{knob}",
-            "knob": knob,
-            "proposed": proposals.get(knob, "auto"),
-            "rationale": f"co-tune for tail latency (p95≈{p95:.1f}ms)",
-            "expected_impact": "-8%~-38% p95 when applied jointly",
-            "bundle": "tail_latency_bundle",
-        })
-    return {"recommendations": recs}
+    # Without a model and validated empirical evidence, abstain. An invented
+    # scheduler knob or an arbitrary value is not a defensible fallback.
+    return {"recommendations": [], "reason": "no_validated_model_or_policy"}
 
 
 # --------------------------------------------------------------------------- #
@@ -200,10 +155,14 @@ def aggregate_self_consistency(samples, ctx):
             votes[k] += 1
             exemplar.setdefault(k, rec)
 
-    k = max(1, len([s for s in samples if s]))
+    k = max(1, len(samples))  # failed calls must not inflate agreement
     graph = ctx.get("dependency_graph", {})
     out = []
+    chosen_knobs = set()
     for key, count in votes.most_common():
+        if key[0] in chosen_knobs:
+            continue
+        chosen_knobs.add(key[0])
         rec = dict(exemplar[key])
         agreement = count / k
         # KB confidence: strongest synergizing edge weight for this knob
@@ -214,6 +173,7 @@ def aggregate_self_consistency(samples, ctx):
         u = (1.0 - agreement) * 0.7 + (1.0 - kb_conf) * 0.3
         rec["uncertainty"] = round(min(1.0, max(0.02, u)), 3)
         rec["provenance"] = {
+            "score_kind": "heuristic_not_calibrated_probability",
             "self_consistency": {"votes": count, "k": k,
                                  "agreement": round(agreement, 3)},
             "kb_neighbors": edges[:4],
@@ -240,6 +200,8 @@ async def _recommend():
     samples -> aggregated, uncertainty-tagged recommendations. Returns a dict so
     both /get_recommendations and /apply can reuse it."""
     ctx = await rag_context()
+    if not ctx["telemetry"].get("end_to_end_latency_valid", False):
+        return {"recommendations": [], "reason": "measured_workload_telemetry_required"}
     prompt = json.dumps(ctx)[:12000]
 
     samples = []
@@ -250,7 +212,7 @@ async def _recommend():
 
     if not any(samples):              # no model reachable -> graph fallback
         fb = graph_grounded_fallback(ctx)
-        samples = [fb, fb, fb]
+        samples = [fb]
 
     return aggregate_self_consistency(samples, ctx)
 
@@ -270,7 +232,7 @@ async def apply(body: dict = Body(default=None)):
     If the caller supplies no recommendations, a fresh set is generated first,
     so /apply can close telemetry -> recommendation -> deployment in one call."""
     recs = (body or {}).get("recommendations")
-    if not recs:
+    if recs is None:
         recs = (await _recommend()).get("recommendations", [])
     async with httpx.AsyncClient(timeout=30) as client:
         r = await client.post(f"{SAFETY_URL}/apply",
@@ -287,7 +249,8 @@ async def log_outcome(context: dict = Body(...), action: dict = Body(...),
     """Persist an applied recommendation's realized outcome back into the KB so
     the dependency graph and RAG index learn from deployment."""
     async with httpx.AsyncClient(timeout=15) as client:
-        await client.post(f"{KB_URL}/kb/upsert_trace",
+        response = await client.post(f"{KB_URL}/kb/upsert_trace",
                           json={"context": context, "action": action,
                                 "outcome": outcome})
+        response.raise_for_status()
     return {"ok": True}

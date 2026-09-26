@@ -1,23 +1,11 @@
-\section{Motivation and Challenges}
+\section{Motivation and Testable Questions}
 \label{sec:motivation}
+SemantOS is motivated by three hypotheses rather than by the earlier unverified 1,000-pair study. First, a configuration's utility may depend on workload and hardware. Second, joint knob effects may be non-additive. Third, performance, failure probability, and intervention cost may conflict. Each hypothesis requires measured interventions with explicit baselines.
 
-Kernel tuning is crucial to system performance, yet difficult in practice. To understand what matters, we conducted a large-scale empirical study over 1{,}000 workload--hardware pairs (CPU-bound, memory-intensive analytics, I/O-intensive streaming, sensor, HPC, ML inference, real-time audio, and more); the six workloads used for controlled evaluation (see \emph{Setup}) are drawn from this study, and the full pair-level dataset is released in our anonymized artifact. In each we varied dozens of settings and measured median and 95\% tail latency, throughput, anomaly rate, and fairness.
+For a loss $L$, define an interaction contrast from four independently measured configurations:
+\[
+ I_{ab}=L(a,b)-L(a,b_0)-L(a_0,b)+L(a_0,b_0).
+\]
+For lower-is-better loss, negative $I_{ab}$ indicates a beneficial non-additive interaction relative to the chosen baseline. A bootstrap interval must resample independent runs, not individual requests from a single run. The sign can change with workload, value range, or kernel version. An edge therefore needs its scope, configuration values, measurement IDs and uncertainty interval. Such an edge describes an empirical interaction; it is not an unconditional causal coupling.
 
-\paragraph{Observation~1 -- Context Sensitivity.} Optimal values vary widely across workloads and even across phases of one workload. Shrinking \texttt{sched\_latency\_ns} improved tail latency by 21\% for web-serving but caused a 20\% fairness drop under mixed streaming; adjusting reclamation knobs (\texttt{vm.swappiness}, \texttt{dirty\_ratio}) boosted steady-state throughput but degraded responsiveness during bursty loads. Similar context-dependence appeared across CPU scheduling, interrupt routing, and NUMA placement.
-
-\paragraph{Observation~2 -- Strong inter-parameter dependencies.}
-% --- Added: Pairwise Effects figure (single column) ---
-\begin{figure}[t]
- \centering
- \includegraphics[width=0.74\linewidth]{figures/pairwise_effects.png}
- \caption{\textbf{Effect on Kernel Tunable Parameter Pairs.}
- Tuning \texttt{sched\_wake\_affinity} and \texttt{sched\_min\_granularity\_ns} simultaneously has a nonlinear synergistic effect on reducing tail latency, indicating that these parameters are strongly linked to each other and cannot be tuned independently.}
- \label{fig:pairwise}
-\end{figure}
-
-
-As shown in Figure~\ref{fig:pairwise}, these \emph{advanced interactions} are better resolved by collaborative tuning than by modifying parameters individually. Contrary to the common belief that parameters can be tuned independently, changing either \texttt{sched\_min\_granularity\_ns} or \texttt{sched\_wake\_affinity} in isolation produced little improvement, yet modifying both simultaneously reduced tail latency by more than 30\%. A similar nonlinear synergy emerged between CPU scheduling and memory reclamation: settings suboptimal in isolation became overall-optimal when combined with complementary settings.
-
-\paragraph{Observation~3 -- Trade-offs between competing objectives.} Improving one dimension often harms others: reducing latency frequently increased starvation, and maximizing throughput could degrade fairness, especially under contention or NUMA imbalance---and more so as resources saturate. A practical solution must therefore model trade-offs explicitly and explain them, so operators can choose among Pareto-optimal configurations by objective.
-
-\paragraph{Summary of findings.} Kernel tuning is characterized by (i)~context-dependence, (ii)~coupled inter-parameter effects, and (iii)~multi-objective trade-offs---explaining why static and black-box techniques struggle in practice. SemantOS addresses these with segmented telemetry, a semantic knowledge base that captures and analyzes parameter interactions, and multi-objective decision-making.
+A \textsc{depends-on} edge requires a validated admissibility rule or measured range conditioning. It cannot be inferred solely from the sign of $I_{ab}$. The current seed graph is empty: unverified scheduler edges are not silently renamed to other controls. The principal question is whether a reasoner can use independently acquired evidence more effectively than an optimizer with the same inputs, after charging the cost of acquiring that evidence.

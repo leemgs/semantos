@@ -1,3 +1,5 @@
 \section{Ethical and Responsible Deployment}
 \label{sec:ethics}
-SemantOS follows \emph{least privilege}: automated writes occur only through designated control steps with rollback policies, immutable audit logs, and governance checkpoints. With a read-only default and safety-first staged rollout, automated kernel modifications stay safe and auditable. Experiments used only synthetic workloads and system-generated telemetry; the user study (N=32) ran under an approved IRB protocol with informed consent, collected no PII, and stored only de-identified task metrics.
+The new measurements run local software workloads and collect no participant data. No human study or IRB approval is claimed in this revision. The current runtime performs no kernel writes. Future interventions require an isolated testbed, documented rollback limits and appropriate authorization. Human studies, if pursued, require prospective institutional review as applicable and informed consent; these cannot be inferred from software tests.
+
+An AI coding assistant assisted this revision's code, prose and analysis. Measurement provenance, source hashes and explicit evidence limits are retained for author verification. Generated values are not substituted for unavailable observations.

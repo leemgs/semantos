@@ -7,9 +7,9 @@ import json, os, datetime, asyncio, httpx
 
 app = FastAPI(title="SemantOS Operator Console", version="0.2.2")
 
-BASE = Path(__file__).resolve().parent.parent.parent
-OUTPUTS = BASE / "outputs"
-DATA = BASE / "operator-console" / "app" / "data"
+BASE = Path(__file__).resolve().parents[1]
+OUTPUTS = Path(os.environ.get("OUTPUTS_DIR", str(BASE / "outputs")))
+DATA = Path(os.environ.get("CONSOLE_DATA_DIR", str(BASE / "app" / "data")))
 DATA.mkdir(parents=True, exist_ok=True)
 
 KB_URL = os.environ.get("KB_URL", "http://kb-service:8000")
@@ -17,7 +17,7 @@ SAFETY_URL = os.environ.get("SAFETY_URL", "http://safety-runtime:8000")
 REASONER_URL = os.environ.get("REASONER_URL", "http://reasoner:8000")
 
 # ❗ static 경로를 templates/static으로 마운트 (실존 폴더)
-STATIC_DIR = BASE / "operator-console" / "app" / "templates" / "static"
+STATIC_DIR = DATA / "static"
 STATIC_DIR.mkdir(parents=True, exist_ok=True)
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
@@ -47,28 +47,7 @@ def _save_json(p: Path, obj):
 
 def seed_if_needed():
     if not REC_FILE.exists():
-        recs = [
-            {
-                "id": "rec-001",
-                "knob": "sched_min_granularity_ns",
-                "proposed": "15000000",
-                "rationale": "Reduce wakeup preemption to improve tail latency.",
-                "expected_impact": "-8% median, -12% P95",
-                "uncertainty": 0.37,
-                "status": "pending",
-                "explanation": ""
-            },
-            {
-                "id": "rec-002",
-                "knob": "vm.dirty_ratio",
-                "proposed": "15",
-                "rationale": "Lower background writeback to reduce IO contention.",
-                "expected_impact": "-4% P95, +2% anomalies",
-                "uncertainty": 0.58,
-                "status": "pending",
-                "explanation": ""
-            }
-        ]
+        recs = []  # no fabricated recommendations
         _save_json(REC_FILE, recs)
     if not AUDIT_FILE.exists():
         _save_json(AUDIT_FILE, [])
@@ -119,15 +98,15 @@ async def index(request: Request):
 </head>
 <body>
   <div class="title">
-    <h1>SemantOS Operator Console</h1>
+    <h1>SemantOS Dry-run Console</h1>
     <div class="muted">v0.2.2</div>
   </div>
 
   <div class="card">
-    <div class="row"><strong>SLO & Rollout Status</strong>
+    <div class="row"><strong>Simulated rollout — no kernel settings are changed</strong>
       <button class="btn" onclick="refreshStatus()">Refresh</button>
       <button class="btn" onclick="advance()">Advance</button>
-      <button class="btn" onclick="rollback()">Rollback</button>
+      <button class="btn" onclick="rollback()">Cancel simulation</button>
     </div>
     <div id="status" class="muted">Loading status...</div>
   </div>
@@ -155,19 +134,17 @@ async def index(request: Request):
 <script>
 async function refreshStatus(){
   const r = await fetch('/api/status'); const d = await r.json();
-  let line = `active=${d.active} percent=${d.percent}%`;
+  let line = `mode=${d.mode || "unavailable"} active=${d.active} percent=${d.percent}%`;
   if(d.rec_id) line += ` rec=${d.rec_id}`;
   if(d.vetoed && d.vetoed.length) line += ` vetoed=[${d.vetoed.join(', ')}]`;
   document.getElementById('status').innerHTML = line + '<br/>' + renderHistory(d.history || []);
 }
 
+function escapeHTML(value){
+  const el = document.createElement('span'); el.textContent = String(value ?? ''); return el.innerHTML;
+}
 function renderHistory(h){
-  if(!h || !h.length) return '<span class="muted">no history</span>';
-  return '<ul>'+h.map(x=>{
-    const ts = new Date(x.ts*1000).toISOString();
-    const ok = x.ok ? '✅' : '❌';
-    return `<li><span class="muted">${ts}</span> — ${x.percent}% p95=${x.p95} ${ok}</li>`;
-  }).join('')+'</ul>';
+  return '<pre>'+escapeHTML(JSON.stringify(h || [], null, 2))+'</pre>';
 }
 
 async function advance(){ await fetch('/api/advance', {method:'POST'}); await refreshStatus(); }
@@ -188,9 +165,9 @@ function recCard(r){
         ${r.explanation ? `<div style="margin-top:6px">${r.explanation}</div>` : ""}
       </div>
       <div class="row">
-        <button class="btn" onclick="approve('${r.id}')">Approve</button>
+        <button class="btn" onclick="approve('${r.id}')">Simulate bundle</button>
         <button class="btn" onclick="rejectRec('${r.id}')">Reject</button>
-        <button class="btn" onclick="rollbackRec('${r.id}')">Rollback</button>
+        <button class="btn" onclick="rollbackRec('${r.id}')">Cancel simulation</button>
       </div>
     </div>
     <div style="margin-top:8px">
@@ -212,7 +189,8 @@ async function refreshRecs(){
 }
 
 async function approve(id){
-  await fetch('/api/approve/'+id, {method:'POST'});
+  const response = await fetch('/api/approve/'+encodeURIComponent(id), {method:'POST'});
+  if (!response.ok) { alert(JSON.stringify(await response.json())); return; }
   await loadRecs();
   await refreshStatus();
 }
@@ -264,27 +242,29 @@ def api_audit():
 
 def _append_audit(action, rec_id):
     logs = _load_json(AUDIT_FILE, [])
-    logs.append({"ts": datetime.datetime.utcnow().isoformat()+"Z", "action": action, "id": rec_id})
+    logs.append({"ts": datetime.datetime.now(datetime.timezone.utc).isoformat(), "action": action, "id": rec_id})
     _save_json(AUDIT_FILE, logs)
 
 @app.post("/api/approve/{rec_id}")
 async def approve(rec_id: str):
     recs = _load_json(REC_FILE, [])
-    target = None
-    for r in recs:
-        if r["id"] == rec_id:
-            r["status"] = "approved"
-            target = r
-            _append_audit("approve", rec_id)
-            break
+    target = next((r for r in recs if r["id"] == rec_id), None)
+    if target is None:
+        raise HTTPException(404, "unknown recommendation")
+    if not target.get("bundle"):
+        raise HTTPException(422, "explicit bundle id required")
+    bundle = [r for r in recs if r.get("bundle") == target["bundle"]]
+    try:
+        async with httpx.AsyncClient() as client:
+            result = await _post(client, f"{SAFETY_URL}/apply", {"recommendations": bundle})
+    except httpx.HTTPError as e:
+        raise HTTPException(502, "runtime rejected or could not process the bundle") from e
+    for rec in bundle:
+        if rec["id"] in result.get("simulated", []): rec["status"] = "simulated"
+        elif rec["id"] in result.get("vetoed", []): rec["status"] = "vetoed"
     _save_json(REC_FILE, recs)
-    if target:
-        try:
-            async with httpx.AsyncClient() as client:
-                await _post(client, f"{SAFETY_URL}/apply", {"recommendations":[target]})
-        except Exception:
-            pass
-    return {"ok": True}
+    _append_audit("dry_run_bundle", target["bundle"])
+    return result
 
 @app.post("/api/reject/{rec_id}")
 def reject(rec_id: str):
@@ -300,18 +280,19 @@ def reject(rec_id: str):
 @app.post("/api/rollback_rec/{rec_id}")
 async def rollback_rec(rec_id: str):
     recs = _load_json(REC_FILE, [])
-    for r in recs:
-        if r["id"] == rec_id:
-            r["status"] = "rolled_back"
-            _append_audit("rollback", rec_id)
-            break
+    target = next((r for r in recs if r["id"] == rec_id), None)
+    if target is None:
+        raise HTTPException(404, "unknown recommendation")
+    async with httpx.AsyncClient() as client:
+        status = await _get(client, f"{SAFETY_URL}/status")
+        if not target.get("bundle") or status.get("rec_id") != target["bundle"]:
+            raise HTTPException(409, "this bundle is not staged")
+        result = await _post(client, f"{SAFETY_URL}/rollback")
+    for rec in recs:
+        if rec.get("bundle") == target["bundle"]: rec["status"] = "simulation_cancelled"
     _save_json(REC_FILE, recs)
-    try:
-        async with httpx.AsyncClient() as client:
-            await _post(client, f"{SAFETY_URL}/rollback")
-    except Exception:
-        pass
-    return {"ok": True}
+    _append_audit("cancel_simulated_bundle", target["bundle"])
+    return result
 
 # ---------- API: rollout / SLO ----------
 @app.get("/api/status")
@@ -352,6 +333,8 @@ async def refresh_recs():
     for r in recs:
         norm.append({
             "id": r.get("id",""),
+            "bundle": r.get("bundle", ""),
+            "provenance": r.get("provenance", {}),
             "knob": r.get("knob",""),
             "proposed": str(r.get("proposed","")),
             "rationale": r.get("rationale",""),

@@ -1,75 +1,54 @@
-
-
-\section{Evaluation}
+\section{Measurements and Evaluation Protocol}
 \label{sec:evaluation}
+\subsection{New Local Measurements}
+We executed three bounded microbenchmarks on the available host: an Intel Core i5-3570 with four logical CPUs, approximately 31.2\,GiB RAM, and Linux 6.17.0-23-generic. These are newly collected measurements, not the earlier six-workload, three-server evaluation. No kernel knob was modified and no LLM or controller was compared.
 
+Each workload had 10 separate invocations of 100 measured operations, preceded by 10 warm-up operations. Workload--run order was shuffled with seed 4088. SQLite inserts a 4\,KiB value and commits each transaction in WAL mode with synchronous=FULL. The file test overwrites a 64\,KiB region and calls fsync. The compression test compresses a fixed seeded 64\,KiB payload at zlib level 6 and verifies decompression. Latency is wall-clock operation duration from a monotonic nanosecond clock; the compression measurement includes verification. The raw log retains every operation, run ID, deadline and error flag, with a SHA-256 hash and software/environment manifest.
 
-% 본문에 표 참조 한 줄 추가 (리뷰어 친화)
-We evaluate SemantOS across diverse workloads, assessing real-world performance, robustness under drift, and how well it meets our design objectives.
+\begin{table}[t]
+\centering
+\caption{Measured local baseline. Mean of run medians, and mean of run P95 values with 95\% Student-$t$ CI half-width across 10 runs. Last column is the percentage of errors or operations exceeding a predeclared 50\,ms deadline. No tuning gain is implied.}
+\label{tab:local}
+\small
+\input{local-measurements.tex}
+\end{table}
 
-\subsection{Setup}
-We evaluate SemantOS across six representative workloads: (1)~a web-serving microservice, (2)~an Online Transaction Processing (OLTP) database benchmark (TPC-C), (3)~a streaming pipeline (Kafka+Spark), (4)~an embedded Internet-of-Things (IoT) sensor gateway, (5)~Graphics Processing Unit (GPU)-based HPC/ML inference, and (6)~a real-time audio pipeline~\cite{Mao2019SIGCOMM,VanAken2017SIGMOD}. We run each on three server classes: (\textbf{S1})~2$\times$Xeon Gold (32~cores, 256\,GB, NVMe), (\textbf{S2})~2$\times$EPYC (64~cores, 512\,GB, NUMA), and (\textbf{S3})~2$\times$Xeon~+~A100 (40~cores, 384\,GB), all on Linux~6.4 with a fixed software stack. Each (workload, server) pair is repeated for 10 independent runs (means with 95\% CIs). Components run primarily in user space over stable kernel interfaces, enabling portability across kernels and distributions.
+The anomaly denominator is all measured operations, including failures; an operation counts once if either it fails or exceeds the deadline. This label is independent of veto and rollback. Zero events in these short runs is not evidence of zero population risk. Run-level intervals describe variability on this shared host and do not account for uncontrolled interference, warm-cache bias or correlated system state. The closed-loop load does not characterize queueing under an externally fixed arrival rate. We do not pool heterogeneous workload latencies or infer kernel tuning effects from these baseline timings.
 
-\paragraph{Baselines.} The \emph{Expert profile} is a hand-tuned human reference; \emph{BO/RL} and strong tuners (Vizier/Ray/Optuna/FLAML) are run \emph{by us} under matched search spaces, budgets, wall-clock time, and safety/reward settings---the only strictly like-for-like rows in Table~\ref{tab:sota-compare}. The $\dagger$-marked \emph{AdaptiveKernel}/\emph{OS-R1} figures are literature-reported (not reproducible here), hence contextual rather than head-to-head.
+\subsection{Measured Per-Process Kernel Interventions}
+We additionally executed real Linux timer-slack and CPU-affinity interventions in fresh owned child processes, without modifying host-wide sysctls. The two factors were timer slack (50\,$\mu$s or 1\,ms, set by PR\_SET\_TIMERSLACK) and affinity (all four available CPUs or CPU 0). Every child checked kernel readback before recording events. This isolated measurement driver is separate from the dry-run SemantOS actuator.
 
+For each periodic wake-up interval (2 or 5\,ms), five training blocks and ten subsequent test blocks evaluated all four configurations. Within each block, the eight interval/configuration cases were randomly ordered using seed 4088. Each fresh process performed ten warm-up and 80 measured wake-ups against absolute monotonic-clock targets. The plan was written before execution; the configuration minimizing mean training-run P95 lateness was frozen before test execution. This is temporal holdout within one host and workload family, not the independent workload/hardware split required for claims of generalization. The complete 120-process experiment retained 9,600 event timestamps, readbacks, frozen selections and hashes. No external competing load was introduced.
 
-%========================================================
+\begin{table}[t]
+\centering
+\caption{Held-out kernel intervention measurements. P95 is the mean of ten run-level P95 wake-up latenesses. Misses count lateness exceeding the predeclared 200\,$\mu$s deadline. CPU affinity is all four CPUs or one CPU.}
+\label{tab:kernel-local}
+\small
+\input{kernel-measurements.tex}
+\end{table}
 
+The training selector chose the explicit control (50\,$\mu$s slack, all CPUs) at both intervals: there is no selected-policy improvement over that control. Its test P95 was $89.5\pm9.2$ and $94.2\pm6.9\,\mu$s at 2 and 5\,ms, respectively (95\% Student-$t$ half-width across ten runs). Raising slack to 1\,ms with all CPUs increased P95 by $927.3\pm16.4$ and $928.4\pm10.0\,\mu$s in paired blocks. Affinity-only differences were $19.9\pm36.7$ and $39.6\pm62.6\,\mu$s; these intervals include zero. These exploratory intervals are unadjusted for multiple comparisons and shared-host temporal dependence. The slack effect is consistent with timer coalescing; no power measurement, graph discovery, LLM advantage, staged rollback or six-workload result is inferred. A miss is defined by observed wake-up time, independently of any safety gate.
 
+\subsection{Required Controlled Comparisons}
+\paragraph{Matched information and budgets.}
+To test the LLM's incremental value, compare (1) the unchanged kernel baseline, (2) a frozen expert profile, (3) a conventional optimizer without the KB, (4) the same optimizer with identical graph and retrieved traces, (5) a deterministic graph policy, and (6) SemantOS. Fix the allowed knob values, workload arrivals, hardware allocation, trial and wall-clock budgets, safety policy and objective weights. Record model inference, graph construction, retrieval, calibration and human setup costs separately. Report both online and total costs; a cold-start comparison alone cannot isolate semantic reasoning.
 
+Ablations remove graph context, retrieval, or the LLM while retaining the other inputs and the runtime. A no-runtime comparison belongs only in an isolated testbed. The KB may carry all useful information; the shared-KB optimizer is the direct test of that alternative. Distinct random-search and optimizer implementations must not be merged into a generic BO/RL result.
 
-\begin{figure}[t]
- \centering
- \includegraphics[width=0.72\columnwidth]{figures/pareto_frontier.png}
- \caption{\textbf{Pareto Frontier of Latency vs.\ Anomaly Rate.}
- Comparison across four controllers (Baseline, Expert, BO/RL, and SemantOS) aggregated over six workloads.
- SemantOS consistently achieves \emph{Pareto-dominant} configurations—simultaneously reducing anomaly rate and tail latency compared to all baselines.
- This illustrates its ability to navigate multi-objective trade-offs rather than optimizing a single metric in isolation.}
- \label{fig:pareto_frontier}
-\end{figure}
+\paragraph{Leakage prevention.}
+Before graph induction, define immutable groups by workload family, hardware class and acquisition session. Maintain disjoint train, retrieval, calibration and test roles; no held-out group may contribute to LLM training, pairwise sweeps, retrieval traces or threshold selection. Freeze hashes of graph snapshots, source measurements, prompts and calibrators before opening test results. Temporal reuse must be forward-only. The artifact includes a manifest validator to reject group overlap and unknown lineage. The old synthetic split, which held out only selected labels, did not establish independence for all six workloads and all three server classes.
 
+\paragraph{Outcome definitions and safety counts.}
+For each proposed bundle record proposed, malformed, constraint-rejected, score-vetoed, accepted, staged, completed and rolled-back counts, together with exposure duration and affected requests. Count bundles and individual knobs separately. For independently labeled actions report TP, FP, FN and TN for the \emph{gate}; separately report rollout rollback counts and causes. Give both $\#\text{unsafe accepted}/\#\text{unsafe labeled}$ and $\#\text{unsafe accepted}/\#\text{accepted labeled}$. Unknown labels remain unknown. Rollback precision is undefined without independently labeled executed actions; veto precision is not its substitute.
 
-\subsection{Experimental Results}
-Runtime overhead is minimal across workloads and decision paths (fast path $<\!10$\,ms, $<\!3\%$ CPU; per-path footprint in the supplement). We compare SemantOS against the baselines above. To avoid reporting only best-case numbers, we examined the \emph{per-workload} reduction vs.\ Baseline for all six workloads (each the mean over 10 runs $\times$ three server classes; full table in the artifact): the headline ``up to 23\%/28\%/31\%'' figures in Table~\ref{tab:sota-compare} are the maxima of these distributions, with medians of 18\%/22\%/27\%; no workload's mean regressed on any axis (all per-workload 95\% CIs for the reduction excluded zero on the positive side). We caution that in Table~\ref{tab:sota-compare} only the \emph{BO/RL} and \emph{Expert} rows are run under matched conditions by us; the $\dagger$-marked rows are literature-reported ranges under differing setups and are contextual, not head-to-head---so cross-row differences against $\dagger$ rows should not be read as controlled comparisons. Against the human \emph{Expert} profile, SemantOS improves median/P95/anomaly by 12--18\%/15--20\%/20--25\% and reduces operator tuning time (our proxy for required human oversight, measured as wall-clock operator effort to reach an accepted configuration) by $>$85\%, while producing KB-grounded \texttt{rationale} fields~\cite{Biswas2023SE4SafeML}.
+A lower threshold accepts a subset of the same fixed candidate list, but the unsafe fraction among survivors need not be monotone. Report absolute unsafe counts, accepted counts, request-level deadline misses and exposure under each threshold on the same frozen candidates. The earlier precision-derived anomaly formula is not an acceptable measurement.
 
-% [Per-workload table moved to anonymized artifact appendix to meet 7-page limit;
-% distribution (medians 18/22/27, maxima 23/28/31, no regressions) summarized in text above.]
+\paragraph{Aggregation and trade-offs.}
+Use paired seeds and runs and report absolute per-workload and per-host metrics before percentage reductions against the explicitly named unchanged-kernel baseline. Aggregate normalized ratios, not raw milliseconds across heterogeneous tasks. Bootstrap independent runs or workload--host groups as appropriate; state the unit of resampling. A Pareto plot requires multiple measured operating points per method across a common budget or objective-weight sweep. Connect only genuinely nondominated measured points and report uncertainty; a dashed line through one point per method is not evidence of a frontier.
 
+\paragraph{Drift and faithfulness.}
+A drift experiment must retain the score function version, $\alpha$, window size, number of unsafe calibration examples, change schedule, threshold trajectory and held-out outcomes at each decision. Evaluate on subsequent data, not on the window used to select the threshold. Report observed misses, denominators and uncertainty; any claimed recovery deadline needs its own assumptions and evidence. For explanation faithfulness, delete cited edges/traces and matched uncited controls while fixing model seeds and objective weights, then measure bundle changes and attribution errors. Record the complete original and perturbed prompts. No human study is needed to begin this intervention test, and no user-study outcome is asserted here.
 
-\paragraph{Pareto Trade-offs.}
-On a frontier over latency, anomaly rate, and fairness (Figure~\ref{fig:pareto_frontier}), SemantOS sits closest to the estimated Pareto-optimal set across six workloads---up to \textbf{17\% lower latency} at the same anomaly budget and \textbf{23\% lower anomaly rate} at equivalent throughput. On streaming, P95 latency dropped 26\% with fairness within 2\% of default; on HPC/ML inference, co-tuning \texttt{sched\_latency\_ns} and \texttt{dirty\_ratio} cut GPU starvation, raising throughput 15\% without raising anomaly~\cite{Mirhoseini2021Nature,Biswas2023SE4SafeML}.
-
-\subsection{Ablation Studies}
-\label{subsec:ablation}
-We selectively remove the KB, the reasoning model, or the safety runtime: removing the KB degrades retrieval relevance and raises anomalies, and omitting the LLM lowers interpretability and performance by 8--12\%~\cite{Brown2020NeurIPS,Touvron2023LLaMA,OpenAI2024GPT4}. Beyond these single-component drops, Table~\ref{tab:ablation_kb_safety} reports five end-to-end variants. Removing the dependency graph---so the Reasoner can no longer co-tune along synergistic edges---raises latency $19.5\!\to\!21.4$\,ms and anomaly $2.4\!\to\!4.1\%$, directly confirming that the inter-knob synergies of Observation~2 (Fig.~\ref{fig:pairwise}) are captured \emph{because} reasoning is graph-grounded, not merely retrieval-augmented. Removing RAG gives 21.2\,ms / 3.6\%; removing Safety preserves latency (19.8\,ms) but lifts anomaly to 4.9\%; \emph{KB only} is worst (22.6\,ms / 7.1\%). Thus the typed graph and RAG drive \emph{performance} while the Safety Runtime drives \emph{reliability}; their combination is Pareto-best, and the trends hold under drift (Table~\ref{tab:ablation_kb_safety}, right block). All CSV schemas and reproduction scripts are in the artifact.
-
-\subsection{Case study: Safety Runtime rollback under a suboptimal recommendation}
-\label{subsec:safety-rollback}
-
-For an OLTP workload the Reasoner suggested lowering \texttt{dirty\_background\_ratio} and raising \texttt{sched\_min\_granularity\_ns} to cut I/O interference. The SLO monitor detected worsening transaction latency and queueing within the canary window ($<\!2$ min); because \texttt{uncertainty\_score} drifted above $\tau$ \emph{after} canary metrics arrived and the late-saturation guardrail fired, the runtime rolled back, logged an \texttt{OptimizationTrace} for KB refinement, and flagged the action as risky---showing the SLO guard catches regressions even when the initial uncertainty was within the accept regime.
-
-
-\textbf{Uncertainty Quantification (UQ) \& Guardrail Thresholds.}
-\label{subsec:uncertainty-guardrails}
-We choose $\tau$ by minimizing a deployment cost that trades false/missed rollbacks under SLO constraints. With base rate $\pi$ of unsafe actions, temperature-calibrated scores, and the True/False Positive Rates (TPR/FPR) on a held-out log,
-\noindent
-\begin{minipage}{\columnwidth}
-\begin{equation*}
-\begin{aligned}
-\mathcal{C}(\tau)
-=~ & c_{\text{FN}}\!\left(1-\mathrm{TPR}(\tau)\right)\pi
- + c_{\text{FP}}\,\mathrm{FPR}(\tau)\!\left(1-\pi\right) \\
- & + \lambda\,\Delta\mathrm{SLO}(\tau),  \quad \text{s.t. } \Delta\mathrm{SLO}(\tau)\le\delta.
-\end{aligned}
-\end{equation*}
-\end{minipage}
-
-We sweep $\tau$ on a grid and select $\tau^\star$ minimizing $\mathcal{C}$ (the cost constants $c_{\mathrm{FN}},c_{\mathrm{FP}},\lambda$ and the SLO budget $\delta$ are listed in the artifact). Each recommendation receives $u\!\in\![0,1]$ from the disagreement (normalized predictive entropy over the proposed knob/value) across the $k\!=\!3$ self-consistency samples, temperature-scaled on the holdout log; calibration quality (ECE, AUPRC, reliability diagrams) is reported in the supplement. Here $k\!=\!3$ is a deliberately cheap estimator giving a coarse but monotone risk signal, which suffices because the conformal threshold $\tau$---not the raw entropy---sets the accept/veto decision. The runtime rolls back when $u\!\ge\!\tau$ or a hard constraint is violated. Sweeping $\tau$ (full table in the supplement), the default $\tau\!=\!0.55$ balances precision/recall at rollback precision/recall $\approx(0.86,0.88)$ and a 2.8\% anomaly rate ($>$85\% of unsafe actions excluded before production); $\tau\!=\!0.30$ raises recall to 0.94 (3.5\% anomaly) and $\tau\!=\!0.70$ raises precision to 0.91 (2.3\% anomaly), so lower $\tau$ trades precision for recall.
-
-\subsection{Exploration Efficiency}
-\label{subsec:exploration}
-We measure sample efficiency as the configurations needed to reach within 2\% of the final median latency: SemantOS converges in 38--52 attempts versus 120--300 for BO/RL---a 2--4$\times$ speedup at equal \emph{online} budget. This comparison favors SemantOS at deployment time: it front-loads cost into offline LLM fine-tuning and KB construction, whereas BO/RL starts cold. The speedup thus reflects amortizing domain knowledge across deployments, not a lower total (offline$+$online) cost (offline cost is reported in the artifact). Over a 30-day continuous deployment with repeated drift, anomaly rate stayed below 3\% and rollback precision above 0.85; recalibration restored coverage after each drift and phased rollouts limited worst-case exposure, empirically supporting Theorem~\ref{thm:pac-cost} and Proposition~\ref{prop:recal}.
-
-\subsection{Human Factors}
-\textbf{Expanded user study (N=32 SRE/DevOps).} In a within-subjects study, 32 SRE/DevOps practitioners (5--15 years' experience) performed three tasks (incident classification, configuration selection, decision rationale) under four conditions: baseline, expert tuning, BO/RL, and SemantOS with explanations and safety. SemantOS reduced decision time vs.\ BO/RL by 28\% ($p<0.01$, Wilcoxon signed-rank) and cognitive load (NASA-TLX) by 18\% vs.\ expert and 24\% vs.\ BO/RL. All reported $p$-values survive Holm--Bonferroni correction across the $3\!\times\!4$ conditions; the study ran under an approved IRB protocol with informed consent and retained no PII. SemantOS also outperformed all comparison conditions on explanation usefulness and uncertainty-corrected reliability ratings (Cliff's $\delta\in[0.42,0.58]$), with participants citing evidence tracking and provenance-validated explanations as decisive---indicating that the explainability and safety design reduces operator cognitive burden beyond raw performance gains.
-
+\paragraph{Additional author-reported measurements.}
+Appendix~\ref{sec:reported-results} records a separately supplied hardware experiment report, which the authors confirm contains actual measurements. Its reported aggregate P95 decreases from 20.0 to 17.2\,ms (14.0\%), but workload-level aggregation and run-level uncertainty remain unresolved. These externally supplied summaries are distinguished from the locally executed measurements above; no raw logs were supplied for independent recomputation.

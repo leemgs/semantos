@@ -1,18 +1,6 @@
 #!/usr/bin/env bash
-# Reproduce every SemantOS paper table/figure offline (no Docker required).
 set -euo pipefail
 cd "$(dirname "$0")"
-
-PY=${PYTHON:-python3}
-echo ">> installing reproduce deps (numpy/scipy/matplotlib) ..."
-$PY -m pip install -q -r reproduce/requirements.txt || true
-
-echo ">> running reproduction harness ..."
-$PY -m reproduce.run_all
-
-echo ">> rendering figures ..."
-$PY -m reproduce.figures
-
-echo
-echo ">> artifacts in reproduce/results/:"
-ls -1 reproduce/results/
+: "${RAW_RUNS:?set RAW_RUNS to an independently collected run-level CSV}"
+${PYTHON:-python3} -m reproduce.run_all "$RAW_RUNS" --output reproduce/results/summary.json
+${PYTHON:-python3} -m unittest reproduce.test_run_all
