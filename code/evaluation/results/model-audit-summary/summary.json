@@ -1932,5 +1932,291 @@
     "valid_calls": 20,
     "elapsed_seconds_total": 101.6236571659997,
     "elapsed_seconds_mean": 5.081182858299985
+  },
+  {
+    "run": "model-audit-api-nemotron3-ultra-550b",
+    "model": "nvidia/nemotron-3-ultra-550b-a55b",
+    "sha256": null,
+    "provider": "openrouter",
+    "reported_models": [
+      "nvidia/nemotron-3-ultra-550b-a55b"
+    ],
+    "routed_providers": [
+      "DeepInfra"
+    ],
+    "fingerprints": [
+      "None"
+    ],
+    "shards": null,
+    "runtime": null,
+    "seeds": [
+      4088,
+      4089,
+      4090,
+      4091,
+      4092
+    ],
+    "variants": {
+      "full": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 6.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 22,
+        "decimal_numbers_in_prompt": 20
+      },
+      "no_graph": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 6.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 21,
+        "decimal_numbers_in_prompt": 19
+      },
+      "no_retrieval": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 1.0,
+        "cites_training_table": 5,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 21,
+        "decimal_numbers_in_prompt": 21
+      },
+      "model_only": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 0.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 0,
+        "decimal_numbers_in_prompt": 0
+      },
+      "delete_cited": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 4.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 33,
+        "decimal_numbers_in_prompt": 19
+      },
+      "delete_uncited": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 6.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 32,
+        "decimal_numbers_in_prompt": 29
+      }
+    },
+    "faithfulness": {
+      "valid": 5,
+      "not_estimable": 0,
+      "cited_action_changed": 0,
+      "uncited_action_changed": 0,
+      "records": [
+        {
+          "variant": "faithfulness",
+          "seed": 4088,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-5-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s1000000_aall",
+            "retrieval-3-1-s1000000_aone",
+            "retrieval-3-1-s50000_aone"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4089,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-5-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s1000000_aall",
+            "retrieval-3-1-s1000000_aone",
+            "retrieval-3-1-s50000_aone"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4090,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-5-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s1000000_aall",
+            "retrieval-3-1-s1000000_aone",
+            "retrieval-3-1-s50000_aone"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4091,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-5-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s1000000_aall",
+            "retrieval-3-1-s1000000_aone",
+            "retrieval-3-1-s50000_aone"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4092,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-5-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s1000000_aall",
+            "retrieval-3-1-s1000000_aone",
+            "retrieval-3-1-s50000_aone"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        }
+      ]
+    },
+    "heldout_by_choice": [
+      {
+        "config": "s50000_aall",
+        "period_ms": 5,
+        "p95_us": {
+          "mean": 179.7384,
+          "ci95_halfwidth": 101.98605308014248
+        },
+        "reduction_pct": {
+          "mean": 0.0,
+          "ci95_halfwidth": 0.0
+        },
+        "same_as_control": true
+      },
+      {
+        "config": "s50000_aall",
+        "period_ms": 8,
+        "p95_us": {
+          "mean": 155.7321,
+          "ci95_halfwidth": 64.44679858513351
+        },
+        "reduction_pct": {
+          "mean": 0.0,
+          "ci95_halfwidth": 0.0
+        },
+        "same_as_control": true
+      }
+    ],
+    "probe": {
+      "status": "exploratory post hoc probe; not part of the preregistered audit",
+      "arms": [
+        {
+          "arm": "delete_cited",
+          "status": "valid",
+          "action_changed": false,
+          "removed": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-5-s50000_aall"
+          ],
+          "config": "s50000_aall"
+        },
+        {
+          "arm": "delete_control",
+          "status": "valid",
+          "action_changed": false,
+          "removed": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-6-s50000_aall",
+            "retrieval-3-7-s50000_aall",
+            "retrieval-3-8-s50000_aall",
+            "retrieval-3-9-s50000_aall"
+          ],
+          "config": "s50000_aall"
+        }
+      ]
+    },
+    "calls": 30,
+    "valid_calls": 30,
+    "elapsed_seconds_total": 62.3477661690049,
+    "elapsed_seconds_mean": 2.078258872300163
   }
 ]

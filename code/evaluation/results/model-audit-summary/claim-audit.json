@@ -469,7 +469,168 @@
       "claim": "s50000_aall consistently lower than any s50000_aone value",
       "verdict": "wrong",
       "check": "ranges overlap: 85.033 < 183.217"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "cited s50000_aall runs range 93.049-183.217",
+      "verdict": "correct",
+      "check": "runs 0-5"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aone ranges from 85.0 to 430.7 us",
+      "verdict": "wrong",
+      "check": "its maximum is 571.84"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s1000000_aall ranges 748.404-1023.152",
+      "verdict": "correct",
+      "check": "minimum and maximum"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aall is lowest across all retrieval runs",
+      "verdict": "overstated",
+      "check": "lowest in 8 of 10 retrieval blocks"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aall ranges 82.5-183.2",
+      "verdict": "correct",
+      "check": "minimum and maximum"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "most s50000_aall runs are below 150 us",
+      "verdict": "correct",
+      "check": "9 of 10"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aone ranges from 85.0 to 430.7 us",
+      "verdict": "wrong",
+      "check": "its maximum is 571.84"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "both s1000000 configurations exceed 748 us",
+      "verdict": "correct",
+      "check": "minima 748.404 and 817.997"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aall is lowest across all retrieval runs",
+      "verdict": "overstated",
+      "check": "lowest in 8 of 10 retrieval blocks"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aall ranges ~82-183",
+      "verdict": "correct",
+      "check": "minimum and maximum"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aone ranges from 85.0 to 430.7 us",
+      "verdict": "wrong",
+      "check": "its maximum is 571.84"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s1000000_aall ranges ~748-1023",
+      "verdict": "correct",
+      "check": "minimum and maximum"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s1000000_aone ranges ~817-1420",
+      "verdict": "correct",
+      "check": "minimum and maximum"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "training table: s50000_aall lowest, 132.94",
+      "verdict": "correct",
+      "check": "matches the table"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aall is lowest across all retrieval runs",
+      "verdict": "overstated",
+      "check": "lowest in 8 of 10 retrieval blocks"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aall ranges 82.488-183.217",
+      "verdict": "correct",
+      "check": "minimum and maximum"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aone ranges from 85.0 to 430.7 us",
+      "verdict": "wrong",
+      "check": "its maximum is 571.84"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s1000000 configurations range 748.404-1419.669",
+      "verdict": "correct",
+      "check": "minimum and maximum"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aall is lowest across all retrieval runs",
+      "verdict": "overstated",
+      "check": "lowest in 8 of 10 retrieval blocks"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aall ranges 82.488-183.217",
+      "verdict": "correct",
+      "check": "minimum and maximum"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aone ranges from 85.0 to 430.7 us",
+      "verdict": "wrong",
+      "check": "its maximum is 571.84"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s1000000 configurations all above 748 us",
+      "verdict": "correct",
+      "check": "minimum 748.404"
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "claim": "s50000_aall is lowest across all retrieval runs",
+      "verdict": "overstated",
+      "check": "lowest in 8 of 10 retrieval blocks"
     }
   ],
-  "hosted_scope": "Hosted models (Llama-3.3-70B, Qwen3-235B-A22B-2507, DeepSeek-V3.2 via OpenRouter) returned different text across seeds; for them only the distinct full-context explanations are audited (4, 3 and 5), with the same labels."
+  "hosted_scope": "Hosted models (Llama-3.3-70B, Qwen3-235B-A22B-2507, DeepSeek-V3.2, Nemotron-3-Ultra-550B-A55B via OpenRouter) returned different text across seeds; for them only the distinct full-context explanations are audited (4, 3, 5 and 5), with the same labels."
 }

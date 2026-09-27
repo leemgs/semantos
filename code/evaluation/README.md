@@ -333,25 +333,28 @@ summarizes four runs, all on a four-core CPU container with llama-cpp-python
   correctness.
 
 Hosted runs (2026-09-27, OpenRouter, `--response-format json_schema`,
-`--max-tokens 4096`, `--min-interval 2`; total cost about 0.03 USD):
+`--max-tokens 4096`, `--min-interval 2`; total cost about 0.06 USD):
 
 | Model | Valid calls | Routed providers | Mean s/call |
 |---|---|---|---|
 | meta-llama/llama-3.3-70b-instruct | 30/30 | AkashML, DeepInfra, Parasail | 19.8 |
 | qwen/qwen3-235b-a22b-2507 | 29/30 (one truncated) | DeepInfra, GMICloud, Nebius, Novita | 8.0 |
 | deepseek/deepseek-v3.2 | 20/20 | Alibaba, AtlasCloud, Baidu, DeepInfra | 5.1 |
+| nvidia/nemotron-3-ultra-550b-a55b | 30/30 | DeepInfra | 2.1 |
 
 * Unlike the local runs, hosted responses differ across seeds at temperature 0,
   and some providers ignore the schema's 400-character explanation limit.
-* All three choose control whenever evidence is given. Without evidence, Llama-70B
+* All four choose control whenever evidence is given. Without evidence, Llama-70B
   chooses 1 ms slack on one CPU (-631 +- 183 %, -699 +- 206 %), Qwen3-235B does so
-  for 3 of 5 seeds, and DeepSeek chooses 50 us slack on one CPU.
-* Faithfulness: DeepSeek cites the single table (non-estimable). For Llama-70B and
-  Qwen3-235B neither cited nor matched uncited deletion changes the action; the
+  for 3 of 5 seeds, and DeepSeek chooses 50 us slack on one CPU. Nemotron-Ultra chooses control
+  without evidence too, explicitly as a "conservative" default without support.
+* Faithfulness: DeepSeek cites the single table (non-estimable). For Llama-70B,
+  Qwen3-235B and Nemotron-Ultra neither cited nor matched uncited deletion changes the action; the
   remaining runs still favor control, so this is consistent with the evidence but
   says nothing about reliance on the cited items.
-* Claim audit of the distinct full-context explanations: 18 of 27 claims correct,
-  9 wrong or overstated (Llama-70B 2/7, Qwen3-235B 3/6, DeepSeek-V3.2 4/14).
+* Claim audit of the distinct full-context explanations: 31 of 50 claims correct,
+  19 wrong or overstated (Llama-70B 2/7, Qwen3-235B 3/6, DeepSeek-V3.2 4/14,
+  Nemotron-Ultra 10/23; every Nemotron explanation misstates the s50000_aone range).
 * A `nvidia/nemotron-3-super-120b-a12b` run was stopped unfinished (about six
   minutes per call); it produced no result and is not reported.
 
