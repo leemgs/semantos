@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'evaluation'))
 import controlled_kernel as ck
 from analyze_controlled import analyze
-from model_audit import evidence, experiment, heldout, validate_answer
+from model_audit import api_backend, evidence, experiment, heldout, validate_answer
 from cited_deletion_probe import controls_for
 from summarize_model_audit import numbers_grounded
 
@@ -84,6 +84,44 @@ class ControlledTests(unittest.TestCase):
         by_id = {i['id']: i for i in items}
         self.assertEqual(sorted(c['config'] for c in controls),
                          sorted(by_id[i]['config'] for i in cited if i != 'training-table'))
+
+    def test_api_backend_sends_schema_retries_and_records_metadata(self):
+        import io as _io
+        import urllib.error
+        sent = []
+        body = {'id': 'r1', 'model': 'm-reported', 'provider': 'P', 'system_fingerprint': 'fp',
+                'choices': [{'finish_reason': 'stop', 'message': {'content':
+                    '```json\n{"config": "a", "cited_ids": [], "explanation": "x"}\n```'}}]}
+
+        class Response(_io.BytesIO):
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *exc):
+                return False
+
+        def opener(request, timeout):
+            sent.append(json.loads(request.data))
+            if len(sent) == 1:
+                raise urllib.error.HTTPError(request.full_url, 429, 'rate', {}, _io.BytesIO(b'slow down'))
+            return Response(json.dumps(body).encode())
+
+        with patch.dict('os.environ', {'OPENROUTER_API_KEY': 'sk-test-secret'}), patch('time.sleep'):
+            backend, manifest = api_backend('openrouter', 'm', min_interval=0, opener=opener)
+            out = backend('sys', json.dumps({'allowed_configs': ['a', 'b'], 'evidence': [{'id': 'e1'}]}), 7)
+        self.assertEqual(len(sent), 2)
+        self.assertEqual(sent[1]['seed'], 7)
+        self.assertEqual(sent[1]['temperature'], 0)
+        schema = sent[1]['response_format']['json_schema']['schema']
+        self.assertEqual(schema['properties']['config']['enum'], ['a', 'b'])
+        self.assertEqual(schema['properties']['cited_ids']['items']['enum'], ['e1'])
+        self.assertTrue(sent[1]['provider']['require_parameters'])
+        self.assertEqual(json.loads(out['content'])['config'], 'a')
+        self.assertTrue(out['meta']['fence_stripped'])
+        self.assertEqual(out['meta']['reported_model'], 'm-reported')
+        self.assertEqual(out['meta']['retried_errors'][0]['status'], 429)
+        self.assertIsNone(manifest['sha256'])
+        self.assertNotIn('sk-test-secret', json.dumps(manifest))
 
     def test_numbers_grounded_is_lexical(self):
         record = {'prompt': '{"p95_us": 126.36}',

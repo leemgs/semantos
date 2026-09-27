@@ -40,7 +40,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('root', type=Path, help='controlled-kernel artifact')
     p.add_argument('audit', type=Path, help='finished model_audit.py output directory')
-    p.add_argument('--gguf', type=Path, required=True)
+    p.add_argument('--gguf', type=Path, help='local runs: the audited GGUF (hash-checked)')
     p.add_argument('--out', type=Path, required=True)
     p.add_argument('--seed', type=int, default=4088)
     p.add_argument('--threads', type=int, default=4)
@@ -50,9 +50,16 @@ def main():
     plan = json.loads((args.audit/'plan.json').read_text())
     full = next(r for r in json.loads((args.audit/'records.json').read_text())
                 if r['variant'] == 'full' and r['seed'] == args.seed and r['status'] == 'valid')
-    backend, manifest = model_audit.llamacpp_backend(args.gguf, plan['manifest']['n_ctx'], args.threads)
-    if manifest['sha256'] != plan['manifest']['sha256']:
-        p.error('weights differ from the audited run')
+    if plan['backend'] == 'api':  # same provider, model and decoding settings as the audit
+        m = plan['manifest']
+        backend, manifest = model_audit.api_backend(m['provider'], m['requested_model'], m['response_format'],
+                                                    m['max_tokens'], m['min_interval_seconds'])
+    else:
+        if not args.gguf:
+            p.error('--gguf is required for local runs')
+        backend, manifest = model_audit.llamacpp_backend(args.gguf, plan['manifest']['n_ctx'], args.threads)
+        if manifest['sha256'] != plan['manifest']['sha256']:
+            p.error('weights differ from the audited run')
     _, items = model_audit.evidence(args.root)
     allowed = [c['name'] for c in json.loads((args.root/'plan.json').read_text())['configs']]
     cited = set(full['answer']['cited_ids'])
@@ -75,6 +82,9 @@ def main():
         rec = {'arm': arm, 'removed': sorted(removed), 'prompt_sha256': model_audit.hashlib.sha256(prompt.encode()).hexdigest()}
         try:
             raw = backend(model_audit.SYSTEM, prompt, args.seed)
+            if isinstance(raw, dict):
+                rec['response_meta'] = raw['meta']
+                raw = raw['content']
             rec['raw_response'] = raw
             rec['answer'] = model_audit.validate_answer(json.loads(raw), allowed, context)
             rec['status'] = 'valid'

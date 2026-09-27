@@ -62,7 +62,12 @@ def summarize(run):
                           for r in json.loads((probe_dir/'records.json').read_text())]}
     elapsed = [r['elapsed_seconds'] for r in calls]
     manifest = plan['manifest']
+    metas = [r['response_meta'] for r in calls if 'response_meta' in r]
     return {'run': run.name, 'model': plan['model'], 'sha256': manifest.get('sha256'),
+            'provider': manifest.get('provider'),
+            'reported_models': sorted({str(m.get('reported_model')) for m in metas}),
+            'routed_providers': sorted({str(m.get('routed_provider')) for m in metas}),
+            'fingerprints': sorted({str(m.get('system_fingerprint')) for m in metas}),
             'shards': manifest.get('shards'), 'runtime': manifest.get('runtime'),
             'seeds': plan['seeds'], 'variants': by_variant,
             'faithfulness': {'valid': sum(f['status'] == 'valid' for f in faith),
@@ -83,7 +88,10 @@ def markdown(summaries):
            'Retrospective frozen-input selection audit on the controlled follow-up. Prompts contain',
            'training and retrieval evidence only; held-out outcomes are read after all calls.', '']
     for s in summaries:
-        out += [f"## {s['model']}", '', f"Weights SHA-256: `{s['sha256']}`; runtime {s['runtime']}; "
+        where = (f"Weights SHA-256: `{s['sha256']}`; runtime {s['runtime']}" if s['sha256'] else
+                 f"Hosted via {s['provider']} (weights not hashable); reported models {s['reported_models']}, "
+                 f"routed providers {s['routed_providers']}, fingerprints {s['fingerprints']}")
+        out += [f"## {s['model']}", '', f"{where}; "
                 f"seeds {s['seeds']}; {s['valid_calls']}/{s['calls']} valid calls, "
                 f"{s['elapsed_seconds_total']:.0f} s total ({s['elapsed_seconds_mean']:.1f} s/call).", '',
                 '| Variant | Valid/calls | Choices | Mean citations | Cites table | Cites graph | Quoted decimals in prompt |',

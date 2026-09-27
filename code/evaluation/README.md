@@ -264,6 +264,34 @@ The run records the SHA-256 of every GGUF shard and its `general.*` metadata in
 plumbing tests with toy models; such runs must not be reported as results, and the
 summarizer refuses them.
 
+### Hosted models through free APIs (`--backend api`)
+
+Larger models than a four-core CPU can hold are run through OpenAI-compatible APIs.
+Keys are read only from `OPENROUTER_API_KEY`, `GEMINI_API_KEY` or `CHATGPT_API_KEY`
+and are never written to results. Prompts, evidence, seeds, the answer schema and
+held-out scoring are identical to local runs.
+
+```
+python3 evaluation/model_audit.py evaluation/results/controlled-2026-09-26 \
+    --backend api --provider openrouter --model nvidia/nemotron-3-super-120b-a12b:free \
+    --response-format json_schema --out evaluation/results/model-audit-api-nemotron-super
+python3 evaluation/cited_deletion_probe.py evaluation/results/controlled-2026-09-26 \
+    evaluation/results/model-audit-api-nemotron-super \
+    --out evaluation/results/model-audit-api-nemotron-super/probe-cited-deletion
+```
+
+`--response-format json_schema` sends the local grammar's schema (OpenRouter is
+told to route only to providers that honor it); `json_object` or `none` fall back
+to the prompt and still re-validate every answer. A single surrounding Markdown
+fence is removed and flagged. Each call records the provider-reported model,
+response id, fingerprint, routing and any retried 429/5xx errors. Hosted weights
+cannot be hashed and may change or be re-routed, so API results are reported as
+less reproducible than the local GGUF runs. `--min-interval` (default 6 s) paces
+requests for free-tier rate limits.
+
+The local runs above used `model_audit.py` as of commit 437076c (the hash in
+their `plan.json`); adding the API backend did not change the local code path.
+
 ### Recorded results (2026-09-26)
 
 [`results/model-audit-summary/summary.md`](results/model-audit-summary/summary.md)

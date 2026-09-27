@@ -7,9 +7,11 @@ This narrow configuration-selection task is not the REST VM-sysctl deployment.
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import statistics
 import time
+import urllib.error
 import urllib.request
 
 from controlled_kernel import digest, quantile, write
@@ -59,6 +61,9 @@ def experiment(root, backend, seeds):
                   'input_evidence_ids': [i['id'] for i in context]}
         try:
             raw = backend(SYSTEM, prompt, seed)
+            if isinstance(raw, dict):  # API backends also return provider metadata
+                record['response_meta'] = raw['meta']
+                raw = raw['content']
             record['raw_response'] = raw
             answer = json.loads(raw)
             record['answer'] = validate_answer(answer, allowed, context)
@@ -140,6 +145,88 @@ def heldout(root, records):
     return scored
 
 
+def answer_schema(allowed, ids):
+    cite = {'type': 'string', 'enum': ids} if ids else {'type': 'string'}
+    return {'type': 'object', 'required': ['config', 'cited_ids', 'explanation'],
+            'properties': {'config': {'type': 'string', 'enum': allowed},
+                           'cited_ids': {'type': 'array', 'items': cite, 'maxItems': 6 if ids else 0},
+                           'explanation': {'type': 'string', 'maxLength': 400}}}
+
+
+# OpenAI-compatible chat-completions endpoints and the environment variable holding
+# each key. Keys are read from the environment only and never written to disk.
+PROVIDERS = {
+    'openrouter': ('https://openrouter.ai/api/v1/chat/completions', 'OPENROUTER_API_KEY'),
+    'gemini': ('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', 'GEMINI_API_KEY'),
+    'openai': ('https://api.openai.com/v1/chat/completions', 'CHATGPT_API_KEY'),
+}
+
+
+def api_backend(provider, model, response_format='json_schema', max_tokens=1024,
+                min_interval=6.0, retries=6, opener=urllib.request.urlopen):
+    """Hosted model via an OpenAI-compatible API.
+
+    Unlike local GGUF runs, hosted weights cannot be hashed and providers may change
+    or route a model silently; each call therefore records the provider's reported
+    model, response id, fingerprint and routing. `json_schema` sends the same schema
+    as the local grammar (OpenRouter is told to use only providers that honor it);
+    `json_object` and `none` rely on the prompt, and answers are re-validated either way.
+    """
+    url, key_env = PROVIDERS[provider]
+    key = os.environ.get(key_env)
+    if not key:
+        raise SystemExit(f'{key_env} is not set')
+    last = [0.0]
+
+    def backend(system, prompt, seed):
+        context = json.loads(prompt)
+        payload = {'model': model, 'temperature': 0, 'seed': seed, 'max_tokens': max_tokens,
+                   'messages': [{'role': 'system', 'content': system}, {'role': 'user', 'content': prompt}]}
+        if response_format == 'json_schema':
+            schema = answer_schema(context['allowed_configs'], [e['id'] for e in context['evidence']])
+            payload['response_format'] = {'type': 'json_schema',
+                                          'json_schema': {'name': 'selection', 'strict': True, 'schema': schema}}
+        elif response_format == 'json_object':
+            payload['response_format'] = {'type': 'json_object'}
+        if provider == 'openrouter':
+            payload['provider'] = {'require_parameters': response_format != 'none'}
+        attempts = []
+        for attempt in range(retries+1):
+            time.sleep(max(0.0, last[0]+min_interval-time.monotonic()))
+            last[0] = time.monotonic()
+            request = urllib.request.Request(url, data=json.dumps(payload).encode(),
+                                             headers={'Content-Type': 'application/json',
+                                                      'Authorization': 'Bearer '+key})
+            try:
+                with opener(request, timeout=300) as response:
+                    body = json.load(response)
+                break
+            except urllib.error.HTTPError as exc:
+                attempts.append({'status': exc.code, 'body': exc.read()[:300].decode('utf-8', 'replace')})
+                if exc.code not in (429, 500, 502, 503, 504) or attempt == retries:
+                    raise RuntimeError(f'HTTP {exc.code} after {len(attempts)} attempts: {attempts[-1]["body"]}')
+                time.sleep(min(120, 10*2**attempt))
+        if 'error' in body:
+            raise RuntimeError(f"provider error: {json.dumps(body['error'])[:300]}")
+        choice = body['choices'][0]
+        content = choice['message'].get('content') or ''
+        stripped = content.strip()
+        fenced = stripped.startswith('```') and stripped.endswith('```')
+        if fenced:  # a single surrounding Markdown fence is removed and recorded
+            stripped = stripped.split('\n', 1)[1].rsplit('```', 1)[0]
+        meta = {'reported_model': body.get('model'), 'response_id': body.get('id'),
+                'system_fingerprint': body.get('system_fingerprint'), 'routed_provider': body.get('provider'),
+                'finish_reason': choice.get('finish_reason'), 'usage': body.get('usage'),
+                'fence_stripped': fenced, 'retried_errors': attempts, 'utc_ns': time.time_ns()}
+        return {'content': stripped, 'meta': meta}
+
+    manifest = {'format': 'hosted API (weights not hashable)', 'provider': provider, 'endpoint': url,
+                'requested_model': model, 'response_format': response_format, 'max_tokens': max_tokens,
+                'temperature': 0, 'min_interval_seconds': min_interval, 'key_env': key_env,
+                'sha256': None}
+    return backend, manifest
+
+
 def llamacpp_backend(path, n_ctx, threads):
     from llama_cpp import Llama, __version__ as llama_cpp_version
     model = Llama(model_path=str(path), n_ctx=n_ctx, n_threads=threads, verbose=False)
@@ -150,12 +237,7 @@ def llamacpp_backend(path, n_ctx, threads):
         # `config` to the allowed names and citations to the supplied evidence IDs
         # (still re-checked afterwards). Model-only prompts carry no evidence to cite.
         context = json.loads(prompt)
-        allowed, ids = context['allowed_configs'], [e['id'] for e in context['evidence']]
-        cite = {'type': 'string', 'enum': ids} if ids else {'type': 'string'}
-        schema = {'type': 'object', 'required': ['config', 'cited_ids', 'explanation'],
-                  'properties': {'config': {'type': 'string', 'enum': allowed},
-                                 'cited_ids': {'type': 'array', 'items': cite, 'maxItems': 6 if ids else 0},
-                                 'explanation': {'type': 'string', 'maxLength': 400}}}
+        schema = answer_schema(context['allowed_configs'], [e['id'] for e in context['evidence']])
         model.set_seed(seed)
         out = model.create_chat_completion(
             messages=[{'role': 'system', 'content': system}, {'role': 'user', 'content': prompt}],
@@ -181,13 +263,17 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('root', type=Path)
     p.add_argument('--out', type=Path, required=True)
-    p.add_argument('--backend', choices=['ollama', 'llamacpp'], default='ollama')
+    p.add_argument('--backend', choices=['ollama', 'llamacpp', 'api'], default='ollama')
     p.add_argument('--model', required=True, help='model name recorded in plan.json')
     p.add_argument('--manifest', type=Path, help='ollama: local manifest for the exact installed model')
     p.add_argument('--endpoint', default='http://127.0.0.1:11434')
     p.add_argument('--gguf', type=Path, help='llamacpp: path to the GGUF weights (hashed into the plan)')
     p.add_argument('--n-ctx', type=int, default=8192)
     p.add_argument('--threads', type=int, default=4)
+    p.add_argument('--provider', choices=sorted(PROVIDERS), help='api: hosted provider')
+    p.add_argument('--response-format', default='json_schema', choices=['json_schema', 'json_object', 'none'])
+    p.add_argument('--max-tokens', type=int, default=1024, help='api: completion token limit')
+    p.add_argument('--min-interval', type=float, default=6.0, help='api: seconds between requests')
     p.add_argument('--purpose', default='experiment', choices=['experiment', 'pipeline-check'],
                    help='pipeline-check runs are plumbing tests and must not be reported as results')
     args = p.parse_args()
@@ -198,9 +284,16 @@ def main():
     if args.backend == 'llamacpp' and not args.gguf:
         p.error('--gguf is required for the llamacpp backend')
 
+    if args.backend == 'api' and not args.provider:
+        p.error('--provider is required for the api backend')
+
     if args.backend == 'llamacpp':
         backend, manifest = llamacpp_backend(args.gguf, args.n_ctx, args.threads)
         manifest_sha = manifest['sha256']
+    elif args.backend == 'api':
+        backend, manifest = api_backend(args.provider, args.model, args.response_format,
+                                        args.max_tokens, args.min_interval)
+        manifest_sha = None
     else:
         manifest = json.loads(args.manifest.read_text())
         manifest_sha = digest(args.manifest)
@@ -216,7 +309,7 @@ def main():
     args.out.mkdir(parents=True)
     metadata = {'model': args.model, 'backend': args.backend, 'purpose': args.purpose,
                 'manifest': manifest, 'manifest_sha256': manifest_sha,
-                'endpoint': args.endpoint if args.backend == 'ollama' else None,
+                'endpoint': args.endpoint if args.backend == 'ollama' else manifest.get('endpoint'),
                 'seeds': [4088, 4089, 4090, 4091, 4092],
                 'temperature': 0, 'num_predict': 256, 'source_sha256': digest(__file__),
                 'input_hashes_sha256': digest(args.root/'SHA256SUMS.json'),
