@@ -4,7 +4,7 @@
 The architecture contains telemetry, a graph and trace store, a reasoner, a runtime and an operator console. The REST prototype connects these components, but its runtime is a \emph{dry run}: it stages an in-memory bundle and never writes a kernel setting, routes traffic or demonstrates a kernel rollback.
 
 \paragraph{Evidence and score.}
-The reasoner retrieves typed neighbors and trace text~\cite{Lewis2020RAG}, then requests $k=3$ model samples~\cite{Wang2023SelfConsistency}. For a knob--value pair proposed in $v$ samples, its heuristic score is
+The reasoner retrieves typed neighbors and lexically matched trace text~\cite{Lewis2020RAG}, then requests $k=3$ model samples~\cite{Wang2023SelfConsistency}. For a knob--value pair proposed in $v$ samples, its heuristic score is
 $u=0.7(1-v/k)+0.3(1-w)$, clipped to $[0.02,1]$, where $w$ is the strongest retrieved synergy weight (zero when absent). This is neither predictive entropy nor a calibrated probability. Backend failure must be recorded; repeated copies of a fallback do not constitute independent model votes. The implementation abstains when no configured model produces recommendations. Supplied evidence is recorded as provenance, not certified as a faithful explanation.
 
 The aggregator chooses a modal complete bundle actually present in a model response, rather than splicing independently winning knob values into an unseen combination. Backend failures retain their type and failed samples remain in the score denominator. Responses expose the complete supplied context, prompt hash and raw samples; exceeding the context budget causes abstention instead of truncating evidence. A model name in this record does not by itself establish immutable checkpoint provenance.

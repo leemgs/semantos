@@ -4,6 +4,7 @@ WORKDIR /app
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 COPY app.py /app/app.py
+COPY embedding.py /app/embedding.py
 COPY kb/ /app/kb/
 VOLUME ["/data"]
 EXPOSE 8000

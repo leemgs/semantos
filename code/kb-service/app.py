@@ -8,7 +8,8 @@ Two coupled stores (paper Sec. 4.2):
      strength), an evidence count, and an `updated_at` epoch used for
      gamma-decay so stale co-tuning evidence is down-weighted over time.
   2. A FAISS trace index for retrieval-augmented grounding (RAG) of past
-     (context, action, outcome) tuples.
+     (context, action, outcome) tuples, embedded lexically by embedding.py
+     (token feature hashing; no learned semantic encoder).
 
 No measured graph ablation is claimed. Seeds are empty pending validated evidence.
 """
@@ -32,19 +33,27 @@ NEO4J_PASS = os.environ.get("NEO4J_PASS", "password")
 driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASS))
 
 import faiss  # noqa: E402
+from embedding import DIM, VERSION as EMBED_VERSION, embed  # noqa: E402
 DATA_DIR = Path(os.environ.get("DATA_DIR", "/data"))
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 INDEX_PATH = DATA_DIR / "faiss.index"
 META_PATH = DATA_DIR / "faiss_meta.json"
 SEED_PATH = Path(os.environ.get("SEED_EDGES", "/app/kb/seed_edges.json"))
 
-DIM = 128
+index, meta = None, None
 if INDEX_PATH.exists():
-    index = faiss.read_index(str(INDEX_PATH))
     meta = json.loads(META_PATH.read_text())
-else:
+    if meta.get("embedding") == EMBED_VERSION:
+        index = faiss.read_index(str(INDEX_PATH))
+if index is None:
+    # Vectors from another embedding (or none) are not comparable; re-embed texts.
+    texts = meta["texts"] if meta else []
     index = faiss.IndexFlatIP(DIM)
-    meta = {"ids": [], "texts": []}
+    meta = {"ids": [], "texts": [], "embedding": EMBED_VERSION}
+    for t in texts:
+        index.add(embed(t).reshape(1, -1))
+        meta["ids"].append(int(index.ntotal) - 1)
+        meta["texts"].append(t)
 
 # Typed edge vocabulary and gamma-decay half-life (paper defaults).
 EDGE_TYPES = {"synergizes_with": "SYNERGIZES_WITH",
@@ -230,10 +239,7 @@ def upsert_trace(context: dict = Body(...), action: dict = Body(...),
 
 
 def _embed(text: str) -> np.ndarray:
-    np.random.seed(abs(hash(text)) % (2 ** 32))
-    v = np.random.normal(0, 1, size=(DIM,)).astype("float32")
-    v /= np.linalg.norm(v) + 1e-8
-    return v
+    return embed(text)
 
 
 @app.post("/kb/nn_upsert")

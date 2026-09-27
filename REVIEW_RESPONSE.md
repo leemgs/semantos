@@ -1,3 +1,50 @@
+# 리뷰 반영 점검 — 2026-09-27 (최신)
+
+AAAI-27 Phase 1 결정(Reject)과 OpenReview 리뷰 3건(a8cr: 2 Strong reject, zBDs: 3 Clear
+reject, AI Reviewer)을 원문 PDF에서 다시 추출해 현재 `main`의 논문·코드와 항목별로 대조했다.
+아래 표가 최신 상태이며, 그 아래 2026-09-26 기록은 이력으로 남긴다.
+
+**이번 점검에서 새로 발견·수정한 것:** KB 서비스의 trace 검색이 Python `hash()`로 seed한
+**난수 벡터**를 임베딩으로 써서 유사도 검색이 아니었고, 프로세스가 바뀌면 저장된 벡터와 질의
+벡터가 맞지도 않았다(a8cr가 지적한 "가짜 구현" 유형). `kb-service/embedding.py`의 결정적
+토큰 feature-hashing 임베딩으로 교체하고, 기존 인덱스는 버전이 다르면 재임베딩하며, 테스트
+3개를 추가했다. 논문은 "lexically matched trace text"로 실제 구현과 일치시켰다.
+
+| 리뷰 | 지적 | 현재 상태 (근거) |
+|---|---|---|
+| a8cr | LLaMA-3.1-13B | 해결. 논문·활성 코드에 없음. 실제 사용 모델은 SHA-256이 공개 파일과 일치하는 GGUF 4종과 보고 모델 ID를 기록한 API 모델 6종 |
+| a8cr | sched_wake_affinity | 해결. 거부 테스트(`tests/test_safety.py`)에만 존재 |
+| a8cr | Moser 무관 인용 | 해결. 참고문헌 전부 제목·저자·출처 확인(신규 LLM 참고문헌 8건 포함) |
+| a8cr | 표 수치+Gaussian noise 코드 | 해결. `code/legacy/`에 격리·경고, 빌드/평가 경로에서 미사용. 모든 보고 수치는 원시 로그에서 스크립트로 산출 |
+| a8cr | 설명이 피상적 | 대부분 해결. 점수식·bundle 계약·결정 경로 그림·예시 trace. KB 검색 구현을 실제 유사도 검색으로 교정(이번) |
+| zBDs | 같은 입력의 전통 optimizer 대비 LLM 가치 | **실증 완료(부정적 결과).** 동일 증거로 비-LLM 선택기와 LLM 10종 비교: 개선한 모델 없음, Llama-8B는 오히려 악화. BO/RL 동일 예산 비교는 미실시 |
+| zBDs | 그래프가 전부를 설명할 가능성 | 해결. graph induction이 edge를 내지 않았고, no-graph ablation은 모든 모델에서 선택 불변 |
+| zBDs | 실험 설정 불충분 | 해결. 호스트·커널·사전계획·seed·기간 분할·해시·모델 digest/ID·디코딩 설정 기록 |
+| zBDs | anomaly 정의·순환 논리 | 해결. 사전 deadline 기반 정의, 독립 label과 veto/rollback 분리 |
+| zBDs | unsafe/수락/거부 수 | 해결. 모든 분모와 TP/FP/FN/TN 공개(5/25, 4/24 unsafe 수락) |
+| zBDs | real-world vs synthetic 모순 | 해결. 실측/replay/dry-run 구분, real-world·production 주장 없음 |
+| AI | Theorem 1 조건부 확률 | 해결. 정확한 비용 항등식(q=P(accept|unsafe), r=P(veto|safe))으로 교체 |
+| AI | Proposition 1 거짓 부등식 | 해결. 올바른 rank gate(j/(n+1)≤α)로 교체, drift recovery 주장 철회 |
+| AI | CRC/NCRC 누락 | 해결. 인용 및 차이 기술 |
+| AI | baseline/SOTA/Pareto | 철회. 명시적 control·paired 비교만 제시, 우위/frontier 주장 없음 |
+| AI | KB-test 누출 | 해결(범위 한정). 기간 단위 역할 분리와 lineage 검증. 단일 호스트·단일 workload family |
+| AI | 다중 knob vs 단일 API | 해결(dry-run). bundle 단위 검증·veto·stage. 실제 VM transaction은 미구현 |
+| AI | 완전한 decision trace | 해결. 선택 artifact·점수·관측 ID와 적용/원복 기록, 모델 prompt/응답 전부 저장 |
+| AI | 설명 faithfulness(ContextCite식 삭제) | **실증 완료.** 사전 계획한 인용/비인용 삭제를 10개 모델에 실행. Phi-4만 인용 특이적 반응(그러나 남은 증거와 반대 선택), 다수는 추정 불가 또는 무변화. 수치 주장 수동 감사: 로컬 16/28, API 25/69 오류·과장 |
+| AI | fast/slow path 통합 | 철회+그림. 94%/6% 수치 철회, 실제 동기 경로 그림 |
+| AI | causal/unconditional safety | 해결. empirical interaction, 가정하 위험 제어로 표현 |
+| AI | checkpoint provenance | 해결. 로컬 가중치 해시, API는 보고 모델·라우팅 제공자 기록(재현성 한계 명시) |
+| AI | OS-R1 분류, τ 방향, 이질적 ms 집계, delay 상태 | 해결. 비교표 삭제·TuneAgent로 정확히 서술, α sweep과 혼동행렬, workload/period 분리, delay 미주장 |
+
+**남은 한계(논문에 명시됨):** 단일 호스트·단일 periodic workload·4개 설정의 작은 과제,
+BO/RL 동일 예산 비교 없음, API 모델은 비트 단위 재현 불가, 실제 VM-sysctl 배포·트래픽 격리 없음.
+OpenReview의 PDF·초록은 이 저장소 수정으로 갱신되지 않으며, 재제출은 새 원고로 해야 한다.
+
+검증: 테스트 37개 통과, 논문 본문 7쪽 이내(참고문헌 8쪽부터), 제출용 PDF 링크 0개,
+undefined/overfull 경고 없음.
+
+---
+
 # 리뷰 반영 및 추가 실험 — 2026-09-26
 
 이 문서는 d471d40 이후 작업공간 수정본을 설명한다. 이전 작업 기록은
