@@ -1,0 +1,18 @@
+{
+  "model": "qwen/qwen3-235b-a22b-2507",
+  "audit": "model-audit-api-qwen3-235b",
+  "seed": 4088,
+  "weights_sha256": null,
+  "source_sha256": "5e29940e8d77603b64baa3eeeb64489c6ff7255c31494a3d54a8cb704aedf40c",
+  "status": "exploratory post hoc probe; not part of the preregistered audit",
+  "full_choice": "s50000_aall",
+  "cited": [
+    "retrieval-3-0-s50000_aall",
+    "retrieval-3-1-s50000_aall",
+    "retrieval-3-2-s50000_aall",
+    "retrieval-3-3-s50000_aall",
+    "retrieval-3-4-s50000_aall",
+    "retrieval-3-5-s50000_aall"
+  ],
+  "started_utc_ns": 1790490981664851931
+}

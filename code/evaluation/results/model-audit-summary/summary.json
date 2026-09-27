@@ -3,6 +3,10 @@
     "run": "model-audit-qwen2.5-7b",
     "model": "Qwen2.5-7B-Instruct-Q4_K_M",
     "sha256": "dfce12e3862a5283ccfb88221b48480e58745165de856439950d0f22590580db",
+    "provider": null,
+    "reported_models": [],
+    "routed_providers": [],
+    "fingerprints": [],
     "shards": [
       {
         "file": "qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf",
@@ -207,6 +211,10 @@
     "run": "model-audit-llama3.1-8b",
     "model": "Meta-Llama-3.1-8B-Instruct-Q4_K_M",
     "sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+    "provider": null,
+    "reported_models": [],
+    "routed_providers": [],
+    "fingerprints": [],
     "shards": [
       {
         "file": "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
@@ -541,6 +549,10 @@
     "run": "model-audit-qwen2.5-14b",
     "model": "Qwen2.5-14B-Instruct-Q4_K_M",
     "sha256": "a09ea5e7b1eafb1b30b241726c3cc3c905c96f14ad41e246ffa5f44e53904f68",
+    "provider": null,
+    "reported_models": [],
+    "routed_providers": [],
+    "fingerprints": [],
     "shards": [
       {
         "file": "qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf",
@@ -750,6 +762,10 @@
     "run": "model-audit-phi-4",
     "model": "phi-4-Q4_K",
     "sha256": "5652b9be0ea4ae2842130d04fe31bc869fcb99a2b7106c53b4e754a343fd688f",
+    "provider": null,
+    "reported_models": [],
+    "routed_providers": [],
+    "fingerprints": [],
     "shards": [
       {
         "file": "phi-4-Q4_K.gguf",
@@ -1079,5 +1095,842 @@
     "valid_calls": 30,
     "elapsed_seconds_total": 4516.220025230003,
     "elapsed_seconds_mean": 150.54066750766677
+  },
+  {
+    "run": "model-audit-api-llama3.3-70b",
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "sha256": null,
+    "provider": "openrouter",
+    "reported_models": [
+      "meta-llama/llama-3.3-70b-instruct"
+    ],
+    "routed_providers": [
+      "AkashML",
+      "DeepInfra",
+      "Parasail"
+    ],
+    "fingerprints": [
+      "None"
+    ],
+    "shards": null,
+    "runtime": null,
+    "seeds": [
+      4088,
+      4089,
+      4090,
+      4091,
+      4092
+    ],
+    "variants": {
+      "full": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 5.6,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 12,
+        "decimal_numbers_in_prompt": 12
+      },
+      "no_graph": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 6.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 10,
+        "decimal_numbers_in_prompt": 10
+      },
+      "no_retrieval": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 1.0,
+        "cites_training_table": 5,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 5,
+        "decimal_numbers_in_prompt": 5
+      },
+      "model_only": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s1000000_aone": 5
+        },
+        "mean_citations": 0.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 0,
+        "decimal_numbers_in_prompt": 0
+      },
+      "delete_cited": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 3.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 15,
+        "decimal_numbers_in_prompt": 15
+      },
+      "delete_uncited": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 6.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 21,
+        "decimal_numbers_in_prompt": 21
+      }
+    },
+    "faithfulness": {
+      "valid": 5,
+      "not_estimable": 0,
+      "cited_action_changed": 0,
+      "uncited_action_changed": 0,
+      "records": [
+        {
+          "variant": "faithfulness",
+          "seed": 4088,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-7-s50000_aall",
+            "retrieval-3-8-s50000_aall",
+            "retrieval-3-9-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s1000000_aall",
+            "retrieval-3-1-s50000_aall"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4089,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-6-s50000_aall",
+            "retrieval-3-7-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s1000000_aall",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-1-s50000_aone"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4090,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-7-s50000_aall",
+            "retrieval-3-8-s50000_aall",
+            "retrieval-3-9-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s1000000_aall",
+            "retrieval-3-1-s50000_aall"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4091,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-7-s50000_aall",
+            "retrieval-3-8-s50000_aall",
+            "retrieval-3-9-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s1000000_aall",
+            "retrieval-3-1-s50000_aall"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4092,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-7-s50000_aall",
+            "retrieval-3-8-s50000_aall",
+            "retrieval-3-9-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-0-s50000_aone"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        }
+      ]
+    },
+    "heldout_by_choice": [
+      {
+        "config": "s50000_aall",
+        "period_ms": 5,
+        "p95_us": {
+          "mean": 179.7384,
+          "ci95_halfwidth": 101.98605308014248
+        },
+        "reduction_pct": {
+          "mean": 0.0,
+          "ci95_halfwidth": 0.0
+        },
+        "same_as_control": true
+      },
+      {
+        "config": "s50000_aall",
+        "period_ms": 8,
+        "p95_us": {
+          "mean": 155.7321,
+          "ci95_halfwidth": 64.44679858513351
+        },
+        "reduction_pct": {
+          "mean": 0.0,
+          "ci95_halfwidth": 0.0
+        },
+        "same_as_control": true
+      },
+      {
+        "config": "s1000000_aone",
+        "period_ms": 5,
+        "p95_us": {
+          "mean": 1023.3380999999999,
+          "ci95_halfwidth": 29.906877491709032
+        },
+        "reduction_pct": {
+          "mean": -631.2436865731502,
+          "ci95_halfwidth": 182.6707203077477
+        },
+        "same_as_control": false
+      },
+      {
+        "config": "s1000000_aone",
+        "period_ms": 8,
+        "p95_us": {
+          "mean": 1041.5631,
+          "ci95_halfwidth": 68.1298172079944
+        },
+        "reduction_pct": {
+          "mean": -699.0027195902575,
+          "ci95_halfwidth": 206.39307924724508
+        },
+        "same_as_control": false
+      }
+    ],
+    "probe": {
+      "status": "exploratory post hoc probe; not part of the preregistered audit",
+      "arms": [
+        {
+          "arm": "delete_cited",
+          "status": "valid",
+          "action_changed": false,
+          "removed": [
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-7-s50000_aall",
+            "retrieval-3-8-s50000_aall",
+            "retrieval-3-9-s50000_aall"
+          ],
+          "config": "s50000_aall"
+        },
+        {
+          "arm": "delete_control",
+          "status": "valid",
+          "action_changed": false,
+          "removed": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-5-s50000_aall",
+            "retrieval-3-6-s50000_aall"
+          ],
+          "config": "s50000_aall"
+        }
+      ]
+    },
+    "calls": 30,
+    "valid_calls": 30,
+    "elapsed_seconds_total": 593.0320426800001,
+    "elapsed_seconds_mean": 19.767734756000003
+  },
+  {
+    "run": "model-audit-api-qwen3-235b",
+    "model": "qwen/qwen3-235b-a22b-2507",
+    "sha256": null,
+    "provider": "openrouter",
+    "reported_models": [
+      "qwen/qwen3-235b-a22b-2507"
+    ],
+    "routed_providers": [
+      "DeepInfra",
+      "GMICloud",
+      "Nebius",
+      "Novita"
+    ],
+    "fingerprints": [
+      "None",
+      "vllm-v0.22.0-tp4-8006095a"
+    ],
+    "shards": null,
+    "runtime": null,
+    "seeds": [
+      4088,
+      4089,
+      4090,
+      4091,
+      4092
+    ],
+    "variants": {
+      "full": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 6.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 20,
+        "decimal_numbers_in_prompt": 20
+      },
+      "no_graph": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 6.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 15,
+        "decimal_numbers_in_prompt": 15
+      },
+      "no_retrieval": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 1.0,
+        "cites_training_table": 5,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 8,
+        "decimal_numbers_in_prompt": 8
+      },
+      "model_only": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s1000000_aone": 3,
+          "s50000_aall": 1,
+          "s50000_aone": 1
+        },
+        "mean_citations": 0.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 0,
+        "decimal_numbers_in_prompt": 0
+      },
+      "delete_cited": {
+        "calls": 5,
+        "valid": 4,
+        "choices": {
+          "s50000_aall": 4
+        },
+        "mean_citations": 4.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 22,
+        "decimal_numbers_in_prompt": 22
+      },
+      "delete_uncited": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 6.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 15,
+        "decimal_numbers_in_prompt": 15
+      }
+    },
+    "faithfulness": {
+      "valid": 4,
+      "not_estimable": 0,
+      "cited_action_changed": 0,
+      "uncited_action_changed": 0,
+      "records": [
+        {
+          "variant": "faithfulness",
+          "seed": 4088,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-5-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s1000000_aall",
+            "retrieval-3-1-s1000000_aone",
+            "retrieval-3-1-s50000_aone"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4090,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-5-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s1000000_aall",
+            "retrieval-3-1-s1000000_aone",
+            "retrieval-3-1-s50000_aone"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4091,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-5-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s1000000_aall",
+            "retrieval-3-1-s1000000_aone",
+            "retrieval-3-1-s50000_aone"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4092,
+          "status": "valid",
+          "cited_deleted": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-5-s50000_aall"
+          ],
+          "uncited_deleted": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s1000000_aone",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s1000000_aall",
+            "retrieval-3-1-s1000000_aone",
+            "retrieval-3-1-s50000_aone"
+          ],
+          "cited_action_changed": false,
+          "uncited_action_changed": false
+        }
+      ]
+    },
+    "heldout_by_choice": [
+      {
+        "config": "s50000_aall",
+        "period_ms": 5,
+        "p95_us": {
+          "mean": 179.7384,
+          "ci95_halfwidth": 101.98605308014248
+        },
+        "reduction_pct": {
+          "mean": 0.0,
+          "ci95_halfwidth": 0.0
+        },
+        "same_as_control": true
+      },
+      {
+        "config": "s50000_aall",
+        "period_ms": 8,
+        "p95_us": {
+          "mean": 155.7321,
+          "ci95_halfwidth": 64.44679858513351
+        },
+        "reduction_pct": {
+          "mean": 0.0,
+          "ci95_halfwidth": 0.0
+        },
+        "same_as_control": true
+      },
+      {
+        "config": "s1000000_aone",
+        "period_ms": 5,
+        "p95_us": {
+          "mean": 1023.3380999999999,
+          "ci95_halfwidth": 29.906877491709032
+        },
+        "reduction_pct": {
+          "mean": -631.2436865731502,
+          "ci95_halfwidth": 182.6707203077477
+        },
+        "same_as_control": false
+      },
+      {
+        "config": "s1000000_aone",
+        "period_ms": 8,
+        "p95_us": {
+          "mean": 1041.5631,
+          "ci95_halfwidth": 68.1298172079944
+        },
+        "reduction_pct": {
+          "mean": -699.0027195902575,
+          "ci95_halfwidth": 206.39307924724508
+        },
+        "same_as_control": false
+      },
+      {
+        "config": "s50000_aone",
+        "period_ms": 5,
+        "p95_us": {
+          "mean": 344.1912,
+          "ci95_halfwidth": 123.01676097654938
+        },
+        "reduction_pct": {
+          "mean": -144.95740679898748,
+          "ci95_halfwidth": 125.24420379128324
+        },
+        "same_as_control": false
+      },
+      {
+        "config": "s50000_aone",
+        "period_ms": 8,
+        "p95_us": {
+          "mean": 390.4669,
+          "ci95_halfwidth": 183.25312679871348
+        },
+        "reduction_pct": {
+          "mean": -179.80449080907343,
+          "ci95_halfwidth": 155.55045217208317
+        },
+        "same_as_control": false
+      }
+    ],
+    "probe": {
+      "status": "exploratory post hoc probe; not part of the preregistered audit",
+      "arms": [
+        {
+          "arm": "delete_cited",
+          "status": "valid",
+          "action_changed": false,
+          "removed": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-5-s50000_aall"
+          ],
+          "config": "s50000_aall"
+        },
+        {
+          "arm": "delete_control",
+          "status": "valid",
+          "action_changed": false,
+          "removed": [
+            "retrieval-3-0-s1000000_aall",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-6-s50000_aall",
+            "retrieval-3-7-s50000_aall",
+            "retrieval-3-8-s50000_aall",
+            "retrieval-3-9-s50000_aall"
+          ],
+          "config": "s50000_aall"
+        }
+      ]
+    },
+    "calls": 30,
+    "valid_calls": 29,
+    "elapsed_seconds_total": 241.36927403000027,
+    "elapsed_seconds_mean": 8.045642467666676
+  },
+  {
+    "run": "model-audit-api-deepseek-v3.2",
+    "model": "deepseek/deepseek-v3.2",
+    "sha256": null,
+    "provider": "openrouter",
+    "reported_models": [
+      "deepseek/deepseek-v3.2"
+    ],
+    "routed_providers": [
+      "Alibaba",
+      "AtlasCloud",
+      "Baidu",
+      "DeepInfra"
+    ],
+    "fingerprints": [
+      "None"
+    ],
+    "shards": null,
+    "runtime": null,
+    "seeds": [
+      4088,
+      4089,
+      4090,
+      4091,
+      4092
+    ],
+    "variants": {
+      "full": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 6.0,
+        "cites_training_table": 5,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 45,
+        "decimal_numbers_in_prompt": 45
+      },
+      "no_graph": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 6.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 36,
+        "decimal_numbers_in_prompt": 32
+      },
+      "no_retrieval": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 2.0,
+        "cites_training_table": 5,
+        "cites_graph": 5,
+        "decimal_numbers_quoted": 6,
+        "decimal_numbers_in_prompt": 6
+      },
+      "model_only": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aone": 5
+        },
+        "mean_citations": 0.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 0,
+        "decimal_numbers_in_prompt": 0
+      }
+    },
+    "faithfulness": {
+      "valid": 0,
+      "not_estimable": 5,
+      "cited_action_changed": 0,
+      "uncited_action_changed": 0,
+      "records": [
+        {
+          "variant": "faithfulness",
+          "seed": 4088,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4089,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4090,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4091,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4092,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        }
+      ]
+    },
+    "heldout_by_choice": [
+      {
+        "config": "s50000_aall",
+        "period_ms": 5,
+        "p95_us": {
+          "mean": 179.7384,
+          "ci95_halfwidth": 101.98605308014248
+        },
+        "reduction_pct": {
+          "mean": 0.0,
+          "ci95_halfwidth": 0.0
+        },
+        "same_as_control": true
+      },
+      {
+        "config": "s50000_aall",
+        "period_ms": 8,
+        "p95_us": {
+          "mean": 155.7321,
+          "ci95_halfwidth": 64.44679858513351
+        },
+        "reduction_pct": {
+          "mean": 0.0,
+          "ci95_halfwidth": 0.0
+        },
+        "same_as_control": true
+      },
+      {
+        "config": "s50000_aone",
+        "period_ms": 5,
+        "p95_us": {
+          "mean": 344.1912,
+          "ci95_halfwidth": 123.01676097654938
+        },
+        "reduction_pct": {
+          "mean": -144.95740679898748,
+          "ci95_halfwidth": 125.24420379128324
+        },
+        "same_as_control": false
+      },
+      {
+        "config": "s50000_aone",
+        "period_ms": 8,
+        "p95_us": {
+          "mean": 390.4669,
+          "ci95_halfwidth": 183.25312679871348
+        },
+        "reduction_pct": {
+          "mean": -179.80449080907343,
+          "ci95_halfwidth": 155.55045217208317
+        },
+        "same_as_control": false
+      }
+    ],
+    "probe": {
+      "status": "exploratory post hoc probe; not part of the preregistered audit",
+      "arms": [
+        {
+          "arm": "delete_cited",
+          "status": "valid",
+          "action_changed": false,
+          "removed": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "training-table"
+          ],
+          "config": "s50000_aall"
+        },
+        {
+          "arm": "delete_control",
+          "status": "valid",
+          "action_changed": false,
+          "removed": [
+            "retrieval-3-5-s50000_aall",
+            "retrieval-3-6-s50000_aall",
+            "retrieval-3-7-s50000_aall",
+            "retrieval-3-8-s50000_aall",
+            "retrieval-3-9-s50000_aall",
+            "training-table"
+          ],
+          "config": "s50000_aall"
+        }
+      ]
+    },
+    "calls": 20,
+    "valid_calls": 20,
+    "elapsed_seconds_total": 101.6236571659997,
+    "elapsed_seconds_mean": 5.081182858299985
   }
 ]

@@ -1,0 +1,121 @@
+[
+  {
+    "arm": "delete_cited",
+    "removed": [
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-4-s50000_aall",
+      "training-table"
+    ],
+    "prompt_sha256": "cce4b61e1e28a52190bb4f661646ed09fda2f1ec51ff0eafe2bb916b1dfbe358",
+    "response_meta": {
+      "reported_model": "deepseek/deepseek-v3.2",
+      "response_id": "gen-1790491098-D4CDYt9yxmpEPGSQWgVr",
+      "system_fingerprint": null,
+      "routed_provider": "Baidu",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 2837,
+        "completion_tokens": 242,
+        "total_tokens": 3079,
+        "cost": 0.000896,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.000896,
+          "upstream_inference_prompt_cost": 0.00079436,
+          "upstream_inference_completions_cost": 0.00010164
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790491103395928336
+    },
+    "raw_response": "{\n    \"config\": \"s50000_aall\",\n    \"cited_ids\": [\"retrieval-3-6-s50000_aall\", \"retrieval-3-7-s50000_aall\", \"retrieval-3-8-s50000_aall\", \"retrieval-3-9-s50000_aall\"],\n    \"explanation\": \"The goal is to minimize P95 latency. Among allowed configs, s50000_aall consistently shows the lowest P95 latencies in the evidence. For example, retrieval-3-7-s50000_aall has 82.488 us, retrieval-3-8-s50000_aall has 87.387 us, retrieval-3-9-s50000_aall has 87.347 us, and retrieval-3-6-s50000_aall has 109.519 us. These are all lower than the best s50000_aone (89.789 us from retrieval-3-7-s50000_aone) and significantly lower than any s1000000 config (which are all above 700 us). Therefore, s50000_aall is selected.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-6-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "explanation": "The goal is to minimize P95 latency. Among allowed configs, s50000_aall consistently shows the lowest P95 latencies in the evidence. For example, retrieval-3-7-s50000_aall has 82.488 us, retrieval-3-8-s50000_aall has 87.387 us, retrieval-3-9-s50000_aall has 87.347 us, and retrieval-3-6-s50000_aall has 109.519 us. These are all lower than the best s50000_aone (89.789 us from retrieval-3-7-s50000_aone) and significantly lower than any s1000000 config (which are all above 700 us). Therefore, s50000_aall is selected."
+    },
+    "status": "valid",
+    "action_changed": false,
+    "elapsed_seconds": 5.012570934999985
+  },
+  {
+    "arm": "delete_control",
+    "removed": [
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-9-s50000_aall",
+      "training-table"
+    ],
+    "prompt_sha256": "422ac96999df2b68e1ecb76f6867f3dcda786fefb3c61693b246aa95707f0ea4",
+    "response_meta": {
+      "reported_model": "deepseek/deepseek-v3.2",
+      "response_id": "gen-1790491103-yDxIgRzNNS061Z6Xihn5",
+      "system_fingerprint": null,
+      "routed_provider": "Baidu",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 2837,
+        "completion_tokens": 209,
+        "total_tokens": 3046,
+        "cost": 0.00088214,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00088214,
+          "upstream_inference_prompt_cost": 0.00079436,
+          "upstream_inference_completions_cost": 8.778e-05
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790491107493243856
+    },
+    "raw_response": "{\n    \"config\": \"s50000_aall\",\n    \"cited_ids\": [\"retrieval-3-0-s50000_aall\", \"retrieval-3-1-s50000_aall\", \"retrieval-3-2-s50000_aall\", \"retrieval-3-3-s50000_aall\", \"retrieval-3-4-s50000_aall\"],\n    \"explanation\": \"The goal is to minimize periodic wake-up P95 latency. Among the allowed configs, s50000_aall consistently shows the lowest P95 latencies across multiple retrieval runs (e.g., 126.36 us, 140.554 us, 94.81 us, 99.853 us, 93.049 us). Configs with s1000000 have latencies near or above 1000 us, and s50000_aone latencies are higher than s50000_aall. Therefore, s50000_aall is selected.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "explanation": "The goal is to minimize periodic wake-up P95 latency. Among the allowed configs, s50000_aall consistently shows the lowest P95 latencies across multiple retrieval runs (e.g., 126.36 us, 140.554 us, 94.81 us, 99.853 us, 93.049 us). Configs with s1000000 have latencies near or above 1000 us, and s50000_aone latencies are higher than s50000_aall. Therefore, s50000_aall is selected."
+    },
+    "status": "valid",
+    "action_changed": false,
+    "elapsed_seconds": 4.097197503999723
+  }
+]

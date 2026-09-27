@@ -1,0 +1,962 @@
+[
+  {
+    "variant": "full",
+    "seed": 4088,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "full",
+    "seed": 4088,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4088,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4088,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4088,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4088,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "model_only",
+    "seed": 4088,
+    "period_ms": 5,
+    "config": "s1000000_aone",
+    "same_as_control": false,
+    "p95_us": {
+      "mean": 1023.3380999999999,
+      "ci95_halfwidth": 29.906877491709032
+    },
+    "reduction_pct": {
+      "mean": -631.2436865731502,
+      "ci95_halfwidth": 182.6707203077477
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "model_only",
+    "seed": 4088,
+    "period_ms": 8,
+    "config": "s1000000_aone",
+    "same_as_control": false,
+    "p95_us": {
+      "mean": 1041.5631,
+      "ci95_halfwidth": 68.1298172079944
+    },
+    "reduction_pct": {
+      "mean": -699.0027195902575,
+      "ci95_halfwidth": 206.39307924724508
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_cited",
+    "seed": 4088,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_cited",
+    "seed": 4088,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_uncited",
+    "seed": 4088,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_uncited",
+    "seed": 4088,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "full",
+    "seed": 4089,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "full",
+    "seed": 4089,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4089,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4089,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4089,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4089,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "model_only",
+    "seed": 4089,
+    "period_ms": 5,
+    "config": "s1000000_aone",
+    "same_as_control": false,
+    "p95_us": {
+      "mean": 1023.3380999999999,
+      "ci95_halfwidth": 29.906877491709032
+    },
+    "reduction_pct": {
+      "mean": -631.2436865731502,
+      "ci95_halfwidth": 182.6707203077477
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "model_only",
+    "seed": 4089,
+    "period_ms": 8,
+    "config": "s1000000_aone",
+    "same_as_control": false,
+    "p95_us": {
+      "mean": 1041.5631,
+      "ci95_halfwidth": 68.1298172079944
+    },
+    "reduction_pct": {
+      "mean": -699.0027195902575,
+      "ci95_halfwidth": 206.39307924724508
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_cited",
+    "seed": 4089,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_cited",
+    "seed": 4089,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_uncited",
+    "seed": 4089,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_uncited",
+    "seed": 4089,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "full",
+    "seed": 4090,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "full",
+    "seed": 4090,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4090,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4090,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4090,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4090,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "model_only",
+    "seed": 4090,
+    "period_ms": 5,
+    "config": "s1000000_aone",
+    "same_as_control": false,
+    "p95_us": {
+      "mean": 1023.3380999999999,
+      "ci95_halfwidth": 29.906877491709032
+    },
+    "reduction_pct": {
+      "mean": -631.2436865731502,
+      "ci95_halfwidth": 182.6707203077477
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "model_only",
+    "seed": 4090,
+    "period_ms": 8,
+    "config": "s1000000_aone",
+    "same_as_control": false,
+    "p95_us": {
+      "mean": 1041.5631,
+      "ci95_halfwidth": 68.1298172079944
+    },
+    "reduction_pct": {
+      "mean": -699.0027195902575,
+      "ci95_halfwidth": 206.39307924724508
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_cited",
+    "seed": 4090,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_cited",
+    "seed": 4090,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_uncited",
+    "seed": 4090,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_uncited",
+    "seed": 4090,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "full",
+    "seed": 4091,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "full",
+    "seed": 4091,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4091,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4091,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4091,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4091,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "model_only",
+    "seed": 4091,
+    "period_ms": 5,
+    "config": "s1000000_aone",
+    "same_as_control": false,
+    "p95_us": {
+      "mean": 1023.3380999999999,
+      "ci95_halfwidth": 29.906877491709032
+    },
+    "reduction_pct": {
+      "mean": -631.2436865731502,
+      "ci95_halfwidth": 182.6707203077477
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "model_only",
+    "seed": 4091,
+    "period_ms": 8,
+    "config": "s1000000_aone",
+    "same_as_control": false,
+    "p95_us": {
+      "mean": 1041.5631,
+      "ci95_halfwidth": 68.1298172079944
+    },
+    "reduction_pct": {
+      "mean": -699.0027195902575,
+      "ci95_halfwidth": 206.39307924724508
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_cited",
+    "seed": 4091,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_cited",
+    "seed": 4091,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_uncited",
+    "seed": 4091,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_uncited",
+    "seed": 4091,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "full",
+    "seed": 4092,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "full",
+    "seed": 4092,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4092,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4092,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4092,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4092,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "model_only",
+    "seed": 4092,
+    "period_ms": 5,
+    "config": "s1000000_aone",
+    "same_as_control": false,
+    "p95_us": {
+      "mean": 1023.3380999999999,
+      "ci95_halfwidth": 29.906877491709032
+    },
+    "reduction_pct": {
+      "mean": -631.2436865731502,
+      "ci95_halfwidth": 182.6707203077477
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "model_only",
+    "seed": 4092,
+    "period_ms": 8,
+    "config": "s1000000_aone",
+    "same_as_control": false,
+    "p95_us": {
+      "mean": 1041.5631,
+      "ci95_halfwidth": 68.1298172079944
+    },
+    "reduction_pct": {
+      "mean": -699.0027195902575,
+      "ci95_halfwidth": 206.39307924724508
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_cited",
+    "seed": 4092,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_cited",
+    "seed": 4092,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_uncited",
+    "seed": 4092,
+    "period_ms": 5,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 179.7384,
+      "ci95_halfwidth": 101.98605308014248
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  },
+  {
+    "variant": "delete_uncited",
+    "seed": 4092,
+    "period_ms": 8,
+    "config": "s50000_aall",
+    "same_as_control": true,
+    "p95_us": {
+      "mean": 155.7321,
+      "ci95_halfwidth": 64.44679858513351
+    },
+    "reduction_pct": {
+      "mean": 0.0,
+      "ci95_halfwidth": 0.0
+    },
+    "scope": "paired offline replay on held-out grid, same rule as the non-LLM selectors"
+  }
+]

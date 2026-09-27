@@ -60,7 +60,29 @@
         150.643
       ]
     },
-    "unit": "all latencies are microseconds"
+    "unit": "all latencies are microseconds",
+    "retrieval_min_max_mean": {
+      "s50000_aall": [
+        82.488,
+        183.217,
+        110.458
+      ],
+      "s50000_aone": [
+        85.033,
+        571.84,
+        227.446
+      ],
+      "s1000000_aall": [
+        748.404,
+        1023.152,
+        953.054
+      ],
+      "s1000000_aone": [
+        817.997,
+        1419.669,
+        1013.992
+      ]
+    }
   },
   "claims": [
     {
@@ -258,6 +280,196 @@
       "claim": "these are significantly lower than those of other configurations",
       "verdict": "overstated",
       "check": "remaining s50000_aone runs 97.5-254.5 overlap 126.36-183.217"
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "claim": "values 94.81, 82.488, 87.387, 87.347 for the cited s50000_aall runs",
+      "verdict": "correct",
+      "check": "runs 2, 7, 8, 9"
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "claim": "s50000_aall has the lowest average P95 across retrieval runs",
+      "verdict": "correct",
+      "check": "110.5 versus 227.4, 953.1, 1014.0"
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "claim": "s50000_aall values range from 82.488 to 140.554",
+      "verdict": "wrong",
+      "check": "cited runs span 82.488-126.36; all runs 82.488-183.217"
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "claim": "s50000_aall has the lowest average P95",
+      "verdict": "correct",
+      "check": "110.5 is lowest"
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "claim": "s50000_aall values range from 82.488 to 183.217",
+      "verdict": "correct",
+      "check": "minimum and maximum of all s50000_aall runs"
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "claim": "cited s50000_aall values range from 82.488 to 126.36",
+      "verdict": "wrong",
+      "check": "the six cited runs span 82.488-99.853"
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "claim": "s50000_aall has the lowest average P95",
+      "verdict": "correct",
+      "check": "110.5 is lowest"
+    },
+    {
+      "model": "Qwen3-235B",
+      "variant": "full",
+      "claim": "s50000_aall runs include 126.36, 140.554, 94.81; highest 183.217",
+      "verdict": "correct",
+      "check": "runs 0-2 and maximum"
+    },
+    {
+      "model": "Qwen3-235B",
+      "variant": "full",
+      "claim": "all other configurations exhibit significantly higher P95",
+      "verdict": "overstated",
+      "check": "s50000_aone runs 85.0-97.5 are below several s50000_aall runs"
+    },
+    {
+      "model": "Qwen3-235B",
+      "variant": "full",
+      "claim": "s50000_aall runs include 126.36, 140.554, 94.81; highest 183.217",
+      "verdict": "correct",
+      "check": "runs 0-2 and maximum"
+    },
+    {
+      "model": "Qwen3-235B",
+      "variant": "full",
+      "claim": "all other configurations exhibit significantly higher P95",
+      "verdict": "overstated",
+      "check": "s50000_aone runs 85.0-97.5 are below several s50000_aall runs"
+    },
+    {
+      "model": "Qwen3-235B",
+      "variant": "full",
+      "claim": "s50000_aall runs include 126.36, 140.554, 94.81; highest 183.217",
+      "verdict": "correct",
+      "check": "runs 0-2 and maximum"
+    },
+    {
+      "model": "Qwen3-235B",
+      "variant": "full",
+      "claim": "all other configurations exhibit significantly higher P95",
+      "verdict": "overstated",
+      "check": "s50000_aone runs 85.0-97.5 are below several s50000_aall runs"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "s50000_aall runs 126.36, 140.554, 94.81, 99.853, 93.049",
+      "verdict": "correct",
+      "check": "runs 0-4"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "s50000_aone often higher, e.g. 571.84, 272.927",
+      "verdict": "correct",
+      "check": "runs 0-1"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "both s1000000 configurations consistently above 800 us",
+      "verdict": "wrong",
+      "check": "s1000000_aall minimum is 748.404"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "training table: s50000_aall lowest, 132.9413 us",
+      "verdict": "correct",
+      "check": "matches the table"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "s50000_aall runs range 82.488-183.217 us",
+      "verdict": "correct",
+      "check": "minimum and maximum"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "s50000_aall consistently lower than any s50000_aone run (85.033-571.84)",
+      "verdict": "wrong",
+      "check": "ranges overlap: 85.033 < 183.217"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "s1000000 configurations range 748.404-1419.669 us",
+      "verdict": "correct",
+      "check": "minimum and maximum"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "lists all ten s50000_aall values",
+      "verdict": "correct",
+      "check": "runs 0-9"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "maximum 183.217 is lower than the lowest P95 of any other config",
+      "verdict": "wrong",
+      "check": "s50000_aone minimum is 85.033"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "training table: s50000_aall lowest, 132.9413 us",
+      "verdict": "correct",
+      "check": "matches the table"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "s50000_aall runs 126.36, 140.554, 94.81, 99.853, 93.049",
+      "verdict": "correct",
+      "check": "runs 0-4"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "other configs, especially s1000000, typically exceed 800 us",
+      "verdict": "correct",
+      "check": "19 of 20 s1000000 runs exceed 800 us"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "ranges for all four configurations",
+      "verdict": "correct",
+      "check": "all minima and maxima match"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "s50000_aall consistently lower than any s50000_aone value",
+      "verdict": "wrong",
+      "check": "ranges overlap: 85.033 < 183.217"
     }
-  ]
+  ],
+  "hosted_scope": "Hosted models (Llama-3.3-70B, Qwen3-235B-A22B-2507, DeepSeek-V3.2 via OpenRouter) returned different text across seeds; for them only the distinct full-context explanations are audited (4, 3 and 5), with the same labels."
 }

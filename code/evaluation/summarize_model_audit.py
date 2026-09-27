@@ -120,38 +120,46 @@ def markdown(summaries):
     return '\n'.join(out) + '\n'
 
 
+SHORT = {'Qwen2.5-7B-Instruct-Q4_K_M': 'Qwen-7B', 'Meta-Llama-3.1-8B-Instruct-Q4_K_M': 'Llama-8B',
+         'Qwen2.5-14B-Instruct-Q4_K_M': 'Qwen-14B', 'phi-4-Q4_K': 'Phi-4',
+         'meta-llama/llama-3.3-70b-instruct': 'Llama-70B', 'qwen/qwen3-235b-a22b-2507': 'Qwen3-235B',
+         'deepseek/deepseek-v3.2': 'DeepSeek-V3.2'}
+CODE = {'s50000_aall': 'ctrl', 's50000_aone': '50/1', 's1000000_aall': '1m/all', 's1000000_aone': '1m/1'}
+
+
 def latex(summaries):
-    """Compact table: per model, contexts grouped by their (seed-invariant) choice."""
-    short = {'Qwen2.5-7B-Instruct-Q4_K_M': 'Qwen-7B', 'Meta-Llama-3.1-8B-Instruct-Q4_K_M': 'Llama-8B',
-             'Qwen2.5-14B-Instruct-Q4_K_M': 'Qwen-14B', 'phi-4-Q4_K': 'Phi-4'}
-    abbrev = {'full': 'full', 'no_graph': 'no graph', 'no_retrieval': 'no retr.', 'model_only': 'none',
-              'delete_cited': 'del.\\ cited', 'delete_uncited': 'del.\\ unc.'}
-    rows = []
+    """One row per model: choice with evidence (full, no graph, no retrieval), without
+    evidence, and after cited / matched-uncited deletion. Counts appear when valid
+    calls disagree; `n/e` marks non-estimable deletion. Hosted models get a dagger.
+    Replay values per configuration go to replay-legend.tex for the caption."""
+    def cell(variants, s):
+        counts = collections.Counter()
+        for v in variants:
+            counts.update(s['variants'].get(v, {}).get('choices', {}))
+        if not counts:
+            return 'n/e'
+        if len(counts) == 1:
+            return CODE[next(iter(counts))]
+        return ' '.join(CODE[c] + (f'$^{{{n}}}$' if n > 1 else '') for c, n in counts.most_common())
+    rows, replay = [], {}
     for s in summaries:
-        replay = {(h['config'], h['period_ms']): h['reduction_pct'] for h in s['heldout_by_choice']}
-        periods = sorted({ms for _, ms in replay})
-        groups = collections.OrderedDict()
-        for v, d in s['variants'].items():
-            if len(d['choices']) != 1 or d['valid'] != d['calls']:
-                raise SystemExit(f"{s['model']} {v}: invalid calls or seed-dependent choice; extend the table")
-            groups.setdefault(next(iter(d['choices'])), []).append(abbrev[v])
-        for k, (config, contexts) in enumerate(groups.items()):
-            cells = []
-            for ms in periods:
-                r = replay[config, ms]
-                cells.append('0' if r['mean'] == 0 and r['ci95_halfwidth'] == 0
-                             else f"${r['mean']:.0f}\\pm{r['ci95_halfwidth']:.0f}$")
-            name = short.get(s['model'], s['model']) if k == 0 else ''
-            if contexts[:4] == ['full', 'no graph', 'no retr.', 'none']:
-                contexts = ['all four'] + contexts[4:]
-            elif contexts[:3] == ['full', 'no graph', 'no retr.']:
-                contexts = ['evid.' if contexts[3:] else 'evidence'] + contexts[3:]
-            label = ', '.join(contexts)
-            rows.append(f"{name} & {label} & {PRETTY.get(config, config)} & " + ' & '.join(cells) + ' \\\\')
-        rows.append('\\addlinespace[2pt]')
-    return ('\\begin{tabular}{@{}llccc@{}}\n\\toprule\n'
-            'Model & Context & Choice & 5\\,ms & 8\\,ms \\\\\n\\midrule\n'
-            + '\n'.join(rows[:-1]) + '\n\\bottomrule\n\\end{tabular}\n')
+        for h in s['heldout_by_choice']:
+            replay[h['config'], h['period_ms']] = h['reduction_pct']
+        name = SHORT.get(s['model'], s['model']) + ('$^\\dagger$' if s['sha256'] is None else '')
+        rows.append(' & '.join([name, cell(['full', 'no_graph', 'no_retrieval'], s), cell(['model_only'], s),
+                                cell(['delete_cited'], s), cell(['delete_uncited'], s)]) + ' \\\\')
+    table = ('\\begin{tabular}{@{}lcccc@{}}\n\\toprule\n'
+             'Model & Evidence & None & Del.\\ cited & Del.\\ unc. \\\\\n\\midrule\n'
+             + '\n'.join(rows) + '\n\\bottomrule\n\\end{tabular}\n')
+    parts = []
+    for c in CODE:
+        if c == 's50000_aall' or (c, 5) not in replay:
+            continue
+        values = [replay[c, ms] for ms in (5, 8)]
+        parts.append(CODE[c] + ' ' + ' and '.join(
+            f"${v['mean']:.0f}\\pm{v['ci95_halfwidth']:.0f}$" for v in values))
+    legend = '; '.join(parts)
+    return table, legend
 
 
 def main():
@@ -165,7 +173,9 @@ def main():
     (args.out/'summary.json').write_text(json.dumps(summaries, indent=2) + '\n')
     (args.out/'summary.md').write_text(markdown(summaries))
     if args.tex:
-        args.tex.write_text(latex(summaries))
+        table, legend = latex(summaries)
+        args.tex.write_text(table)
+        args.tex.with_name(args.tex.stem + '-legend.tex').write_text(legend + '\n')
     print((args.out/'summary.md').read_text())
 
 

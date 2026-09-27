@@ -1,19 +1,13 @@
-\begin{tabular}{@{}llccc@{}}
+\begin{tabular}{@{}lcccc@{}}
 \toprule
-Model & Context & Choice & 5\,ms & 8\,ms \\
+Model & Evidence & None & Del.\ cited & Del.\ unc. \\
 \midrule
-Qwen-7B & evidence & 50\,$\mu$s/all & 0 & 0 \\
- & none & 50\,$\mu$s/one & $-145\pm125$ & $-180\pm156$ \\
-\addlinespace[2pt]
-Llama-8B & all four & 50\,$\mu$s/one & $-145\pm125$ & $-180\pm156$ \\
- & del.\ cited & 1\,ms/all & $-599\pm188$ & $-631\pm179$ \\
- & del.\ unc. & 50\,$\mu$s/all & 0 & 0 \\
-\addlinespace[2pt]
-Qwen-14B & evidence & 50\,$\mu$s/all & 0 & 0 \\
- & none & 50\,$\mu$s/one & $-145\pm125$ & $-180\pm156$ \\
-\addlinespace[2pt]
-Phi-4 & evid., del.\ unc. & 50\,$\mu$s/all & 0 & 0 \\
- & none & 1\,ms/one & $-631\pm183$ & $-699\pm206$ \\
- & del.\ cited & 50\,$\mu$s/one & $-145\pm125$ & $-180\pm156$ \\
+Qwen-7B & ctrl & 50/1 & n/e & n/e \\
+Llama-8B & 50/1 & 50/1 & 1m/all & ctrl \\
+Qwen-14B & ctrl & 50/1 & n/e & n/e \\
+Phi-4 & ctrl & 1m/1 & 50/1 & ctrl \\
+Llama-70B$^\dagger$ & ctrl & 1m/1 & ctrl & ctrl \\
+Qwen3-235B$^\dagger$ & ctrl & 1m/1$^{3}$ ctrl 50/1 & ctrl & ctrl \\
+DeepSeek-V3.2$^\dagger$ & ctrl & 50/1 & n/e & n/e \\
 \bottomrule
 \end{tabular}
