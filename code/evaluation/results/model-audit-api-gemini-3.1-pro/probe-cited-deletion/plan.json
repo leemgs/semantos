@@ -1,0 +1,17 @@
+{
+  "model": "google/gemini-3.1-pro-preview",
+  "audit": "model-audit-api-gemini-3.1-pro",
+  "seed": 4088,
+  "weights_sha256": null,
+  "source_sha256": "5e29940e8d77603b64baa3eeeb64489c6ff7255c31494a3d54a8cb704aedf40c",
+  "status": "exploratory post hoc probe; not part of the preregistered audit",
+  "full_choice": "s50000_aall",
+  "cited": [
+    "retrieval-3-4-s50000_aall",
+    "retrieval-3-4-s50000_aone",
+    "retrieval-3-7-s50000_aall",
+    "retrieval-3-7-s50000_aone",
+    "training-table"
+  ],
+  "started_utc_ns": 1790506970892309170
+}

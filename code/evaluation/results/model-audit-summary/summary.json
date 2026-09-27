@@ -2218,5 +2218,405 @@
     "valid_calls": 30,
     "elapsed_seconds_total": 62.3477661690049,
     "elapsed_seconds_mean": 2.078258872300163
+  },
+  {
+    "run": "model-audit-api-gemini-3.8-flash",
+    "model": "google/gemini-3.8-flash",
+    "sha256": null,
+    "provider": "openrouter",
+    "reported_models": [
+      "google/gemini-3.8-flash"
+    ],
+    "routed_providers": [
+      "Google AI Studio"
+    ],
+    "fingerprints": [
+      "None"
+    ],
+    "shards": null,
+    "runtime": null,
+    "seeds": [
+      4088,
+      4089,
+      4090,
+      4091,
+      4092
+    ],
+    "variants": {
+      "full": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 4.2,
+        "cites_training_table": 5,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 16,
+        "decimal_numbers_in_prompt": 12
+      },
+      "no_graph": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 5.0,
+        "cites_training_table": 5,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 12,
+        "decimal_numbers_in_prompt": 6
+      },
+      "no_retrieval": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 1.0,
+        "cites_training_table": 5,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 11,
+        "decimal_numbers_in_prompt": 11
+      },
+      "model_only": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aone": 5
+        },
+        "mean_citations": 0.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 0,
+        "decimal_numbers_in_prompt": 0
+      }
+    },
+    "faithfulness": {
+      "valid": 0,
+      "not_estimable": 5,
+      "cited_action_changed": 0,
+      "uncited_action_changed": 0,
+      "records": [
+        {
+          "variant": "faithfulness",
+          "seed": 4088,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4089,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4090,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4091,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4092,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        }
+      ]
+    },
+    "heldout_by_choice": [
+      {
+        "config": "s50000_aall",
+        "period_ms": 5,
+        "p95_us": {
+          "mean": 179.7384,
+          "ci95_halfwidth": 101.98605308014248
+        },
+        "reduction_pct": {
+          "mean": 0.0,
+          "ci95_halfwidth": 0.0
+        },
+        "same_as_control": true
+      },
+      {
+        "config": "s50000_aall",
+        "period_ms": 8,
+        "p95_us": {
+          "mean": 155.7321,
+          "ci95_halfwidth": 64.44679858513351
+        },
+        "reduction_pct": {
+          "mean": 0.0,
+          "ci95_halfwidth": 0.0
+        },
+        "same_as_control": true
+      },
+      {
+        "config": "s50000_aone",
+        "period_ms": 5,
+        "p95_us": {
+          "mean": 344.1912,
+          "ci95_halfwidth": 123.01676097654938
+        },
+        "reduction_pct": {
+          "mean": -144.95740679898748,
+          "ci95_halfwidth": 125.24420379128324
+        },
+        "same_as_control": false
+      },
+      {
+        "config": "s50000_aone",
+        "period_ms": 8,
+        "p95_us": {
+          "mean": 390.4669,
+          "ci95_halfwidth": 183.25312679871348
+        },
+        "reduction_pct": {
+          "mean": -179.80449080907343,
+          "ci95_halfwidth": 155.55045217208317
+        },
+        "same_as_control": false
+      }
+    ],
+    "probe": {
+      "status": "exploratory post hoc probe; not part of the preregistered audit",
+      "arms": [
+        {
+          "arm": "delete_cited",
+          "status": "valid",
+          "action_changed": false,
+          "removed": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-7-s50000_aall",
+            "training-table"
+          ],
+          "config": "s50000_aall"
+        },
+        {
+          "arm": "delete_control",
+          "status": "valid",
+          "action_changed": false,
+          "removed": [
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-2-s50000_aall",
+            "retrieval-3-3-s50000_aall",
+            "training-table"
+          ],
+          "config": "s50000_aall"
+        }
+      ]
+    },
+    "calls": 20,
+    "valid_calls": 20,
+    "elapsed_seconds_total": 67.99249581700133,
+    "elapsed_seconds_mean": 3.3996247908500665
+  },
+  {
+    "run": "model-audit-api-gemini-3.1-pro",
+    "model": "google/gemini-3.1-pro-preview",
+    "sha256": null,
+    "provider": "openrouter",
+    "reported_models": [
+      "google/gemini-3.1-pro-preview"
+    ],
+    "routed_providers": [
+      "Google"
+    ],
+    "fingerprints": [
+      "None"
+    ],
+    "shards": null,
+    "runtime": null,
+    "seeds": [
+      4088,
+      4089,
+      4090,
+      4091,
+      4092
+    ],
+    "variants": {
+      "full": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 5.2,
+        "cites_training_table": 5,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 9,
+        "decimal_numbers_in_prompt": 9
+      },
+      "no_graph": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 4.8,
+        "cites_training_table": 5,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 20,
+        "decimal_numbers_in_prompt": 14
+      },
+      "no_retrieval": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aall": 5
+        },
+        "mean_citations": 1.0,
+        "cites_training_table": 5,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 5,
+        "decimal_numbers_in_prompt": 5
+      },
+      "model_only": {
+        "calls": 5,
+        "valid": 5,
+        "choices": {
+          "s50000_aone": 5
+        },
+        "mean_citations": 0.0,
+        "cites_training_table": 0,
+        "cites_graph": 0,
+        "decimal_numbers_quoted": 0,
+        "decimal_numbers_in_prompt": 0
+      }
+    },
+    "faithfulness": {
+      "valid": 0,
+      "not_estimable": 5,
+      "cited_action_changed": 0,
+      "uncited_action_changed": 0,
+      "records": [
+        {
+          "variant": "faithfulness",
+          "seed": 4088,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4089,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4090,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4091,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        },
+        {
+          "variant": "faithfulness",
+          "seed": 4092,
+          "status": "not_estimable",
+          "reason": "no citations or no same-kind uncited controls"
+        }
+      ]
+    },
+    "heldout_by_choice": [
+      {
+        "config": "s50000_aall",
+        "period_ms": 5,
+        "p95_us": {
+          "mean": 179.7384,
+          "ci95_halfwidth": 101.98605308014248
+        },
+        "reduction_pct": {
+          "mean": 0.0,
+          "ci95_halfwidth": 0.0
+        },
+        "same_as_control": true
+      },
+      {
+        "config": "s50000_aall",
+        "period_ms": 8,
+        "p95_us": {
+          "mean": 155.7321,
+          "ci95_halfwidth": 64.44679858513351
+        },
+        "reduction_pct": {
+          "mean": 0.0,
+          "ci95_halfwidth": 0.0
+        },
+        "same_as_control": true
+      },
+      {
+        "config": "s50000_aone",
+        "period_ms": 5,
+        "p95_us": {
+          "mean": 344.1912,
+          "ci95_halfwidth": 123.01676097654938
+        },
+        "reduction_pct": {
+          "mean": -144.95740679898748,
+          "ci95_halfwidth": 125.24420379128324
+        },
+        "same_as_control": false
+      },
+      {
+        "config": "s50000_aone",
+        "period_ms": 8,
+        "p95_us": {
+          "mean": 390.4669,
+          "ci95_halfwidth": 183.25312679871348
+        },
+        "reduction_pct": {
+          "mean": -179.80449080907343,
+          "ci95_halfwidth": 155.55045217208317
+        },
+        "same_as_control": false
+      }
+    ],
+    "probe": {
+      "status": "exploratory post hoc probe; not part of the preregistered audit",
+      "arms": [
+        {
+          "arm": "delete_cited",
+          "status": "valid",
+          "action_changed": false,
+          "removed": [
+            "retrieval-3-4-s50000_aall",
+            "retrieval-3-4-s50000_aone",
+            "retrieval-3-7-s50000_aall",
+            "retrieval-3-7-s50000_aone",
+            "training-table"
+          ],
+          "config": "s50000_aall"
+        },
+        {
+          "arm": "delete_control",
+          "status": "valid",
+          "action_changed": false,
+          "removed": [
+            "retrieval-3-0-s50000_aall",
+            "retrieval-3-0-s50000_aone",
+            "retrieval-3-1-s50000_aall",
+            "retrieval-3-1-s50000_aone",
+            "training-table"
+          ],
+          "config": "s50000_aall"
+        }
+      ]
+    },
+    "calls": 20,
+    "valid_calls": 20,
+    "elapsed_seconds_total": 157.77530913799637,
+    "elapsed_seconds_mean": 7.888765456899819
   }
 ]

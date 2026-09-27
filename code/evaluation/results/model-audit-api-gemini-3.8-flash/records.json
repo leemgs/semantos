@@ -1,0 +1,1518 @@
+[
+  {
+    "variant": "full",
+    "seed": 4088,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"contrast_us\": -18.62369999999993, \"edges\": [], \"id\": \"interaction\", \"kind\": \"graph\", \"scope\": \"same measured table; graph is a reparameterization, not extra evidence\"}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-0-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 571.84, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-0-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1023.152, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-0-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1036.014, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-0-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 126.36, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-1-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 140.554, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-1-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1000.735, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-1-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 272.927, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-1-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 817.997, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-2-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 94.81, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-2-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 983.2, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-2-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1419.669, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-2-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 151.299, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-3-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 99.853, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-3-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 254.509, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-3-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.673, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-3-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1019.124, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-4-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1016.898, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-4-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 93.049, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-4-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 170.306, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-4-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1010.901, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-5-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 183.217, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-5-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 430.654, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-5-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 929.63, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-5-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 960.925, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-6-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 875.788, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-6-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 965.994, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-6-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 97.457, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-6-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 109.519, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-7-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1027.923, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-7-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 89.789, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-7-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 974.613, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-7-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 82.488, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-8-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 960.755, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-8-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 85.033, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-8-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.387, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-8-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 748.404, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-9-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 927.701, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-9-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.347, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-9-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.365, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-9-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 150.643, \"period_ns\": 3000000}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "6133e6e0203c5b8460d8ac76d69c687948dbf140081aab0fb569c0239c71e134",
+    "input_evidence_ids": [
+      "training-table",
+      "interaction",
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-0-s1000000_aall",
+      "retrieval-3-0-s1000000_aone",
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-1-s1000000_aall",
+      "retrieval-3-1-s50000_aone",
+      "retrieval-3-1-s1000000_aone",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-2-s1000000_aall",
+      "retrieval-3-2-s1000000_aone",
+      "retrieval-3-2-s50000_aone",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-3-s50000_aone",
+      "retrieval-3-3-s1000000_aone",
+      "retrieval-3-3-s1000000_aall",
+      "retrieval-3-4-s1000000_aall",
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-4-s50000_aone",
+      "retrieval-3-4-s1000000_aone",
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-5-s50000_aone",
+      "retrieval-3-5-s1000000_aone",
+      "retrieval-3-5-s1000000_aall",
+      "retrieval-3-6-s1000000_aall",
+      "retrieval-3-6-s1000000_aone",
+      "retrieval-3-6-s50000_aone",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s1000000_aone",
+      "retrieval-3-7-s50000_aone",
+      "retrieval-3-7-s1000000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s1000000_aone",
+      "retrieval-3-8-s50000_aone",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-8-s1000000_aall",
+      "retrieval-3-9-s1000000_aall",
+      "retrieval-3-9-s50000_aall",
+      "retrieval-3-9-s1000000_aone",
+      "retrieval-3-9-s50000_aone"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506737-cvp2OTFA4g5jeyvYX4uv",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 3311,
+        "completion_tokens": 714,
+        "total_tokens": 4025,
+        "cost": 0.00516075,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00516075,
+          "upstream_inference_prompt_cost": 0.00248325,
+          "upstream_inference_completions_cost": 0.0026775
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 495,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506739681652877
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"training-table\",\n    \"retrieval-3-0-s50000_aall\",\n    \"retrieval-3-4-s50000_aall\",\n    \"retrieval-3-7-s50000_aall\"\n  ],\n  \"explanation\": \"In training-table, s50000_aall demonstrated the lowest overall mean P95 latency (132.94 us compared to 277.46 us for s50000_aone and >950 us for s1000000 configurations). This is further confirmed across retrieval runs where s50000_aall consistently yielded low latencies, such as 126.36 us in retrieval-3-0, 93.05 us in retrieval-3-4, and 82.49 us in retrieval-3-7.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "explanation": "In training-table, s50000_aall demonstrated the lowest overall mean P95 latency (132.94 us compared to 277.46 us for s50000_aone and >950 us for s1000000 configurations). This is further confirmed across retrieval runs where s50000_aall consistently yielded low latencies, such as 126.36 us in retrieval-3-0, 93.05 us in retrieval-3-4, and 82.49 us in retrieval-3-7."
+    },
+    "status": "valid",
+    "elapsed_seconds": 2.680021124000632
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4088,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-0-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 571.84, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-0-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1023.152, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-0-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1036.014, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-0-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 126.36, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-1-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 140.554, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-1-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1000.735, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-1-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 272.927, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-1-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 817.997, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-2-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 94.81, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-2-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 983.2, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-2-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1419.669, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-2-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 151.299, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-3-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 99.853, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-3-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 254.509, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-3-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.673, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-3-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1019.124, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-4-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1016.898, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-4-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 93.049, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-4-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 170.306, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-4-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1010.901, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-5-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 183.217, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-5-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 430.654, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-5-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 929.63, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-5-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 960.925, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-6-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 875.788, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-6-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 965.994, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-6-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 97.457, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-6-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 109.519, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-7-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1027.923, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-7-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 89.789, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-7-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 974.613, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-7-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 82.488, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-8-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 960.755, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-8-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 85.033, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-8-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.387, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-8-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 748.404, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-9-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 927.701, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-9-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.347, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-9-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.365, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-9-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 150.643, \"period_ns\": 3000000}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "0551e14a292df184aa38ce031353b4d6c619b560a34fdc53b7d6301d94943388",
+    "input_evidence_ids": [
+      "training-table",
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-0-s1000000_aall",
+      "retrieval-3-0-s1000000_aone",
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-1-s1000000_aall",
+      "retrieval-3-1-s50000_aone",
+      "retrieval-3-1-s1000000_aone",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-2-s1000000_aall",
+      "retrieval-3-2-s1000000_aone",
+      "retrieval-3-2-s50000_aone",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-3-s50000_aone",
+      "retrieval-3-3-s1000000_aone",
+      "retrieval-3-3-s1000000_aall",
+      "retrieval-3-4-s1000000_aall",
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-4-s50000_aone",
+      "retrieval-3-4-s1000000_aone",
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-5-s50000_aone",
+      "retrieval-3-5-s1000000_aone",
+      "retrieval-3-5-s1000000_aall",
+      "retrieval-3-6-s1000000_aall",
+      "retrieval-3-6-s1000000_aone",
+      "retrieval-3-6-s50000_aone",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s1000000_aone",
+      "retrieval-3-7-s50000_aone",
+      "retrieval-3-7-s1000000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s1000000_aone",
+      "retrieval-3-8-s50000_aone",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-8-s1000000_aall",
+      "retrieval-3-9-s1000000_aall",
+      "retrieval-3-9-s50000_aall",
+      "retrieval-3-9-s1000000_aone",
+      "retrieval-3-9-s50000_aone"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506739-UZjSbGPR0WFSlSaO3Vtz",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 3252,
+        "completion_tokens": 945,
+        "total_tokens": 4197,
+        "cost": 0.00598275,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00598275,
+          "upstream_inference_prompt_cost": 0.002439,
+          "upstream_inference_completions_cost": 0.00354375
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 844,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506743148788596
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"training-table\",\n    \"retrieval-3-0-s50000_aall\",\n    \"retrieval-3-4-s50000_aall\",\n    \"retrieval-3-7-s50000_aall\",\n    \"retrieval-3-8-s50000_aall\",\n    \"retrieval-3-9-s50000_aall\"\n  ],\n  \"explanation\": \"Config s50000_aall achieves the lowest overall wake-up P95 latency, recording 132.94 us in the training summary table and consistently low measured latencies down to 82.49 us across retrieval runs.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "explanation": "Config s50000_aall achieves the lowest overall wake-up P95 latency, recording 132.94 us in the training summary table and consistently low measured latencies down to 82.49 us across retrieval runs."
+    },
+    "status": "valid",
+    "elapsed_seconds": 3.4669055119993573
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4088,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"contrast_us\": -18.62369999999993, \"edges\": [], \"id\": \"interaction\", \"kind\": \"graph\", \"scope\": \"same measured table; graph is a reparameterization, not extra evidence\"}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "f60810ed1d943a718a9fb2f1564e9eb80fe63286d0631707866fb0a36d429cbe",
+    "input_evidence_ids": [
+      "training-table",
+      "interaction"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506743-3Pnpqz79FVFXfkN13HUc",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 279,
+        "completion_tokens": 337,
+        "total_tokens": 616,
+        "cost": 0.001473,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.001473,
+          "upstream_inference_prompt_cost": 0.00020925,
+          "upstream_inference_completions_cost": 0.00126375
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 269,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506745040752690
+    },
+    "raw_response": "{\"config\":\"s50000_aall\",\"cited_ids\":[\"training-table\"],\"explanation\":\"According to training-table, s50000_aall achieves the lowest periodic wake-up P95 latency of 132.9413, outperforming all other tested configurations.\"}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table"
+      ],
+      "explanation": "According to training-table, s50000_aall achieves the lowest periodic wake-up P95 latency of 132.9413, outperforming all other tested configurations."
+    },
+    "status": "valid",
+    "elapsed_seconds": 1.8918479530002514
+  },
+  {
+    "variant": "model_only",
+    "seed": 4088,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": []}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "800b7da9ed2fbc6b4e60174a33f55af307dd58c7bdac3409ca764a0ab6a8c14f",
+    "input_evidence_ids": [],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506745-kUVUUCyFDYrfckKW9W8s",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 115,
+        "completion_tokens": 2125,
+        "total_tokens": 2240,
+        "cost": 0.008055,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.008055,
+          "upstream_inference_prompt_cost": 8.625e-05,
+          "upstream_inference_completions_cost": 0.00796875
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2031,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506753918317265
+    },
+    "raw_response": "{\"config\":\"s50000_aone\",\"cited_ids\":[],\"explanation\":\"s50000_aone minimizes periodic wake-up P95 latency by using the lower slack value (50000 vs 1000000), bounding timer coalescing delays, while waking a single thread (aone) avoids thundering herd scheduling contention and synchronization delays inherent in waking all threads (aall).\"}",
+    "answer": {
+      "config": "s50000_aone",
+      "cited_ids": [],
+      "explanation": "s50000_aone minimizes periodic wake-up P95 latency by using the lower slack value (50000 vs 1000000), bounding timer coalescing delays, while waking a single thread (aone) avoids thundering herd scheduling contention and synchronization delays inherent in waking all threads (aall)."
+    },
+    "status": "valid",
+    "elapsed_seconds": 8.877498059999198
+  },
+  {
+    "variant": "faithfulness",
+    "seed": 4088,
+    "status": "not_estimable",
+    "reason": "no citations or no same-kind uncited controls"
+  },
+  {
+    "variant": "full",
+    "seed": 4089,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"contrast_us\": -18.62369999999993, \"edges\": [], \"id\": \"interaction\", \"kind\": \"graph\", \"scope\": \"same measured table; graph is a reparameterization, not extra evidence\"}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-0-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 571.84, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-0-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1023.152, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-0-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1036.014, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-0-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 126.36, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-1-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 140.554, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-1-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1000.735, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-1-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 272.927, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-1-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 817.997, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-2-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 94.81, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-2-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 983.2, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-2-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1419.669, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-2-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 151.299, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-3-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 99.853, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-3-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 254.509, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-3-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.673, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-3-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1019.124, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-4-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1016.898, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-4-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 93.049, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-4-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 170.306, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-4-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1010.901, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-5-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 183.217, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-5-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 430.654, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-5-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 929.63, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-5-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 960.925, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-6-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 875.788, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-6-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 965.994, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-6-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 97.457, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-6-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 109.519, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-7-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1027.923, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-7-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 89.789, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-7-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 974.613, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-7-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 82.488, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-8-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 960.755, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-8-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 85.033, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-8-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.387, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-8-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 748.404, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-9-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 927.701, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-9-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.347, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-9-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.365, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-9-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 150.643, \"period_ns\": 3000000}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "6133e6e0203c5b8460d8ac76d69c687948dbf140081aab0fb569c0239c71e134",
+    "input_evidence_ids": [
+      "training-table",
+      "interaction",
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-0-s1000000_aall",
+      "retrieval-3-0-s1000000_aone",
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-1-s1000000_aall",
+      "retrieval-3-1-s50000_aone",
+      "retrieval-3-1-s1000000_aone",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-2-s1000000_aall",
+      "retrieval-3-2-s1000000_aone",
+      "retrieval-3-2-s50000_aone",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-3-s50000_aone",
+      "retrieval-3-3-s1000000_aone",
+      "retrieval-3-3-s1000000_aall",
+      "retrieval-3-4-s1000000_aall",
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-4-s50000_aone",
+      "retrieval-3-4-s1000000_aone",
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-5-s50000_aone",
+      "retrieval-3-5-s1000000_aone",
+      "retrieval-3-5-s1000000_aall",
+      "retrieval-3-6-s1000000_aall",
+      "retrieval-3-6-s1000000_aone",
+      "retrieval-3-6-s50000_aone",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s1000000_aone",
+      "retrieval-3-7-s50000_aone",
+      "retrieval-3-7-s1000000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s1000000_aone",
+      "retrieval-3-8-s50000_aone",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-8-s1000000_aall",
+      "retrieval-3-9-s1000000_aall",
+      "retrieval-3-9-s50000_aall",
+      "retrieval-3-9-s1000000_aone",
+      "retrieval-3-9-s50000_aone"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506754-IP4Ugt400DL1zw1FxSDL",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 3311,
+        "completion_tokens": 650,
+        "total_tokens": 3961,
+        "cost": 0.00492075,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00492075,
+          "upstream_inference_prompt_cost": 0.00248325,
+          "upstream_inference_completions_cost": 0.0024375
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 455,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506757006557290
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"training-table\",\n    \"retrieval-3-0-s50000_aall\",\n    \"retrieval-3-4-s50000_aall\",\n    \"retrieval-3-7-s50000_aall\",\n    \"retrieval-3-9-s50000_aall\"\n  ],\n  \"explanation\": \"According to training-table, s50000_aall yields the lowest baseline latency at 132.9413 us compared to 277.4647 us for s50000_aone and ~954-1080 us for the 1000000-scale configurations. Across retrieval runs, s50000_aall consistently maintains the lowest P95 wake-up latency, dropping as low as 82.488 us.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "explanation": "According to training-table, s50000_aall yields the lowest baseline latency at 132.9413 us compared to 277.4647 us for s50000_aone and ~954-1080 us for the 1000000-scale configurations. Across retrieval runs, s50000_aall consistently maintains the lowest P95 wake-up latency, dropping as low as 82.488 us."
+    },
+    "status": "valid",
+    "elapsed_seconds": 3.088150264000433
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4089,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-0-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 571.84, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-0-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1023.152, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-0-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1036.014, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-0-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 126.36, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-1-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 140.554, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-1-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1000.735, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-1-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 272.927, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-1-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 817.997, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-2-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 94.81, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-2-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 983.2, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-2-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1419.669, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-2-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 151.299, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-3-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 99.853, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-3-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 254.509, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-3-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.673, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-3-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1019.124, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-4-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1016.898, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-4-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 93.049, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-4-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 170.306, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-4-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1010.901, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-5-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 183.217, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-5-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 430.654, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-5-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 929.63, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-5-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 960.925, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-6-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 875.788, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-6-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 965.994, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-6-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 97.457, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-6-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 109.519, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-7-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1027.923, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-7-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 89.789, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-7-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 974.613, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-7-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 82.488, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-8-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 960.755, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-8-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 85.033, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-8-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.387, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-8-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 748.404, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-9-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 927.701, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-9-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.347, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-9-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.365, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-9-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 150.643, \"period_ns\": 3000000}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "0551e14a292df184aa38ce031353b4d6c619b560a34fdc53b7d6301d94943388",
+    "input_evidence_ids": [
+      "training-table",
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-0-s1000000_aall",
+      "retrieval-3-0-s1000000_aone",
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-1-s1000000_aall",
+      "retrieval-3-1-s50000_aone",
+      "retrieval-3-1-s1000000_aone",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-2-s1000000_aall",
+      "retrieval-3-2-s1000000_aone",
+      "retrieval-3-2-s50000_aone",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-3-s50000_aone",
+      "retrieval-3-3-s1000000_aone",
+      "retrieval-3-3-s1000000_aall",
+      "retrieval-3-4-s1000000_aall",
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-4-s50000_aone",
+      "retrieval-3-4-s1000000_aone",
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-5-s50000_aone",
+      "retrieval-3-5-s1000000_aone",
+      "retrieval-3-5-s1000000_aall",
+      "retrieval-3-6-s1000000_aall",
+      "retrieval-3-6-s1000000_aone",
+      "retrieval-3-6-s50000_aone",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s1000000_aone",
+      "retrieval-3-7-s50000_aone",
+      "retrieval-3-7-s1000000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s1000000_aone",
+      "retrieval-3-8-s50000_aone",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-8-s1000000_aall",
+      "retrieval-3-9-s1000000_aall",
+      "retrieval-3-9-s50000_aall",
+      "retrieval-3-9-s1000000_aone",
+      "retrieval-3-9-s50000_aone"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506757-dq0e5aB4lYssn21A6Hl6",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 3252,
+        "completion_tokens": 899,
+        "total_tokens": 4151,
+        "cost": 0.00581025,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00581025,
+          "upstream_inference_prompt_cost": 0.002439,
+          "upstream_inference_completions_cost": 0.00337125
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 758,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506760261177442
+    },
+    "raw_response": "{\"config\":\"s50000_aall\",\"cited_ids\":[\"training-table\",\"retrieval-3-4-s50000_aall\",\"retrieval-3-7-s50000_aall\",\"retrieval-3-8-s50000_aall\",\"retrieval-3-9-s50000_aall\"],\"explanation\":\"s50000_aall achieves the lowest overall P95 latency, showing a mean of 132.94 us in training-table and consistently lower retrieval values such as 82.49 us in retrieval-3-7-s50000_aall and 87.35 us in retrieval-3-9-s50000_aall compared to other configurations.\"}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "explanation": "s50000_aall achieves the lowest overall P95 latency, showing a mean of 132.94 us in training-table and consistently lower retrieval values such as 82.49 us in retrieval-3-7-s50000_aall and 87.35 us in retrieval-3-9-s50000_aall compared to other configurations."
+    },
+    "status": "valid",
+    "elapsed_seconds": 3.254505742999754
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4089,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"contrast_us\": -18.62369999999993, \"edges\": [], \"id\": \"interaction\", \"kind\": \"graph\", \"scope\": \"same measured table; graph is a reparameterization, not extra evidence\"}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "f60810ed1d943a718a9fb2f1564e9eb80fe63286d0631707866fb0a36d429cbe",
+    "input_evidence_ids": [
+      "training-table",
+      "interaction"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506760-7tTWUICi27hs0nKvKO0P",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 279,
+        "completion_tokens": 457,
+        "total_tokens": 736,
+        "cost": 0.001923,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.001923,
+          "upstream_inference_prompt_cost": 0.00020925,
+          "upstream_inference_completions_cost": 0.00171375
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 331,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506762614993049
+    },
+    "raw_response": "{\"config\":\"s50000_aall\",\"cited_ids\":[\"training-table\"],\"explanation\":\"Based on training-table, s50000_aall achieves the lowest periodic wake-up P95 latency of 132.9413, outperforming s50000_aone (277.4647), s1000000_aall (954.7558), and s1000000_aone (1080.6555).\"}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table"
+      ],
+      "explanation": "Based on training-table, s50000_aall achieves the lowest periodic wake-up P95 latency of 132.9413, outperforming s50000_aone (277.4647), s1000000_aall (954.7558), and s1000000_aone (1080.6555)."
+    },
+    "status": "valid",
+    "elapsed_seconds": 2.353705158999219
+  },
+  {
+    "variant": "model_only",
+    "seed": 4089,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": []}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "800b7da9ed2fbc6b4e60174a33f55af307dd58c7bdac3409ca764a0ab6a8c14f",
+    "input_evidence_ids": [],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506762-d5k0lACSdWqELfbvsAkT",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 115,
+        "completion_tokens": 764,
+        "total_tokens": 879,
+        "cost": 0.00295125,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00295125,
+          "upstream_inference_prompt_cost": 8.625e-05,
+          "upstream_inference_completions_cost": 0.002865
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 684,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506766529770582
+    },
+    "raw_response": "{\"config\":\"s50000_aone\",\"cited_ids\":[],\"explanation\":\"Config s50000_aone minimizes periodic wake-up P95 latency by combining a lower timer slack (50,000) for tighter timing precision with targeted single wake-up behavior (aone) to prevent scheduling contention and thundering herd latency spikes.\"}",
+    "answer": {
+      "config": "s50000_aone",
+      "cited_ids": [],
+      "explanation": "Config s50000_aone minimizes periodic wake-up P95 latency by combining a lower timer slack (50,000) for tighter timing precision with targeted single wake-up behavior (aone) to prevent scheduling contention and thundering herd latency spikes."
+    },
+    "status": "valid",
+    "elapsed_seconds": 3.9147447400027886
+  },
+  {
+    "variant": "faithfulness",
+    "seed": 4089,
+    "status": "not_estimable",
+    "reason": "no citations or no same-kind uncited controls"
+  },
+  {
+    "variant": "full",
+    "seed": 4090,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"contrast_us\": -18.62369999999993, \"edges\": [], \"id\": \"interaction\", \"kind\": \"graph\", \"scope\": \"same measured table; graph is a reparameterization, not extra evidence\"}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-0-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 571.84, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-0-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1023.152, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-0-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1036.014, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-0-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 126.36, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-1-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 140.554, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-1-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1000.735, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-1-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 272.927, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-1-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 817.997, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-2-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 94.81, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-2-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 983.2, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-2-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1419.669, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-2-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 151.299, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-3-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 99.853, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-3-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 254.509, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-3-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.673, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-3-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1019.124, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-4-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1016.898, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-4-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 93.049, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-4-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 170.306, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-4-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1010.901, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-5-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 183.217, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-5-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 430.654, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-5-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 929.63, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-5-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 960.925, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-6-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 875.788, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-6-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 965.994, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-6-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 97.457, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-6-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 109.519, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-7-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1027.923, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-7-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 89.789, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-7-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 974.613, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-7-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 82.488, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-8-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 960.755, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-8-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 85.033, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-8-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.387, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-8-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 748.404, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-9-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 927.701, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-9-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.347, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-9-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.365, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-9-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 150.643, \"period_ns\": 3000000}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "6133e6e0203c5b8460d8ac76d69c687948dbf140081aab0fb569c0239c71e134",
+    "input_evidence_ids": [
+      "training-table",
+      "interaction",
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-0-s1000000_aall",
+      "retrieval-3-0-s1000000_aone",
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-1-s1000000_aall",
+      "retrieval-3-1-s50000_aone",
+      "retrieval-3-1-s1000000_aone",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-2-s1000000_aall",
+      "retrieval-3-2-s1000000_aone",
+      "retrieval-3-2-s50000_aone",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-3-s50000_aone",
+      "retrieval-3-3-s1000000_aone",
+      "retrieval-3-3-s1000000_aall",
+      "retrieval-3-4-s1000000_aall",
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-4-s50000_aone",
+      "retrieval-3-4-s1000000_aone",
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-5-s50000_aone",
+      "retrieval-3-5-s1000000_aone",
+      "retrieval-3-5-s1000000_aall",
+      "retrieval-3-6-s1000000_aall",
+      "retrieval-3-6-s1000000_aone",
+      "retrieval-3-6-s50000_aone",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s1000000_aone",
+      "retrieval-3-7-s50000_aone",
+      "retrieval-3-7-s1000000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s1000000_aone",
+      "retrieval-3-8-s50000_aone",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-8-s1000000_aall",
+      "retrieval-3-9-s1000000_aall",
+      "retrieval-3-9-s50000_aall",
+      "retrieval-3-9-s1000000_aone",
+      "retrieval-3-9-s50000_aone"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506766-zf96mFNFHUcV02gTu7ee",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 3311,
+        "completion_tokens": 648,
+        "total_tokens": 3959,
+        "cost": 0.00491325,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00491325,
+          "upstream_inference_prompt_cost": 0.00248325,
+          "upstream_inference_completions_cost": 0.00243
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 533,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506769336615092
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"training-table\",\n    \"retrieval-3-0-s50000_aall\",\n    \"retrieval-3-4-s50000_aall\",\n    \"retrieval-3-7-s50000_aall\"\n  ],\n  \"explanation\": \"Config s50000_aall consistently delivers the lowest P95 wake-up latency, averaging 132.94 us in the training table and reaching down to 82.49 us in individual retrieval runs, outperforming all other configurations.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "explanation": "Config s50000_aall consistently delivers the lowest P95 wake-up latency, averaging 132.94 us in the training table and reaching down to 82.49 us in individual retrieval runs, outperforming all other configurations."
+    },
+    "status": "valid",
+    "elapsed_seconds": 2.8065803770005004
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4090,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-0-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 571.84, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-0-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1023.152, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-0-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1036.014, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-0-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 126.36, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-1-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 140.554, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-1-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1000.735, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-1-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 272.927, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-1-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 817.997, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-2-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 94.81, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-2-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 983.2, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-2-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1419.669, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-2-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 151.299, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-3-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 99.853, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-3-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 254.509, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-3-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.673, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-3-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1019.124, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-4-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1016.898, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-4-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 93.049, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-4-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 170.306, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-4-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1010.901, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-5-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 183.217, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-5-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 430.654, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-5-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 929.63, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-5-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 960.925, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-6-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 875.788, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-6-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 965.994, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-6-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 97.457, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-6-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 109.519, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-7-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1027.923, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-7-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 89.789, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-7-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 974.613, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-7-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 82.488, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-8-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 960.755, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-8-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 85.033, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-8-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.387, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-8-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 748.404, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-9-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 927.701, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-9-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.347, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-9-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.365, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-9-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 150.643, \"period_ns\": 3000000}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "0551e14a292df184aa38ce031353b4d6c619b560a34fdc53b7d6301d94943388",
+    "input_evidence_ids": [
+      "training-table",
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-0-s1000000_aall",
+      "retrieval-3-0-s1000000_aone",
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-1-s1000000_aall",
+      "retrieval-3-1-s50000_aone",
+      "retrieval-3-1-s1000000_aone",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-2-s1000000_aall",
+      "retrieval-3-2-s1000000_aone",
+      "retrieval-3-2-s50000_aone",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-3-s50000_aone",
+      "retrieval-3-3-s1000000_aone",
+      "retrieval-3-3-s1000000_aall",
+      "retrieval-3-4-s1000000_aall",
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-4-s50000_aone",
+      "retrieval-3-4-s1000000_aone",
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-5-s50000_aone",
+      "retrieval-3-5-s1000000_aone",
+      "retrieval-3-5-s1000000_aall",
+      "retrieval-3-6-s1000000_aall",
+      "retrieval-3-6-s1000000_aone",
+      "retrieval-3-6-s50000_aone",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s1000000_aone",
+      "retrieval-3-7-s50000_aone",
+      "retrieval-3-7-s1000000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s1000000_aone",
+      "retrieval-3-8-s50000_aone",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-8-s1000000_aall",
+      "retrieval-3-9-s1000000_aall",
+      "retrieval-3-9-s50000_aall",
+      "retrieval-3-9-s1000000_aone",
+      "retrieval-3-9-s50000_aone"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506769-zwOts8WOKqzRrJZa5jc9",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 3252,
+        "completion_tokens": 1141,
+        "total_tokens": 4393,
+        "cost": 0.00671775,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00671775,
+          "upstream_inference_prompt_cost": 0.002439,
+          "upstream_inference_completions_cost": 0.00427875
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 985,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506773167221154
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"training-table\",\n    \"retrieval-3-4-s50000_aall\",\n    \"retrieval-3-7-s50000_aall\",\n    \"retrieval-3-8-s50000_aall\",\n    \"retrieval-3-9-s50000_aall\"\n  ],\n  \"explanation\": \"Across training and retrieval runs, s50000_aall achieved the lowest P95 wake-up latency, averaging 132.94 us in training and reaching as low as 82.49 us in retrieval runs, consistently outperforming s50000_aone and the s1000000 configurations.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "explanation": "Across training and retrieval runs, s50000_aall achieved the lowest P95 wake-up latency, averaging 132.94 us in training and reaching as low as 82.49 us in retrieval runs, consistently outperforming s50000_aone and the s1000000 configurations."
+    },
+    "status": "valid",
+    "elapsed_seconds": 3.8304763169981015
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4090,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"contrast_us\": -18.62369999999993, \"edges\": [], \"id\": \"interaction\", \"kind\": \"graph\", \"scope\": \"same measured table; graph is a reparameterization, not extra evidence\"}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "f60810ed1d943a718a9fb2f1564e9eb80fe63286d0631707866fb0a36d429cbe",
+    "input_evidence_ids": [
+      "training-table",
+      "interaction"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506773-szNEKpAlwPMbWoHyaIT4",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 279,
+        "completion_tokens": 321,
+        "total_tokens": 600,
+        "cost": 0.001413,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.001413,
+          "upstream_inference_prompt_cost": 0.00020925,
+          "upstream_inference_completions_cost": 0.00120375
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 253,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506775283694883
+    },
+    "raw_response": "{\"config\":\"s50000_aall\",\"cited_ids\":[\"training-table\"],\"explanation\":\"According to the measured training table, s50000_aall achieved the lowest periodic wake-up P95 latency at 132.9413 compared to all other evaluated configurations.\"}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table"
+      ],
+      "explanation": "According to the measured training table, s50000_aall achieved the lowest periodic wake-up P95 latency at 132.9413 compared to all other evaluated configurations."
+    },
+    "status": "valid",
+    "elapsed_seconds": 2.116349321000598
+  },
+  {
+    "variant": "model_only",
+    "seed": 4090,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": []}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "800b7da9ed2fbc6b4e60174a33f55af307dd58c7bdac3409ca764a0ab6a8c14f",
+    "input_evidence_ids": [],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506775-5HvtoytOW2U3ByJviOOt",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 115,
+        "completion_tokens": 1286,
+        "total_tokens": 1401,
+        "cost": 0.00490875,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00490875,
+          "upstream_inference_prompt_cost": 8.625e-05,
+          "upstream_inference_completions_cost": 0.0048225
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1194,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506781198324951
+    },
+    "raw_response": "{\"config\":\"s50000_aone\",\"cited_ids\":[],\"explanation\":\"Configuration s50000_aone minimizes periodic wake-up P95 latency by avoiding the thundering herd contention associated with waking all threads (aone vs. aall) and preventing the CPU from remaining in deeper high-exit-latency idle C-states caused by longer sleep durations (50ms vs. 1s).\"}",
+    "answer": {
+      "config": "s50000_aone",
+      "cited_ids": [],
+      "explanation": "Configuration s50000_aone minimizes periodic wake-up P95 latency by avoiding the thundering herd contention associated with waking all threads (aone vs. aall) and preventing the CPU from remaining in deeper high-exit-latency idle C-states caused by longer sleep durations (50ms vs. 1s)."
+    },
+    "status": "valid",
+    "elapsed_seconds": 5.914568688000145
+  },
+  {
+    "variant": "faithfulness",
+    "seed": 4090,
+    "status": "not_estimable",
+    "reason": "no citations or no same-kind uncited controls"
+  },
+  {
+    "variant": "full",
+    "seed": 4091,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"contrast_us\": -18.62369999999993, \"edges\": [], \"id\": \"interaction\", \"kind\": \"graph\", \"scope\": \"same measured table; graph is a reparameterization, not extra evidence\"}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-0-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 571.84, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-0-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1023.152, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-0-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1036.014, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-0-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 126.36, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-1-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 140.554, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-1-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1000.735, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-1-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 272.927, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-1-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 817.997, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-2-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 94.81, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-2-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 983.2, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-2-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1419.669, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-2-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 151.299, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-3-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 99.853, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-3-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 254.509, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-3-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.673, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-3-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1019.124, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-4-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1016.898, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-4-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 93.049, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-4-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 170.306, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-4-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1010.901, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-5-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 183.217, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-5-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 430.654, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-5-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 929.63, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-5-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 960.925, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-6-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 875.788, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-6-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 965.994, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-6-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 97.457, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-6-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 109.519, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-7-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1027.923, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-7-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 89.789, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-7-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 974.613, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-7-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 82.488, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-8-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 960.755, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-8-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 85.033, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-8-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.387, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-8-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 748.404, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-9-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 927.701, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-9-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.347, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-9-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.365, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-9-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 150.643, \"period_ns\": 3000000}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "6133e6e0203c5b8460d8ac76d69c687948dbf140081aab0fb569c0239c71e134",
+    "input_evidence_ids": [
+      "training-table",
+      "interaction",
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-0-s1000000_aall",
+      "retrieval-3-0-s1000000_aone",
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-1-s1000000_aall",
+      "retrieval-3-1-s50000_aone",
+      "retrieval-3-1-s1000000_aone",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-2-s1000000_aall",
+      "retrieval-3-2-s1000000_aone",
+      "retrieval-3-2-s50000_aone",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-3-s50000_aone",
+      "retrieval-3-3-s1000000_aone",
+      "retrieval-3-3-s1000000_aall",
+      "retrieval-3-4-s1000000_aall",
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-4-s50000_aone",
+      "retrieval-3-4-s1000000_aone",
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-5-s50000_aone",
+      "retrieval-3-5-s1000000_aone",
+      "retrieval-3-5-s1000000_aall",
+      "retrieval-3-6-s1000000_aall",
+      "retrieval-3-6-s1000000_aone",
+      "retrieval-3-6-s50000_aone",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s1000000_aone",
+      "retrieval-3-7-s50000_aone",
+      "retrieval-3-7-s1000000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s1000000_aone",
+      "retrieval-3-8-s50000_aone",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-8-s1000000_aall",
+      "retrieval-3-9-s1000000_aall",
+      "retrieval-3-9-s50000_aall",
+      "retrieval-3-9-s1000000_aone",
+      "retrieval-3-9-s50000_aone"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506781-gyt4MeOctIolbsjeVgck",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 3311,
+        "completion_tokens": 661,
+        "total_tokens": 3972,
+        "cost": 0.004962,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.004962,
+          "upstream_inference_prompt_cost": 0.00248325,
+          "upstream_inference_completions_cost": 0.00247875
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 513,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506783989653203
+    },
+    "raw_response": "{\"config\":\"s50000_aall\",\"cited_ids\":[\"training-table\",\"retrieval-3-0-s50000_aall\",\"retrieval-3-4-s50000_aall\",\"retrieval-3-7-s50000_aall\"],\"explanation\":\"In training-table, s50000_aall achieves the lowest P95 latency at 132.9413 us compared to 277.4647 us for s50000_aone and over 950 us for the s1000000 variants. Retrieval runs consistently confirm this, with s50000_aall measuring as low as 82.488 us in retrieval-3-7-s50000_aall.\"}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "explanation": "In training-table, s50000_aall achieves the lowest P95 latency at 132.9413 us compared to 277.4647 us for s50000_aone and over 950 us for the s1000000 variants. Retrieval runs consistently confirm this, with s50000_aall measuring as low as 82.488 us in retrieval-3-7-s50000_aall."
+    },
+    "status": "valid",
+    "elapsed_seconds": 2.791177110000717
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4091,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-0-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 571.84, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-0-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1023.152, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-0-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1036.014, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-0-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 126.36, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-1-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 140.554, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-1-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1000.735, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-1-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 272.927, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-1-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 817.997, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-2-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 94.81, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-2-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 983.2, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-2-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1419.669, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-2-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 151.299, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-3-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 99.853, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-3-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 254.509, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-3-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.673, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-3-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1019.124, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-4-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1016.898, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-4-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 93.049, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-4-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 170.306, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-4-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1010.901, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-5-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 183.217, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-5-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 430.654, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-5-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 929.63, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-5-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 960.925, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-6-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 875.788, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-6-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 965.994, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-6-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 97.457, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-6-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 109.519, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-7-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1027.923, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-7-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 89.789, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-7-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 974.613, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-7-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 82.488, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-8-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 960.755, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-8-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 85.033, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-8-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.387, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-8-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 748.404, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-9-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 927.701, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-9-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.347, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-9-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.365, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-9-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 150.643, \"period_ns\": 3000000}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "0551e14a292df184aa38ce031353b4d6c619b560a34fdc53b7d6301d94943388",
+    "input_evidence_ids": [
+      "training-table",
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-0-s1000000_aall",
+      "retrieval-3-0-s1000000_aone",
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-1-s1000000_aall",
+      "retrieval-3-1-s50000_aone",
+      "retrieval-3-1-s1000000_aone",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-2-s1000000_aall",
+      "retrieval-3-2-s1000000_aone",
+      "retrieval-3-2-s50000_aone",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-3-s50000_aone",
+      "retrieval-3-3-s1000000_aone",
+      "retrieval-3-3-s1000000_aall",
+      "retrieval-3-4-s1000000_aall",
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-4-s50000_aone",
+      "retrieval-3-4-s1000000_aone",
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-5-s50000_aone",
+      "retrieval-3-5-s1000000_aone",
+      "retrieval-3-5-s1000000_aall",
+      "retrieval-3-6-s1000000_aall",
+      "retrieval-3-6-s1000000_aone",
+      "retrieval-3-6-s50000_aone",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s1000000_aone",
+      "retrieval-3-7-s50000_aone",
+      "retrieval-3-7-s1000000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s1000000_aone",
+      "retrieval-3-8-s50000_aone",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-8-s1000000_aall",
+      "retrieval-3-9-s1000000_aall",
+      "retrieval-3-9-s50000_aall",
+      "retrieval-3-9-s1000000_aone",
+      "retrieval-3-9-s50000_aone"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506784-Ta4q9q7HhOVJKx66mCfb",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 3252,
+        "completion_tokens": 1205,
+        "total_tokens": 4457,
+        "cost": 0.00695775,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00695775,
+          "upstream_inference_prompt_cost": 0.002439,
+          "upstream_inference_completions_cost": 0.00451875
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1043,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506788014481775
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"training-table\",\n    \"retrieval-3-4-s50000_aall\",\n    \"retrieval-3-7-s50000_aall\",\n    \"retrieval-3-9-s50000_aall\"\n  ],\n  \"explanation\": \"In training-table, s50000_aall achieved the lowest baseline P95 latency at 132.94 us compared to s50000_aone (277.46 us) and the s1000000 configurations (>950 us). Retrieval runs consistently confirmed lower P95 wake-up latencies for s50000_aall, reaching as low as 82.49 us.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "explanation": "In training-table, s50000_aall achieved the lowest baseline P95 latency at 132.94 us compared to s50000_aone (277.46 us) and the s1000000 configurations (>950 us). Retrieval runs consistently confirmed lower P95 wake-up latencies for s50000_aall, reaching as low as 82.49 us."
+    },
+    "status": "valid",
+    "elapsed_seconds": 4.024578778000432
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4091,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"contrast_us\": -18.62369999999993, \"edges\": [], \"id\": \"interaction\", \"kind\": \"graph\", \"scope\": \"same measured table; graph is a reparameterization, not extra evidence\"}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "f60810ed1d943a718a9fb2f1564e9eb80fe63286d0631707866fb0a36d429cbe",
+    "input_evidence_ids": [
+      "training-table",
+      "interaction"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506788-iflT63PDOP3852NSxiFA",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 279,
+        "completion_tokens": 350,
+        "total_tokens": 629,
+        "cost": 0.00152175,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00152175,
+          "upstream_inference_prompt_cost": 0.00020925,
+          "upstream_inference_completions_cost": 0.0013125
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 266,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506789881439481
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\"training-table\"],\n  \"explanation\": \"According to the measured values in training-table, s50000_aall achieves the lowest periodic wake-up P95 latency at 132.9413 compared to all other evaluated configurations.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table"
+      ],
+      "explanation": "According to the measured values in training-table, s50000_aall achieves the lowest periodic wake-up P95 latency at 132.9413 compared to all other evaluated configurations."
+    },
+    "status": "valid",
+    "elapsed_seconds": 1.866878781998821
+  },
+  {
+    "variant": "model_only",
+    "seed": 4091,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": []}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "800b7da9ed2fbc6b4e60174a33f55af307dd58c7bdac3409ca764a0ab6a8c14f",
+    "input_evidence_ids": [],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506790-GAgDMcm2VAM4vsQqBW59",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 115,
+        "completion_tokens": 786,
+        "total_tokens": 901,
+        "cost": 0.00303375,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00303375,
+          "upstream_inference_prompt_cost": 8.625e-05,
+          "upstream_inference_completions_cost": 0.0029475
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 697,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506793752676512
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aone\",\n  \"cited_ids\": [],\n  \"explanation\": \"Selecting s50000_aone minimizes periodic wake-up P95 latency by waking a single waiter rather than all waiters, preventing thundering herd contention, while the shorter period reduces entry into deep power-saving C-states that inflate wake-up latency.\"\n}",
+    "answer": {
+      "config": "s50000_aone",
+      "cited_ids": [],
+      "explanation": "Selecting s50000_aone minimizes periodic wake-up P95 latency by waking a single waiter rather than all waiters, preventing thundering herd contention, while the shorter period reduces entry into deep power-saving C-states that inflate wake-up latency."
+    },
+    "status": "valid",
+    "elapsed_seconds": 3.871181736001745
+  },
+  {
+    "variant": "faithfulness",
+    "seed": 4091,
+    "status": "not_estimable",
+    "reason": "no citations or no same-kind uncited controls"
+  },
+  {
+    "variant": "full",
+    "seed": 4092,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"contrast_us\": -18.62369999999993, \"edges\": [], \"id\": \"interaction\", \"kind\": \"graph\", \"scope\": \"same measured table; graph is a reparameterization, not extra evidence\"}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-0-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 571.84, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-0-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1023.152, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-0-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1036.014, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-0-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 126.36, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-1-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 140.554, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-1-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1000.735, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-1-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 272.927, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-1-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 817.997, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-2-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 94.81, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-2-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 983.2, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-2-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1419.669, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-2-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 151.299, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-3-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 99.853, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-3-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 254.509, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-3-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.673, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-3-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1019.124, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-4-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1016.898, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-4-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 93.049, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-4-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 170.306, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-4-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1010.901, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-5-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 183.217, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-5-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 430.654, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-5-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 929.63, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-5-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 960.925, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-6-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 875.788, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-6-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 965.994, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-6-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 97.457, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-6-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 109.519, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-7-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1027.923, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-7-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 89.789, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-7-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 974.613, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-7-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 82.488, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-8-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 960.755, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-8-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 85.033, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-8-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.387, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-8-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 748.404, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-9-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 927.701, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-9-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.347, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-9-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.365, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-9-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 150.643, \"period_ns\": 3000000}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "6133e6e0203c5b8460d8ac76d69c687948dbf140081aab0fb569c0239c71e134",
+    "input_evidence_ids": [
+      "training-table",
+      "interaction",
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-0-s1000000_aall",
+      "retrieval-3-0-s1000000_aone",
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-1-s1000000_aall",
+      "retrieval-3-1-s50000_aone",
+      "retrieval-3-1-s1000000_aone",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-2-s1000000_aall",
+      "retrieval-3-2-s1000000_aone",
+      "retrieval-3-2-s50000_aone",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-3-s50000_aone",
+      "retrieval-3-3-s1000000_aone",
+      "retrieval-3-3-s1000000_aall",
+      "retrieval-3-4-s1000000_aall",
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-4-s50000_aone",
+      "retrieval-3-4-s1000000_aone",
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-5-s50000_aone",
+      "retrieval-3-5-s1000000_aone",
+      "retrieval-3-5-s1000000_aall",
+      "retrieval-3-6-s1000000_aall",
+      "retrieval-3-6-s1000000_aone",
+      "retrieval-3-6-s50000_aone",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s1000000_aone",
+      "retrieval-3-7-s50000_aone",
+      "retrieval-3-7-s1000000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s1000000_aone",
+      "retrieval-3-8-s50000_aone",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-8-s1000000_aall",
+      "retrieval-3-9-s1000000_aall",
+      "retrieval-3-9-s50000_aall",
+      "retrieval-3-9-s1000000_aone",
+      "retrieval-3-9-s50000_aone"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506793-z96FHT9VU62uBaJlYOYa",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 3311,
+        "completion_tokens": 651,
+        "total_tokens": 3962,
+        "cost": 0.0049245,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0049245,
+          "upstream_inference_prompt_cost": 0.00248325,
+          "upstream_inference_completions_cost": 0.00244125
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 468,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506796348236101
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"training-table\",\n    \"retrieval-3-0-s50000_aall\",\n    \"retrieval-3-4-s50000_aall\",\n    \"retrieval-3-7-s50000_aall\"\n  ],\n  \"explanation\": \"In training-table, s50000_aall achieves the lowest overall P95 latency (132.94 us vs 277.46 us for s50000_aone and >950 us for s1000000 variants). This performance is corroborated across retrieval runs where s50000_aall consistently achieves low latencies, dropping as low as 82.49 us.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "explanation": "In training-table, s50000_aall achieves the lowest overall P95 latency (132.94 us vs 277.46 us for s50000_aone and >950 us for s1000000 variants). This performance is corroborated across retrieval runs where s50000_aall consistently achieves low latencies, dropping as low as 82.49 us."
+    },
+    "status": "valid",
+    "elapsed_seconds": 2.595407597000303
+  },
+  {
+    "variant": "no_graph",
+    "seed": 4092,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-0-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 571.84, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-0-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1023.152, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-0-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1036.014, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-0-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 126.36, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-1-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 140.554, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-1-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1000.735, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-1-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 272.927, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-1-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 817.997, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-2-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 94.81, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-2-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 983.2, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-2-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1419.669, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-2-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 151.299, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-3-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 99.853, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-3-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 254.509, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-3-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.673, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-3-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1019.124, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-4-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 1016.898, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-4-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 93.049, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-4-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 170.306, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-4-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1010.901, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-5-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 183.217, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-5-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 430.654, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-5-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 929.63, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-5-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 960.925, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-6-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 875.788, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-6-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 965.994, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-6-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 97.457, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-6-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 109.519, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-7-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 1027.923, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-7-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 89.789, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-7-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 974.613, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-7-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 82.488, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-8-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 960.755, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-8-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 85.033, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-8-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.387, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-8-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 748.404, \"period_ns\": 3000000}, {\"config\": \"s1000000_aall\", \"id\": \"retrieval-3-9-s1000000_aall\", \"kind\": \"retrieval\", \"p95_us\": 927.701, \"period_ns\": 3000000}, {\"config\": \"s50000_aall\", \"id\": \"retrieval-3-9-s50000_aall\", \"kind\": \"retrieval\", \"p95_us\": 87.347, \"period_ns\": 3000000}, {\"config\": \"s1000000_aone\", \"id\": \"retrieval-3-9-s1000000_aone\", \"kind\": \"retrieval\", \"p95_us\": 985.365, \"period_ns\": 3000000}, {\"config\": \"s50000_aone\", \"id\": \"retrieval-3-9-s50000_aone\", \"kind\": \"retrieval\", \"p95_us\": 150.643, \"period_ns\": 3000000}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "0551e14a292df184aa38ce031353b4d6c619b560a34fdc53b7d6301d94943388",
+    "input_evidence_ids": [
+      "training-table",
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-0-s1000000_aall",
+      "retrieval-3-0-s1000000_aone",
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-1-s1000000_aall",
+      "retrieval-3-1-s50000_aone",
+      "retrieval-3-1-s1000000_aone",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-2-s1000000_aall",
+      "retrieval-3-2-s1000000_aone",
+      "retrieval-3-2-s50000_aone",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-3-s50000_aone",
+      "retrieval-3-3-s1000000_aone",
+      "retrieval-3-3-s1000000_aall",
+      "retrieval-3-4-s1000000_aall",
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-4-s50000_aone",
+      "retrieval-3-4-s1000000_aone",
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-5-s50000_aone",
+      "retrieval-3-5-s1000000_aone",
+      "retrieval-3-5-s1000000_aall",
+      "retrieval-3-6-s1000000_aall",
+      "retrieval-3-6-s1000000_aone",
+      "retrieval-3-6-s50000_aone",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s1000000_aone",
+      "retrieval-3-7-s50000_aone",
+      "retrieval-3-7-s1000000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s1000000_aone",
+      "retrieval-3-8-s50000_aone",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-8-s1000000_aall",
+      "retrieval-3-9-s1000000_aall",
+      "retrieval-3-9-s50000_aall",
+      "retrieval-3-9-s1000000_aone",
+      "retrieval-3-9-s50000_aone"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506796-pYGsZ9xI5GBMCLhlIeSJ",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 3252,
+        "completion_tokens": 853,
+        "total_tokens": 4105,
+        "cost": 0.00563775,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00563775,
+          "upstream_inference_prompt_cost": 0.002439,
+          "upstream_inference_completions_cost": 0.00319875
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 737,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506799818782019
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"training-table\",\n    \"retrieval-3-4-s50000_aall\",\n    \"retrieval-3-7-s50000_aall\",\n    \"retrieval-3-8-s50000_aall\",\n    \"retrieval-3-9-s50000_aall\"\n  ],\n  \"explanation\": \"Across the summary table and retrieval evaluations, s50000_aall consistently achieves the lowest P95 wake-up latency, recording 132.94 us in the training table and sub-100 us values in several runs including 82.49 us in retrieval-3-7.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "explanation": "Across the summary table and retrieval evaluations, s50000_aall consistently achieves the lowest P95 wake-up latency, recording 132.94 us in the training table and sub-100 us values in several runs including 82.49 us in retrieval-3-7."
+    },
+    "status": "valid",
+    "elapsed_seconds": 3.470468539999274
+  },
+  {
+    "variant": "no_retrieval",
+    "seed": 4092,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": [{\"id\": \"training-table\", \"kind\": \"table\", \"values\": {\"s1000000_aall\": 954.7558, \"s1000000_aone\": 1080.6555, \"s50000_aall\": 132.9413, \"s50000_aone\": 277.4647}}, {\"contrast_us\": -18.62369999999993, \"edges\": [], \"id\": \"interaction\", \"kind\": \"graph\", \"scope\": \"same measured table; graph is a reparameterization, not extra evidence\"}]}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "f60810ed1d943a718a9fb2f1564e9eb80fe63286d0631707866fb0a36d429cbe",
+    "input_evidence_ids": [
+      "training-table",
+      "interaction"
+    ],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506800-7g2mOOAIdN2Vqdso8AT8",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 279,
+        "completion_tokens": 360,
+        "total_tokens": 639,
+        "cost": 0.00155925,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00155925,
+          "upstream_inference_prompt_cost": 0.00020925,
+          "upstream_inference_completions_cost": 0.00135
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 235,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506801564550728
+    },
+    "raw_response": "{\"config\":\"s50000_aall\",\"cited_ids\":[\"training-table\"],\"explanation\":\"Based on training-table, s50000_aall achieves the lowest periodic wake-up P95 latency of 132.9413 compared to s50000_aone (277.4647), s1000000_aall (954.7558), and s1000000_aone (1080.6555).\"}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table"
+      ],
+      "explanation": "Based on training-table, s50000_aall achieves the lowest periodic wake-up P95 latency of 132.9413 compared to s50000_aone (277.4647), s1000000_aall (954.7558), and s1000000_aone (1080.6555)."
+    },
+    "status": "valid",
+    "elapsed_seconds": 1.7456706630000554
+  },
+  {
+    "variant": "model_only",
+    "seed": 4092,
+    "prompt": "{\"allowed_configs\": [\"s50000_aall\", \"s50000_aone\", \"s1000000_aall\", \"s1000000_aone\"], \"evidence\": []}",
+    "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+    "prompt_sha256": "800b7da9ed2fbc6b4e60174a33f55af307dd58c7bdac3409ca764a0ab6a8c14f",
+    "input_evidence_ids": [],
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506802-5hh714Ly8Pm2vc1Wcf4t",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 115,
+        "completion_tokens": 634,
+        "total_tokens": 749,
+        "cost": 0.00246375,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00246375,
+          "upstream_inference_prompt_cost": 8.625e-05,
+          "upstream_inference_completions_cost": 0.0023775
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 530,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506804996377575
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aone\",\n  \"cited_ids\": [],\n  \"explanation\": \"Selecting s50000_aone minimizes periodic wake-up P95 latency because waking a single thread (aone) avoids thundering herd contention compared to waking all threads (aall), and a smaller interval/scale (s50000 vs s1000000) prevents long queueing delays.\"\n}",
+    "answer": {
+      "config": "s50000_aone",
+      "cited_ids": [],
+      "explanation": "Selecting s50000_aone minimizes periodic wake-up P95 latency because waking a single thread (aone) avoids thundering herd contention compared to waking all threads (aall), and a smaller interval/scale (s50000 vs s1000000) prevents long queueing delays."
+    },
+    "status": "valid",
+    "elapsed_seconds": 3.4317793529990013
+  },
+  {
+    "variant": "faithfulness",
+    "seed": 4092,
+    "status": "not_estimable",
+    "reason": "no citations or no same-kind uncited controls"
+  }
+]

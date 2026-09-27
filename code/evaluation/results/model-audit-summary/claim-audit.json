@@ -1,5 +1,5 @@
 {
-  "method": "Manual check, one annotator (the authors), of every quantitative or comparative claim in each distinct explanation against the supplied prompt evidence. Responses were byte-identical across the five seeds for every variant, so each distinct explanation is audited once. List-valued statements count as one claim; comparative statements as another. Explanations are capped at 400 characters by the decoding grammar.",
+  "method": "Manual check, one annotator (the authors), of every quantitative or comparative claim in each distinct explanation against the supplied prompt evidence. Responses were byte-identical across the five seeds for every variant, so each distinct explanation is audited once. List-valued statements count as one claim; comparative statements as another. Explanations are capped at 400 characters by the decoding grammar. Statements that a configuration is \"consistently\" lowest or lowest in all runs are labeled overstated (s50000_aall is lowest in 8 of 10 retrieval blocks).",
   "evidence_facts": {
     "training_means_p95_us": {
       "s50000_aall": 132.9413,
@@ -630,7 +630,140 @@
       "claim": "s50000_aall is lowest across all retrieval runs",
       "verdict": "overstated",
       "check": "lowest in 8 of 10 retrieval blocks"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "s50000_aall is consistently the lowest in retrieval runs",
+      "verdict": "overstated",
+      "check": "lowest in 8 of 10 retrieval blocks"
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "claim": "s50000_aall is consistently the lowest in retrieval runs",
+      "verdict": "overstated",
+      "check": "lowest in 8 of 10 retrieval blocks"
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "claim": "training mean for s50000_aall is 132.94 us",
+      "verdict": "correct",
+      "check": "matches the table"
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "claim": "s50000_aall reaches as low as 82.49 us",
+      "verdict": "correct",
+      "check": "minimum retrieval run"
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "claim": "s50000_aall is consistently the lowest in retrieval runs",
+      "verdict": "overstated",
+      "check": "lowest in 8 of 10 retrieval blocks"
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "claim": "training table: s50000_aall 132.94 us versus 277.46 us and >950 us",
+      "verdict": "correct",
+      "check": "matches the table"
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "claim": "s50000_aall reaches as low as 82.49 us",
+      "verdict": "correct",
+      "check": "minimum retrieval run"
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "claim": "training table: s50000_aall 132.94 us versus 277.46 us and >950 us",
+      "verdict": "correct",
+      "check": "matches the table"
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "claim": "retrieval runs 0, 4, 7 give 126.36, 93.05, 82.49 us",
+      "verdict": "correct",
+      "check": "matches the runs"
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "claim": "training table: s50000_aall 132.94 us versus 277.46 us and >950 us",
+      "verdict": "correct",
+      "check": "matches the table"
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "claim": "s50000_aall reaches as low as 82.49 us",
+      "verdict": "correct",
+      "check": "minimum retrieval run"
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "claim": "s50000_aall is consistently the lowest in retrieval runs",
+      "verdict": "overstated",
+      "check": "lowest in 8 of 10 retrieval blocks"
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "claim": "training table: s50000_aall 132.94 us versus 277.46 us and >950 us",
+      "verdict": "correct",
+      "check": "matches the table"
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "claim": "s50000_aall reaches as low as 82.49 us",
+      "verdict": "correct",
+      "check": "minimum retrieval run"
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "variant": "full",
+      "claim": "training table: s50000_aall lowest at 132.94 us",
+      "verdict": "correct",
+      "check": "matches the table"
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "variant": "full",
+      "claim": "s50000_aall is consistently the lowest in retrieval runs",
+      "verdict": "overstated",
+      "check": "lowest in 8 of 10 retrieval blocks"
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "variant": "full",
+      "claim": "s50000_aall frequently drops below 100 us",
+      "verdict": "correct",
+      "check": "6 of 10 runs"
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "variant": "full",
+      "claim": "training table: s50000_aall 132.94 us versus 277.46 us and >950 us",
+      "verdict": "correct",
+      "check": "matches the table"
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "variant": "full",
+      "claim": "s50000_aall is consistently the lowest in retrieval runs",
+      "verdict": "overstated",
+      "check": "lowest in 8 of 10 retrieval blocks"
     }
   ],
-  "hosted_scope": "Hosted models (Llama-3.3-70B, Qwen3-235B-A22B-2507, DeepSeek-V3.2, Nemotron-3-Ultra-550B-A55B via OpenRouter) returned different text across seeds; for them only the distinct full-context explanations are audited (4, 3, 5 and 5), with the same labels."
+  "hosted_scope": "Hosted models (Llama-3.3-70B, Qwen3-235B-A22B-2507, DeepSeek-V3.2, Nemotron-3-Ultra-550B-A55B, Gemini 3.8 Flash and Gemini 3.1 Pro preview via OpenRouter) returned different text across seeds; for them only the distinct full-context explanations are audited (4, 3, 5, 5, 5 and 2), with the same labels."
 }

@@ -1,0 +1,116 @@
+[
+  {
+    "arm": "delete_cited",
+    "removed": [
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-7-s50000_aall",
+      "training-table"
+    ],
+    "prompt_sha256": "d4d22bfb6ef348058721e822d96e597194502edb84a4f0179f43368f300ff7d8",
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506805-QE4sXfzxTdJPplJeYyQH",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 2986,
+        "completion_tokens": 1233,
+        "total_tokens": 4219,
+        "cost": 0.00686325,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00686325,
+          "upstream_inference_prompt_cost": 0.0022395,
+          "upstream_inference_completions_cost": 0.00462375
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1078,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506808957227696
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"retrieval-3-9-s50000_aall\",\n    \"retrieval-3-8-s50000_aall\",\n    \"retrieval-3-2-s50000_aall\",\n    \"retrieval-3-3-s50000_aall\"\n  ],\n  \"explanation\": \"Across repeated measurements at a 3ms period, s50000_aall consistently demonstrates the lowest periodic wake-up P95 latency, regularly achieving sub-100 us latencies (e.g., ~87.35 us and ~87.39 us) and avoiding the higher latency spikes seen in s50000_aone and the ~800-1400 us latencies observed for all s1000000 configurations.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-9-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall"
+      ],
+      "explanation": "Across repeated measurements at a 3ms period, s50000_aall consistently demonstrates the lowest periodic wake-up P95 latency, regularly achieving sub-100 us latencies (e.g., ~87.35 us and ~87.39 us) and avoiding the higher latency spikes seen in s50000_aone and the ~800-1400 us latencies observed for all s1000000 configurations."
+    },
+    "status": "valid",
+    "action_changed": false,
+    "elapsed_seconds": 3.850372652999795
+  },
+  {
+    "arm": "delete_control",
+    "removed": [
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-3-s50000_aall",
+      "training-table"
+    ],
+    "prompt_sha256": "834849d1d57c55da4730050bc3abe752cd1cac75acd0073b3ce4226de6fba30c",
+    "response_meta": {
+      "reported_model": "google/gemini-3.8-flash",
+      "response_id": "gen-1790506809-u93CeEsfPfR6T4mjkR8T",
+      "system_fingerprint": null,
+      "routed_provider": "Google AI Studio",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 2986,
+        "completion_tokens": 1165,
+        "total_tokens": 4151,
+        "cost": 0.00660825,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00660825,
+          "upstream_inference_prompt_cost": 0.0022395,
+          "upstream_inference_completions_cost": 0.00436875
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1008,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506812917996722
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"retrieval-3-4-s50000_aall\",\n    \"retrieval-3-7-s50000_aall\",\n    \"retrieval-3-8-s50000_aall\",\n    \"retrieval-3-9-s50000_aall\"\n  ],\n  \"explanation\": \"Across the measured runs, s50000_aall consistently achieves the lowest P95 latency, often dipping below 90 us (e.g., 82.488 us in retrieval-3-7-s50000_aall and 87.347 us in retrieval-3-9-s50000_aall), substantially outperforming s50000_aone and the 1000000 configs.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "explanation": "Across the measured runs, s50000_aall consistently achieves the lowest P95 latency, often dipping below 90 us (e.g., 82.488 us in retrieval-3-7-s50000_aall and 87.347 us in retrieval-3-9-s50000_aall), substantially outperforming s50000_aone and the 1000000 configs."
+    },
+    "status": "valid",
+    "action_changed": false,
+    "elapsed_seconds": 3.9606572989978304
+  }
+]

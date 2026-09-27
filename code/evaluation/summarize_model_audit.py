@@ -123,7 +123,8 @@ def markdown(summaries):
 SHORT = {'Qwen2.5-7B-Instruct-Q4_K_M': 'Qwen-7B', 'Meta-Llama-3.1-8B-Instruct-Q4_K_M': 'Llama-8B',
          'Qwen2.5-14B-Instruct-Q4_K_M': 'Qwen-14B', 'phi-4-Q4_K': 'Phi-4',
          'meta-llama/llama-3.3-70b-instruct': 'Llama-70B', 'qwen/qwen3-235b-a22b-2507': 'Qwen3-235B',
-         'deepseek/deepseek-v3.2': 'DeepSeek-V3.2', 'nvidia/nemotron-3-ultra-550b-a55b': 'Nemotron-550B'}
+         'deepseek/deepseek-v3.2': 'DeepSeek-V3.2', 'nvidia/nemotron-3-ultra-550b-a55b': 'Nemotron-550B',
+         'google/gemini-3.8-flash': 'Gemini-Flash', 'google/gemini-3.1-pro-preview': 'Gemini-Pro'}
 CODE = {'s50000_aall': 'ctrl', 's50000_aone': '50/1', 's1000000_aall': '1m/all', 's1000000_aone': '1m/1'}
 
 

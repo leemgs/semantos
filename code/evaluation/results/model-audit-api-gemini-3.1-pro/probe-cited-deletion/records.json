@@ -1,0 +1,122 @@
+[
+  {
+    "arm": "delete_cited",
+    "removed": [
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-4-s50000_aone",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-7-s50000_aone",
+      "training-table"
+    ],
+    "prompt_sha256": "788f84ea050f937f1e9e6ae8e57d20a237f75a90b52db01792f9fe103340cdb4",
+    "response_meta": {
+      "reported_model": "google/gemini-3.1-pro-preview",
+      "response_id": "gen-1790506971-v7y12h0P7ORuTUzUqyul",
+      "system_fingerprint": null,
+      "routed_provider": "Google",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 3835,
+        "completion_tokens": 2316,
+        "total_tokens": 6151,
+        "cost": 0.035462,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.035462,
+          "upstream_inference_prompt_cost": 0.00767,
+          "upstream_inference_completions_cost": 0.027792
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2054,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790506986869614531
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"retrieval-3-9-s50000_aall\",\n    \"retrieval-3-8-s50000_aall\",\n    \"retrieval-3-2-s50000_aall\",\n    \"retrieval-3-0-s50000_aone\",\n    \"retrieval-3-0-s1000000_aall\",\n    \"retrieval-3-0-s1000000_aone\"\n  ],\n  \"explanation\": \"The s50000_aall configuration consistently minimizes the periodic wake-up P95 latency, typically ranging from 87 to 183 microseconds. In contrast, s50000_aone exhibits higher and more variable latencies (up to 571 us), while the s1000000 configurations result in significantly higher latencies, generally between 700 and 1400 microseconds.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-9-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-0-s50000_aone",
+        "retrieval-3-0-s1000000_aall",
+        "retrieval-3-0-s1000000_aone"
+      ],
+      "explanation": "The s50000_aall configuration consistently minimizes the periodic wake-up P95 latency, typically ranging from 87 to 183 microseconds. In contrast, s50000_aone exhibits higher and more variable latencies (up to 571 us), while the s1000000 configurations result in significantly higher latencies, generally between 700 and 1400 microseconds."
+    },
+    "status": "valid",
+    "action_changed": false,
+    "elapsed_seconds": 15.977266197001882
+  },
+  {
+    "arm": "delete_control",
+    "removed": [
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-1-s50000_aone",
+      "training-table"
+    ],
+    "prompt_sha256": "d098ac6fba4e54e37c9e7ec246f5a04d37493fa39d37f701335dd21168484e4a",
+    "response_meta": {
+      "reported_model": "google/gemini-3.1-pro-preview",
+      "response_id": "gen-1790506987-tl02Yvwiuy8JIc3tLjo7",
+      "system_fingerprint": null,
+      "routed_provider": "Google",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 3834,
+        "completion_tokens": 2372,
+        "total_tokens": 6206,
+        "cost": 0.036132,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.036132,
+          "upstream_inference_prompt_cost": 0.007668,
+          "upstream_inference_completions_cost": 0.028464
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2057,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790507003362963737
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"retrieval-3-7-s50000_aall\",\n    \"retrieval-3-7-s50000_aone\",\n    \"retrieval-3-7-s1000000_aall\",\n    \"retrieval-3-4-s50000_aall\",\n    \"retrieval-3-4-s50000_aone\",\n    \"retrieval-3-4-s1000000_aall\"\n  ],\n  \"explanation\": \"The s50000_aall configuration consistently achieves the lowest P95 latency across multiple retrieval runs. For example, in run 3-7, s50000_aall recorded 82.49 \u00b5s, outperforming s50000_aone (89.79 \u00b5s) and significantly beating s1000000_aall (974.61 \u00b5s). Similar trends are observed in run 3-4, where s50000_aall achieved 93.05 \u00b5s compared to 170.31 \u00b5s for s50000_aone.\"\n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-7-s50000_aone",
+        "retrieval-3-7-s1000000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-4-s50000_aone",
+        "retrieval-3-4-s1000000_aall"
+      ],
+      "explanation": "The s50000_aall configuration consistently achieves the lowest P95 latency across multiple retrieval runs. For example, in run 3-7, s50000_aall recorded 82.49 \u00b5s, outperforming s50000_aone (89.79 \u00b5s) and significantly beating s1000000_aall (974.61 \u00b5s). Similar trends are observed in run 3-4, where s50000_aall achieved 93.05 \u00b5s compared to 170.31 \u00b5s for s50000_aone."
+    },
+    "status": "valid",
+    "action_changed": false,
+    "elapsed_seconds": 16.493236663998687
+  }
+]

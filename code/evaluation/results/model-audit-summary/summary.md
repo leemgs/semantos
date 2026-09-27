@@ -193,4 +193,48 @@ Faithfulness: 5 estimable seeds, 0 not estimable; action changed after deleting 
 | s50000_aall | 5 | 179.7 ± 102.0 | 0.0 ± 0.0 |
 | s50000_aall | 8 | 155.7 ± 64.4 | 0.0 ± 0.0 |
 
+## google/gemini-3.8-flash
+
+Hosted via openrouter (weights not hashable); reported models ['google/gemini-3.8-flash'], routed providers ['Google AI Studio'], fingerprints ['None']; seeds [4088, 4089, 4090, 4091, 4092]; 20/20 valid calls, 68 s total (3.4 s/call).
+
+| Variant | Valid/calls | Choices | Mean citations | Cites table | Cites graph | Quoted decimals in prompt |
+|---|---|---|---|---|---|---|
+| full | 5/5 | {'s50000_aall': 5} | 4.2 | 5 | 0 | 12/16 |
+| no_graph | 5/5 | {'s50000_aall': 5} | 5.0 | 5 | 0 | 6/12 |
+| no_retrieval | 5/5 | {'s50000_aall': 5} | 1.0 | 5 | 0 | 11/11 |
+| model_only | 5/5 | {'s50000_aone': 5} | 0.0 | 0 | 0 | 0/0 |
+
+Probe (exploratory post hoc probe; not part of the preregistered audit): delete_cited -> s50000_aall (changed: False); delete_control -> s50000_aall (changed: False).
+
+Faithfulness: 0 estimable seeds, 5 not estimable; action changed after deleting cited context in 0, after deleting matched uncited context in 0.
+
+| Chosen config | Period ms | Test P95 us ± 95% CI | Paired reduction % ± 95% CI |
+|---|---|---|---|
+| s50000_aall | 5 | 179.7 ± 102.0 | 0.0 ± 0.0 |
+| s50000_aall | 8 | 155.7 ± 64.4 | 0.0 ± 0.0 |
+| s50000_aone | 5 | 344.2 ± 123.0 | -145.0 ± 125.2 |
+| s50000_aone | 8 | 390.5 ± 183.3 | -179.8 ± 155.6 |
+
+## google/gemini-3.1-pro-preview
+
+Hosted via openrouter (weights not hashable); reported models ['google/gemini-3.1-pro-preview'], routed providers ['Google'], fingerprints ['None']; seeds [4088, 4089, 4090, 4091, 4092]; 20/20 valid calls, 158 s total (7.9 s/call).
+
+| Variant | Valid/calls | Choices | Mean citations | Cites table | Cites graph | Quoted decimals in prompt |
+|---|---|---|---|---|---|---|
+| full | 5/5 | {'s50000_aall': 5} | 5.2 | 5 | 0 | 9/9 |
+| no_graph | 5/5 | {'s50000_aall': 5} | 4.8 | 5 | 0 | 14/20 |
+| no_retrieval | 5/5 | {'s50000_aall': 5} | 1.0 | 5 | 0 | 5/5 |
+| model_only | 5/5 | {'s50000_aone': 5} | 0.0 | 0 | 0 | 0/0 |
+
+Probe (exploratory post hoc probe; not part of the preregistered audit): delete_cited -> s50000_aall (changed: False); delete_control -> s50000_aall (changed: False).
+
+Faithfulness: 0 estimable seeds, 5 not estimable; action changed after deleting cited context in 0, after deleting matched uncited context in 0.
+
+| Chosen config | Period ms | Test P95 us ± 95% CI | Paired reduction % ± 95% CI |
+|---|---|---|---|
+| s50000_aall | 5 | 179.7 ± 102.0 | 0.0 ± 0.0 |
+| s50000_aall | 8 | 155.7 ± 64.4 | 0.0 ± 0.0 |
+| s50000_aone | 5 | 344.2 ± 123.0 | -145.0 ± 125.2 |
+| s50000_aone | 8 | 390.5 ± 183.3 | -179.8 ± 155.6 |
+
 Valid outputs and unchanged choices are not an LLM advantage; five seeds under greedy decoding are not independent samples.
