@@ -14,6 +14,7 @@ import controlled_kernel as ck
 from analyze_controlled import analyze
 from model_audit import api_backend, evidence, experiment, heldout, validate_answer
 from cited_deletion_probe import controls_for
+import optimizer_baselines as ob
 from summarize_model_audit import numbers_grounded
 
 
@@ -122,6 +123,27 @@ class ControlledTests(unittest.TestCase):
         self.assertEqual(out['meta']['retried_errors'][0]['status'], 429)
         self.assertIsNone(manifest['sha256'])
         self.assertNotIn('sk-test-secret', json.dumps(manifest))
+
+    def test_optimizer_baselines_respect_budget_and_start_with_each_config(self):
+        import random as _random
+        _, pool, features = ob.training_pool(ROOT/'evaluation/results/controlled-2026-09-26')
+        for method in ob.METHODS:
+            for budget in (4, 9):
+                out = ob.run(method, budget, pool, features, _random.Random(f'{method}-{budget}'))
+                self.assertEqual(sum(out['pulls'].values()), budget)
+                self.assertTrue(all(n >= 1 for n in out['pulls'].values()))
+                self.assertIn(out['choice'], pool)
+                again = ob.run(method, budget, pool, features, _random.Random(f'{method}-{budget}'))
+                self.assertEqual(out, again)
+
+    def test_optimizer_baselines_recorded_summary_matches_rerun(self):
+        root = ROOT/'evaluation/results/optimizer-baselines-2026-09-27'
+        runs = json.loads((root/'runs.json').read_text())
+        _, pool, features = ob.training_pool(ROOT/'evaluation/results/controlled-2026-09-26')
+        import random as _random
+        for x in runs[::997]:
+            rng = _random.Random(f"{x['method']}-{x['budget']}-{4088+x['replicate']}")
+            self.assertEqual(ob.run(x['method'], x['budget'], pool, features, rng)['choice'], x['choice'])
 
     def test_numbers_grounded_is_lexical(self):
         record = {'prompt': '{"p95_us": 126.36}',

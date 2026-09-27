@@ -1,0 +1,242 @@
+[
+  {
+    "method": "random",
+    "budget": 4,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 619,
+      "s50000_aone": 381,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.619,
+    "mean_pulls_1ms_configs": 2,
+    "expected_paired_change_pct_5ms": -55.22877199041423,
+    "expected_paired_change_pct_8ms": -68.50551099825698
+  },
+  {
+    "method": "random",
+    "budget": 8,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 736,
+      "s50000_aone": 264,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.736,
+    "mean_pulls_1ms_configs": 3.975,
+    "expected_paired_change_pct_5ms": -38.2687553949327,
+    "expected_paired_change_pct_8ms": -47.468385573595384
+  },
+  {
+    "method": "random",
+    "budget": 16,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 851,
+      "s50000_aone": 149,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.851,
+    "mean_pulls_1ms_configs": 7.97,
+    "expected_paired_change_pct_5ms": -21.598653613049134,
+    "expected_paired_change_pct_8ms": -26.79086913055194
+  },
+  {
+    "method": "random",
+    "budget": 40,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 981,
+      "s50000_aone": 19,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.981,
+    "mean_pulls_1ms_configs": 19.799,
+    "expected_paired_change_pct_5ms": -2.754190729180762,
+    "expected_paired_change_pct_8ms": -3.416285325372395
+  },
+  {
+    "method": "egreedy",
+    "budget": 4,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 649,
+      "s50000_aone": 351,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.649,
+    "mean_pulls_1ms_configs": 2,
+    "expected_paired_change_pct_5ms": -50.8800497864446,
+    "expected_paired_change_pct_8ms": -63.111376273984774
+  },
+  {
+    "method": "egreedy",
+    "budget": 8,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 865,
+      "s50000_aone": 135,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.865,
+    "mean_pulls_1ms_configs": 2.195,
+    "expected_paired_change_pct_5ms": -19.56924991786331,
+    "expected_paired_change_pct_8ms": -24.273606259224913
+  },
+  {
+    "method": "egreedy",
+    "budget": 16,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 946,
+      "s50000_aone": 54,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.946,
+    "mean_pulls_1ms_configs": 2.581,
+    "expected_paired_change_pct_5ms": -7.827699967145324,
+    "expected_paired_change_pct_8ms": -9.709442503689965
+  },
+  {
+    "method": "egreedy",
+    "budget": 40,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 993,
+      "s50000_aone": 7,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.993,
+    "mean_pulls_1ms_configs": 3.838,
+    "expected_paired_change_pct_5ms": -1.0147018475929124,
+    "expected_paired_change_pct_8ms": -1.258631435663514
+  },
+  {
+    "method": "ucb1",
+    "budget": 4,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 649,
+      "s50000_aone": 351,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.649,
+    "mean_pulls_1ms_configs": 2,
+    "expected_paired_change_pct_5ms": -50.8800497864446,
+    "expected_paired_change_pct_8ms": -63.111376273984774
+  },
+  {
+    "method": "ucb1",
+    "budget": 8,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 774,
+      "s50000_aone": 226,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.774,
+    "mean_pulls_1ms_configs": 3.907,
+    "expected_paired_change_pct_5ms": -32.76037393657117,
+    "expected_paired_change_pct_8ms": -40.63581492285059
+  },
+  {
+    "method": "ucb1",
+    "budget": 16,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 914,
+      "s50000_aone": 86,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.914,
+    "mean_pulls_1ms_configs": 5.875,
+    "expected_paired_change_pct_5ms": -12.466336984712923,
+    "expected_paired_change_pct_8ms": -15.463186209580314
+  },
+  {
+    "method": "ucb1",
+    "budget": 40,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 994,
+      "s50000_aone": 6,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.994,
+    "mean_pulls_1ms_configs": 12.046,
+    "expected_paired_change_pct_5ms": -0.8697444407939249,
+    "expected_paired_change_pct_8ms": -1.0788269448544405
+  },
+  {
+    "method": "gp_ei",
+    "budget": 4,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 648,
+      "s50000_aone": 352,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.648,
+    "mean_pulls_1ms_configs": 2,
+    "expected_paired_change_pct_5ms": -51.02500719324359,
+    "expected_paired_change_pct_8ms": -63.29118076479385
+  },
+  {
+    "method": "gp_ei",
+    "budget": 8,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 829,
+      "s50000_aone": 171,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.829,
+    "mean_pulls_1ms_configs": 2,
+    "expected_paired_change_pct_5ms": -24.78771656262686,
+    "expected_paired_change_pct_8ms": -30.746567928351556
+  },
+  {
+    "method": "gp_ei",
+    "budget": 16,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 946,
+      "s50000_aone": 54,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.946,
+    "mean_pulls_1ms_configs": 2.003,
+    "expected_paired_change_pct_5ms": -7.827699967145324,
+    "expected_paired_change_pct_8ms": -9.709442503689965
+  },
+  {
+    "method": "gp_ei",
+    "budget": 40,
+    "replicates": 1000,
+    "choices": {
+      "s50000_aall": 991,
+      "s50000_aone": 9,
+      "s1000000_aall": 0,
+      "s1000000_aone": 0
+    },
+    "control_fraction": 0.991,
+    "mean_pulls_1ms_configs": 2.46,
+    "expected_paired_change_pct_5ms": -1.3046166611908874,
+    "expected_paired_change_pct_8ms": -1.618240417281661
+  }
+]

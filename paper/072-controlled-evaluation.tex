@@ -13,6 +13,16 @@ The empirical selector minimizes mean training-run P95 over the four configurati
 
 Both informed selectors chose 50\,$\mu$s slack and all CPUs, identical to control; their paired improvement is exactly zero in this replay. Control P95 is $179.7\pm102.0$ and $155.7\pm64.4\,\mu$s at 5 and 8\,ms (95\% Student-$t$ half-width across ten blocks). The training interaction contrast is $-18.6\,\mu$s; the prespecified normalized-contrast bootstrap emitted no edge because its interval included zero. We do not turn a nonsignificant contrast into a dependency rule or a semantic-reasoning gain. Acquisition took 6.54\,s for training, 8.29\,s for retrieval and 10.15\,s for calibration; graph construction and selection took 0.10\,s, included in calibration-phase wall time.
 
+\paragraph{Matched-budget BO and RL.}
+Random search, $\epsilon$-greedy Q-learning ($\epsilon=0.1$), UCB1~\cite{Auer2002UCB} and Gaussian-process expected-improvement BO~\cite{Snoek2012BO} each evaluate $B\in\{4,8,16,40\}$ training runs, starting with one per configuration; an evaluation returns the P95 of a recorded run of the chosen configuration, drawn with replacement. $B=40$ matches the table selector. Each method recommends its lowest observed or posterior mean, scored by the same replay over 1,000 seeds. Control is best at both test periods, so this comparison can reveal only losses (Table~\ref{tab:optimizers}). All methods converge on control, reaching 98--99\% at $B=40$; with small budgets, noisy single-CPU runs mislead them. BO spends fewest evaluations on the 1\,ms settings, whose training runs miss over 90\% of deadlines.
+
+\begin{table}[t]
+\centering\footnotesize\setlength{\tabcolsep}{2pt}
+\caption{Matched-budget replay: \% of 1,000 seeds choosing control\,/\,expected paired P95 change at 5\,ms (\%); last column: mean training evaluations of 1\,ms settings at $B=40$.}
+\label{tab:optimizers}
+\input{optimizer-baselines.tex}
+\end{table}
+
 \paragraph{Independent labels and gate misses.}
 For this experiment only, the score is a configuration's training deadline-miss fraction, fixed before calibration; it is not the REST reasoner's self-consistency score. A run is labeled unsafe when more than 10\% of its 40 observed events exceed the predeclared 200\,$\mu$s deadline. Thus the label depends on measured timing, independently of a veto or rollback. Every candidate is executed in an isolated owned process, permitting gate replay with observed outcomes for accepted and vetoed candidates. Calibration uses only 4\,ms runs. The three prespecified $\alpha$ values $\{.05,.10,.20\}$ all yield $\tau=.9225$ because the unsafe-score order statistics are tied.
 

@@ -17,7 +17,7 @@ reject, AI Reviewer)을 원문 PDF에서 다시 추출해 현재 `main`의 논�
 | a8cr | Moser 무관 인용 | 해결. 참고문헌 전부 제목·저자·출처 확인(신규 LLM 참고문헌 8건 포함) |
 | a8cr | 표 수치+Gaussian noise 코드 | 해결. `code/legacy/`에 격리·경고, 빌드/평가 경로에서 미사용. 모든 보고 수치는 원시 로그에서 스크립트로 산출 |
 | a8cr | 설명이 피상적 | 대부분 해결. 점수식·bundle 계약·결정 경로 그림·예시 trace. KB 검색 구현을 실제 유사도 검색으로 교정(이번) |
-| zBDs | 같은 입력의 전통 optimizer 대비 LLM 가치 | **실증 완료(부정적 결과).** 동일 증거로 비-LLM 선택기와 LLM 10종 비교: 개선한 모델 없음, Llama-8B는 오히려 악화. BO/RL 동일 예산 비교는 미실시 |
+| zBDs | 같은 입력의 전통 optimizer 대비 LLM 가치 | **실증 완료(부정적 결과).** 동일 증거로 비-LLM 선택기와 LLM 10종 비교: 개선한 모델 없음, Llama-8B는 오히려 악화. **BO/RL 동일 예산 비교도 실행(2026-09-27):** random·ε-greedy·UCB1·GP-EI가 B=4~40 평가로 모두 control에 수렴(B=40에서 98~99%), 적은 예산에서는 손실. 기록된 학습 실행의 offline replay |
 | zBDs | 그래프가 전부를 설명할 가능성 | 해결. graph induction이 edge를 내지 않았고, no-graph ablation은 모든 모델에서 선택 불변 |
 | zBDs | 실험 설정 불충분 | 해결. 호스트·커널·사전계획·seed·기간 분할·해시·모델 digest/ID·디코딩 설정 기록 |
 | zBDs | anomaly 정의·순환 논리 | 해결. 사전 deadline 기반 정의, 독립 label과 veto/rollback 분리 |
@@ -36,11 +36,11 @@ reject, AI Reviewer)을 원문 PDF에서 다시 추출해 현재 `main`의 논�
 | AI | checkpoint provenance | 해결. 로컬 가중치 해시, API는 보고 모델·라우팅 제공자 기록(재현성 한계 명시) |
 | AI | OS-R1 분류, τ 방향, 이질적 ms 집계, delay 상태 | 해결. 비교표 삭제·TuneAgent로 정확히 서술, α sweep과 혼동행렬, workload/period 분리, delay 미주장 |
 
-**남은 한계(논문에 명시됨):** 단일 호스트·단일 periodic workload·4개 설정의 작은 과제,
-BO/RL 동일 예산 비교 없음, API 모델은 비트 단위 재현 불가, 실제 VM-sysctl 배포·트래픽 격리 없음.
+**남은 한계(논문에 명시됨):** 단일 호스트·단일 periodic workload·4개 설정의 작은 과제
+(test에서 control이 최적이라 어떤 선택기도 개선을 보일 수 없음), BO/RL은 새 live 실행이 아닌 기록 실행 replay, API 모델은 비트 단위 재현 불가, 실제 VM-sysctl 배포·트래픽 격리 없음.
 OpenReview의 PDF·초록은 이 저장소 수정으로 갱신되지 않으며, 재제출은 새 원고로 해야 한다.
 
-검증: 테스트 37개 통과, 논문 본문 7쪽 이내(참고문헌 8쪽부터), 제출용 PDF 링크 0개,
+검증: 테스트 39개 통과, 논문 본문 7쪽 이내(참고문헌 8쪽부터), 제출용 PDF 링크 0개,
 undefined/overfull 경고 없음.
 
 ---

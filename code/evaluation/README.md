@@ -45,6 +45,30 @@ restore. Stage-trigger labels are not independent rollback ground truth. The
 analyzer deliberately reports rollback precision as null. The sample count
 depends on early stopping, so raw fractions cannot measure causal safety benefit.
 
+## Matched-budget BO and RL baselines
+
+```bash
+python3 evaluation/optimizer_baselines.py evaluation/results/controlled-2026-09-26 \
+  --out evaluation/results/new-optimizer-baselines --tex ../paper/optimizer-baselines.tex
+```
+
+Random search, epsilon-greedy Q-learning (epsilon 0.1), UCB1 and GP expected
+improvement (fixed RBF kernel on log10 slack and all-CPU indicator, standardized
+log P95) each evaluate B in {4, 8, 16, 40} training-period runs, after one
+evaluation per configuration. An evaluation returns the P95 of one recorded 2 ms
+training run of the chosen configuration, drawn with replacement; B=40 matches the
+table selector's forty runs. The recommendation (lowest observed or posterior mean)
+is scored by the same paired held-out replay as the other selectors, over 1,000
+string-seeded replicates, and test outcomes are read only afterwards.
+
+[Recorded result](results/optimizer-baselines-2026-09-27/summary.md): all methods
+converge on control (98-99% at B=40, expected paired change -1 to -3%); with B=4
+only 62-65% choose it (-51 to -55% at 5 ms), because single-CPU training runs are
+noisy. Mean evaluations of the 1 ms settings at B=40: GP-EI 2.5, epsilon-greedy 3.8,
+UCB1 12.0, random 19.8. Control is best at both test periods, so this task cannot
+show a gain for any selector. This is offline replay of measured runs, not new
+closed-loop acquisition.
+
 ## Executable model and context audit
 
 ```bash
