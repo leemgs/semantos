@@ -267,13 +267,15 @@ summarizer refuses them.
 ### Recorded results (2026-09-26)
 
 [`results/model-audit-summary/summary.md`](results/model-audit-summary/summary.md)
-summarizes two runs, both on a four-core CPU container with llama-cpp-python
+summarizes four runs, all on a four-core CPU container with llama-cpp-python
 0.3.35 and weights whose SHA-256 equal the publishers' Hugging Face LFS hashes:
 
 | Model | Weights SHA-256 | Calls | Mean s/call |
 |---|---|---|---|
 | Qwen2.5-7B-Instruct Q4_K_M (2 shards) | `dfce12e3…` + `539cf93f…` | 20/20 valid | 80.2 |
 | Llama-3.1-8B-Instruct Q4_K_M | `7b064f58…` | 30/30 valid | 77.5 |
+| Qwen2.5-14B-Instruct Q4_K_M (3 shards) | `a09ea5e7…` + `21b9457d…` + `c8d37006…` | 20/20 valid | 156.8 |
+| Phi-4 Q4_K (microsoft/phi-4-gguf) | `5652b9be…` | 30/30 valid | 150.5 |
 
 * Responses were byte-identical across the five seeds (greedy decoding), so the
   seeds are not independent replicates.
@@ -282,14 +284,23 @@ summarizes two runs, both on a four-core CPU container with llama-cpp-python
   on one CPU without evidence (-145 +- 125 % and -180 +- 156 % at 5/8 ms).
 * Llama chose 50 us slack on one CPU in all four contexts, i.e. worse than control
   on replay even when given only the training table.
+* Qwen2.5-14B behaves like Qwen2.5-7B. Phi-4 chooses control with evidence and
+  1 ms slack on one CPU without it (-631 +- 183 % and -699 +- 206 %).
+* Phi-4 is the only model with an estimable, citation-specific preregistered
+  result: deleting its six cited runs changes the action for all seeds, deleting
+  six matched uncited runs for none. Its preregistered controls are runs of other
+  configurations; the post hoc probe, whose controls are other runs of the chosen
+  configuration, agrees. The changed choices are not evidence-driven, because the
+  remaining runs still favor control.
 * Faithfulness: Qwen cites the single training table, which has no same-kind
   control, so it is non-estimable. For Llama, deleting cited and matched uncited
   runs both changed the action, so its sensitivity is not citation-specific.
   The post hoc probe (`probe-cited-deletion/`) found citation-specific sensitivity
   for Qwen in one deterministic response; this is not a faithfulness estimate.
-* [`claim-audit.json`](results/model-audit-summary/claim-audit.json) checks all 12
-  quantitative claims in the ten distinct explanations by hand: 1 correct, 1 partly
-  wrong, 2 unsupported priors, 8 wrong, misattributed or overstated. All quoted
+* [`claim-audit.json`](results/model-audit-summary/claim-audit.json) checks all 28
+  quantitative claims in the 20 distinct explanations by hand: 7 correct, 1 partly
+  wrong, 4 unsupported priors, 16 wrong, misattributed, overstated or in the wrong
+  unit (8 of 12 for the 7-8B models, 8 of 16 for the 14B models). All quoted
   decimals occur in the prompt, so citation checks verify provenance, not
   correctness.
 

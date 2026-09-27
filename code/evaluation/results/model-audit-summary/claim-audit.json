@@ -1,5 +1,5 @@
 {
-  "method": "Manual check, one annotator (the authors), of every quantitative or comparative claim in each distinct explanation against the supplied prompt evidence. Responses were byte-identical across the five seeds for every variant, so each distinct explanation is audited once. Explanations are capped at 400 characters by the decoding grammar.",
+  "method": "Manual check, one annotator (the authors), of every quantitative or comparative claim in each distinct explanation against the supplied prompt evidence. Responses were byte-identical across the five seeds for every variant, so each distinct explanation is audited once. List-valued statements count as one claim; comparative statements as another. Explanations are capped at 400 characters by the decoding grammar.",
   "evidence_facts": {
     "training_means_p95_us": {
       "s50000_aall": 132.9413,
@@ -33,7 +33,34 @@
       "s50000_aall": 8,
       "s50000_aone": 2
     },
-    "retrieval_blocks": 10
+    "retrieval_blocks": 10,
+    "retrieval_runs_in_evidence_order": {
+      "s50000_aall": [
+        126.36,
+        140.554,
+        94.81,
+        99.853,
+        93.049,
+        183.217,
+        109.519,
+        82.488,
+        87.387,
+        87.347
+      ],
+      "s50000_aone": [
+        571.84,
+        272.927,
+        151.299,
+        254.509,
+        170.306,
+        430.654,
+        97.457,
+        89.789,
+        85.033,
+        150.643
+      ]
+    },
+    "unit": "all latencies are microseconds"
   },
   "claims": [
     {
@@ -119,6 +146,118 @@
       "claim": "s50000_aall lowest at 82.488; all five cited runs below 100 us",
       "verdict": "partly wrong",
       "check": "82.488 is the global minimum, but one cited run (retrieval-3-6) is 109.519"
+    },
+    {
+      "model": "Qwen2.5-14B",
+      "variant": "full",
+      "claim": "training table gives s50000_aall 132.9413 ms",
+      "verdict": "wrong unit",
+      "check": "value is correct but in microseconds"
+    },
+    {
+      "model": "Qwen2.5-14B",
+      "variant": "full",
+      "claim": "s50000_aall has the lowest P95 across all retrieval runs",
+      "verdict": "overstated",
+      "check": "lowest in 8 of 10 retrieval blocks"
+    },
+    {
+      "model": "Qwen2.5-14B",
+      "variant": "no_graph",
+      "claim": "training table gives s50000_aall 132.9413 ms",
+      "verdict": "wrong unit",
+      "check": "value is correct but in microseconds"
+    },
+    {
+      "model": "Qwen2.5-14B",
+      "variant": "no_graph",
+      "claim": "s50000_aall retrieval runs range from 82.488 to 183.217",
+      "verdict": "correct",
+      "check": "matches minimum and maximum"
+    },
+    {
+      "model": "Qwen2.5-14B",
+      "variant": "no_retrieval",
+      "claim": "s50000_aall has the lowest P95, 132.9413 milliseconds",
+      "verdict": "wrong unit",
+      "check": "lowest is correct; unit is microseconds"
+    },
+    {
+      "model": "Qwen2.5-14B",
+      "variant": "model_only",
+      "claim": "'50000' denotes a smaller dataset size",
+      "verdict": "unsupported prior",
+      "check": "it is the timer slack in ns; no evidence supplied"
+    },
+    {
+      "model": "Phi-4",
+      "variant": "full",
+      "claim": "s50000_aall runs are 126.36, 140.554, 94.81, 99.853, 93.049, 183.217",
+      "verdict": "correct",
+      "check": "retrieval runs 0-5"
+    },
+    {
+      "model": "Phi-4",
+      "variant": "full",
+      "claim": "these are significantly lower than those of the other configurations",
+      "verdict": "overstated",
+      "check": "s50000_aone runs 85.0-97.5 are below 126.36 and 183.217"
+    },
+    {
+      "model": "Phi-4",
+      "variant": "no_graph",
+      "claim": "s50000_aall runs are 126.36, 140.554, 94.81, 99.853, 93.049, 183.217",
+      "verdict": "correct",
+      "check": "retrieval runs 0-5"
+    },
+    {
+      "model": "Phi-4",
+      "variant": "no_graph",
+      "claim": "these are significantly lower than those of the other configurations",
+      "verdict": "overstated",
+      "check": "s50000_aone runs 85.0-97.5 are below 126.36 and 183.217"
+    },
+    {
+      "model": "Phi-4",
+      "variant": "no_retrieval",
+      "claim": "lists the four training means and s50000_aall as lowest",
+      "verdict": "correct",
+      "check": "matches the table"
+    },
+    {
+      "model": "Phi-4",
+      "variant": "model_only",
+      "claim": "'1000000' is a larger sample size and one component reduces wake-ups",
+      "verdict": "unsupported prior",
+      "check": "names misread; no evidence supplied; worst replay of all choices"
+    },
+    {
+      "model": "Phi-4",
+      "variant": "delete_cited",
+      "claim": "s50000_aone runs are 571.84, 272.927, 151.299, 254.509, 170.306, 430.654",
+      "verdict": "correct",
+      "check": "retrieval runs 0-5"
+    },
+    {
+      "model": "Phi-4",
+      "variant": "delete_cited",
+      "claim": "these are significantly lower than those of the other configurations",
+      "verdict": "wrong",
+      "check": "remaining s50000_aall runs are 82.488-109.519"
+    },
+    {
+      "model": "Phi-4",
+      "variant": "delete_uncited",
+      "claim": "s50000_aall runs are 126.36, 140.554, 94.81, 99.853, 93.049, 183.217",
+      "verdict": "correct",
+      "check": "retrieval runs 0-5"
+    },
+    {
+      "model": "Phi-4",
+      "variant": "delete_uncited",
+      "claim": "these are significantly lower than those of other configurations",
+      "verdict": "overstated",
+      "check": "remaining s50000_aone runs 97.5-254.5 overlap 126.36-183.217"
     }
   ]
 }

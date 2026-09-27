@@ -117,7 +117,7 @@ def latex(summaries):
     short = {'Qwen2.5-7B-Instruct-Q4_K_M': 'Qwen-7B', 'Meta-Llama-3.1-8B-Instruct-Q4_K_M': 'Llama-8B',
              'Qwen2.5-14B-Instruct-Q4_K_M': 'Qwen-14B', 'phi-4-Q4_K': 'Phi-4'}
     abbrev = {'full': 'full', 'no_graph': 'no graph', 'no_retrieval': 'no retr.', 'model_only': 'none',
-              'delete_cited': 'del.\\ cited', 'delete_uncited': 'del.\\ uncited'}
+              'delete_cited': 'del.\\ cited', 'delete_uncited': 'del.\\ unc.'}
     rows = []
     for s in summaries:
         replay = {(h['config'], h['period_ms']): h['reduction_pct'] for h in s['heldout_by_choice']}
@@ -134,10 +134,13 @@ def latex(summaries):
                 cells.append('0' if r['mean'] == 0 and r['ci95_halfwidth'] == 0
                              else f"${r['mean']:.0f}\\pm{r['ci95_halfwidth']:.0f}$")
             name = short.get(s['model'], s['model']) if k == 0 else ''
-            label = {('full', 'no graph', 'no retr.', 'none'): 'all four',
-                     ('full', 'no graph', 'no retr.'): 'evidence'}.get(tuple(contexts), ', '.join(contexts))
+            if contexts[:4] == ['full', 'no graph', 'no retr.', 'none']:
+                contexts = ['all four'] + contexts[4:]
+            elif contexts[:3] == ['full', 'no graph', 'no retr.']:
+                contexts = ['evid.' if contexts[3:] else 'evidence'] + contexts[3:]
+            label = ', '.join(contexts)
             rows.append(f"{name} & {label} & {PRETTY.get(config, config)} & " + ' & '.join(cells) + ' \\\\')
-        rows.append('\\midrule')
+        rows.append('\\addlinespace[2pt]')
     return ('\\begin{tabular}{@{}llccc@{}}\n\\toprule\n'
             'Model & Context & Choice & 5\\,ms & 8\\,ms \\\\\n\\midrule\n'
             + '\n'.join(rows[:-1]) + '\n\\bottomrule\n\\end{tabular}\n')

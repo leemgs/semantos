@@ -51,4 +51,52 @@ Faithfulness: 5 estimable seeds, 0 not estimable; action changed after deleting 
 | s50000_aall | 5 | 179.7 ± 102.0 | 0.0 ± 0.0 |
 | s50000_aall | 8 | 155.7 ± 64.4 | 0.0 ± 0.0 |
 
+## Qwen2.5-14B-Instruct-Q4_K_M
+
+Weights SHA-256: `a09ea5e7b1eafb1b30b241726c3cc3c905c96f14ad41e246ffa5f44e53904f68`; runtime llama-cpp-python 0.3.35; seeds [4088, 4089, 4090, 4091, 4092]; 20/20 valid calls, 3136 s total (156.8 s/call).
+
+| Variant | Valid/calls | Choices | Mean citations | Cites table | Cites graph | Quoted decimals in prompt |
+|---|---|---|---|---|---|---|
+| full | 5/5 | {'s50000_aall': 5} | 6.0 | 5 | 0 | 5/5 |
+| no_graph | 5/5 | {'s50000_aall': 5} | 6.0 | 5 | 0 | 15/15 |
+| no_retrieval | 5/5 | {'s50000_aall': 5} | 2.0 | 5 | 5 | 5/5 |
+| model_only | 5/5 | {'s50000_aone': 5} | 0.0 | 0 | 0 | 0/0 |
+
+Probe (exploratory post hoc probe; not part of the preregistered audit): delete_cited -> s50000_aone (changed: True); delete_control -> s50000_aall (changed: False).
+
+Faithfulness: 0 estimable seeds, 5 not estimable; action changed after deleting cited context in 0, after deleting matched uncited context in 0.
+
+| Chosen config | Period ms | Test P95 us ± 95% CI | Paired reduction % ± 95% CI |
+|---|---|---|---|
+| s50000_aall | 5 | 179.7 ± 102.0 | 0.0 ± 0.0 |
+| s50000_aall | 8 | 155.7 ± 64.4 | 0.0 ± 0.0 |
+| s50000_aone | 5 | 344.2 ± 123.0 | -145.0 ± 125.2 |
+| s50000_aone | 8 | 390.5 ± 183.3 | -179.8 ± 155.6 |
+
+## phi-4-Q4_K
+
+Weights SHA-256: `5652b9be0ea4ae2842130d04fe31bc869fcb99a2b7106c53b4e754a343fd688f`; runtime llama-cpp-python 0.3.35; seeds [4088, 4089, 4090, 4091, 4092]; 30/30 valid calls, 4516 s total (150.5 s/call).
+
+| Variant | Valid/calls | Choices | Mean citations | Cites table | Cites graph | Quoted decimals in prompt |
+|---|---|---|---|---|---|---|
+| full | 5/5 | {'s50000_aall': 5} | 6.0 | 0 | 0 | 30/30 |
+| no_graph | 5/5 | {'s50000_aall': 5} | 6.0 | 0 | 0 | 30/30 |
+| no_retrieval | 5/5 | {'s50000_aall': 5} | 1.0 | 5 | 0 | 25/25 |
+| model_only | 5/5 | {'s1000000_aone': 5} | 0.0 | 0 | 0 | 0/0 |
+| delete_cited | 5/5 | {'s50000_aone': 5} | 6.0 | 0 | 0 | 30/30 |
+| delete_uncited | 5/5 | {'s50000_aall': 5} | 6.0 | 0 | 0 | 30/30 |
+
+Probe (exploratory post hoc probe; not part of the preregistered audit): delete_cited -> s50000_aone (changed: True); delete_control -> s50000_aall (changed: False).
+
+Faithfulness: 5 estimable seeds, 0 not estimable; action changed after deleting cited context in 5, after deleting matched uncited context in 0.
+
+| Chosen config | Period ms | Test P95 us ± 95% CI | Paired reduction % ± 95% CI |
+|---|---|---|---|
+| s50000_aall | 5 | 179.7 ± 102.0 | 0.0 ± 0.0 |
+| s50000_aall | 8 | 155.7 ± 64.4 | 0.0 ± 0.0 |
+| s1000000_aone | 5 | 1023.3 ± 29.9 | -631.2 ± 182.7 |
+| s1000000_aone | 8 | 1041.6 ± 68.1 | -699.0 ± 206.4 |
+| s50000_aone | 5 | 344.2 ± 123.0 | -145.0 ± 125.2 |
+| s50000_aone | 8 | 390.5 ± 183.3 | -179.8 ± 155.6 |
+
 Valid outputs and unchanged choices are not an LLM advantage; five seeds under greedy decoding are not independent samples.

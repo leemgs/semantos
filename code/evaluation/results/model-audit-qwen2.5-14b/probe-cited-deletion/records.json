@@ -1,0 +1,57 @@
+[
+  {
+    "arm": "delete_cited",
+    "removed": [
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-4-s50000_aall",
+      "training-table"
+    ],
+    "prompt_sha256": "cce4b61e1e28a52190bb4f661646ed09fda2f1ec51ff0eafe2bb916b1dfbe358",
+    "raw_response": "{\"config\": \"s50000_aone\", \"cited_ids\": [\"retrieval-3-0-s50000_aone\", \"retrieval-3-1-s50000_aone\", \"retrieval-3-2-s50000_aone\", \"retrieval-3-3-s50000_aone\", \"retrieval-3-4-s50000_aone\", \"retrieval-3-5-s50000_aone\"], \"explanation\": \"The configuration 's50000_aone' has the lowest P95 latency across multiple retrieval runs. For example, in the retrieval run with id 'retrieval-3-0-s50000_aone', the P95 latency is 571.84 microseconds, which is significantly lower than the P95 latency of other configurations. The retrieval run with id 'retrieval-3-1-s50000_aone' has a P95 latency of 272.927 microseconds, further confirming the low\" }",
+    "answer": {
+      "config": "s50000_aone",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aone",
+        "retrieval-3-1-s50000_aone",
+        "retrieval-3-2-s50000_aone",
+        "retrieval-3-3-s50000_aone",
+        "retrieval-3-4-s50000_aone",
+        "retrieval-3-5-s50000_aone"
+      ],
+      "explanation": "The configuration 's50000_aone' has the lowest P95 latency across multiple retrieval runs. For example, in the retrieval run with id 'retrieval-3-0-s50000_aone', the P95 latency is 571.84 microseconds, which is significantly lower than the P95 latency of other configurations. The retrieval run with id 'retrieval-3-1-s50000_aone' has a P95 latency of 272.927 microseconds, further confirming the low"
+    },
+    "status": "valid",
+    "action_changed": true,
+    "elapsed_seconds": 255.49026966300153
+  },
+  {
+    "arm": "delete_control",
+    "removed": [
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-9-s50000_aall",
+      "training-table"
+    ],
+    "prompt_sha256": "422ac96999df2b68e1ecb76f6867f3dcda786fefb3c61693b246aa95707f0ea4",
+    "raw_response": "{\"config\": \"s50000_aall\", \"cited_ids\": [\"retrieval-3-0-s50000_aall\", \"retrieval-3-1-s50000_aall\", \"retrieval-3-2-s50000_aall\", \"retrieval-3-3-s50000_aall\", \"retrieval-3-4-s50000_aall\"], \"explanation\": \"The configuration 's50000_aall' has the lowest P95 latency among the allowed configurations. The evidence shows that 's50000_aall' has a P95 latency of 93.049 to 140.554 microseconds, which is significantly lower than the other configurations. For instance, 's1000000_aall' has a P95 latency ranging from 748.404 to 1019.124 microseconds, and 's50000_aone' has a P95 latency ranging from 89.789 to 43\" }",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "explanation": "The configuration 's50000_aall' has the lowest P95 latency among the allowed configurations. The evidence shows that 's50000_aall' has a P95 latency of 93.049 to 140.554 microseconds, which is significantly lower than the other configurations. For instance, 's1000000_aall' has a P95 latency ranging from 748.404 to 1019.124 microseconds, and 's50000_aone' has a P95 latency ranging from 89.789 to 43"
+    },
+    "status": "valid",
+    "action_changed": false,
+    "elapsed_seconds": 244.31766239799617
+  }
+]

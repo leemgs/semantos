@@ -1,0 +1,18 @@
+{
+  "model": "phi-4-Q4_K",
+  "audit": "model-audit-phi-4",
+  "seed": 4088,
+  "weights_sha256": "5652b9be0ea4ae2842130d04fe31bc869fcb99a2b7106c53b4e754a343fd688f",
+  "source_sha256": "727118b99d365362784492b30e99bb3507a096d943c2d25a0bb09f5c8082a2c9",
+  "status": "exploratory post hoc probe; not part of the preregistered audit",
+  "full_choice": "s50000_aall",
+  "cited": [
+    "retrieval-3-0-s50000_aall",
+    "retrieval-3-1-s50000_aall",
+    "retrieval-3-2-s50000_aall",
+    "retrieval-3-3-s50000_aall",
+    "retrieval-3-4-s50000_aall",
+    "retrieval-3-5-s50000_aall"
+  ],
+  "started_utc_ns": 1790482969472662629
+}

@@ -1,0 +1,50 @@
+{
+  "model": "phi-4-Q4_K",
+  "backend": "llamacpp",
+  "purpose": "experiment",
+  "manifest": {
+    "format": "gguf",
+    "file": "phi-4-Q4_K.gguf",
+    "bytes": 9053114560,
+    "sha256": "5652b9be0ea4ae2842130d04fe31bc869fcb99a2b7106c53b4e754a343fd688f",
+    "gguf_general_metadata": {
+      "general.file_type": "15",
+      "general.quantization_version": "2",
+      "general.basename": "phi",
+      "general.name": "Phi 4",
+      "general.version": "4",
+      "general.organization": "Microsoft",
+      "general.type": "model",
+      "general.size_label": "15B",
+      "general.license.link": "https://huggingface.co/microsoft/phi-4/resolve/main/LICENSE",
+      "general.license": "mit",
+      "general.architecture": "phi3"
+    },
+    "shards": [
+      {
+        "file": "phi-4-Q4_K.gguf",
+        "bytes": 9053114560,
+        "sha256": "5652b9be0ea4ae2842130d04fe31bc869fcb99a2b7106c53b4e754a343fd688f"
+      }
+    ],
+    "runtime": "llama-cpp-python 0.3.35",
+    "n_ctx": 8192,
+    "response_format": "JSON schema grammar: config enum; <=6 citations restricted to supplied IDs; <=400-char explanation",
+    "max_tokens": 384
+  },
+  "manifest_sha256": "5652b9be0ea4ae2842130d04fe31bc869fcb99a2b7106c53b4e754a343fd688f",
+  "endpoint": null,
+  "seeds": [
+    4088,
+    4089,
+    4090,
+    4091,
+    4092
+  ],
+  "temperature": 0,
+  "num_predict": 256,
+  "source_sha256": "bb49f2ab8e2ec5b2631bdfdd96aa42e36ffca2dcfc5fa48335e5acf0a7a4fab6",
+  "input_hashes_sha256": "d5a1ec2d425fd9ea1ea45b5e65b2cca91f87ca88eff3b3cf879e80435d130b2c",
+  "scope": "retrospective frozen-input selection audit; no test outcomes in prompts",
+  "started_utc_ns": 1790477897479888140
+}
