@@ -114,7 +114,8 @@ def markdown(summaries):
 
 def latex(summaries):
     """Compact table: per model, contexts grouped by their (seed-invariant) choice."""
-    short = {'Qwen2.5-7B-Instruct-Q4_K_M': 'Qwen', 'Meta-Llama-3.1-8B-Instruct-Q4_K_M': 'Llama'}
+    short = {'Qwen2.5-7B-Instruct-Q4_K_M': 'Qwen-7B', 'Meta-Llama-3.1-8B-Instruct-Q4_K_M': 'Llama-8B',
+             'Qwen2.5-14B-Instruct-Q4_K_M': 'Qwen-14B', 'phi-4-Q4_K': 'Phi-4'}
     abbrev = {'full': 'full', 'no_graph': 'no graph', 'no_retrieval': 'no retr.', 'model_only': 'none',
               'delete_cited': 'del.\\ cited', 'delete_uncited': 'del.\\ uncited'}
     rows = []
