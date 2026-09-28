@@ -1,8 +1,10 @@
 SemantOS paper sources
 ======================
-`make` builds main.pdf and main_bluelink.pdf from main.tex.
-main.pdf omits reference-link annotations (upload this one);
-main_bluelink.pdf shows clickable reference URLs for link checking only.
+Target venue: ACL 2027 (ACL Rolling Review), long paper, anonymous review mode.
+`make` builds main.pdf from main.tex with the official ACL style files
+(acl.sty, acl_natbib.bst from github.com/acl-org/acl-style-files). Reference
+URLs are clickable. The unnumbered Limitations section (required) and Ethics
+Statement follow the Conclusion and do not count toward the 8-page limit.
 
 Measured evidence used by the paper (paths under ../code/evaluation/results/):
 - local-2026-09-26/: 3,000 baseline operations (local-measurements.tex).
@@ -22,4 +24,5 @@ paired offline replay. The model audit failed before inference; its status is
 stored under results/model-audit-2026-09-26/. No LLM-superiority,
 explanation-faithfulness or production-safety result is claimed.
 
-Current PDF: 8 pages (body ends on page 7; references on pages 7-8).
+Current PDF: 11 pages (body ends on page 8; Limitations and Ethics Statement
+on pages 8-9; references on pages 9-11).

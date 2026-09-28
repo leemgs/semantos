@@ -11,6 +11,7 @@ The aggregator chooses a modal complete bundle actually present in a model respo
 
 \begin{figure}[t]
 \centering
+\begin{adjustbox}{max width=\columnwidth}
 \begin{tikzpicture}[font=\scriptsize, >={Stealth[length=1.6mm]}, x=1mm, y=1mm,
   box/.style={draw, rounded corners=1.2pt, align=center, inner sep=1.8pt, minimum height=7mm},
   ev/.style={box, fill=black!6}, en/.style={box, fill=black!16, line width=0.6pt},
@@ -34,6 +35,7 @@ The aggregator chooses a modal complete bundle actually present in a model respo
 \node[tag, anchor=south west] at (tel.north west) {evidence};
 \node[tag, anchor=south east] at (cal.north east) {independent labels};
 \end{tikzpicture}
+\end{adjustbox}
 \caption{SemantOS decision path as implemented. Evidence, proposal and enforcement are separate components, so the same evidence can be given to a non-LLM optimizer and gate errors can be counted against independently defined labels. The REST runtime never writes kernel settings; a separate per-thread actuator (evaluated later) applies, verifies and restores timer slack and affinity in owned child processes.}
 \label{fig:runtime-path}
 \end{figure}
@@ -67,9 +69,6 @@ A real actuator must snapshot all old values, validate the full target configura
 
 \paragraph{One illustrative decision trace.}
 Consider supplied context with example values 5 and 15 for the two dirty ratios, and retrieved evidence IDs $e_1,t_1$. Suppose all three model samples agree on this pair and $w=0$, giving $u=0.30$. If an independently obtained threshold is $\tau=0.25$, the whole bundle is vetoed; if $\tau=0.35$, it can enter the dry-run canary after joint validation. The audit record includes the values, scores, threshold and decision. These numbers illustrate the contract and are not a measured recommendation or calibrated operating point. The initial artifact threshold is zero until calibration data is explicitly supplied.
-
-\paragraph{Scheduling scope.}
-The reasoner awaits model samples synchronously, and we make no fast-path latency or resource-footprint claim. A future nonblocking deployment path should separate synchronous policy enforcement from asynchronous proposals, record the objective weights and policy version per decision, and refresh graph and calibration snapshots with versioned evidence. No \emph{delay} state or immutable audit storage is claimed: logs are append-only files within a process, without tamper resistance.
 
 \subsection{Probability Statements for Gated Acceptance}
 \label{subsec:theorem}

@@ -1,20 +1,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% AAAI-27 Anonymous Submission --- built on the official AuthorKit27 preamble
-% (aaai2027.sty / aaai2027.bst). Font, bibliographystyle, and copyright text
-% are handled automatically by aaai2027.sty. DO NOT add times/helvet/courier,
-% hyperref/navigator, titlesec, geometry, setspace, or any link-embedding code.
+% ACL 2027 (ACL Rolling Review) anonymous submission, built on the official
+% ACL style files (acl.sty / acl_natbib.bst from github.com/acl-org/acl-style-files).
+% Change "review" to "final" for the camera-ready version.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
-\usepackage[submission]{aaai2027}  % DO NOT CHANGE THIS
-\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
-\usepackage{graphicx} % DO NOT CHANGE THIS
-\urlstyle{rm} % DO NOT CHANGE THIS
-\def\UrlFont{\rm}  % DO NOT CHANGE THIS
-\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
-\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
-\frenchspacing  % DO NOT CHANGE THIS
-\setlength{\pdfpagewidth}{8.5in} % DO NOT CHANGE THIS
-\setlength{\pdfpageheight}{11in} % DO NOT CHANGE THIS
+\documentclass[11pt]{article}
+\usepackage[review]{acl}
+
+% Standard package includes (from the ACL template)
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+\usepackage{adjustbox} % shrink over-wide floats to the column
+\usepackage{xurl}      % allow line breaks anywhere in long reference URLs
 
 % Algorithms (used by Algorithm 1)
 \usepackage{algorithm}
@@ -27,14 +28,8 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,calc}
 
-\pdfinfo{
-/TemplateVersion (2027.1)
-}
-
-\setcounter{secnumdepth}{0} % AAAI style: unnumbered sections
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Project-specific packages/macros (all AAAI-27 allowed)
+% Project-specific packages/macros
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -56,46 +51,10 @@
 \newcommand{\cmark}{\ding{51}} % check mark (tables)
 \newcommand{\xmark}{\ding{55}} % cross mark (tables)
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Reference web-link mode. TWO output PDFs are produced from THIS source,
-% selected by \debugenablereferencelink (default 0). Build BOTH with `make`
-% (see the Makefile), which overrides the default on the command line via
-% \def and writes distinct jobnames:
-%
-%   0 = SUBMISSION  ->  main.pdf
-%       No URLs, no link annotations. Fully AAAI-27 compliant. UPLOAD THIS.
-%   1 = DEBUG/REVIEW-ONLY  ->  main_bluelink.pdf
-%       Each reference URL is shown as a BLUE, CLICKABLE link so authors can
-%       click-check every reference. Implemented with the pdfTeX primitives
-%       \pdfstartlink/\pdfendlink (NOT hyperref, which aaai2027.sty blocks).
-%       This PDF embeds link annotations and MUST NOT be submitted to AAAI --
-%       that is why it is written to a SEPARATE file (main_bluelink.pdf), so
-%       the submission file main.pdf is always the compliant, link-free build.
-%
-%   \providecommand keeps 0 as the default for a plain `pdflatex main.tex`
-%   (safe: produces the compliant main.pdf), while `make` passes
-%   \def\debugenablereferencelink{1} to build main_bluelink.pdf.
-%   Each .bib entry carries note={\refurl{<url>}}; the bst is unmodified.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\providecommand{\debugenablereferencelink}{0} % 0 = submission (default); 1 = blue links
-\ifnum\debugenablereferencelink=1
-  \usepackage{xcolor}
-  \newcommand{\refurl}[1]{%
-    \newblock
-    \pdfstartlink
-      height \ht\strutbox depth \dp\strutbox
-      attr {/Border [0 0 0]}%                 hide the link border box
-      user {/Subtype /Link
-            /A << /S /URI /URI (#1) >>}%      clickable URI annotation
-    \textcolor{blue}{\urlstyle{rm}\url{#1}}%   blue URL text
-    \pdfendlink}
-\else
-  % submission: no URL, no annotation. The bst emits `\newblock \refurl{URL}.';
-  % also swallow that trailing period so entries do not end in ". .".
-  \makeatletter
-  \newcommand{\refurl}[1]{\@ifnextchar.{\@gobble}{}}%
-  \makeatother
-\fi
+% Each .bib entry carries note={\refurl{<url>}}. ACL permits hyperref, so the
+% reference URL is printed as a clickable link. The bst emits
+% `\newblock \refurl{URL}.', so the trailing period is kept.
+\newcommand{\refurl}[1]{\url{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{./000-title}
@@ -110,9 +69,12 @@
 \input{./040-design}
 \input{./070-evaluation}
 \input{./072-controlled-evaluation}
-\input{./080-discussion}
-\input{./085-ethics}
 \input{./100-conclusion}
+
+% Unnumbered sections required/permitted by ACL; they do not count toward
+% the page limit.
+\input{./090-limitations}
+\input{./085-ethics}
 
 \bibliography{reference-data}
 \end{document}
