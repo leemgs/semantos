@@ -1,18 +1,10 @@
 \section{Results}
 \label{sec:results}
 \label{subsec:followup}
+We report the audit at four levels, from the decision to the text that justifies it: what models choose (\S\ref{subsec:decisions}), what they cite (\S\ref{subsec:citations}), what their explanations claim (\S\ref{subsec:claims}) and whether the cited evidence matters (\S\ref{subsec:reliance}). A final subsection evaluates the testbed's risk gate (\S\ref{subsec:gate}).
+
 \subsection{Decisions: Evidence Is Necessary and Sufficient}
-Both informed non-LLM selectors choose the control, so their paired improvement is exactly zero; control test P95 is $179.7\pm102.0$ and $155.7\pm64.4\,\mu$s at 5 and 8\,ms (95\% half-widths across ten blocks; Appendix~\ref{app:measurements}). The control is also best on the test grid, so any deviation is a loss. The matched-budget optimizers converge on it too, choosing it in 98--99\% of 1,000 seeds at $B=40$; at small budgets, noisy single-CPU runs mislead them (Table~\ref{tab:optimizers}).
-
-\begin{table}[t]
-\centering\footnotesize\setlength{\tabcolsep}{2pt}
-\caption{Matched-budget replay: \% of 1,000 seeds choosing control\,/\,expected paired P95 change at 5\,ms (\%); last column: mean training evaluations of 1\,ms settings at $B=40$.}
-\label{tab:optimizers}
-\begin{adjustbox}{max width=\columnwidth}
-\input{optimizer-baselines.tex}
-\end{adjustbox}
-\end{table}
-
+\label{subsec:decisions}
 \begin{table}[t]
 \centering\footnotesize\setlength{\tabcolsep}{2.5pt}
 \caption{LLM decisions with evidence (full, no graph, no retrieval), without it, and after deleting cited or matched uncited evidence; superscripts count seeds; n/e: non-estimable; $^\dagger$hosted. Paired test P95 change versus control at 5 and 8\,ms (\%, 95\% half-width): ctrl 0; \protect\input{model-audit-legend.tex}\unskip.}
@@ -22,9 +14,18 @@ Both informed non-LLM selectors choose the control, so their paired improvement 
 \end{adjustbox}
 \end{table}
 
-Table~\ref{tab:model-audit} gives each model's choice under every input condition. With evidence, nine of ten models choose the control in all three evidence variants, exactly as table lookup does; Llama-3.1-8B instead picks \texttt{s50000\_aone}, which is worse on replay ($-145\pm125\%$ and $-180\pm156\%$). Without evidence, every model except Nemotron, which declares the default, chooses a worse setting in at least four of five seeds, usually single-CPU affinity with 50\,$\mu$s slack (six models) or with 1\,ms slack (three). The evidence is therefore necessary; in this task it is also sufficient, since no model improves on the selector that simply reads it. 249 of 250 calls returned schema-valid output.
+The table selector and its saturated-model equivalent choose the control, which is also best on the test grid, so any other choice is a loss; control test P95 is $179.7\pm102.0$ and $155.7\pm64.4\,\mu$s at 5 and 8\,ms (95\% half-widths across ten blocks). Matched-budget random search, Q-learning, UCB1 and BO converge on it as well, choosing it in 98--99\% of 1,000 seeds at $B=40$ (Appendix~\ref{app:measurements}).
+
+Table~\ref{tab:model-audit} gives each model's choice under every input condition. With evidence, nine of ten models choose the control in all three evidence variants, exactly as table lookup does; Llama-3.1-8B instead picks \texttt{s50000\_aone}, which is worse on replay ($-145\pm125\%$ and $-180\pm156\%$). Removing the graph item changes no choice, and removing the retrieval runs changes none either: the training table alone suffices. Without evidence, every model except Nemotron, which declares the default, chooses a worse setting in at least four of five seeds, usually single-CPU affinity with 50\,$\mu$s slack (six models) or with 1\,ms slack (three). The evidence is therefore necessary; in this task it is also sufficient, since no model improves on the selector that simply reads it. 249 of 250 calls returned schema-valid output.
+
+\subsection{Citations: Valid, One-Sided and Front-Loaded}
+\label{subsec:citations}
+Every citation refers to a supplied item, since the schema permits nothing else, but what models choose to cite is far from a balanced account of the evidence. Across the 50 full-context answers, 285 citations comprise 25 of the training table, none of the interaction-graph item, and 260 of individual retrieval runs. Of these 260, 252 are runs of the configuration the model chose; only Gemini~3.1 Pro ever cites a run of a competing configuration. The cited evidence is thus confirmatory: no answer from the other nine models cites a run of a competing configuration, although \texttt{s50000\_aone} beats the control in two of ten retrieval blocks.
+
+Citations also favor the start of the evidence list. Retrieval runs appear in block order, and 209 of the 260 retrieval citations fall in the first five of ten blocks. Seven models cite exactly a prefix of the blocks, typically blocks 0--4 or 0--5 of the chosen configuration, and so never cite that configuration's lowest run (block~7 for the control, block~8 for \texttt{s50000\_aone}). The six-citation cap in the schema makes a prefix convenient, but it does not explain why the prefix is chosen over the most informative runs; the pattern is consistent with the position effects reported for long contexts~\cite{Liu2024LostMiddle}. Counts are computed by \texttt{citation\_analysis.py}.
 
 \subsection{Explanations: Cited but Not Correct}
+\label{subsec:claims}
 \begin{table}[t]
 \centering\footnotesize\setlength{\tabcolsep}{2.5pt}
 \caption{Manual verification of quantitative and comparative claims in explanations against the supplied evidence. Corr.: correct; Over.: overstated; Wrong: wrong or partly wrong value; Unit/Src: wrong unit or evidence source; Prior: unsupported prior without evidence; Misst.: wrong, misattributed, overstated or wrong unit. Generated by \texttt{claim\_taxonomy.py}.}
@@ -52,23 +53,25 @@ Qwen-14B, prior & ``50000'' denotes a smaller dataset size & no evidence given; 
 \end{tabular}
 \end{table}
 
-Every citation in every valid answer refers to a supplied item, since the schema permits nothing else. The explanations are nevertheless often wrong about what those items say (Table~\ref{tab:claims}): 16 of 28 audited claims from local models and 25 of 69 from hosted models are misstated. Errors fall into four recurring patterns (Table~\ref{tab:claim-examples}).
+The explanations are often wrong about what the cited items say (Table~\ref{tab:claims}): 16 of 28 audited claims from local models and 25 of 69 from hosted models are misstated. Errors fall into four recurring patterns (Table~\ref{tab:claim-examples}).
 
-\emph{Overstated regularities.} Thirteen of the 19 overstatements assert that the chosen configuration is lowest ``consistently'' or in ``all'' retrieval runs, whereas it is lowest in 8 of 10 retrieval blocks; the other six claim ``significant'' differences that no test in the evidence supports.
+\emph{Overstated regularities.} Thirteen of the 19 overstatements assert that the chosen configuration is lowest ``consistently'' or in ``all'' retrieval runs, whereas it is lowest in 8 of 10 retrieval blocks; the other six claim ``significant'' differences that no test in the evidence supports. These claims are easier to make when, as above, the cited runs are all of one configuration.
 
-\emph{Range and extremum errors.} All 11 wrong values from hosted models misreport a range, an extremum or a cross-configuration ordering. Nemotron repeatedly gives the \texttt{s50000\_aone} range as 85.0--430.7\,$\mu$s (its maximum is 571.84), and DeepSeek-V3.2 states that the control is ``consistently lower than any'' \texttt{s50000\_aone} run although the ranges overlap (85.033 $<$ 183.217). Llama-3.1-8B reports 571.84\,$\mu$s, the \emph{maximum} of \texttt{s50000\_aone}, as the lowest P95, consistent with its wrong choice.
+\emph{Range and extremum errors.} All 11 wrong values from hosted models misreport a range, an extremum or a cross-configuration ordering. Nemotron repeatedly gives the \texttt{s50000\_aone} range as 85.0--430.7\,$\mu$s (its maximum is 571.84), and DeepSeek-V3.2 states that the control is ``consistently lower than any'' \texttt{s50000\_aone} run although the ranges overlap (Figure~\ref{fig:teaser}). Llama-3.1-8B reports 571.84\,$\mu$s, the \emph{maximum} of \texttt{s50000\_aone}, as the lowest P95, consistent with its wrong choice.
 
 \emph{Source and unit confusion.} Qwen2.5-7B attributes the retrieval value 126.36 to the training table, whose mean is 132.94; Qwen2.5-14B reports the training mean 132.9413 in milliseconds in three explanations, although the evidence declares microseconds.
 
-\emph{Invented semantics.} Without evidence, four local models justify their choice by assigning meanings to opaque identifiers, for instance reading ``50000'' as a smaller dataset size or ``one'' as a more aggressive approach. The configuration names carry no such information.
+\emph{Invented semantics.} Without evidence, all four local models justify their choice by assigning meanings to opaque identifiers, for instance reading ``50000'' as a smaller dataset size or ``one'' as a more aggressive approach. The configuration names carry no such information.
 
-These errors are largely decoupled from the decision: 35 of the 41 misstated claims accompany a choice of the control. Valid citations thus establish provenance, and a correct decision can coexist with an incorrect account of the evidence that supports it.
+These errors are largely decoupled from the decision: 35 of the 41 misstated claims accompany a choice of the control. Nor does variation in wording track variation in decisions: hosted models produced two to five distinct full-context explanations each while choosing the control in every seed. Valid citations thus establish provenance, and a correct decision can coexist with an incorrect account of the evidence that supports it.
 
 \subsection{Reliance: Rarely Estimable, Rarely Specific}
-Five models cite the training table in their full-context answers, so matched deletion is non-estimable for them. Among estimable models, only Phi-4 shows citation-specific reliance: deleting its six cited retrieval runs changes its choice in all five seeds while matched uncited deletion does not, but the new choice (\texttt{s50000\_aone}) contradicts the training table that remains in the prompt. Llama-3.1-8B changes its choice under both deletions, which indicates sensitivity to context rather than reliance on what it cites. Llama-3.3-70B, Qwen3 and Nemotron change under neither, which is consistent with the remaining evidence still favoring the control but uninformative about reliance. Deletion tests therefore need evidence sets with matched, redundant items per kind to be informative.
+\label{subsec:reliance}
+Five models cite the training table in their full-context answers, so matched deletion is non-estimable for them. Among estimable models, only Phi-4 shows citation-specific reliance: deleting its six cited retrieval runs changes its choice in all five seeds while matched uncited deletion does not, but the new choice (\texttt{s50000\_aone}) contradicts the training table that remains in the prompt. Llama-3.1-8B changes its choice under both deletions, which indicates sensitivity to context rather than reliance on what it cites. Llama-3.3-70B, Qwen3 and Nemotron change under neither, which is consistent with the remaining evidence still favoring the control but uninformative about reliance.
 
 \subsection{Enforcement: A Calibrated Gate under Shift}
-For the gate, the score is a configuration's training deadline-miss fraction, fixed before calibration, and calibration uses only 4\,ms runs; all three prespecified $\alpha\in\{.05,.10,.20\}$ yield $\tau=.9225$ because the unsafe-score order statistics are tied. Every candidate is executed in an isolated process, so accepted and vetoed candidates both have observed outcomes (Figure~\ref{fig:gate-replay}).
+\label{subsec:gate}
+Advice that is acted on needs a screen, and a screen's error rate must be judged by outcomes it does not define. For the gate, the score is a configuration's training deadline-miss fraction, fixed before calibration on 4\,ms runs only; all three prespecified $\alpha\in\{.05,.10,.20\}$ yield $\tau=.9225$ because the unsafe-score order statistics are tied. Every candidate is executed in an isolated process, so accepted and vetoed candidates both have observed outcomes (Figure~\ref{fig:gate-replay}).
 
 \begin{figure}[t]
 \centering
@@ -77,6 +80,4 @@ For the gate, the score is a configuration's training deadline-miss fraction, fi
 \label{fig:gate-replay}
 \end{figure}
 
-Unsafe acceptance is $5/25=20.0\%$ and $4/24=16.7\%$ among unsafe runs, above the nominal 5\% and 10\% levels; unsafe fractions among accepted runs are $5/20$ and $4/20$, and veto precision is $20/20$ in each period. The gate stays frozen throughout test. As with LLM explanations, a nominally calibrated signal is only as good as the exchangeability it assumes, and a period shift is enough to break it.
-
-Separately, the actuator executed all four configurations in ten blocks at each test period, observing stages of 8, 16 and 32 events and stopping when a stage's deadline-miss fraction exceeded 10\%. Of 80 executions, 66 stopped on a breach and 14 completed; all 80 restored and read back both original settings.
+Unsafe acceptance is $5/25=20.0\%$ and $4/24=16.7\%$ among unsafe runs, above the nominal 5\% and 10\% levels; unsafe fractions among accepted runs are $5/20$ and $4/20$, and veto precision is $20/20$ in each period. As with LLM explanations, a nominally calibrated signal is only as good as the exchangeability it assumes, and a period shift is enough to break it. The bounded actuator restored both original settings in all 80 staged executions (Appendix~\ref{app:measurements}).

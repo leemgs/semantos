@@ -358,6 +358,10 @@ summarizes four runs, all on a four-core CPU container with llama-cpp-python
 * [`claim_taxonomy.py`](claim_taxonomy.py) tabulates every labeled claim (local
   and hosted) by model and error type and writes the paper's claim table
   (`python3 claim_taxonomy.py --out ../../paper/claim-taxonomy.tex`).
+* [`citation_analysis.py`](citation_analysis.py) counts what the 50 valid
+  full-context answers cite (training table, graph item, runs of the chosen or
+  another configuration, and each cited run's position in the evidence list)
+  and writes [`citations.json`](results/model-audit-summary/citations.json).
 
 Hosted runs (2026-09-27, OpenRouter, `--response-format json_schema`,
 `--max-tokens 4096`, `--min-interval 2`; total cost about 0.5 USD):
