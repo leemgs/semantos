@@ -1,0 +1,57 @@
+\section{Testbed: SemantOS}
+\label{sec:testbed}
+\label{sec:semantos}
+SemantOS is a control loop with five components: telemetry, a graph and trace store, a reasoner, a runtime and an operator console (Figure~\ref{fig:runtime-path}). Its purpose here is to make the evidence, the proposal and the enforcement decision separately observable.
+
+\paragraph{Evidence.}
+The store holds a typed knob-interaction graph and measurement traces. For a lower-is-better loss $L$ and baseline values $a_0,b_0$, an interaction edge requires the contrast $I_{ab}=L(a,b)-L(a,b_0)-L(a_0,b)+L(a_0,b_0)$ from independently measured configurations, with a bootstrap interval over runs that excludes zero; an edge records its scope, values, measurement IDs and interval, and describes an empirical interaction rather than a causal coupling (Appendix~\ref{app:testbed}).
+
+\paragraph{Proposals.}
+The reasoner retrieves typed neighbors and lexically matched trace text~\cite{Lewis2020RAG} and requests $k=3$ samples~\cite{Wang2023SelfConsistency}. It returns a modal \emph{complete} bundle actually present in a response, rather than splicing per-knob winners into an unseen combination, together with the supplied context, prompt hash and raw samples. For a knob--value pair proposed in $v$ samples, a heuristic score $u=0.7(1-v/k)+0.3(1-w)$, clipped to $[0.02,1]$, combines disagreement with the strongest retrieved synergy weight $w$; it is not a calibrated probability. Failed samples stay in the denominator, and the reasoner abstains when no model responds or the context budget would force truncation.
+
+\begin{figure}[t]
+\centering
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tikzpicture}[font=\scriptsize, >={Stealth[length=1.6mm]}, x=1mm, y=1mm,
+  box/.style={draw, rounded corners=1.2pt, align=center, inner sep=1.8pt, minimum height=7mm},
+  ev/.style={box, fill=black!6}, en/.style={box, fill=black!16, line width=0.6pt},
+  tag/.style={font=\tiny\itshape, text=black!60}]
+\node[ev, text width=33mm] (tel) at (-19.5,0) {Workload telemetry\\(validity-checked)};
+\node[ev, text width=33mm] (kb)  at (19.5,0)  {Frozen typed graph\\+ retrieved traces};
+\node[box, text width=76mm] (rsn) at (0,-12) {\textbf{Reasoner}: $k{=}3$ model samples $\rightarrow$ one \emph{observed} complete bundle,\\heuristic score $u$ = max over members; abstains on invalid input};
+\node[en, text width=50mm] (val) at (-13,-24) {\textbf{Runtime}: validate the whole bundle\\(allowlist, bounds, joint constraints)};
+\node[ev, text width=20mm] (cal) at (29,-24) {Calibration\\labels $\rightarrow$ $\tau$};
+\node[box, text width=30mm] (veto)  at (-23,-36) {Veto every member\\($u{\ge}\tau$ or invalid)};
+\node[box, text width=40mm] (stage) at (17,-36) {Stage $5{\to}25{\to}50{\to}100\%$\\in memory only (dry run)};
+\node[box, text width=76mm] (trace) at (0,-48) {Decision trace: inputs, prompt hash, raw samples, $u$, $\tau$, decision};
+\draw[->] (tel) -- (tel |- rsn.north);
+\draw[->] (kb) -- (kb |- rsn.north);
+\draw[->] (rsn.south -| val) -- (val.north);
+\draw[->] (cal) -- (val);
+\draw[->] (val.south -| veto) -- (veto.north);
+\draw[->] (val.south) ++(12,0) -- (stage.north -| {$(val.south)+(12,0)$});
+\draw[->] (veto) -- (veto |- trace.north);
+\draw[->] (stage) -- (stage |- trace.north);
+\node[tag, anchor=south west] at (tel.north west) {evidence};
+\node[tag, anchor=south east] at (cal.north east) {independent labels};
+\end{tikzpicture}
+\end{adjustbox}
+\caption{SemantOS decision path. Evidence, proposal and enforcement are separate components, so the same frozen evidence can be given to a non-LLM selector, ablated or partially deleted, and gate errors can be counted against independently defined labels. The REST runtime is a dry run; a separate per-thread actuator applies, verifies and restores timer slack and affinity in owned child processes.}
+\label{fig:runtime-path}
+\end{figure}
+
+\paragraph{Enforcement.}
+The runtime validates a whole bundle (allowlisted knobs, bounds, joint constraints, no duplicates) and treats it atomically: if any member score satisfies $u\ge\tau$, every member is vetoed; otherwise the bundle enters a staged rollout. The REST runtime is a dry run that stages bundles in memory and never writes kernel settings; the full contract is in Appendix~\ref{app:testbed}.
+
+\paragraph{Rank gate.}
+\label{subsec:theorem}
+Let $Y=1$ denote an unsafe outcome defined from raw observations, never from whether a veto or rollback occurred.
+\begin{proposition}[Restricted rank gate]\label{prop:recal}
+Fix a score function before calibration. Suppose $n$ unsafe calibration scores and the next unsafe test score are jointly exchangeable. Set $j=\lfloor\alpha(n+1)\rfloor$ for $0<\alpha<1$. If $j=0$, veto all; otherwise let $\tau$ be the $j$th smallest unsafe calibration score and accept only when $u<\tau$. Then the unsafe-class acceptance probability, marginal over calibration and test scores, is at most $j/(n+1)\le\alpha$.
+\end{proposition}
+\noindent\emph{Proof.} With distinct scores the test score has a uniform rank among $n+1$ exchangeable scores and lies below the $j$th calibration order statistic only in the first $j$ ranks; ties with strict acceptance only reduce this probability.\hfill$\square$
+
+The bound controls misses among unsafe actions, $\Pr(A=1\mid Y=1)$, not the unsafe fraction among accepted actions; for bundles, $u$ is the maximum member score and $Y$ the bundle outcome. A cost-selected threshold is capped at the rank threshold, and no unsafe calibration example implies veto-all. An expected-cost identity for gated acceptance and a discussion of drift are in Appendix~\ref{app:testbed}.
+
+\paragraph{Actuator.}
+A separate adapter snapshots a child thread's timer slack and CPU affinity~\cite{LinuxTimerSlack,LinuxAffinity}, validates the target, applies both settings, verifies readback and restores both originals in a \texttt{finally} path, including after partial application. Updates are sequential, not an atomic kernel transaction.

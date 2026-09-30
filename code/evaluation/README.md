@@ -355,6 +355,9 @@ summarizes four runs, all on a four-core CPU container with llama-cpp-python
   unit (8 of 12 for the 7-8B models, 8 of 16 for the 14B models). All quoted
   decimals occur in the prompt, so citation checks verify provenance, not
   correctness.
+* [`claim_taxonomy.py`](claim_taxonomy.py) tabulates every labeled claim (local
+  and hosted) by model and error type and writes the paper's claim table
+  (`python3 claim_taxonomy.py --out ../../paper/claim-taxonomy.tex`).
 
 Hosted runs (2026-09-27, OpenRouter, `--response-format json_schema`,
 `--max-tokens 4096`, `--min-interval 2`; total cost about 0.5 USD):

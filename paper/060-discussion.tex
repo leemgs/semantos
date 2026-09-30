@@ -1,0 +1,10 @@
+\section{Discussion}
+\label{sec:discussion}
+\paragraph{What the protocol shows.}
+Each component isolates a different failure. The matched-information baseline separates what the evidence determines from what the model adds; here the answer is nothing, a result invisible to an evaluation that compares an LLM advisor only with the unchanged default or with a cold-start optimizer. Evidence ablation shows the models do read the evidence, since removing it degrades nine of ten. Claim verification shows that reading is not the same as reporting: explanations with valid citations misstate a third or more of their quantitative content. Deletion shows that citation lists are weak evidence of reliance, and that reliance can only be estimated when the evidence contains matched alternatives.
+
+\paragraph{Recommendations.}
+For evaluating evidence-grounded advisors we recommend (i) giving a non-LLM selector exactly the model's evidence and reporting both; (ii) verifying explanation claims against the supplied evidence, with special attention to quantifiers (``consistently'', ``all''), ranges and units, which account for most misstatements at every model size; (iii) designing evidence sets so that deletion controls exist; and (iv) labeling outcomes from raw observations rather than from the enforcement mechanism under test.
+
+\paragraph{When could an LLM add value?}
+Our task gives the evidence everything needed to decide. An LLM could add value when the evidence is incomplete and prior knowledge, for example from documentation, carries information the measurements lack. Testing this requires tasks where the default is not optimal and where the protocol's baseline receives the same documents, which we leave to future work.

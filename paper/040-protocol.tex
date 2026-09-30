@@ -1,0 +1,26 @@
+\section{Audit Protocol}
+\label{sec:protocol}
+\label{sec:evaluation}
+\paragraph{Task.}
+An advisor selects one of four per-thread configurations: timer slack of 50\,$\mu$s or 1\,ms (set by \texttt{PR\_SET\_TIMERSLACK}) crossed with affinity to all four CPUs or to CPU~0, named \texttt{s50000\_aall}, \texttt{s50000\_aone}, \texttt{s1000000\_aall} and \texttt{s1000000\_aone}. The objective is the 95th-percentile (P95) lateness of periodic wake-ups against absolute monotonic-clock targets, and \texttt{s50000\_aall} is the explicit control. Every measurement runs in a fresh owned child process that checks kernel readback, on an Intel Core i5-3570 host (four logical CPUs, Linux 6.17); no host-wide setting is changed.
+
+\paragraph{Role separation.}
+The plan was saved before acquisition. Training, retrieval, calibration and test use wake-up periods of 2, 3, 4 and $\{5,8\}$\,ms. Each period has ten randomized blocks of the four configurations, with five warm-ups and 40 recorded events per child: 200 processes and 8,000 events. Roles are period-disjoint but share one workload family and host. Selections and thresholds are frozen, with hashes, before calibration and test data are opened, and a validator rejects role overlap or unknown lineage.
+
+\paragraph{Frozen evidence.}
+The evidence given to every advisor contains three kinds of items: the training table (mean training-run P95 per configuration), an interaction-graph item (the training contrast, $-18.6\,\mu$s, whose prespecified bootstrap interval includes zero, so the graph has no edge), and 40 retrieval items, each a single retrieval run's configuration, period and P95. Test outcomes never enter a prompt.
+
+\paragraph{Equally informed baselines.}
+The table selector minimizes mean training P95; a saturated two-factor model of the same four means adds no information. Both use the same 40 training runs as the LLMs and no online trials. Unchanged-control and seeded uniform-random selectors are references. Matched-budget random search, $\epsilon$-greedy Q-learning ($\epsilon=0.1$), UCB1~\cite{Auer2002UCB} and Gaussian-process expected-improvement BO~\cite{Snoek2012BO} each evaluate $B\in\{4,8,16,40\}$ training runs, starting with one per configuration and drawing recorded runs with replacement; $B=40$ matches the table selector.
+
+\paragraph{LLM conditions.}
+Qwen2.5 7B and 14B~\cite{Qwen2024Qwen25}, Llama-3.1-8B~\cite{Grattafiori2024Llama3} and Phi-4~\cite{Abdin2024Phi4} run locally as hashed 4-bit GGUF files in llama.cpp. Llama-3.3-70B, Qwen3-235B-A22B~\cite{Yang2025Qwen3}, DeepSeek-V3.2~\cite{DeepSeek2025V32}, Nemotron-3-Ultra-550B~\cite{NVIDIA2026Nemotron3Ultra}, Gemini~3.8 Flash~\cite{Google2026Gemini38Flash} and Gemini~3.1 Pro preview~\cite{Google2026Gemini31Pro} run through OpenRouter; their weights cannot be hashed. All models receive the same system prompt, JSON evidence and schema (a configuration from the allowed list, at most six citations restricted to supplied IDs, and an explanation of at most 400 characters; Appendix~\ref{app:prompt}), with temperature~0 and five seeds. Four input variants are compared: full evidence, no graph, no retrieval, and no evidence.
+
+\paragraph{Reliance by matched deletion.}
+For each seed, we delete the evidence items cited in the full-context answer and, separately, the same number of uncited items of the same kinds. A decision that changes only when cited items are deleted indicates citation-specific reliance. A seed is non-estimable when no same-kind uncited control exists; in particular, the training table is the only table item, so an answer citing it has no matched control.
+
+\paragraph{Claim verification.}
+Every quantitative or comparative claim in each distinct explanation is checked against the supplied prompt evidence and labeled \emph{correct}, \emph{overstated}, \emph{wrong} (including partly wrong), \emph{wrong unit}, \emph{wrong attribution} (a value assigned to the wrong evidence source) or, for no-evidence prompts, \emph{unsupported prior}. A claim is \emph{misstated} if it is wrong, misattributed, overstated or in the wrong unit. A statement that a configuration is ``consistently'' or ``always'' lowest is labeled overstated, since the chosen configuration is lowest in 8 of 10 retrieval blocks. Local models returned byte-identical text across seeds, so each distinct explanation is audited once in every variant; hosted models varied across seeds and providers, so all distinct full-context explanations are audited. The labels were assigned by one annotator (an author) and are released per claim.
+
+\paragraph{Outcomes and scoring.}
+Each fixed choice is scored by paired offline replay on the measured test grid: the chosen configuration's run P95 in each block, and its paired change relative to the control in the same block, with a Student-$t$ interval across the ten blocks. A test run is \emph{unsafe} when more than 10\% of its 40 events exceed a predeclared 200\,$\mu$s deadline, a label computed from timing alone.
