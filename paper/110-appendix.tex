@@ -79,6 +79,8 @@ Workload, hardware and session groups are fixed before graph induction and assig
 \section{Additional Measurements}
 \label{app:measurements}
 \subsection{Selector Replay on the Follow-up}
+All controlled runs used one Intel Core i5-3570 host (four logical CPUs, Linux 6.17.0-23-generic). Each fresh child set its timer slack with \texttt{PR\_SET\_TIMERSLACK} and its affinity with \texttt{sched\_setaffinity}, checked both by readback, and recorded 40 wake-ups against absolute monotonic-clock targets after five warm-ups.
+
 The empirical selector minimizes mean training-run P95 over the four configurations. A saturated two-factor representation encodes the same four means as a baseline, two main effects and their interaction; minimizing it adds no information to table lookup. Both selectors have the same 40 training runs and zero online search trials. An unchanged-control selector and a seeded uniform-random selector provide references. Choices are frozen before calibration and test. We evaluate these fixed selectors by paired \emph{offline replay} on the same measured test grid, not by separate closed-loop executions. A block is the uncertainty unit, and paired reductions are calculated within each period against its explicit control.
 
 \begin{table}[t]

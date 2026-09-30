@@ -71,7 +71,7 @@ Five models cite the training table in their full-context answers, so matched de
 
 \subsection{Enforcement: A Calibrated Gate under Shift}
 \label{subsec:gate}
-For the gate, the score is a configuration's training deadline-miss fraction, fixed before calibration on 4\,ms runs only; all three prespecified $\alpha\in\{.05,.10,.20\}$ yield $\tau=.9225$ because the unsafe-score order statistics are tied. Every candidate is executed in an isolated process, so accepted and vetoed candidates both have observed outcomes (Figure~\ref{fig:gate-replay}).
+A test run is \emph{unsafe} when more than 10\% of its 40 events exceed a predeclared 200\,$\mu$s deadline, a label computed from timing alone. For the gate, the score is a configuration's training deadline-miss fraction, fixed before calibration on 4\,ms runs only; all three prespecified $\alpha\in\{.05,.10,.20\}$ yield $\tau=.9225$ because the unsafe-score order statistics are tied. Every candidate is executed in an isolated process, so accepted and vetoed candidates both have observed outcomes (Figure~\ref{fig:gate-replay}).
 
 \begin{figure}[t]
 \centering
