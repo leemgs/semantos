@@ -109,8 +109,8 @@ Yes.
 
 **C1. Did you report the number of parameters in the models used, the total
 computational budget (e.g., GPU hours), and computing infrastructure used?**
-Partially — parameter scale is given by model names (7B–550B). Add the budget
-below to Appendix C for the camera-ready version.
+Yes. Parameter scale is given by the model names (7B–550B); Appendix C
+(Compute budget) reports the infrastructure and budget:
 - Local models: 4-bit GGUF (Q4_K_M; Phi-4 Q4_K) with llama-cpp-python 0.3.35
   on a four-core CPU container, no GPU, `n_ctx`=8192. Total wall time
   11,580 s (about 3.2 CPU-hours): Qwen2.5-7B 1,603 s, Llama-3.1-8B 2,325 s,
@@ -191,14 +191,14 @@ against a table, not judgments that depend on annotator demographics.
 Yes.
 
 **E1. Did you include information about your use of AI assistants?**
-Yes. The Ethics Statement states that AI coding assistants were used in
-developing parts of the code, prose and analysis, and that every reported
-number is produced by released scripts from hashed raw logs.
-**[확인 필요]** ARR policy asks authors to describe the use more specifically
-if it went beyond language editing or coding help (e.g., drafting or
-restructuring sections). Consider extending the sentence, e.g., "AI assistants
-were used for coding, for drafting and restructuring prose and for checking
-references; the authors verified all content, references and numbers."
+Yes. The Ethics Statement states that AI assistants were used for writing and
+debugging code, for drafting and restructuring prose, and for locating and
+checking references; that the authors reviewed all generated content and
+verified every reference; that the explanation claims were annotated by an
+author, not by an AI assistant; and that every reported number is produced by
+released scripts from hashed raw logs.
+**[확인 필요]** Confirm that the last two statements (reference verification
+by the authors, human annotation of claims) are accurate.
 
 ---
 
@@ -208,8 +208,7 @@ references; the authors verified all content, references and numbers."
    responses may be redistributed (B2).
 2. Confirm the DeepSeek-V3.2 and Nemotron-3-Ultra licenses on their model
    cards (B2).
-3. Add the compute budget in C1 to Appendix C (camera-ready is fine).
-4. Optionally cite llama.cpp and OpenRouter in a footnote (B1).
-5. Decide whether to extend the AI-assistant disclosure (E1).
-6. Prepare an anonymized repository link for reviewers (e.g., an anonymous
+3. Optionally cite llama.cpp and OpenRouter in a footnote (B1).
+4. Confirm the factual statements in the extended AI-assistant disclosure (E1).
+5. Prepare an anonymized repository link for reviewers (e.g., an anonymous
    GitHub mirror), since the paper states that artifacts are released.
