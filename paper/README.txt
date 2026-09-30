@@ -34,5 +34,5 @@ The follow-up covers one workload family on one host. Selector comparisons are
 paired offline replay. Claim labels come from a single annotator. No
 LLM-superiority, deployment-efficacy or production-safety result is claimed.
 
-Current PDF: 13 pages (body ends on page 7; Limitations and Ethics Statement
-on pages 7-8; references on pages 8-10; appendix on pages 10-13).
+Current PDF: 15 pages (body ends on page 7; Limitations and Ethics Statement
+on pages 7-8; references on pages 8-12; appendix from page 12).
