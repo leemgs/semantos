@@ -12,6 +12,9 @@ For lower-is-better loss, negative $I_{ab}$ indicates a beneficial non-additive 
 
 A \textsc{depends-on} edge requires a validated admissibility rule or measured range conditioning; it cannot be inferred solely from the sign of $I_{ab}$. The released seed graph is empty until edges pass this test. The principal question is whether a reasoner can use independently acquired evidence more effectively than an optimizer with the same inputs, after charging the cost of acquiring that evidence.
 
+\paragraph{Disagreement score.}
+For a knob--value pair proposed in $v$ of $k$ samples, the reasoner's score is $u=0.7(1-v/k)+0.3(1-w)$, clipped to $[0.02,1]$, where $w$ is the strongest retrieved synergy weight (zero when absent). It is neither predictive entropy nor a calibrated probability. Failed samples stay in the denominator, and repeated copies of a fallback are not counted as independent votes.
+
 \paragraph{Bundle contract.}
 A request contains a nonempty bundle identifier and a list of recommendations with \texttt{id}, \texttt{knob}, \texttt{proposed}, \texttt{uncertainty}, and optional rationale and provenance. Each request submits one bundle. Duplicate knobs, nonfinite scores, unsupported controls, and example-policy bound violations reject the entire request. Dirty-ratio changes must supply both values and satisfy the example policy that the background ratio is less than the foreground ratio. This is a declared policy, not proof that a configuration improves any workload. If any score satisfies $u\ge\tau$, all members are vetoed; otherwise all are staged together. A concurrent bundle receives a conflict response. Dry-run results return \texttt{applied=[]} and list simulated members separately.
 
@@ -41,6 +44,9 @@ A real actuator must snapshot all old values, validate the full target configura
 
 \paragraph{One illustrative decision trace.}
 Consider supplied context with example values 5 and 15 for the two dirty ratios, and retrieved evidence IDs $e_1,t_1$. Suppose all three model samples agree on this pair and $w=0$, giving $u=0.30$. If an independently obtained threshold is $\tau=0.25$, the whole bundle is vetoed; if $\tau=0.35$, it can enter the dry-run canary after joint validation. The audit record includes the values, scores, threshold and decision. These numbers illustrate the contract and are not a measured recommendation or calibrated operating point. The initial artifact threshold is zero until calibration data is explicitly supplied.
+
+\paragraph{Actuator.}
+A separate adapter snapshots a child thread's timer slack and CPU affinity~\cite{LinuxTimerSlack,LinuxAffinity}, validates the target, applies both settings, verifies readback and restores both originals in a \texttt{finally} path, including after partial application. Updates are sequential, not an atomic kernel transaction.
 
 \paragraph{Expected cost of gated acceptance.}
 Let $Y=1$ denote an independently defined unsafe outcome and $A=1$ acceptance. An outcome label is not defined by whether a rollback happened. For example, a benchmark can predeclare a request deadline, count observed failures or deadline exceedances, and define an action-level breach from these raw observations in a fixed window. Rejected actions have unknown counterfactual outcomes unless evaluated in an isolated experiment; they must not automatically be labeled safe or unsafe.

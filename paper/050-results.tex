@@ -71,7 +71,7 @@ Five models cite the training table in their full-context answers, so matched de
 
 \subsection{Enforcement: A Calibrated Gate under Shift}
 \label{subsec:gate}
-Advice that is acted on needs a screen, and a screen's error rate must be judged by outcomes it does not define. For the gate, the score is a configuration's training deadline-miss fraction, fixed before calibration on 4\,ms runs only; all three prespecified $\alpha\in\{.05,.10,.20\}$ yield $\tau=.9225$ because the unsafe-score order statistics are tied. Every candidate is executed in an isolated process, so accepted and vetoed candidates both have observed outcomes (Figure~\ref{fig:gate-replay}).
+For the gate, the score is a configuration's training deadline-miss fraction, fixed before calibration on 4\,ms runs only; all three prespecified $\alpha\in\{.05,.10,.20\}$ yield $\tau=.9225$ because the unsafe-score order statistics are tied. Every candidate is executed in an isolated process, so accepted and vetoed candidates both have observed outcomes (Figure~\ref{fig:gate-replay}).
 
 \begin{figure}[t]
 \centering

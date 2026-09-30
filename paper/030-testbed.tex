@@ -1,13 +1,13 @@
 \section{Testbed: SemantOS}
 \label{sec:testbed}
 \label{sec:semantos}
-SemantOS is a control loop with five components: telemetry, a graph and trace store, a reasoner, a runtime and an operator console (Figure~\ref{fig:runtime-path}). Its purpose here is to make the evidence, the proposal and the enforcement decision separately observable.
+SemantOS is an evidence-grounded generation pipeline for system configuration that we use as an instrument (Figure~\ref{fig:runtime-path}). Four properties matter for the audit. The evidence is \emph{addressable} (every citation resolves to one item), \emph{portable} (a non-LLM selector can receive the same object) and \emph{editable} (kinds or items can be removed), and enforcement is \emph{independent} of generation, so its errors can be counted against labels the generator never sees.
 
-\paragraph{Evidence.}
-The store holds a typed knob-interaction graph and measurement traces. For a lower-is-better loss $L$ and baseline values $a_0,b_0$, an interaction edge requires the contrast $I_{ab}=L(a,b)-L(a,b_0)-L(a_0,b)+L(a_0,b_0)$ from independently measured configurations, with a bootstrap interval over runs that excludes zero; an edge records its scope, values, measurement IDs and interval, and describes an empirical interaction rather than a causal coupling (Appendix~\ref{app:testbed}).
+\paragraph{Evidence as a structured context.}
+The store holds typed items, each with a stable ID, a kind and a provenance record: summary tables, individual measurement traces, and edges of a knob-interaction graph. The graph is a small knowledge representation with a strict admission rule: for a lower-is-better loss $L$ and baseline values $a_0,b_0$, an edge requires the contrast $I_{ab}=L(a,b)-L(a,b_0)-L(a_0,b)+L(a_0,b_0)$ from independently measured configurations, with a bootstrap interval over runs that excludes zero, and records its scope, values, measurement IDs and interval. Edges describe empirical interactions, not causal couplings (Appendix~\ref{app:testbed}). For the audit, the evidence is frozen and serialized as a JSON list that is identical for every advisor.
 
-\paragraph{Proposals.}
-The reasoner retrieves typed neighbors and lexically matched trace text~\cite{Lewis2020RAG} and requests $k=3$ samples~\cite{Wang2023SelfConsistency}. It returns a modal \emph{complete} bundle actually present in a response, rather than splicing per-knob winners into an unseen combination, together with the supplied context, prompt hash and raw samples. For a knob--value pair proposed in $v$ samples, a heuristic score $u=0.7(1-v/k)+0.3(1-w)$, clipped to $[0.02,1]$, combines disagreement with the strongest retrieved synergy weight $w$; it is not a calibrated probability. Failed samples stay in the denominator, and the reasoner abstains when no model responds or the context budget would force truncation.
+\paragraph{Generation.}
+The reasoner retrieves typed neighbors and lexically matched trace text~\cite{Lewis2020RAG} and asks a model for a complete proposal, a set of knob values, with cited item IDs and an explanation. In deployment it draws $k=3$ samples~\cite{Wang2023SelfConsistency} and returns a modal complete proposal actually present in a response, rather than splicing per-knob winners into an unseen combination, scores each member by sample disagreement $u$ (a heuristic, not a calibrated probability; Appendix~\ref{app:testbed}), and abstains when no model responds or the context budget would force evidence to be truncated. The audit in \S\ref{sec:protocol} calls each model directly on the frozen evidence, one response per seed, so that decisions, citations and explanations can be compared across models without the aggregation step.
 
 \begin{figure}[t]
 \centering
@@ -36,22 +36,16 @@ The reasoner retrieves typed neighbors and lexically matched trace text~\cite{Le
 \node[tag, anchor=south east] at (cal.north east) {independent labels};
 \end{tikzpicture}
 \end{adjustbox}
-\caption{SemantOS decision path. Evidence, proposal and enforcement are separate components, so the same frozen evidence can be given to a non-LLM selector, ablated or partially deleted, and gate errors can be counted against independently defined labels. The REST runtime is a dry run; a separate per-thread actuator applies, verifies and restores timer slack and affinity in owned child processes.}
+\caption{SemantOS decision path. Evidence, generation and enforcement are separate components: the frozen evidence object can be given to a non-LLM selector, ablated or partially deleted, citations can be resolved against its item IDs, and gate errors can be counted against independently defined labels. The REST runtime is a dry run; a separate per-thread actuator applies, verifies and restores timer slack and affinity in owned child processes.}
 \label{fig:runtime-path}
 \end{figure}
 
 \paragraph{Enforcement.}
-The runtime validates a whole bundle (allowlisted knobs, bounds, joint constraints, no duplicates) and treats it atomically: if any member score satisfies $u\ge\tau$, every member is vetoed; otherwise the bundle enters a staged rollout. The REST runtime is a dry run that stages bundles in memory and never writes kernel settings; the full contract is in Appendix~\ref{app:testbed}.
-
-\paragraph{Rank gate.}
+The runtime treats a proposal as a unit: it validates every member (allowlisted knobs, bounds, joint constraints, no duplicates) and, if any member score satisfies $u\ge\tau$, vetoes all of them; otherwise the proposal enters a staged rollout. The REST runtime is a dry run that never writes kernel settings (Appendix~\ref{app:testbed}). The threshold $\tau$ comes from a rank gate, a selective-prediction rule~\cite{Geifman2017Selective} calibrated on unsafe examples only. Let $Y=1$ denote an unsafe outcome defined from raw observations, never from whether a veto or rollback occurred.
 \label{subsec:theorem}
-Let $Y=1$ denote an unsafe outcome defined from raw observations, never from whether a veto or rollback occurred.
 \begin{proposition}[Restricted rank gate]\label{prop:recal}
 Fix a score function before calibration. Suppose $n$ unsafe calibration scores and the next unsafe test score are jointly exchangeable. Set $j=\lfloor\alpha(n+1)\rfloor$ for $0<\alpha<1$. If $j=0$, veto all; otherwise let $\tau$ be the $j$th smallest unsafe calibration score and accept only when $u<\tau$. Then the unsafe-class acceptance probability, marginal over calibration and test scores, is at most $j/(n+1)\le\alpha$.
 \end{proposition}
-\noindent\emph{Proof.} With distinct scores the test score has a uniform rank among $n+1$ exchangeable scores and lies below the $j$th calibration order statistic only in the first $j$ ranks; ties with strict acceptance only reduce this probability.\hfill$\square$
+\noindent\emph{Proof.} By exchangeability the test score's rank among the $n+1$ scores is uniform; it falls below the $j$th calibration score only in the first $j$ ranks, and ties only reduce this.\hfill$\square$
 
-The bound controls misses among unsafe actions, $\Pr(A=1\mid Y=1)$, not the unsafe fraction among accepted actions; for bundles, $u$ is the maximum member score and $Y$ the bundle outcome. A cost-selected threshold is capped at the rank threshold, and no unsafe calibration example implies veto-all. An expected-cost identity for gated acceptance and a discussion of drift are in Appendix~\ref{app:testbed}.
-
-\paragraph{Actuator.}
-A separate adapter snapshots a child thread's timer slack and CPU affinity~\cite{LinuxTimerSlack,LinuxAffinity}, validates the target, applies both settings, verifies readback and restores both originals in a \texttt{finally} path, including after partial application. Updates are sequential, not an atomic kernel transaction.
+The bound controls misses among unsafe actions, $\Pr(A=1\mid Y=1)$, not the unsafe fraction among accepted actions; a cost-selected threshold is capped at the rank threshold, and no unsafe calibration example implies veto-all. The gate accepts any fixed score; \S\ref{subsec:gate} evaluates it with a measured risk score rather than $u$. An expected-cost identity, a discussion of drift and the bounded per-thread actuator used in \S\ref{subsec:gate} are in Appendix~\ref{app:testbed}.
