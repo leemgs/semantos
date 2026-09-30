@@ -25,7 +25,10 @@ Measured evidence used by the paper (paths under ../code/evaluation/results/):
     python3 ../code/evaluation/claim_taxonomy.py --out claim-taxonomy.tex
 The matching analyze*.py scripts verify hashes and regenerate the tables.
 
-Figures: Figure 1 (decision path) is TikZ inside 030-testbed.tex. Figure 2,
+Figures: Figure 1 (teaser) quotes a real DeepSeek-V3.2 response from
+results/model-audit-api-deepseek-v3.2/records.json (seed 4089, full context);
+its claim is labeled in claim-audit.json. Figure 2 (decision path) is TikZ
+inside 030-testbed.tex. Figure 3,
 figures/gate_replay.pdf, is regenerated from the raw controlled log by
   python3 ../code/evaluation/plot_gate_replay.py --out figures/gate_replay.pdf
 which re-runs the hash/lineage checks and asserts its counts match analysis.json.
@@ -34,5 +37,5 @@ The follow-up covers one workload family on one host. Selector comparisons are
 paired offline replay. Claim labels come from a single annotator. No
 LLM-superiority, deployment-efficacy or production-safety result is claimed.
 
-Current PDF: 15 pages (body ends on page 7; Limitations and Ethics Statement
-on pages 7-8; references on pages 8-12; appendix from page 12).
+Current PDF: 16 pages (body ends on page 8; Limitations and Ethics Statement
+on pages 8-9; references on pages 9-12; appendix from page 12).
