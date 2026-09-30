@@ -40,4 +40,4 @@ paired offline replay. Claim labels come from a single annotator. No
 LLM-superiority, deployment-efficacy or production-safety result is claimed.
 
 Current PDF: 17 pages (body fills pages 1-8; Limitations and Ethics Statement
-on page 9; references on pages 9-12; appendix from page 12).
+on page 9; references on pages 9-13; appendix from page 13).
