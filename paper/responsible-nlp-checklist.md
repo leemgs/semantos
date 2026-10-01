@@ -65,9 +65,11 @@ README. **[확인 필요: 각 라이선스를 모델 카드에서 최종 확인]
   Google/OpenRouter API terms of service.
 - llama-cpp-python 0.3.35 and llama.cpp: MIT.
 - Released artifacts (code, measurements, prompts, responses, annotations):
-  **[확인 필요]** the repository currently has no LICENSE file. Choose one
-  before release (e.g., MIT or Apache 2.0 for code, CC BY 4.0 for data and
-  annotations) and check that redistributing hosted-model responses is allowed
+  Apache License 2.0 (`LICENSE` at the repository root). The bundled ACL style
+  files keep their own terms (`acl_natbib.bst`: LaTeX Project Public License),
+  and stored model responses remain subject to each model's license and
+  provider terms; both exceptions are listed in the README.
+  **[확인 필요]** Check that redistributing hosted-model responses is allowed
   by each provider's terms.
 
 **B3. Did you discuss if your use of existing artifacts was consistent with
@@ -204,8 +206,8 @@ by the authors, human annotation of claims) are accurate.
 
 ## Pre-submission to-do (from the answers above)
 
-1. Add a LICENSE for the released code and data, and confirm that hosted-model
-   responses may be redistributed (B2).
+1. Confirm that hosted-model responses may be redistributed under each
+   provider's terms (B2). The repository LICENSE (Apache-2.0) is in place.
 2. Confirm the DeepSeek-V3.2 and Nemotron-3-Ultra licenses on their model
    cards (B2).
 3. Optionally cite llama.cpp and OpenRouter in a footnote (B1).
