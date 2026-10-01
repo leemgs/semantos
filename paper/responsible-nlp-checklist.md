@@ -75,8 +75,17 @@ model cards on 2026-10-01.
   files keep their own terms (`acl_natbib.bst`: LaTeX Project Public License),
   and stored model responses remain subject to each model's license and
   provider terms; both exceptions are listed in the README.
-  **[확인 필요]** Check that redistributing hosted-model responses is allowed
-  by each provider's terms.
+  Redistribution of the hosted-model responses was checked on 2026-10-01:
+  OpenRouter's Terms of Service (last updated 2026-08-31, §4 and §5) impose no
+  restriction of their own on Outputs and defer ownership and use of Outputs
+  to each model's Model Terms. For Gemini 3.8 Flash and Gemini 3.1 Pro preview
+  these are Google's Gemini API Additional Terms (last updated 2026-04-28):
+  Google does not claim ownership of generated content, users are responsible
+  for their use of it and for its use by anyone they share it with, and the
+  Services may not be used to develop competing models. The other hosted
+  models' Model Terms are their open-weight licenses (Llama 3.3 Community
+  License, Apache 2.0, MIT, OpenMDW-1.1), none of which restricts sharing
+  outputs. Releasing the responses as research data is therefore permitted.
 
 **B3. Did you discuss if your use of existing artifacts was consistent with
 their intended use?**
@@ -212,9 +221,7 @@ by the authors, human annotation of claims) are accurate.
 
 ## Pre-submission to-do (from the answers above)
 
-1. Confirm that hosted-model responses may be redistributed under each
-   provider's terms (B2). The repository LICENSE (Apache-2.0) is in place.
-2. Confirm the factual statements in the extended AI-assistant disclosure (E1).
-3. Create the anonymous link (or upload the zip as supplementary material) and
+1. Confirm the factual statements in the extended AI-assistant disclosure (E1).
+2. Create the anonymous link (or upload the zip as supplementary material) and
    add it to the paper; see `paper/anonymous-review.md`. The anonymized copy is
    built and checked by `scripts/make_anonymous_release.py`.
