@@ -1,0 +1,392 @@
+{
+  "comparisons": [
+    {
+      "period_ms": 5,
+      "method": "control",
+      "p95_us": {
+        "mean": 179.7384,
+        "ci95_halfwidth": 101.98605308014248
+      },
+      "reduction_pct": {
+        "mean": 0.0,
+        "ci95_halfwidth": 0.0
+      },
+      "misses": 13,
+      "events": 400,
+      "scope": "shared-outcome replay, not independent controller execution"
+    },
+    {
+      "period_ms": 5,
+      "method": "empirical_min",
+      "p95_us": {
+        "mean": 179.7384,
+        "ci95_halfwidth": 101.98605308014248
+      },
+      "reduction_pct": {
+        "mean": 0.0,
+        "ci95_halfwidth": 0.0
+      },
+      "misses": 13,
+      "events": 400,
+      "scope": "shared-outcome replay, not independent controller execution"
+    },
+    {
+      "period_ms": 5,
+      "method": "graph_min",
+      "p95_us": {
+        "mean": 179.7384,
+        "ci95_halfwidth": 101.98605308014248
+      },
+      "reduction_pct": {
+        "mean": 0.0,
+        "ci95_halfwidth": 0.0
+      },
+      "misses": 13,
+      "events": 400,
+      "scope": "shared-outcome replay, not independent controller execution"
+    },
+    {
+      "period_ms": 5,
+      "method": "seeded_random",
+      "p95_us": {
+        "mean": 811.5797,
+        "ci95_halfwidth": 230.21579473481793
+      },
+      "reduction_pct": {
+        "mean": -499.0469974896608,
+        "ci95_halfwidth": 248.2241391835533
+      },
+      "misses": 248,
+      "events": 400,
+      "scope": "shared-outcome replay, not independent controller execution"
+    },
+    {
+      "period_ms": 8,
+      "method": "control",
+      "p95_us": {
+        "mean": 155.7321,
+        "ci95_halfwidth": 64.44679858513351
+      },
+      "reduction_pct": {
+        "mean": 0.0,
+        "ci95_halfwidth": 0.0
+      },
+      "misses": 13,
+      "events": 400,
+      "scope": "shared-outcome replay, not independent controller execution"
+    },
+    {
+      "period_ms": 8,
+      "method": "empirical_min",
+      "p95_us": {
+        "mean": 155.7321,
+        "ci95_halfwidth": 64.44679858513351
+      },
+      "reduction_pct": {
+        "mean": 0.0,
+        "ci95_halfwidth": 0.0
+      },
+      "misses": 13,
+      "events": 400,
+      "scope": "shared-outcome replay, not independent controller execution"
+    },
+    {
+      "period_ms": 8,
+      "method": "graph_min",
+      "p95_us": {
+        "mean": 155.7321,
+        "ci95_halfwidth": 64.44679858513351
+      },
+      "reduction_pct": {
+        "mean": 0.0,
+        "ci95_halfwidth": 0.0
+      },
+      "misses": 13,
+      "events": 400,
+      "scope": "shared-outcome replay, not independent controller execution"
+    },
+    {
+      "period_ms": 8,
+      "method": "seeded_random",
+      "p95_us": {
+        "mean": 642.1941,
+        "ci95_halfwidth": 330.1550680209657
+      },
+      "reduction_pct": {
+        "mean": -355.2160907191446,
+        "ci95_halfwidth": 277.9387088989049
+      },
+      "misses": 225,
+      "events": 400,
+      "scope": "shared-outcome replay, not independent controller execution"
+    }
+  ],
+  "safety_replay": [
+    {
+      "period_ms": 5,
+      "alpha": 0.05,
+      "tau": 0.9225,
+      "unsafe_calibration_n": 19,
+      "counts": {
+        "proposed": 40,
+        "accepted": 20,
+        "vetoed": 20,
+        "invalid": 0,
+        "unknown": 0,
+        "tp": 20,
+        "fp": 0,
+        "fn": 5,
+        "tn": 15,
+        "rolled_back": 0,
+        "unsafe_rolled_back": 0,
+        "labeled_rolled_back": 0
+      },
+      "unsafe_given_accepted": 0.25,
+      "acceptance_given_unsafe": 0.2,
+      "veto_given_safe": 0.0,
+      "veto_precision": 1.0,
+      "rollback_precision_labeled_only": null,
+      "note": "conditional metrics use labeled bundles only; missing-label selection may bias them",
+      "scope": "gate replay on independent observed outcomes; no deployment prevented"
+    },
+    {
+      "period_ms": 5,
+      "alpha": 0.1,
+      "tau": 0.9225,
+      "unsafe_calibration_n": 19,
+      "counts": {
+        "proposed": 40,
+        "accepted": 20,
+        "vetoed": 20,
+        "invalid": 0,
+        "unknown": 0,
+        "tp": 20,
+        "fp": 0,
+        "fn": 5,
+        "tn": 15,
+        "rolled_back": 0,
+        "unsafe_rolled_back": 0,
+        "labeled_rolled_back": 0
+      },
+      "unsafe_given_accepted": 0.25,
+      "acceptance_given_unsafe": 0.2,
+      "veto_given_safe": 0.0,
+      "veto_precision": 1.0,
+      "rollback_precision_labeled_only": null,
+      "note": "conditional metrics use labeled bundles only; missing-label selection may bias them",
+      "scope": "gate replay on independent observed outcomes; no deployment prevented"
+    },
+    {
+      "period_ms": 5,
+      "alpha": 0.2,
+      "tau": 0.9225,
+      "unsafe_calibration_n": 19,
+      "counts": {
+        "proposed": 40,
+        "accepted": 20,
+        "vetoed": 20,
+        "invalid": 0,
+        "unknown": 0,
+        "tp": 20,
+        "fp": 0,
+        "fn": 5,
+        "tn": 15,
+        "rolled_back": 0,
+        "unsafe_rolled_back": 0,
+        "labeled_rolled_back": 0
+      },
+      "unsafe_given_accepted": 0.25,
+      "acceptance_given_unsafe": 0.2,
+      "veto_given_safe": 0.0,
+      "veto_precision": 1.0,
+      "rollback_precision_labeled_only": null,
+      "note": "conditional metrics use labeled bundles only; missing-label selection may bias them",
+      "scope": "gate replay on independent observed outcomes; no deployment prevented"
+    },
+    {
+      "period_ms": 8,
+      "alpha": 0.05,
+      "tau": 0.9225,
+      "unsafe_calibration_n": 19,
+      "counts": {
+        "proposed": 40,
+        "accepted": 20,
+        "vetoed": 20,
+        "invalid": 0,
+        "unknown": 0,
+        "tp": 20,
+        "fp": 0,
+        "fn": 4,
+        "tn": 16,
+        "rolled_back": 0,
+        "unsafe_rolled_back": 0,
+        "labeled_rolled_back": 0
+      },
+      "unsafe_given_accepted": 0.2,
+      "acceptance_given_unsafe": 0.16666666666666666,
+      "veto_given_safe": 0.0,
+      "veto_precision": 1.0,
+      "rollback_precision_labeled_only": null,
+      "note": "conditional metrics use labeled bundles only; missing-label selection may bias them",
+      "scope": "gate replay on independent observed outcomes; no deployment prevented"
+    },
+    {
+      "period_ms": 8,
+      "alpha": 0.1,
+      "tau": 0.9225,
+      "unsafe_calibration_n": 19,
+      "counts": {
+        "proposed": 40,
+        "accepted": 20,
+        "vetoed": 20,
+        "invalid": 0,
+        "unknown": 0,
+        "tp": 20,
+        "fp": 0,
+        "fn": 4,
+        "tn": 16,
+        "rolled_back": 0,
+        "unsafe_rolled_back": 0,
+        "labeled_rolled_back": 0
+      },
+      "unsafe_given_accepted": 0.2,
+      "acceptance_given_unsafe": 0.16666666666666666,
+      "veto_given_safe": 0.0,
+      "veto_precision": 1.0,
+      "rollback_precision_labeled_only": null,
+      "note": "conditional metrics use labeled bundles only; missing-label selection may bias them",
+      "scope": "gate replay on independent observed outcomes; no deployment prevented"
+    },
+    {
+      "period_ms": 8,
+      "alpha": 0.2,
+      "tau": 0.9225,
+      "unsafe_calibration_n": 19,
+      "counts": {
+        "proposed": 40,
+        "accepted": 20,
+        "vetoed": 20,
+        "invalid": 0,
+        "unknown": 0,
+        "tp": 20,
+        "fp": 0,
+        "fn": 4,
+        "tn": 16,
+        "rolled_back": 0,
+        "unsafe_rolled_back": 0,
+        "labeled_rolled_back": 0
+      },
+      "unsafe_given_accepted": 0.2,
+      "acceptance_given_unsafe": 0.16666666666666666,
+      "veto_given_safe": 0.0,
+      "veto_precision": 1.0,
+      "rollback_precision_labeled_only": null,
+      "note": "conditional metrics use labeled bundles only; missing-label selection may bias them",
+      "scope": "gate replay on independent observed outcomes; no deployment prevented"
+    }
+  ],
+  "staged_execution": [
+    {
+      "period_ms": 5,
+      "applied": 40,
+      "completed": 7,
+      "rolled_back": 33,
+      "restored": 40,
+      "events": 816,
+      "misses": 186,
+      "exposure_ms": 4106.37394,
+      "rollback_precision": null,
+      "scope": "fresh separate executions, outcome-triggered stops; no independent action-level ground truth"
+    },
+    {
+      "period_ms": 8,
+      "applied": 40,
+      "completed": 7,
+      "rolled_back": 33,
+      "restored": 40,
+      "events": 880,
+      "misses": 190,
+      "exposure_ms": 7065.994635,
+      "rollback_precision": null,
+      "scope": "fresh separate executions, outcome-triggered stops; no independent action-level ground truth"
+    }
+  ],
+  "frozen": {
+    "means_p95_us": {
+      "s50000_aall": 132.9413,
+      "s50000_aone": 277.4647,
+      "s1000000_aall": 954.7558,
+      "s1000000_aone": 1080.6555
+    },
+    "score": {
+      "s50000_aall": 0.0275,
+      "s50000_aone": 0.0675,
+      "s1000000_aall": 0.9225,
+      "s1000000_aone": 0.9625
+    },
+    "selected": {
+      "control": "s50000_aall",
+      "empirical_min": "s50000_aall",
+      "graph_min": "s50000_aall"
+    },
+    "interaction_us": -18.62369999999993,
+    "edges": [],
+    "source_ids": [
+      "train-2-0-s50000_aone",
+      "train-2-0-s1000000_aall",
+      "train-2-0-s50000_aall",
+      "train-2-0-s1000000_aone",
+      "train-2-1-s50000_aall",
+      "train-2-1-s50000_aone",
+      "train-2-1-s1000000_aone",
+      "train-2-1-s1000000_aall",
+      "train-2-2-s50000_aall",
+      "train-2-2-s50000_aone",
+      "train-2-2-s1000000_aall",
+      "train-2-2-s1000000_aone",
+      "train-2-3-s50000_aone",
+      "train-2-3-s1000000_aall",
+      "train-2-3-s50000_aall",
+      "train-2-3-s1000000_aone",
+      "train-2-4-s1000000_aall",
+      "train-2-4-s50000_aall",
+      "train-2-4-s1000000_aone",
+      "train-2-4-s50000_aone",
+      "train-2-5-s50000_aone",
+      "train-2-5-s1000000_aone",
+      "train-2-5-s50000_aall",
+      "train-2-5-s1000000_aall",
+      "train-2-6-s50000_aone",
+      "train-2-6-s1000000_aall",
+      "train-2-6-s1000000_aone",
+      "train-2-6-s50000_aall",
+      "train-2-7-s1000000_aone",
+      "train-2-7-s50000_aall",
+      "train-2-7-s50000_aone",
+      "train-2-7-s1000000_aall",
+      "train-2-8-s50000_aall",
+      "train-2-8-s1000000_aall",
+      "train-2-8-s1000000_aone",
+      "train-2-8-s50000_aone",
+      "train-2-9-s1000000_aone",
+      "train-2-9-s50000_aall",
+      "train-2-9-s1000000_aall",
+      "train-2-9-s50000_aone"
+    ],
+    "frozen_utc_ns": 1790418383006872421,
+    "scope": "same measured table; graph is a reparameterization, not extra evidence"
+  },
+  "costs": {
+    "train_seconds": 6.541494601988234,
+    "retrieval_seconds": 8.290736828988884,
+    "graph_and_selection_seconds": 0.10052888598875143,
+    "calibration_seconds": 10.152591692982242,
+    "test_seconds": 29.41510469399509,
+    "staged_seconds": 16.864631508971797
+  },
+  "runs": 280,
+  "grid_events": 8000,
+  "llm_status": "not_run: local model socket forbidden; no configured external model credential",
+  "scope": "single shared host, one periodic workload family; period-disjoint roles, no host/family holdout",
+  "input_hashes_sha256": "d5a1ec2d425fd9ea1ea45b5e65b2cca91f87ca88eff3b3cf879e80435d130b2c"
+}

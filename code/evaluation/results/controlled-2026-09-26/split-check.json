@@ -1,0 +1,6 @@
+{
+  "records": 200,
+  "groups": 5,
+  "status": "manifest_consistent",
+  "limitation": "checks declared lineage; does not authenticate acquisition or hidden inputs"
+}

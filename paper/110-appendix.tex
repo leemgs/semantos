@@ -1,0 +1,164 @@
+\appendix
+\section{SemantOS Testbed Details}
+\label{app:testbed}
+\paragraph{Design hypotheses.}
+SemantOS is motivated by three hypotheses. First, a configuration's utility may depend on workload and hardware. Second, joint knob effects may be non-additive. Third, performance, failure probability and intervention cost may conflict. Each hypothesis requires measured interventions with explicit baselines.
+
+For a loss $L$, define an interaction contrast from four independently measured configurations:
+\[
+ I_{ab}=L(a,b)-L(a,b_0)-L(a_0,b)+L(a_0,b_0).
+\]
+For lower-is-better loss, negative $I_{ab}$ indicates a beneficial non-additive interaction relative to the chosen baseline. A bootstrap interval must resample independent runs, not individual requests from a single run. The sign can change with workload, value range or kernel version, so an edge needs its scope, configuration values, measurement IDs and uncertainty interval. Such an edge describes an empirical interaction, not an unconditional causal coupling.
+
+A \textsc{depends-on} edge requires a validated admissibility rule or measured range conditioning; it cannot be inferred solely from the sign of $I_{ab}$. The released seed graph is empty until edges pass this test. The principal question is whether a reasoner can use independently acquired evidence more effectively than an optimizer with the same inputs, after charging the cost of acquiring that evidence.
+
+\paragraph{Disagreement score.}
+For a knob--value pair proposed in $v$ of $k$ samples, the reasoner's score is $u=0.7(1-v/k)+0.3(1-w)$, clipped to $[0.02,1]$, where $w$ is the strongest retrieved synergy weight (zero when absent). It is neither predictive entropy nor a calibrated probability. Failed samples stay in the denominator, and repeated copies of a fallback are not counted as independent votes.
+
+\paragraph{Bundle contract.}
+A request contains a nonempty bundle identifier and a list of recommendations with \texttt{id}, \texttt{knob}, \texttt{proposed}, \texttt{uncertainty}, and optional rationale and provenance. Each request submits one bundle. Duplicate knobs, nonfinite scores, unsupported controls, and example-policy bound violations reject the entire request. Dirty-ratio changes must supply both values and satisfy the example policy that the background ratio is less than the foreground ratio. This is a declared policy, not proof that a configuration improves any workload. If any score satisfies $u\ge\tau$, all members are vetoed; otherwise all are staged together. A concurrent bundle receives a conflict response. Dry-run results return \texttt{applied=[]} and list simulated members separately.
+
+\begin{algorithm}[t]
+\caption{Implemented dry-run bundle path}
+\label{alg:control-loop}
+\begin{algorithmic}[1]
+\REQUIRE Validated bundle $B$, fixed score function, calibration threshold $\tau$
+\STATE Validate every member and joint constraints before changing state
+\IF{another bundle is active}
+  \STATE Return conflict
+\ENDIF
+\IF{$\max_{a\in B}u(a)\ge\tau$}
+  \STATE Record veto for all members; return
+\ENDIF
+\STATE Stage the complete bundle in memory at 5\%
+\FOR{requested stage in $\{25,50,100\}\%$}
+  \STATE Advance the simulated bundle; record the transition
+\ENDFOR
+\STATE On cancellation, clear the complete simulated bundle
+\STATE Never infer an unsafe/safe training label from simulated completion
+\end{algorithmic}
+\end{algorithm}
+
+\paragraph{Deployment requirements.}
+A real actuator must snapshot all old values, validate the full target configuration and available host interfaces, serialize updates, verify readback, and restore every old value on failure. Multiple sysctl writes are not a kernel transaction: partial exposure must be measured and cannot be described as atomic hardware state. Canary shares require separate hosts or an appropriate isolation mechanism; changing a host-global sysctl cannot isolate a fraction of requests on that host. Missing, stale or malformed end-to-end telemetry must stop promotion. These capabilities are requirements, not features demonstrated by the dry-run state machine.
+
+\paragraph{One illustrative decision trace.}
+Consider supplied context with example values 5 and 15 for the two dirty ratios, and retrieved evidence IDs $e_1,t_1$. Suppose all three model samples agree on this pair and $w=0$, giving $u=0.30$. If an independently obtained threshold is $\tau=0.25$, the whole bundle is vetoed; if $\tau=0.35$, it can enter the dry-run canary after joint validation. The audit record includes the values, scores, threshold and decision. These numbers illustrate the contract and are not a measured recommendation or calibrated operating point. The initial artifact threshold is zero until calibration data is explicitly supplied.
+
+\paragraph{Actuator.}
+A separate adapter snapshots a child thread's timer slack and CPU affinity~\cite{LinuxTimerSlack,LinuxAffinity}, validates the target, applies both settings, verifies readback and restores both originals in a \texttt{finally} path, including after partial application. Updates are sequential, not an atomic kernel transaction.
+
+\paragraph{Expected cost of gated acceptance.}
+Let $Y=1$ denote an independently defined unsafe outcome and $A=1$ acceptance. An outcome label is not defined by whether a rollback happened. For example, a benchmark can predeclare a request deadline, count observed failures or deadline exceedances, and define an action-level breach from these raw observations in a fixed window. Rejected actions have unknown counterfactual outcomes unless evaluated in an isolated experiment; they must not automatically be labeled safe or unsafe.
+
+\begin{theorem}[Cost identity]\label{thm:pac-cost}
+For costs $c_{\rm FN},c_{\rm FP},\lambda\ge0$, define
+$C=c_{\rm FN}\mathbf{1}\{Y=1,A=1\}+c_{\rm FP}\mathbf{1}\{Y=0,A=0\}+\lambda D$,
+where $D\ge0$ is measured exposure or SLO debt. Write $\pi=\Pr(Y=1)$,
+$q=\Pr(A=1\mid Y=1)$ and $r=\Pr(A=0\mid Y=0)$. Then
+\[
+\mathbb{E}C=c_{\rm FN}\pi q+c_{\rm FP}(1-\pi)r+\lambda\mathbb{E}D.
+\]
+For a zero-probability class its associated product is zero.
+\end{theorem}
+\noindent\emph{Proof.} Expand each indicator expectation as its joint probability and use the definition of conditional probability. Linearity requires no independence.\hfill$\square$
+
+This is an accounting identity, not a claim of novelty or a safety bound. A bound $q\le\alpha$ controls misses among unsafe actions. A different bound $\Pr(Y=1\mid A=1)\le\alpha$ instead gives
+$\Pr(Y=1,A=1)\le\alpha\Pr(A=1)$, not $\pi\alpha$. Likewise $r$ is a veto rate among safe actions, not the proportion of vetoed actions that are safe. We report all denominators separately.
+
+For bundle-level calibration, $u$ denotes the maximum member score and $Y$ the independently observed bundle outcome. Per-knob labels alone do not establish a bundle-level guarantee.
+
+Selecting a smaller threshold by a cost rule cannot enlarge the acceptance event. Selecting a larger threshold can invalidate the bound; therefore the implementation uses the minimum of the rank threshold and optional cost-selected cap. No unsafe calibration examples implies veto-all. Calibration-window diagnostics are not test-set estimates.
+
+\paragraph{Drift and selective observation.}
+Sliding windows and a drift detector~\cite{Bifet2007ADWIN} do not guarantee exchangeability or a deterministic recovery time. Under an explicitly justified total-variation bound on the \emph{joint calibration--test law}, the probability of the same event changes by at most that bound; a marginal score-distance statement alone does not establish it. We neither estimate that distance nor claim recovery. Online labels selected by acceptance introduce additional selection bias. The runtime holds its threshold at zero on detected change until an explicit refresh; refresh remains an exploratory operation, not proof of safety.
+
+\paragraph{Protocol requirements beyond this study.}
+Workload, hardware and session groups are fixed before graph induction and assigned to disjoint train, retrieval, calibration and test roles; hashes of graphs, sources, prompts and calibrators are frozen before test results are opened, and a validator rejects overlap or unknown lineage. For each bundle we count proposed, rejected, vetoed, accepted, staged, completed and rolled-back outcomes, report gate TP/FP/FN/TN with both $\#$unsafe-accepted$/\#$unsafe and $/\#$accepted, and leave unknown labels unknown; rollback precision needs independently labeled executed actions. A lower threshold accepts a subset of fixed candidates, but the unsafe fraction among survivors need not be monotone. Absolute per-workload metrics precede ratios against a named baseline; a Pareto claim needs several measured operating points per method. Drift studies must keep the threshold trajectory and held-out outcomes at each decision, and faithfulness is tested by deleting cited and matched uncited context under fixed seeds.
+
+\section{Additional Measurements}
+\label{app:measurements}
+\subsection{Selector Replay on the Follow-up}
+All controlled runs used one Intel Core i5-3570 host (four logical CPUs, Linux 6.17.0-23-generic). Each fresh child set its timer slack with \texttt{PR\_SET\_TIMERSLACK} and its affinity with \texttt{sched\_setaffinity}, checked both by readback, and recorded 40 wake-ups against absolute monotonic-clock targets after five warm-ups.
+
+The empirical selector minimizes mean training-run P95 over the four configurations. A saturated two-factor representation encodes the same four means as a baseline, two main effects and their interaction; minimizing it adds no information to table lookup. Both selectors have the same 40 training runs and zero online search trials. An unchanged-control selector and a seeded uniform-random selector provide references. Choices are frozen before calibration and test. We evaluate these fixed selectors by paired \emph{offline replay} on the same measured test grid, not by separate closed-loop executions. A block is the uncertainty unit, and paired reductions are calculated within each period against its explicit control.
+
+\begin{table}[t]
+\centering\small
+\caption{Follow-up selector replay: mean of ten test-run P95 values. Misses are observed lateness above 200\,$\mu$s. Shared rows across selectors are intentional: selectors choosing the same configuration use the same held-out observations.}
+\label{tab:controlled-selectors}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{adjustbox}{max width=\columnwidth}
+\input{controlled-measurements.tex}
+\end{adjustbox}
+\end{adjustbox}
+\end{table}
+
+Both informed selectors chose 50\,$\mu$s slack and all CPUs, identical to control; their paired improvement is exactly zero in this replay. Control P95 is $179.7\pm102.0$ and $155.7\pm64.4\,\mu$s at 5 and 8\,ms (95\% Student-$t$ half-width across ten blocks). The training interaction contrast is $-18.6\,\mu$s; the prespecified normalized-contrast bootstrap emitted no edge because its interval included zero. We do not turn a nonsignificant contrast into a dependency rule or a semantic-reasoning gain. Acquisition took 6.54\,s for training, 8.29\,s for retrieval and 10.15\,s for calibration; graph construction and selection took 0.10\,s, included in calibration-phase wall time.
+
+\subsection{Matched-Budget Optimizers}
+Random search, $\epsilon$-greedy Q-learning ($\epsilon=0.1$), UCB1 and GP-EI BO each evaluate $B\in\{4,8,16,40\}$ recorded training runs, starting with one per configuration, and recommend their lowest observed or posterior mean, scored by the same replay over 1,000 seeds (Table~\ref{tab:optimizers}). Control is best at both test periods, so this comparison can reveal only losses. With small budgets, noisy single-CPU runs mislead the methods; BO spends fewest evaluations on the 1\,ms settings, whose training runs miss over 90\% of deadlines.
+
+\begin{table}[t]
+\centering\footnotesize\setlength{\tabcolsep}{2pt}
+\caption{Matched-budget replay: \% of 1,000 seeds choosing control\,/\,expected paired P95 change at 5\,ms (\%); last column: mean training evaluations of 1\,ms settings at $B=40$.}
+\label{tab:optimizers}
+\begin{adjustbox}{max width=\columnwidth}
+\input{optimizer-baselines.tex}
+\end{adjustbox}
+\end{table}
+
+\subsection{Staged Actuation}
+Across 80 fresh executions, 66 stop on a stage breach and 14 complete all stages; all 80 restore and read back both original values. At 5 and 8\,ms, observed deadline misses are respectively $186/816$ and $190/880$; summed exposure durations are 4.106 and 7.066\,s. Early stops reduce the number of observed events, so these fractions cannot be compared directly with fixed-duration, no-stop runs to claim an anomaly reduction. The stop criterion itself is not independent ground truth for rollback precision.
+
+\subsection{Local Baseline Measurements}
+We executed three bounded microbenchmarks on the available host: an Intel Core i5-3570 with four logical CPUs, approximately 31.2\,GiB RAM, and Linux 6.17.0-23-generic. These runs characterize the measurement pipeline: no kernel knob was modified and no LLM or controller was compared.
+
+Each workload had 10 separate invocations of 100 measured operations, preceded by 10 warm-up operations. Workload--run order was shuffled with seed 4088. SQLite inserts a 4\,KiB value and commits each transaction in WAL mode with synchronous=FULL. The file test overwrites a 64\,KiB region and calls fsync. The compression test compresses a fixed seeded 64\,KiB payload at zlib level 6 and verifies decompression. Latency is wall-clock operation duration from a monotonic nanosecond clock; the compression measurement includes verification. The raw log retains every operation, run ID, deadline and error flag, with a SHA-256 hash and software/environment manifest.
+
+\begin{table}[t]
+\centering
+\caption{Measured local baseline. Mean of run medians, and mean of run P95 values with 95\% Student-$t$ CI half-width across 10 runs. Last column is the percentage of errors or operations exceeding a predeclared 50\,ms deadline. No tuning gain is implied.}
+\label{tab:local}
+\small
+\begin{adjustbox}{max width=\columnwidth}
+\input{local-measurements.tex}
+\end{adjustbox}
+\end{table}
+
+The anomaly denominator is all measured operations, including failures; an operation counts once if either it fails or exceeds the deadline. This label is independent of veto and rollback. Zero events in these short runs is not evidence of zero population risk. We do not pool heterogeneous workload latencies or infer kernel tuning effects from these baseline timings.
+
+\subsection{Temporal-Holdout Kernel Interventions}
+We additionally executed real Linux timer-slack and CPU-affinity interventions in fresh owned child processes, without modifying host-wide sysctls. The two factors were timer slack (50\,$\mu$s or 1\,ms, set by PR\_SET\_TIMERSLACK) and affinity (all four available CPUs or CPU 0). Every child checked kernel readback before recording events. This isolated measurement driver is separate from the dry-run SemantOS actuator.
+
+For each periodic wake-up interval (2 or 5\,ms), five training blocks and ten subsequent test blocks evaluated all four configurations. Within each block, the eight interval/configuration cases were randomly ordered using seed 4088. Each fresh process performed ten warm-up and 80 measured wake-ups against absolute monotonic-clock targets. The plan was written before execution; the configuration minimizing mean training-run P95 lateness was frozen before test execution. This is temporal holdout within one host and workload family, not the independent workload/hardware split required for claims of generalization. The complete 120-process experiment retained 9,600 event timestamps, readbacks, frozen selections and hashes. No external competing load was introduced.
+
+\begin{table}[t]
+\centering
+\caption{Held-out kernel intervention measurements. P95 is the mean of ten run-level P95 wake-up latenesses. Misses count lateness exceeding the predeclared 200\,$\mu$s deadline. CPU affinity is all four CPUs or one CPU.}
+\label{tab:kernel-local}
+\small
+\begin{adjustbox}{max width=\columnwidth}
+\input{kernel-measurements.tex}
+\end{adjustbox}
+\end{table}
+
+The training selector chose the explicit control (50\,$\mu$s slack, all CPUs) at both intervals: there is no selected-policy improvement over that control. Its test P95 was $89.5\pm9.2$ and $94.2\pm6.9\,\mu$s at 2 and 5\,ms, respectively (95\% Student-$t$ half-width across ten runs). Raising slack to 1\,ms with all CPUs increased P95 by $927.3\pm16.4$ and $928.4\pm10.0\,\mu$s in paired blocks. Affinity-only differences were $19.9\pm36.7$ and $39.6\pm62.6\,\mu$s; these intervals include zero. The slack effect is consistent with timer coalescing; no power measurement, graph discovery, LLM advantage or staged rollback is inferred. A miss is defined by observed wake-up time, independently of any safety gate.
+
+\section{Prompt and Output Schema}
+\label{app:prompt}
+Every model receives the following system prompt:
+\begin{quote}\small
+Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited\_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.
+\end{quote}
+The user message is a JSON object with the four allowed configuration names and the evidence list for the input variant. Items have the forms
+\begin{quote}\small\raggedright
+\texttt{\{"id": "training-table", "kind": "table", "values": \{"s50000\_aall": 132.9413, ...\}\}}\\
+\texttt{\{"id": "interaction", "kind": "graph", "contrast\_us": -18.62, "edges": [], "scope": "same measured table; graph is a reparameterization, not extra evidence"\}}\\
+\texttt{\{"id": "retrieval-3-0-s50000\_aall", "kind": "retrieval", "config": "s50000\_aall", "period\_ns": 3000000, "p95\_us": 126.36\}}
+\end{quote}
+The output schema requires \texttt{config} from the allowed list, \texttt{cited\_ids} with at most six entries restricted to the supplied IDs (none for the no-evidence variant), and an \texttt{explanation} of at most 400 characters. Local models enforce it as a llama.cpp JSON grammar with greedy decoding; hosted models receive it as a strict JSON schema through OpenRouter, restricted to providers that honor it. Every answer is re-validated, and an invented or deleted citation makes it invalid; the explanation length is not re-checked, and 14 of 20 DeepSeek-V3.2 answers exceed 400 characters. Claim and citation counts in \S\ref{sec:results} are recomputed from these records by \texttt{claim\_taxonomy.py} and \texttt{citation\_analysis.py}. The released records contain each prompt, its SHA-256 hash, the raw response and, for hosted models, the routed provider.
+
+\paragraph{Compute budget.}
+Local models ran as 4-bit GGUF files (Q4\_K\_M; Phi-4 Q4\_K) with llama-cpp-python 0.3.35 (\url{https://github.com/abetlen/llama-cpp-python}) on a four-core CPU container without a GPU, with an 8,192-token context and at most 384 output tokens. Their 100 calls took 11,580\,s of wall time (about 3.2 CPU-hours): Qwen2.5-7B 1,603\,s, Llama-3.1-8B 2,325\,s, Qwen2.5-14B 3,136\,s and Phi-4 4,516\,s. The 150 hosted calls through OpenRouter, with at most 4,096 output tokens, took 1,224\,s in total and cost about 0.5\,USD. Kernel measurements ran on the Intel Core i5-3570 host described in Appendix~\ref{app:measurements}; acquiring the training, retrieval and calibration roles took 6.54, 8.29 and 10.15\,s. Optimizer replays over 1,000 seeds take seconds on one CPU.
+

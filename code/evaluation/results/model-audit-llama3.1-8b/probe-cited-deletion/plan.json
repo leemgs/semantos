@@ -1,0 +1,18 @@
+{
+  "model": "Meta-Llama-3.1-8B-Instruct-Q4_K_M",
+  "audit": "model-audit-llama3.1-8b",
+  "seed": 4088,
+  "weights_sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+  "source_sha256": "727118b99d365362784492b30e99bb3507a096d943c2d25a0bb09f5c8082a2c9",
+  "status": "exploratory post hoc probe; not part of the preregistered audit",
+  "full_choice": "s50000_aone",
+  "cited": [
+    "retrieval-3-0-s50000_aone",
+    "retrieval-3-1-s50000_aone",
+    "retrieval-3-2-s50000_aone",
+    "retrieval-3-3-s50000_aone",
+    "retrieval-3-4-s50000_aone",
+    "retrieval-3-5-s50000_aone"
+  ],
+  "started_utc_ns": 1790436291672156352
+}

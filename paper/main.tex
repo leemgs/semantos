@@ -1,0 +1,83 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACL 2027 (ACL Rolling Review) anonymous submission, built on the official
+% ACL style files (acl.sty / acl_natbib.bst from github.com/acl-org/acl-style-files).
+% Change "review" to "final" for the camera-ready version.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+\usepackage[review]{acl}
+
+% Standard package includes (from the ACL template)
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+\usepackage{adjustbox} % shrink over-wide floats to the column
+\usepackage{xurl}      % allow line breaks anywhere in long reference URLs
+\usepackage[normalem]{ulem} % \uline in Figure 1
+
+% Algorithms (used by Algorithm 1)
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% Better-looking tables
+\usepackage{booktabs}
+
+% Vector figures
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Project-specific packages/macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{threeparttable}
+\usepackage{xspace}
+\usepackage{pifont}
+\usepackage{enumitem}
+\usepackage{textcomp}
+
+\newtheorem{example}{Example}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{\mathrm{Var}}
+\newcommand{\Xsafe}{\mathcal{X}_{\mathrm{safe}}}
+\newcommand{\given}{\;\vert\;}
+\newcommand{\cmark}{\ding{51}} % check mark (tables)
+\newcommand{\xmark}{\ding{55}} % cross mark (tables)
+
+% Each .bib entry carries note={\refurl{<url>}}. ACL permits hyperref, so the
+% reference URL is printed as a clickable link. The bst emits
+% `\newblock \refurl{URL}.', so the trailing period is kept.
+\newcommand{\refurl}[1]{\url{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{./000-title}
+
+\begin{document}
+\maketitle
+
+\input{./005-abstract}
+\input{./010-introduction}
+\input{./015-background_related}
+\input{./030-testbed}
+\input{./040-protocol}
+\input{./050-results}
+\input{./060-discussion}
+\input{./100-conclusion}
+
+% Unnumbered sections required/permitted by ACL; they do not count toward
+% the page limit.
+\input{./090-limitations}
+\input{./085-ethics}
+
+\bibliography{reference-data}
+
+\input{./110-appendix}
+\end{document}

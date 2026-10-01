@@ -1,0 +1,121 @@
+[
+  {
+    "arm": "delete_cited",
+    "removed": [
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-9-s50000_aall"
+    ],
+    "prompt_sha256": "6ee129e99af57e25e77d67636cafe958ab508e2a80efba70a2c3465110244e61",
+    "response_meta": {
+      "reported_model": "meta-llama/llama-3.3-70b-instruct",
+      "response_id": "gen-1790488140-XbgPHWoDNRbnPP5UfDIX",
+      "system_fingerprint": null,
+      "routed_provider": "Parasail",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 2129,
+        "completion_tokens": 138,
+        "total_tokens": 2267,
+        "cost": 0.00053738,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00053738,
+          "upstream_inference_prompt_cost": 0.00046838,
+          "upstream_inference_completions_cost": 6.9e-05
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790488142247840997
+    },
+    "raw_response": "{\"config\": \"s50000_aall\", \"cited_ids\": [\"retrieval-3-0-s50000_aall\", \"retrieval-3-1-s50000_aall\", \"retrieval-3-5-s50000_aall\", \"retrieval-3-6-s50000_aall\"], \"explanation\": \"The config 's50000_aall' has the lowest P95 latency values across multiple retrieval runs, with values ranging from 109.519 to 183.217 microseconds. This suggests that 's50000_aall' is the most effective config for minimizing periodic wake-up P95 latency.\"}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-5-s50000_aall",
+        "retrieval-3-6-s50000_aall"
+      ],
+      "explanation": "The config 's50000_aall' has the lowest P95 latency values across multiple retrieval runs, with values ranging from 109.519 to 183.217 microseconds. This suggests that 's50000_aall' is the most effective config for minimizing periodic wake-up P95 latency."
+    },
+    "status": "valid",
+    "action_changed": false,
+    "elapsed_seconds": 2.017490508000037
+  },
+  {
+    "arm": "delete_control",
+    "removed": [
+      "retrieval-3-0-s1000000_aall",
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-6-s50000_aall"
+    ],
+    "prompt_sha256": "f68ad5daf9d82cb15a273e0d778cbf2116686987c710913258c807c4c2656f78",
+    "response_meta": {
+      "reported_model": "meta-llama/llama-3.3-70b-instruct",
+      "response_id": "gen-1790488142-ttKclgX81xXo8lmXNdFY",
+      "system_fingerprint": null,
+      "routed_provider": "AkashML",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 2126,
+        "completion_tokens": 141,
+        "total_tokens": 2267,
+        "cost": 0.00047452,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 240,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.00047452,
+          "upstream_inference_prompt_cost": 0.0004012,
+          "upstream_inference_completions_cost": 7.332e-05
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790488150154630734
+    },
+    "raw_response": "{\"config\": \"s50000_aall\", \"cited_ids\": [\"retrieval-3-2-s50000_aall\", \"retrieval-3-4-s50000_aall\", \"retrieval-3-7-s50000_aall\", \"retrieval-3-8-s50000_aall\", \"retrieval-3-9-s50000_aall\"], \"explanation\": \"The config 's50000_aall' has the lowest average P95 latency across multiple retrieval runs, with values ranging from 82.488 to 99.853 microseconds, indicating a more consistent and lower latency performance compared to other configurations.\"}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "explanation": "The config 's50000_aall' has the lowest average P95 latency across multiple retrieval runs, with values ranging from 82.488 to 99.853 microseconds, indicating a more consistent and lower latency performance compared to other configurations."
+    },
+    "status": "valid",
+    "action_changed": false,
+    "elapsed_seconds": 7.906628940000019
+  }
+]

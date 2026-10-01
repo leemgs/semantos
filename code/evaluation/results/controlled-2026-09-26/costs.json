@@ -1,0 +1,8 @@
+{
+  "train_seconds": 6.541494601988234,
+  "retrieval_seconds": 8.290736828988884,
+  "graph_and_selection_seconds": 0.10052888598875143,
+  "calibration_seconds": 10.152591692982242,
+  "test_seconds": 29.41510469399509,
+  "staged_seconds": 16.864631508971797
+}

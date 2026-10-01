@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  telemetry-agent:
+    privileged: true
+    pid: "host"
+    environment:
+      USE_EBPF: "auto"
+      SAMPLE_WINDOW: "60"
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /usr/src:/usr/src:ro
+      - /sys/kernel/debug:/sys/kernel/debug
+      - /sys/fs/bpf:/sys/fs/bpf

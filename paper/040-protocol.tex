@@ -1,0 +1,38 @@
+\section{Audit Protocol}
+\label{sec:protocol}
+\label{sec:evaluation}
+The protocol treats configuration advice as a grounded generation task and audits its output at four levels, each with its own manipulation and measure (Table~\ref{tab:protocol}).
+
+\begin{table}[t]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{Audit levels, in the order of \S\ref{sec:results}; all use the same frozen evidence.}
+\label{tab:protocol}
+\begin{tabular}{@{}p{0.15\columnwidth}p{0.4\columnwidth}p{0.39\columnwidth}@{}}
+\toprule
+Level & Manipulation & Measure \\
+\midrule
+Decision & matched non-LLM selector; evidence ablation & held-out P95 change vs.\ control \\
+Citation & --- (observational) & kind, configuration, position \\
+Claim & --- (observational) & labels against the evidence \\
+Reliance & cited vs.\ matched uncited deletion & decision change \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Task.}
+The input is a list of four allowed configuration labels and a JSON evidence list; the output is one label, up to six cited evidence IDs and a free-text explanation. The labels name per-thread settings: timer slack of 50\,$\mu$s or 1\,ms crossed with affinity to all four CPUs or to CPU~0 (\texttt{s50000\_aall}, \texttt{s50000\_aone}, \texttt{s1000000\_aall}, \texttt{s1000000\_aone}). They are opaque by design: nothing in a label says which setting is better. The objective is the 95th-percentile (P95) wake-up lateness; \texttt{s50000\_aall} is the control. Runs execute in fresh child processes on one Linux host (Appendix~\ref{app:measurements}).
+
+\paragraph{Data roles and frozen evidence.}
+Training, retrieval, calibration and test data come from disjoint wake-up periods of 2, 3, 4 and $\{5,8\}$\,ms~\cite{Sogaard2021RandomSplits}. Each period has ten randomized blocks of the four configurations with 40 recorded events per run: 200 runs and 8,000 events, collected under a plan saved in advance. The evidence contains three kinds of items: the training table (mean training-run P95 per configuration), an interaction-graph item (the training contrast, $-18.6\,\mu$s, whose prespecified interval includes zero, so the graph has no edge) and 40 retrieval items, one per retrieval run, listed in block order. Selections and thresholds are frozen, with hashes, before calibration and test data are opened; test outcomes never enter a prompt.
+
+\paragraph{Decisions.}
+The equally informed baseline is a table selector that picks the minimum of the training table; a saturated two-factor model of the same means is equivalent. It uses the same training runs as the LLMs and no online trials; matched-budget bandit, RL and BO optimizers~\cite{Auer2002UCB,Snoek2012BO} are further references (Appendix~\ref{app:measurements}). Ten LLMs receive the same system prompt, evidence and output schema (Appendix~\ref{app:prompt}) at temperature~0 with five seeds: Qwen2.5 7B and 14B~\cite{Qwen2024Qwen25}, Llama-3.1-8B~\cite{Grattafiori2024Llama3} and Phi-4~\cite{Abdin2024Phi4} locally as hashed 4-bit GGUF files in llama.cpp\footnote{\url{https://github.com/ggml-org/llama.cpp}, via llama-cpp-python 0.3.35.}, and Llama-3.3-70B, Qwen3-235B-A22B~\cite{Yang2025Qwen3}, DeepSeek-V3.2~\cite{DeepSeek2025V32}, Nemotron-3-Ultra-550B~\cite{NVIDIA2026Nemotron3Ultra}, Gemini~3.8 Flash~\cite{Google2026Gemini38Flash} and Gemini~3.1 Pro preview~\cite{Google2026Gemini31Pro} through OpenRouter\footnote{\url{https://openrouter.ai}}, whose weights cannot be hashed. Four input variants isolate the evidence: full, no graph, no retrieval, and no evidence. Each choice is scored by paired replay on the held-out grid: its run P95 in each test block and its change relative to the control in the same block, with a Student-$t$ interval over ten blocks.
+
+\paragraph{Citations.}
+For every valid full-context answer we record the kind of each cited item, whether a cited run belongs to the chosen or to a competing configuration, and its position in the evidence list. Since the schema admits only valid IDs, these counts describe which evidence a model presents.
+
+\paragraph{Claims.}
+Following error annotation in data-to-text evaluation~\cite{Thomson2020GoldStandard}, every quantitative or comparative claim in each distinct explanation is checked against the prompt evidence and labeled \emph{correct}, \emph{overstated}, \emph{wrong} (including partly wrong), \emph{wrong unit}, \emph{wrong attribution} (a value assigned to the wrong source) or, for no-evidence prompts, \emph{unsupported prior}. A claim is \emph{misstated} if it is wrong, misattributed, overstated or in the wrong unit. A list-valued statement counts as one claim and a comparison as another; ``consistently'' or ``always'' lowest is overstated, since the chosen configuration is lowest in 8 of 10 retrieval blocks. Local models returned byte-identical text across seeds, so each distinct explanation is audited once per variant; hosted models varied across seeds and providers, so all distinct full-context explanations are audited. DeepSeek-V3.2's providers ignored the 400-character limit in 14 of 20 answers; these are audited in full. One annotator (an author) assigned the labels, which are released per claim.
+
+\paragraph{Reliance.}
+Following the comprehensiveness test of ERASER~\cite{DeYoung2020ERASER}, for each seed we delete the items cited in the full-context answer and, separately, the same number of uncited items of the same kinds. A decision that changes only under cited deletion indicates citation-specific reliance. A seed is non-estimable when no same-kind control exists, as for the training table, the only item of its kind.

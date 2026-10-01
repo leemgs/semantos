@@ -1,0 +1,18 @@
+{
+  "model": "deepseek/deepseek-v3.2",
+  "audit": "model-audit-api-deepseek-v3.2",
+  "seed": 4088,
+  "weights_sha256": null,
+  "source_sha256": "5e29940e8d77603b64baa3eeeb64489c6ff7255c31494a3d54a8cb704aedf40c",
+  "status": "exploratory post hoc probe; not part of the preregistered audit",
+  "full_choice": "s50000_aall",
+  "cited": [
+    "retrieval-3-0-s50000_aall",
+    "retrieval-3-1-s50000_aall",
+    "retrieval-3-2-s50000_aall",
+    "retrieval-3-3-s50000_aall",
+    "retrieval-3-4-s50000_aall",
+    "training-table"
+  ],
+  "started_utc_ns": 1790491098383268907
+}

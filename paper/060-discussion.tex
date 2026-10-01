@@ -1,0 +1,16 @@
+\section{Discussion}
+\label{sec:discussion}
+\paragraph{Decisions and rationales come apart.}
+Most misstatements accompany a correct choice. This pattern is consistent with a decision driven by a simple reading of the evidence, here the minimum of the training table, and a rationale that is generated as a separate summary of the retrieval runs. Choosing the smallest of four means is easy; summarizing forty noisy measurements with ranges, extremes and quantifiers is where the errors concentrate. Because the decision is right, an end-to-end evaluation would never surface these errors, and a reader who trusts the rationale would come away with a false picture of the evidence, for instance that the chosen configuration is never beaten. This mirrors findings that explanations can be plausible yet unfaithful to what drives a prediction~\cite{Jacovi2020Faithfulness,Turpin2023Unfaithful}, with the difference that here the error is checkable against the prompt itself.
+
+\paragraph{Scale does not remove the error types.}
+Every model we audited, including hosted frontier models, produced at least two misstated claims, and the same overstatement (``consistently the lowest'') recurs across model families. The local and hosted rates (16/28 and 25/69) are not directly comparable, since local explanations were audited across all input variants and hosted ones only with full context, but the error types are shared. The superlative, range and quantifier errors long documented in data-to-text generation~\cite{Thomson2020GoldStandard,Chen2020LogicNLG} are therefore not solved by instruction tuning or scale.
+
+\paragraph{Implications for attribution metrics.}
+Attribution benchmarks typically ask whether cited passages support a statement, often with an entailment judge~\cite{Rashkin2023AIS,Gao2023ALCE}. Many of our misstated claims quote correct numbers from the cited items and err only in a comparison or quantifier, the kind of near-miss that a coarse support judgment may accept. We did not run such judges here; whether they catch these errors is an open question that structured evidence makes easy to test, because every claim can also be checked exactly.
+
+\paragraph{What deletion can and cannot show.}
+Matched deletion measures whether a decision is sensitive to what is cited, which is a form of self-consistency rather than faithfulness to internal computation~\cite{Parcalabescu2024SelfConsistency}. Even that is estimable only when the evidence contains redundant items of the same kind: half of our models cited the single training table, for which no control exists. Evidence sets for such audits should be designed with matched alternatives for every item a model might cite.
+
+\paragraph{When could an LLM add value?}
+Our evidence determines the best choice, so a selector that reads it is hard to beat. A language model could add value when the evidence is incomplete and prior knowledge, for example from documentation, carries information the measurements lack. Testing this requires tasks in which the default is not optimal and in which the baseline receives the same documents; the invented label meanings in our no-evidence runs show why such priors must be checked, not assumed.

@@ -1,0 +1,51 @@
+\section{Testbed: SemantOS}
+\label{sec:testbed}
+\label{sec:semantos}
+SemantOS is an evidence-grounded generation pipeline for system configuration that we use as an instrument (Figure~\ref{fig:runtime-path}). Four properties matter for the audit. The evidence is \emph{addressable} (every citation resolves to one item), \emph{portable} (a non-LLM selector can receive the same object) and \emph{editable} (kinds or items can be removed), and enforcement is \emph{independent} of generation, so its errors can be counted against labels the generator never sees.
+
+\paragraph{Evidence as a structured context.}
+The store holds typed items, each with a stable ID, a kind and a provenance record: summary tables, individual measurement traces, and edges of a knob-interaction graph. The graph is a small knowledge representation with a strict admission rule: for a lower-is-better loss $L$ and baseline values $a_0,b_0$, an edge requires the contrast $I_{ab}=L(a,b)-L(a,b_0)-L(a_0,b)+L(a_0,b_0)$ from independently measured configurations, with a bootstrap interval over runs that excludes zero, and records its scope, values, measurement IDs and interval. Edges describe empirical interactions, not causal couplings (Appendix~\ref{app:testbed}). For the audit, the evidence is frozen and serialized as a JSON list that is identical for every advisor.
+
+\paragraph{Generation.}
+The reasoner retrieves typed neighbors and lexically matched trace text~\cite{Lewis2020RAG} and asks a model for a complete proposal, a set of knob values, with cited item IDs and an explanation. In deployment it draws $k=3$ samples~\cite{Wang2023SelfConsistency} and returns a modal complete proposal actually present in a response, rather than splicing per-knob winners into an unseen combination, scores each member by sample disagreement $u$ (a heuristic, not a calibrated probability; Appendix~\ref{app:testbed}), and abstains when no model responds or the context budget would force evidence to be truncated. The audit in \S\ref{sec:protocol} calls each model directly on the frozen evidence, one response per seed, so that decisions, citations and explanations can be compared across models without the aggregation step.
+
+\begin{figure}[t]
+\centering
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tikzpicture}[font=\scriptsize, >={Stealth[length=1.6mm]}, x=1mm, y=1mm,
+  box/.style={draw, rounded corners=1.2pt, align=center, inner sep=1.8pt, minimum height=7mm},
+  ev/.style={box, fill=black!6}, en/.style={box, fill=black!16, line width=0.6pt},
+  tag/.style={font=\tiny\itshape, text=black!60}]
+\node[ev, text width=33mm] (tel) at (-19.5,0) {Workload telemetry\\(validity-checked)};
+\node[ev, text width=33mm] (kb)  at (19.5,0)  {Frozen typed graph\\+ retrieved traces};
+\node[box, text width=76mm] (rsn) at (0,-12) {\textbf{Reasoner}: $k{=}3$ model samples $\rightarrow$ one \emph{observed} complete bundle,\\heuristic score $u$ = max over members; abstains on invalid input};
+\node[en, text width=50mm] (val) at (-13,-24) {\textbf{Runtime}: validate the whole bundle\\(allowlist, bounds, joint constraints)};
+\node[ev, text width=20mm] (cal) at (29,-24) {Calibration\\labels $\rightarrow$ $\tau$};
+\node[box, text width=30mm] (veto)  at (-23,-36) {Veto every member\\($u{\ge}\tau$ or invalid)};
+\node[box, text width=40mm] (stage) at (17,-36) {Stage $5{\to}25{\to}50{\to}100\%$\\in memory only (dry run)};
+\node[box, text width=76mm] (trace) at (0,-48) {Decision trace: inputs, prompt hash, raw samples, $u$, $\tau$, decision};
+\draw[->] (tel) -- (tel |- rsn.north);
+\draw[->] (kb) -- (kb |- rsn.north);
+\draw[->] (rsn.south -| val) -- (val.north);
+\draw[->] (cal) -- (val);
+\draw[->] (val.south -| veto) -- (veto.north);
+\draw[->] (val.south) ++(12,0) -- (stage.north -| {$(val.south)+(12,0)$});
+\draw[->] (veto) -- (veto |- trace.north);
+\draw[->] (stage) -- (stage |- trace.north);
+\node[tag, anchor=south west] at (tel.north west) {evidence};
+\node[tag, anchor=south east] at (cal.north east) {independent labels};
+\end{tikzpicture}
+\end{adjustbox}
+\caption{SemantOS decision path. Evidence, generation and enforcement are separate components: the frozen evidence object can be given to a non-LLM selector, ablated or partially deleted, citations can be resolved against its item IDs, and gate errors can be counted against independently defined labels. The REST runtime is a dry run; a separate per-thread actuator applies, verifies and restores timer slack and affinity in owned child processes.}
+\label{fig:runtime-path}
+\end{figure}
+
+\paragraph{Enforcement.}
+The runtime treats a proposal as a unit: it validates every member (allowlisted knobs, bounds, joint constraints, no duplicates) and, if any member score satisfies $u\ge\tau$, vetoes all of them; otherwise the proposal enters a staged rollout. The REST runtime is a dry run that never writes kernel settings (Appendix~\ref{app:testbed}). The threshold $\tau$ comes from a rank gate, a selective-prediction rule~\cite{Geifman2017Selective} calibrated on unsafe examples only. Let $Y=1$ denote an unsafe outcome defined from raw observations, never from whether a veto or rollback occurred.
+\label{subsec:theorem}
+\begin{proposition}[Restricted rank gate]\label{prop:recal}
+Fix a score function before calibration. Suppose $n$ unsafe calibration scores and the next unsafe test score are jointly exchangeable. Set $j=\lfloor\alpha(n+1)\rfloor$ for $0<\alpha<1$. If $j=0$, veto all; otherwise let $\tau$ be the $j$th smallest unsafe calibration score and accept only when $u<\tau$. Then the unsafe-class acceptance probability, marginal over calibration and test scores, is at most $j/(n+1)\le\alpha$.
+\end{proposition}
+\noindent\emph{Proof.} By exchangeability the test score's rank among the $n+1$ scores is uniform; it falls below the $j$th calibration score only in the first $j$ ranks, and ties only reduce this.\hfill$\square$
+
+The bound controls misses among unsafe actions, $\Pr(A=1\mid Y=1)$, not the unsafe fraction among accepted actions; a cost-selected threshold is capped at the rank threshold, and no unsafe calibration example implies veto-all. The gate accepts any fixed score; \S\ref{subsec:gate} evaluates it with a measured risk score rather than $u$. An expected-cost identity, a discussion of drift and the bounded per-thread actuator used in \S\ref{subsec:gate} are in Appendix~\ref{app:testbed}.

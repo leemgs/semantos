@@ -1,0 +1,122 @@
+[
+  {
+    "arm": "delete_cited",
+    "removed": [
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-4-s50000_aall",
+      "retrieval-3-5-s50000_aall"
+    ],
+    "prompt_sha256": "5548098cfc923aaae6e403f62651535c92ead7b4bf4d2890619f7920b2391ef5",
+    "response_meta": {
+      "reported_model": "nvidia/nemotron-3-ultra-550b-a55b",
+      "response_id": "gen-1790497698-cwskOqhPPu0QyhNecHT6",
+      "system_fingerprint": null,
+      "routed_provider": "DeepInfra",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 2743,
+        "completion_tokens": 281,
+        "total_tokens": 3024,
+        "cost": 0.0009145,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 2688,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0009145,
+          "upstream_inference_prompt_cost": 0.0002963,
+          "upstream_inference_completions_cost": 0.0006182
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790497699657709721
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"retrieval-3-6-s50000_aall\",\n    \"retrieval-3-7-s50000_aall\",\n    \"retrieval-3-8-s50000_aall\",\n    \"retrieval-3-9-s50000_aall\"\n  ],\n  \"explanation\": \"Among the four allowed configs, only s50000_aall and s50000_aone have retrieval P95 measurements. s50000_aall has four runs (ids retrieval-3-6 through retrieval-3-9) with P95 latencies of 109.5, 82.5, 87.4, and 87.3 \u00b5s. s50000_aone has ten runs with P95 latencies ranging from 85.0 to 571.8 \u00b5s. The highest observed P95 for s50000_aall is 109.5 \u00b5s, while for s50000_aone it is 571.8 \u00b5s. Even the mean\" \n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-6-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "explanation": "Among the four allowed configs, only s50000_aall and s50000_aone have retrieval P95 measurements. s50000_aall has four runs (ids retrieval-3-6 through retrieval-3-9) with P95 latencies of 109.5, 82.5, 87.4, and 87.3 \u00b5s. s50000_aone has ten runs with P95 latencies ranging from 85.0 to 571.8 \u00b5s. The highest observed P95 for s50000_aall is 109.5 \u00b5s, while for s50000_aone it is 571.8 \u00b5s. Even the mean"
+    },
+    "status": "valid",
+    "action_changed": false,
+    "elapsed_seconds": 1.6004790229999344
+  },
+  {
+    "arm": "delete_control",
+    "removed": [
+      "retrieval-3-0-s1000000_aall",
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-9-s50000_aall"
+    ],
+    "prompt_sha256": "74f6c3147062be1c6d48ff1c7f7a8005f971d0edc5606b683b05f175119fd4d0",
+    "response_meta": {
+      "reported_model": "nvidia/nemotron-3-ultra-550b-a55b",
+      "response_id": "gen-1790497700-uTuZYVLMeHGxQCNioX8a",
+      "system_fingerprint": null,
+      "routed_provider": "DeepInfra",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 2737,
+        "completion_tokens": 278,
+        "total_tokens": 3015,
+        "cost": 0.0018905,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 224,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0018905,
+          "upstream_inference_prompt_cost": 0.0012789,
+          "upstream_inference_completions_cost": 0.0006116
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "fence_stripped": false,
+      "retried_errors": [],
+      "utc_ns": 1790497701775916911
+    },
+    "raw_response": "{\n  \"config\": \"s50000_aall\",\n  \"cited_ids\": [\n    \"retrieval-3-0-s50000_aall\",\n    \"retrieval-3-1-s50000_aall\",\n    \"retrieval-3-2-s50000_aall\",\n    \"retrieval-3-3-s50000_aall\",\n    \"retrieval-3-4-s50000_aall\",\n    \"retrieval-3-5-s50000_aall\"\n  ],\n  \"explanation\": \"Among the allowed configurations, s50000_aall consistently shows the lowest periodic wake-up P95 latency across all retrieval runs. The measured P95 values for s50000_aall range from 93.049 to 183.217 microseconds, while s50000_aone ranges from 85.033 to 430.654 microseconds, and both s1000000 configurations show significantly higher latencies (748.404 to 1419.669 microseconds). The training table\" \n}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "explanation": "Among the allowed configurations, s50000_aall consistently shows the lowest periodic wake-up P95 latency across all retrieval runs. The measured P95 values for s50000_aall range from 93.049 to 183.217 microseconds, while s50000_aone ranges from 85.033 to 430.654 microseconds, and both s1000000 configurations show significantly higher latencies (748.404 to 1419.669 microseconds). The training table"
+    },
+    "status": "valid",
+    "action_changed": false,
+    "elapsed_seconds": 2.118046994000906
+  }
+]

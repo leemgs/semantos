@@ -1,0 +1,29 @@
+{
+  "budgets": [
+    4,
+    8,
+    16,
+    40
+  ],
+  "methods": [
+    "random",
+    "egreedy",
+    "ucb1",
+    "gp_ei"
+  ],
+  "replicates": 1000,
+  "seed_base": 4088,
+  "epsilon": 0.1,
+  "gp": {
+    "lengthscale": 1.0,
+    "signal_var": 1.0,
+    "noise_var": 0.1
+  },
+  "ucb_reward": "1 - min(p95, 2000 us)/2000 us",
+  "environment": "bootstrap draw of one recorded 2 ms training run of the chosen config",
+  "recommendation": "lowest observed mean (gp_ei: lowest posterior mean)",
+  "scoring": "model_audit.heldout paired replay on the 5 and 8 ms test grid, after all runs",
+  "input_hashes_sha256": "d5a1ec2d425fd9ea1ea45b5e65b2cca91f87ca88eff3b3cf879e80435d130b2c",
+  "source_sha256": "eb702b8c6f20b6d51950ca6af94e468a705c0851668488865aae9428cded8696",
+  "frozen_utc_ns": 1790508476533319927
+}

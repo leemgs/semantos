@@ -1,0 +1,309 @@
+{
+  "kind": "measured_local_baseline",
+  "raw_sha256": "744155b9e08b7ece7e8b45e7c6495f3d78b8aac01d94d0d1a3b6221191ad4b9d",
+  "workloads": {
+    "file_fsync": {
+      "statistics": {
+        "median_ms": {
+          "mean": 1.9029836000000002,
+          "ci95_half_width": 0.011457325691076837,
+          "n_runs": 10
+        },
+        "p95_ms": {
+          "mean": 2.03533654,
+          "ci95_half_width": 0.04320139933218171,
+          "n_runs": 10
+        },
+        "anomaly_rate": {
+          "mean": 0.0,
+          "ci95_half_width": 0.0,
+          "n_runs": 10
+        }
+      },
+      "runs": [
+        {
+          "run": 0,
+          "median_ms": 1.8834635,
+          "p95_ms": 2.0228386,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 1,
+          "median_ms": 1.8830464999999998,
+          "p95_ms": 1.9493821500000001,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 2,
+          "median_ms": 1.894984,
+          "p95_ms": 1.9787421,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 3,
+          "median_ms": 1.9237535000000001,
+          "p95_ms": 2.10024205,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 4,
+          "median_ms": 1.9022260000000002,
+          "p95_ms": 1.98744185,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 5,
+          "median_ms": 1.9187815000000001,
+          "p95_ms": 2.09230395,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 6,
+          "median_ms": 1.8829449999999999,
+          "p95_ms": 1.96831175,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 7,
+          "median_ms": 1.9104554999999999,
+          "p95_ms": 2.1016571500000003,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 8,
+          "median_ms": 1.9109604999999998,
+          "p95_ms": 2.08295895,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 9,
+          "median_ms": 1.91922,
+          "p95_ms": 2.06948685,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        }
+      ]
+    },
+    "sqlite_commit": {
+      "statistics": {
+        "median_ms": {
+          "mean": 1.8703077999999997,
+          "ci95_half_width": 0.018635390065839606,
+          "n_runs": 10
+        },
+        "p95_ms": {
+          "mean": 2.1870847799999997,
+          "ci95_half_width": 0.2727529662019146,
+          "n_runs": 10
+        },
+        "anomaly_rate": {
+          "mean": 0.0,
+          "ci95_half_width": 0.0,
+          "n_runs": 10
+        }
+      },
+      "runs": [
+        {
+          "run": 0,
+          "median_ms": 1.828474,
+          "p95_ms": 2.03969005,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 1,
+          "median_ms": 1.884679,
+          "p95_ms": 2.0890942999999997,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 2,
+          "median_ms": 1.8829525,
+          "p95_ms": 2.07190725,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 3,
+          "median_ms": 1.884228,
+          "p95_ms": 3.26562445,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 4,
+          "median_ms": 1.821393,
+          "p95_ms": 2.1264699,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 5,
+          "median_ms": 1.8857925,
+          "p95_ms": 2.0221093,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 6,
+          "median_ms": 1.8697355,
+          "p95_ms": 2.0568880999999997,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 7,
+          "median_ms": 1.894203,
+          "p95_ms": 2.1434737499999996,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 8,
+          "median_ms": 1.8921364999999999,
+          "p95_ms": 2.0225669,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 9,
+          "median_ms": 1.859484,
+          "p95_ms": 2.0330237999999996,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        }
+      ]
+    },
+    "zlib_compress": {
+      "statistics": {
+        "median_ms": {
+          "mean": 1.4743112999999999,
+          "ci95_half_width": 0.008421835122567266,
+          "n_runs": 10
+        },
+        "p95_ms": {
+          "mean": 2.0375405649999996,
+          "ci95_half_width": 0.355516125507345,
+          "n_runs": 10
+        },
+        "anomaly_rate": {
+          "mean": 0.0,
+          "ci95_half_width": 0.0,
+          "n_runs": 10
+        }
+      },
+      "runs": [
+        {
+          "run": 0,
+          "median_ms": 1.457455,
+          "p95_ms": 1.52794065,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 1,
+          "median_ms": 1.4712049999999999,
+          "p95_ms": 1.56092185,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 2,
+          "median_ms": 1.458751,
+          "p95_ms": 1.514893,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 3,
+          "median_ms": 1.463987,
+          "p95_ms": 1.52608205,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 4,
+          "median_ms": 1.476445,
+          "p95_ms": 2.4225991,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 5,
+          "median_ms": 1.4816625,
+          "p95_ms": 2.5881232999999995,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 6,
+          "median_ms": 1.4878675000000001,
+          "p95_ms": 1.9494874999999998,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 7,
+          "median_ms": 1.4913155,
+          "p95_ms": 2.86330135,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 8,
+          "median_ms": 1.482531,
+          "p95_ms": 2.2072716999999997,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        },
+        {
+          "run": 9,
+          "median_ms": 1.4718935,
+          "p95_ms": 2.21478515,
+          "anomaly_rate": 0.0,
+          "errors": 0,
+          "operations": 100
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "model": "Qwen2.5-14B-Instruct-Q4_K_M",
+  "backend": "llamacpp",
+  "purpose": "experiment",
+  "manifest": {
+    "format": "gguf",
+    "file": "qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf",
+    "bytes": 8988110496,
+    "sha256": "a09ea5e7b1eafb1b30b241726c3cc3c905c96f14ad41e246ffa5f44e53904f68",
+    "gguf_general_metadata": {
+      "general.file_type": "15",
+      "general.architecture": "qwen2",
+      "general.name": "qwen2.5-14b-instruct",
+      "general.version": "v0.1",
+      "general.finetune": "qwen2.5-14b-instruct",
+      "general.type": "model",
+      "general.size_label": "15B",
+      "general.quantization_version": "2"
+    },
+    "shards": [
+      {
+        "file": "qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf",
+        "bytes": 3991999872,
+        "sha256": "a09ea5e7b1eafb1b30b241726c3cc3c905c96f14ad41e246ffa5f44e53904f68"
+      },
+      {
+        "file": "qwen2.5-14b-instruct-q4_k_m-00002-of-00003.gguf",
+        "bytes": 3989373504,
+        "sha256": "21b9457d079680d284e90ef69607c4b2d8ef64a09d4729cb7b5e1357bdba41ae"
+      },
+      {
+        "file": "qwen2.5-14b-instruct-q4_k_m-00003-of-00003.gguf",
+        "bytes": 1006737120,
+        "sha256": "c8d37006760a387a35216e070e6664d7da927f10be8eb870fef2e3d4833d9976"
+      }
+    ],
+    "runtime": "llama-cpp-python 0.3.35",
+    "n_ctx": 8192,
+    "response_format": "JSON schema grammar: config enum; <=6 citations restricted to supplied IDs; <=400-char explanation",
+    "max_tokens": 384
+  },
+  "manifest_sha256": "a09ea5e7b1eafb1b30b241726c3cc3c905c96f14ad41e246ffa5f44e53904f68",
+  "endpoint": null,
+  "seeds": [
+    4088,
+    4089,
+    4090,
+    4091,
+    4092
+  ],
+  "temperature": 0,
+  "num_predict": 256,
+  "source_sha256": "bb49f2ab8e2ec5b2631bdfdd96aa42e36ffca2dcfc5fa48335e5acf0a7a4fab6",
+  "input_hashes_sha256": "d5a1ec2d425fd9ea1ea45b5e65b2cca91f87ca88eff3b3cf879e80435d130b2c",
+  "scope": "retrospective frozen-input selection audit; no test outcomes in prompts",
+  "started_utc_ns": 1790474718004117717
+}

@@ -1,0 +1,55 @@
+{
+  "seed": 4088,
+  "periods_ns": [
+    2000000,
+    5000000
+  ],
+  "train_blocks": 5,
+  "test_blocks": 10,
+  "samples": 80,
+  "warmup": 10,
+  "deadline_ns": 200000,
+  "control": "slack50000_all",
+  "selection": "lowest mean training run P95 per period",
+  "configs": [
+    {
+      "name": "slack50000_all",
+      "slack_ns": 50000,
+      "cpus": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "slack50000_one",
+      "slack_ns": 50000,
+      "cpus": [
+        0
+      ]
+    },
+    {
+      "name": "slack1000000_all",
+      "slack_ns": 1000000,
+      "cpus": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "slack1000000_one",
+      "slack_ns": 1000000,
+      "cpus": [
+        0
+      ]
+    }
+  ],
+  "cpu": "x86_64",
+  "kernel": "6.17.0-23-generic",
+  "python": "3.12.3",
+  "clock": "monotonic_ns",
+  "scope": "single host, owned child process, no external competing load"
+}

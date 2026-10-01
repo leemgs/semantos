@@ -1,0 +1,58 @@
+[
+  {
+    "arm": "delete_cited",
+    "removed": [
+      "retrieval-3-0-s50000_aall",
+      "retrieval-3-1-s50000_aall",
+      "retrieval-3-2-s50000_aall",
+      "retrieval-3-3-s50000_aall",
+      "retrieval-3-4-s50000_aall",
+      "training-table"
+    ],
+    "prompt_sha256": "cce4b61e1e28a52190bb4f661646ed09fda2f1ec51ff0eafe2bb916b1dfbe358",
+    "raw_response": "{\"config\": \"s50000_aone\", \"cited_ids\": [\"retrieval-3-0-s50000_aone\", \"retrieval-3-1-s50000_aone\", \"retrieval-3-2-s50000_aone\", \"retrieval-3-3-s50000_aone\", \"retrieval-3-4-s50000_aone\", \"retrieval-3-5-s50000_aone\"], \"explanation\": \"The configuration 's50000_aone' has the lowest P95 latency among the provided options, with a value of 150.643 microseconds. This configuration also has the shortest period of 3000000 nanoseconds, which is consistent across all runs. Therefore, 's50000_aone' is the optimal choice to minimize the periodic wake-up P95 latency.\"}",
+    "answer": {
+      "config": "s50000_aone",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aone",
+        "retrieval-3-1-s50000_aone",
+        "retrieval-3-2-s50000_aone",
+        "retrieval-3-3-s50000_aone",
+        "retrieval-3-4-s50000_aone",
+        "retrieval-3-5-s50000_aone"
+      ],
+      "explanation": "The configuration 's50000_aone' has the lowest P95 latency among the provided options, with a value of 150.643 microseconds. This configuration also has the shortest period of 3000000 nanoseconds, which is consistent across all runs. Therefore, 's50000_aone' is the optimal choice to minimize the periodic wake-up P95 latency."
+    },
+    "status": "valid",
+    "action_changed": true,
+    "elapsed_seconds": 123.87143717699928
+  },
+  {
+    "arm": "delete_control",
+    "removed": [
+      "retrieval-3-5-s50000_aall",
+      "retrieval-3-6-s50000_aall",
+      "retrieval-3-7-s50000_aall",
+      "retrieval-3-8-s50000_aall",
+      "retrieval-3-9-s50000_aall",
+      "training-table"
+    ],
+    "prompt_sha256": "422ac96999df2b68e1ecb76f6867f3dcda786fefb3c61693b246aa95707f0ea4",
+    "raw_response": "{\"config\": \"s50000_aall\", \"cited_ids\": [\"retrieval-3-0-s50000_aall\", \"retrieval-3-1-s50000_aall\", \"retrieval-3-2-s50000_aall\", \"retrieval-3-3-s50000_aall\", \"retrieval-3-4-s50000_aall\", \"retrieval-3-5-s50000_aone\"], \"explanation\": \"The configuration 's50000_aall' consistently shows the lowest P95 latency across multiple runs, with values ranging from 92.36 to 140.554 microseconds. This configuration is therefore the best choice to minimize the periodic wake-up P95 latency, based on the evidence provided.\"}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aone"
+      ],
+      "explanation": "The configuration 's50000_aall' consistently shows the lowest P95 latency across multiple runs, with values ranging from 92.36 to 140.554 microseconds. This configuration is therefore the best choice to minimize the periodic wake-up P95 latency, based on the evidence provided."
+    },
+    "status": "valid",
+    "action_changed": false,
+    "elapsed_seconds": 101.89903956600028
+  }
+]

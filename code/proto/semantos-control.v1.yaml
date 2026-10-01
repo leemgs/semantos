@@ -1,0 +1,113 @@
+openapi: 3.0.3
+info:
+  title: SemantOS dry-run control contract
+  version: 2.0.0
+  description: >-
+    Runtime only. No kernel writes or empirical safety guarantee. Reasoner
+    /get_recommendations returns the same Recommendation items. Its /apply proxy
+    forwards this contract; reasoner /log_outcome instead accepts context/action/outcome
+    for KB storage and is distinct from the runtime outcome endpoint below.
+components:
+  schemas:
+    Recommendation:
+      type: object
+      required: [id, bundle, knob, proposed, uncertainty]
+      properties:
+        id: {type: string, minLength: 1}
+        bundle: {type: string, minLength: 1, description: One shared bundle ID per request}
+        knob:
+          type: string
+          enum: [vm.dirty_ratio, vm.dirty_background_ratio, vm.swappiness]
+        proposed:
+          oneOf: [{type: string, pattern: '^[+-]?[0-9]+$'}, {type: integer}]
+        uncertainty:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Finite heuristic score, not a calibrated probability
+        rationale: {type: string}
+        expected_impact: {type: string, description: Unverified model prediction}
+        explanation: {type: string}
+        provenance: {type: object}
+    ApplyResult:
+      type: object
+      required: [mode, applied, simulated, vetoed, tau]
+      properties:
+        mode: {type: string, enum: [dry_run]}
+        applied: {type: array, maxItems: 0, items: {type: string}}
+        simulated: {type: array, items: {type: string}}
+        vetoed: {type: array, items: {type: string}}
+        tau: {type: number, minimum: 0, maximum: 1}
+paths:
+  /apply:
+    post:
+      summary: Validate and gate a complete dry-run bundle
+      description: >-
+        Duplicate knobs, missing bundle IDs, unsupported controls, nonfinite scores,
+        out-of-policy values or joint-constraint violations reject the whole request.
+        Dirty ratio edits require both values with background < foreground.
+        Any member u >= tau vetoes the entire bundle. An empty list is a no-op.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                recommendations:
+                  type: array
+                  items: {$ref: '#/components/schemas/Recommendation'}
+      responses:
+        '200':
+          description: Dry-run gate result, never an actual deployment
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApplyResult'}
+        '409': {description: Another bundle is active}
+        '422': {description: Invalid bundle}
+  /calibrate:
+    post:
+      summary: Explicit exploratory calibration from external labels
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                required: [u, unsafe]
+                properties:
+                  u: {type: number, minimum: 0, maximum: 1}
+                  unsafe: {type: boolean}
+      responses:
+        '200': {description: In-sample confusion counts and diagnostic rates; undefined rates are null}
+        '422': {description: Invalid records}
+  /log_outcome:
+    post:
+      summary: Archive an unverified dry-run outcome without training the gate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {type: object}
+      responses:
+        '200': {description: used_for_calibration is false}
+  /rollout/advance:
+    post:
+      summary: Advance the complete simulated bundle through 5/25/50/100 percent states
+      responses:
+        '200': {description: Simulated stage or no_active_bundle}
+  /rollback:
+    post:
+      summary: Cancel all members of the staged simulation; no kernel rollback occurs
+      responses:
+        '200': {description: kernel_rollback is false}
+  /status:
+    get:
+      responses:
+        '200': {description: Dry-run state, trace history and calibration diagnostics}
+  /healthz:
+    get:
+      responses:
+        '200': {description: mode is dry_run and kernel_writes is false}

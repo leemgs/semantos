@@ -1,0 +1,18 @@
+{
+  "model": "Qwen2.5-14B-Instruct-Q4_K_M",
+  "audit": "model-audit-qwen2.5-14b",
+  "seed": 4088,
+  "weights_sha256": "a09ea5e7b1eafb1b30b241726c3cc3c905c96f14ad41e246ffa5f44e53904f68",
+  "source_sha256": "727118b99d365362784492b30e99bb3507a096d943c2d25a0bb09f5c8082a2c9",
+  "status": "exploratory post hoc probe; not part of the preregistered audit",
+  "full_choice": "s50000_aall",
+  "cited": [
+    "retrieval-3-0-s50000_aall",
+    "retrieval-3-1-s50000_aall",
+    "retrieval-3-2-s50000_aall",
+    "retrieval-3-3-s50000_aall",
+    "retrieval-3-4-s50000_aall",
+    "training-table"
+  ],
+  "started_utc_ns": 1790482441538427016
+}

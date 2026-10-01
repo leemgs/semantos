@@ -1,0 +1,58 @@
+[
+  {
+    "arm": "delete_cited",
+    "removed": [
+      "retrieval-3-0-s50000_aone",
+      "retrieval-3-1-s50000_aone",
+      "retrieval-3-2-s50000_aone",
+      "retrieval-3-3-s50000_aone",
+      "retrieval-3-4-s50000_aone",
+      "retrieval-3-5-s50000_aone"
+    ],
+    "prompt_sha256": "e13f7f15ed223581bf1002a0760698ce0b3d6d83bfca12311e5f8f6f2b6dac33",
+    "raw_response": "{\"config\": \"s1000000_aall\", \"cited_ids\": [\"retrieval-3-0-s1000000_aall\", \"retrieval-3-1-s1000000_aall\", \"retrieval-3-2-s1000000_aall\", \"retrieval-3-3-s1000000_aall\", \"retrieval-3-4-s1000000_aall\", \"retrieval-3-5-s1000000_aall\"], \"explanation\": \"The config 's1000000_aall' has the lowest P95 latency of 748.404 us among all the allowed configs.\"}",
+    "answer": {
+      "config": "s1000000_aall",
+      "cited_ids": [
+        "retrieval-3-0-s1000000_aall",
+        "retrieval-3-1-s1000000_aall",
+        "retrieval-3-2-s1000000_aall",
+        "retrieval-3-3-s1000000_aall",
+        "retrieval-3-4-s1000000_aall",
+        "retrieval-3-5-s1000000_aall"
+      ],
+      "explanation": "The config 's1000000_aall' has the lowest P95 latency of 748.404 us among all the allowed configs."
+    },
+    "status": "valid",
+    "action_changed": true,
+    "elapsed_seconds": 90.23591490200033
+  },
+  {
+    "arm": "delete_control",
+    "removed": [
+      "retrieval-3-0-s1000000_aall",
+      "retrieval-3-0-s1000000_aone",
+      "retrieval-3-6-s50000_aone",
+      "retrieval-3-7-s50000_aone",
+      "retrieval-3-8-s50000_aone",
+      "retrieval-3-9-s50000_aone"
+    ],
+    "prompt_sha256": "57a7d4598b1d96231e9a0e28ed5bdbe914193e895d31e5234f8f2fa9e58626cc",
+    "raw_response": "{\"config\": \"s50000_aall\", \"cited_ids\": [\"retrieval-3-0-s50000_aall\", \"retrieval-3-1-s50000_aall\", \"retrieval-3-2-s50000_aall\", \"retrieval-3-3-s50000_aall\", \"retrieval-3-4-s50000_aall\", \"retrieval-3-5-s50000_aall\"], \"explanation\": \"The config 's50000_aall' has the lowest P95 latency of 93.049 us in the retrieval-3-4-s50000_aall evidence, which is the lowest value among all the configs.\"}",
+    "answer": {
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "explanation": "The config 's50000_aall' has the lowest P95 latency of 93.049 us in the retrieval-3-4-s50000_aall evidence, which is the lowest value among all the configs."
+    },
+    "status": "valid",
+    "action_changed": true,
+    "elapsed_seconds": 85.85462009599996
+  }
+]

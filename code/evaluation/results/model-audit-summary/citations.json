@@ -1,0 +1,177 @@
+{
+  "models": 10,
+  "answers": 50,
+  "citations": 285,
+  "table": 25,
+  "graph": 0,
+  "retrieval_chosen": 252,
+  "retrieval_other": 8,
+  "retrieval_citations": 260,
+  "retrieval_blocks": {
+    "0": 41,
+    "1": 35,
+    "2": 41,
+    "3": 39,
+    "4": 53,
+    "5": 20,
+    "6": 1,
+    "7": 19,
+    "8": 5,
+    "9": 6
+  },
+  "retrieval_in_first_half": 209,
+  "models_citing_only_chosen_runs": 9,
+  "models_citing_a_prefix_of_blocks": [
+    "model-audit-api-deepseek-v3.2",
+    "model-audit-api-nemotron3-ultra-550b",
+    "model-audit-api-qwen3-235b",
+    "model-audit-llama3.1-8b",
+    "model-audit-phi-4",
+    "model-audit-qwen2.5-14b",
+    "model-audit-qwen2.5-7b"
+  ],
+  "per_model": {
+    "model-audit-api-deepseek-v3.2": {
+      "answers": 5,
+      "distinct_explanations": 5,
+      "citations": 30,
+      "table": 5,
+      "retrieval_chosen": 25,
+      "retrieval_blocks": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5,
+        "4": 5
+      }
+    },
+    "model-audit-api-gemini-3.1-pro": {
+      "answers": 5,
+      "distinct_explanations": 2,
+      "citations": 26,
+      "table": 5,
+      "retrieval_chosen": 13,
+      "retrieval_other": 8,
+      "retrieval_blocks": {
+        "2": 1,
+        "4": 9,
+        "7": 9,
+        "8": 1,
+        "9": 1
+      }
+    },
+    "model-audit-api-gemini-3.8-flash": {
+      "answers": 5,
+      "distinct_explanations": 5,
+      "citations": 21,
+      "table": 5,
+      "retrieval_chosen": 16,
+      "retrieval_blocks": {
+        "0": 5,
+        "4": 5,
+        "7": 5,
+        "9": 1
+      }
+    },
+    "model-audit-api-llama3.3-70b": {
+      "answers": 5,
+      "distinct_explanations": 4,
+      "citations": 28,
+      "retrieval_chosen": 28,
+      "retrieval_blocks": {
+        "0": 1,
+        "2": 5,
+        "3": 4,
+        "4": 4,
+        "6": 1,
+        "7": 5,
+        "8": 4,
+        "9": 4
+      }
+    },
+    "model-audit-api-nemotron3-ultra-550b": {
+      "answers": 5,
+      "distinct_explanations": 5,
+      "citations": 30,
+      "retrieval_chosen": 30,
+      "retrieval_blocks": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5,
+        "4": 5,
+        "5": 5
+      }
+    },
+    "model-audit-api-qwen3-235b": {
+      "answers": 5,
+      "distinct_explanations": 2,
+      "citations": 30,
+      "retrieval_chosen": 30,
+      "retrieval_blocks": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5,
+        "4": 5,
+        "5": 5
+      }
+    },
+    "model-audit-llama3.1-8b": {
+      "answers": 5,
+      "distinct_explanations": 1,
+      "citations": 30,
+      "retrieval_chosen": 30,
+      "retrieval_blocks": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5,
+        "4": 5,
+        "5": 5
+      }
+    },
+    "model-audit-phi-4": {
+      "answers": 5,
+      "distinct_explanations": 1,
+      "citations": 30,
+      "retrieval_chosen": 30,
+      "retrieval_blocks": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5,
+        "4": 5,
+        "5": 5
+      }
+    },
+    "model-audit-qwen2.5-14b": {
+      "answers": 5,
+      "distinct_explanations": 1,
+      "citations": 30,
+      "table": 5,
+      "retrieval_chosen": 25,
+      "retrieval_blocks": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5,
+        "4": 5
+      }
+    },
+    "model-audit-qwen2.5-7b": {
+      "answers": 5,
+      "distinct_explanations": 1,
+      "citations": 30,
+      "table": 5,
+      "retrieval_chosen": 25,
+      "retrieval_blocks": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5,
+        "4": 5
+      }
+    }
+  }
+}
