@@ -108,6 +108,14 @@ Random search, $\epsilon$-greedy Q-learning ($\epsilon=0.1$), UCB1 and GP-EI BO 
 \end{adjustbox}
 \end{table}
 
+\subsection{Gate Replay}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/gate_replay.pdf}
+\caption{Frozen-gate replay on the 80 held-out test runs; each point is one run. Positive means unsafe (dashed line) and a gate-positive decision is veto. Counts at every tested $\alpha$ (all give $\tau=.9225$): 5\,ms, 20 accepted / 20 vetoed, TP~20, FP~0, FN~5, TN~15; 8\,ms, 20 / 20, TP~20, FP~0, FN~4, TN~16. Blue points above the line are the accepted unsafe runs. Generated from raw logs by \texttt{plot\_gate\_replay.py}.}
+\label{fig:gate-replay}
+\end{figure}
+
 \subsection{Staged Actuation}
 Across 80 fresh executions, 66 stop on a stage breach and 14 complete all stages; all 80 restore and read back both original values. At 5 and 8\,ms, observed deadline misses are respectively $186/816$ and $190/880$; summed exposure durations are 4.106 and 7.066\,s. Early stops reduce the number of observed events, so these fractions cannot be compared directly with fixed-duration, no-stop runs to claim an anomaly reduction. The stop criterion itself is not independent ground truth for rollback precision.
 
