@@ -350,7 +350,8 @@ summarizes four runs, all on a four-core CPU container with llama-cpp-python
   The post hoc probe (`probe-cited-deletion/`) found citation-specific sensitivity
   for Qwen in one deterministic response; this is not a faithfulness estimate.
 * [`claim-audit.json`](results/model-audit-summary/claim-audit.json) checks all 28
-  quantitative claims in the 20 distinct explanations by hand: 7 correct, 1 partly
+  quantitative claims in the 20 distinct explanations (labels drafted with an AI
+  assistant and released with their checks; see `claim_review_agreement.py`): 7 correct, 1 partly
   wrong, 4 unsupported priors, 16 wrong, misattributed, overstated or in the wrong
   unit (8 of 12 for the 7-8B models, 8 of 16 for the 14B models). All quoted
   decimals occur in the prompt, so citation checks verify provenance, not
@@ -358,6 +359,10 @@ summarizes four runs, all on a four-core CPU container with llama-cpp-python
 * [`claim_taxonomy.py`](claim_taxonomy.py) tabulates every labeled claim (local
   and hosted) by model and error type and writes the paper's claim table
   (`python3 claim_taxonomy.py --out ../../paper/claim-taxonomy.tex`).
+* [`claim_review_agreement.py`](claim_review_agreement.py) exports the drafted
+  claim labels for human review (`paper/claim-label-review.csv`), reports
+  agreement and Cohen's kappa between the drafted and reviewed labels, and with
+  `--apply` writes the verified labels back into `claim-audit.json`.
 * [`citation_analysis.py`](citation_analysis.py) counts what the 50 valid
   full-context answers cite (training table, graph item, runs of the chosen or
   another configuration, and each cited run's position in the evidence list)
