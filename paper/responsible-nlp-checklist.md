@@ -211,5 +211,6 @@ by the authors, human annotation of claims) are accurate.
 2. Confirm the DeepSeek-V3.2 and Nemotron-3-Ultra licenses on their model
    cards (B2).
 3. Confirm the factual statements in the extended AI-assistant disclosure (E1).
-4. Prepare an anonymized repository link for reviewers (e.g., an anonymous
-   GitHub mirror), since the paper states that artifacts are released.
+4. Create the anonymous link (or upload the zip as supplementary material) and
+   add it to the paper; see `paper/anonymous-review.md`. The anonymized copy is
+   built and checked by `scripts/make_anonymous_release.py`.
