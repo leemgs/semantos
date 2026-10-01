@@ -38,8 +38,10 @@ but it mirrors *every* file in the chosen branch. Point it at a branch that
 contains only the anonymized copy, not at `main`, because `archive/` contains
 PDFs and slides with the author's name that term replacement cannot clean.
 
-1. Put the anonymized copy on its own branch, for example `anonymous-review`,
-   as a single commit with no history (or in a separate repository).
+1. The branch `anonymous-review` holds the anonymized copy as a single
+   commit with no history (created 2026-10-01 from `main` at `312fe3f`). After
+   changing the paper or code, rebuild the copy and replace the branch's
+   contents with a new commit.
 2. Sign in at https://anonymous.4open.science with GitHub and choose
    "Anonymize a repository".
 3. Repository: this repository; branch: `anonymous-review`.
