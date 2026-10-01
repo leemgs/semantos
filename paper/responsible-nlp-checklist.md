@@ -46,8 +46,8 @@ Yes. All ten models are cited where they are introduced (§4, Decisions
 paragraph): Qwen2.5 7B/14B, Llama-3.1-8B, Phi-4, Llama-3.3-70B,
 Qwen3-235B-A22B, DeepSeek-V3.2, Nemotron-3-Ultra-550B, Gemini 3.8 Flash and
 Gemini 3.1 Pro preview. Linux interfaces are cited in §3/Appendix A.
-**[확인 필요]** llama.cpp / llama-cpp-python and OpenRouter are named in §4 and
-Appendix C but not cited; add a footnote with their URLs if desired.
+llama.cpp and OpenRouter are cited with footnote URLs at their first mention
+(§4), and llama-cpp-python with its URL and version in Appendix C.
 
 **B2. Did you discuss the license or terms for use and/or distribution of any
 artifacts?**
@@ -210,7 +210,6 @@ by the authors, human annotation of claims) are accurate.
    provider's terms (B2). The repository LICENSE (Apache-2.0) is in place.
 2. Confirm the DeepSeek-V3.2 and Nemotron-3-Ultra licenses on their model
    cards (B2).
-3. Optionally cite llama.cpp and OpenRouter in a footnote (B1).
-4. Confirm the factual statements in the extended AI-assistant disclosure (E1).
-5. Prepare an anonymized repository link for reviewers (e.g., an anonymous
+3. Confirm the factual statements in the extended AI-assistant disclosure (E1).
+4. Prepare an anonymized repository link for reviewers (e.g., an anonymous
    GitHub mirror), since the paper states that artifacts are released.
