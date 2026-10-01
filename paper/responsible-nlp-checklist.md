@@ -52,15 +52,21 @@ llama.cpp and OpenRouter are cited with footnote URLs at their first mention
 **B2. Did you discuss the license or terms for use and/or distribution of any
 artifacts?**
 Partially — add the following to the camera-ready appendix or the release
-README. **[확인 필요: 각 라이선스를 모델 카드에서 최종 확인]**
+README. All open-weight licenses below were checked against the Hugging Face
+model cards on 2026-10-01.
 - Qwen2.5-7B-Instruct, Qwen2.5-14B-Instruct: Apache 2.0.
 - Qwen3-235B-A22B-Instruct-2507: Apache 2.0.
 - Llama-3.1-8B-Instruct, Llama-3.3-70B-Instruct: Llama 3.1 / Llama 3.3
-  Community License.
+  Community License (`llama3.1`, `llama3.3`).
 - Phi-4: MIT.
-- DeepSeek-V3.2: license per the model card (earlier DeepSeek-V3 releases use
-  MIT). **[확인 필요]**
-- Nemotron-3-Ultra-550B-A55B: NVIDIA license per the model card. **[확인 필요]**
+- DeepSeek-V3.2 (`deepseek-ai/DeepSeek-V3.2`): MIT, per the Hugging Face
+  model card and its LICENSE file (checked 2026-10-01).
+- Nemotron-3-Ultra-550B-A55B (`nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16`):
+  OpenMDW License Agreement 1.1, a permissive license that requires keeping the
+  agreement and notices when redistributing the model materials and imposes no
+  restrictions on outputs (model card and license text checked 2026-10-01).
+  OpenRouter's model list maps both API model IDs used in the audit to these
+  Hugging Face repositories.
 - Gemini 3.8 Flash, Gemini 3.1 Pro preview: proprietary, accessed under the
   Google/OpenRouter API terms of service.
 - llama-cpp-python 0.3.35 and llama.cpp: MIT.
@@ -208,9 +214,7 @@ by the authors, human annotation of claims) are accurate.
 
 1. Confirm that hosted-model responses may be redistributed under each
    provider's terms (B2). The repository LICENSE (Apache-2.0) is in place.
-2. Confirm the DeepSeek-V3.2 and Nemotron-3-Ultra licenses on their model
-   cards (B2).
-3. Confirm the factual statements in the extended AI-assistant disclosure (E1).
-4. Create the anonymous link (or upload the zip as supplementary material) and
+2. Confirm the factual statements in the extended AI-assistant disclosure (E1).
+3. Create the anonymous link (or upload the zip as supplementary material) and
    add it to the paper; see `paper/anonymous-review.md`. The anonymized copy is
    built and checked by `scripts/make_anonymous_release.py`.
