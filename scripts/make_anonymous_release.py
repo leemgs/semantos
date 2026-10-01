@@ -31,6 +31,8 @@ EXCLUDE = [
     'paper/aaai2027.bib',                # leftover template file from the earlier venue
     'paper/responsible-nlp-checklist.md',  # internal notes for the submission form
     'paper/anonymous-review.md',           # instructions that refer to the excluded material
+    'paper/claim-label-review.csv',        # internal review worksheet
+    'paper/claim-review-explanations.md',  # internal review worksheet
     'scripts/make_anonymous_release.py',   # lists the identifying terms itself
 ]
 

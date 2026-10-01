@@ -1,5 +1,5 @@
 {
-  "method": "Manual check, one annotator (the authors), of every quantitative or comparative claim in each distinct explanation against the supplied prompt evidence. Responses were byte-identical across the five seeds for every variant, so each distinct explanation is audited once. List-valued statements count as one claim; comparative statements as another. Explanations are capped at 400 characters by the decoding grammar. Statements that a configuration is \"consistently\" lowest or lowest in all runs are labeled overstated (s50000_aall is lowest in 8 of 10 retrieval blocks).",
+  "method": "Check of every quantitative or comparative claim in each distinct explanation against the supplied prompt evidence. The labels and checks were drafted with an AI coding assistant applying the fixed rules below; they have not yet been independently re-annotated by a human (see 'verification'). Local-model responses were byte-identical across the five seeds for every variant, so each distinct explanation is audited once. List-valued statements count as one claim; comparative statements as another. The decoding grammar caps local explanations at 400 characters; DeepSeek-V3.2's hosted providers ignored the cap in 14 of 20 answers, which are audited in full. Statements that a configuration is \"consistently\" lowest or lowest in all runs are labeled overstated (s50000_aall is lowest in 8 of 10 retrieval blocks).",
   "evidence_facts": {
     "training_means_p95_us": {
       "s50000_aall": 132.9413,
@@ -765,5 +765,9 @@
       "check": "lowest in 8 of 10 retrieval blocks"
     }
   ],
-  "hosted_scope": "Hosted models (Llama-3.3-70B, Qwen3-235B-A22B-2507, DeepSeek-V3.2, Nemotron-3-Ultra-550B-A55B, Gemini 3.8 Flash and Gemini 3.1 Pro preview via OpenRouter) returned different text across seeds; for them only the distinct full-context explanations are audited (4, 3, 5, 5, 5 and 2), with the same labels."
+  "hosted_scope": "Hosted models (Llama-3.3-70B, Qwen3-235B-A22B-2507, DeepSeek-V3.2, Nemotron-3-Ultra-550B-A55B, Gemini 3.8 Flash and Gemini 3.1 Pro preview via OpenRouter) returned different text across seeds; for them only the distinct full-context explanations are audited (4, 3, 5, 5, 5 and 2), with the same labels.",
+  "verification": {
+    "human_verified": false,
+    "procedure": "An author reviews every label in paper/claim-label-review.csv; code/evaluation/claim_review_agreement.py reports agreement with these drafted labels and writes the verified labels back here."
+  }
 }

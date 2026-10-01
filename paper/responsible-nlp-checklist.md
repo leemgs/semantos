@@ -89,19 +89,19 @@ model cards on 2026-10-01.
 
 **B3. Did you discuss if your use of existing artifacts was consistent with
 their intended use?**
-Yes, implicitly: all models are used for research inference only, through
+Yes. All models are used for research inference only, through
 their published weights or official/aggregator APIs, without fine-tuning or
 redistribution of weights. The released data contain model outputs, not
-weights. **[확인 필요]** If the form requires an explicit statement, add one
-sentence to the Ethics Statement.
+weights. The Ethics Statement says so explicitly ("All models were used for research
+inference under their licenses").
 
 **B4. Did you discuss the steps taken to check whether the data that was
 collected/used contains any information that names or uniquely identifies
 individual people or offensive content?**
 Yes / not applicable. The data are kernel timing measurements, synthetic
 configuration labels and model responses to a fixed technical prompt; they
-contain no personal data (Ethics Statement). Distinct model explanations were read in full
-during annotation; none contained offensive content. **[확인 필요]**
+contain no personal data (Ethics Statement). The audited explanations are short technical texts about latency
+measurements (listed in `paper/claim-review-explanations.md`).
 
 **B5. Did you provide documentation of the artifacts, e.g., coverage of
 domains, languages, and linguistic phenomena, demographic groups represented?**
@@ -171,35 +171,13 @@ in the released `plan.json` files.
 
 ## D. Did you use human annotators (e.g., crowdworkers) or research with human participants?
 
-Yes, in a limited sense: one author annotated the 97 explanation claims. No
-crowdworkers or external participants were involved.
-
-**D1. Did you report the full text of instructions given to participants,
-including e.g., screenshots, disclaimers of any risks to participants or
-annotators, etc.?**
-Yes. The labeling rules (label set, definition of a misstated claim,
-segmentation rule, overstatement rule) are given in §4 (Claims paragraph) and
-stored with every label in `claim-audit.json`.
-
-**D2. Did you report information about how you recruited (e.g., crowdsourcing
-platform, students) and paid participants, and discuss if such payment is
-adequate given the participants' demographic (e.g., country of residence)?**
-N/A. The annotator is an author; no one was recruited or paid.
-
-**D3. Did you discuss whether and how consent was obtained from people whose
-data you're using/curating?**
-N/A. No data from people are used.
-
-**D4. Was the data collection protocol approved (or determined exempt) by an
-ethics review board?**
-N/A. No human-subjects data were collected (Ethics Statement).
-
-**D5. Did you report the basic demographic and geographic characteristics of
-the annotator population that is the source of the data?**
-N/A. A single author annotator; the annotations are factual checks of numbers
-against a table, not judgments that depend on annotator demographics.
-**[확인 필요]** If a second annotator is added, report their background
-(e.g., an NLP researcher not involved in the runs) and the agreement.
+No (current state). The 97 explanation-claim labels were drafted with an AI
+assistant applying the rules in §4; no human annotators or participants were
+involved. **[저자 검토 후 갱신]** Once an author has reviewed every label with
+`paper/claim-label-review.csv` and `claim_review_agreement.py score --apply`,
+answer "Yes, one author verified all labels" and report the agreement with the
+AI draft; D1 then points to §4 and D2–D5 remain N/A (author annotator, no
+recruitment or payment, no data from people).
 
 ---
 
@@ -208,20 +186,22 @@ against a table, not judgments that depend on annotator demographics.
 Yes.
 
 **E1. Did you include information about your use of AI assistants?**
-Yes. The Ethics Statement states that AI assistants were used for writing and
-debugging code, for drafting and restructuring prose, and for locating and
-checking references; that the authors reviewed all generated content and
-verified every reference; that the explanation claims were annotated by an
-author, not by an AI assistant; and that every reported number is produced by
-released scripts from hashed raw logs.
-**[확인 필요]** Confirm that the last two statements (reference verification
-by the authors, human annotation of claims) are accurate.
+Yes. The Ethics Statement states that the research idea, problem formulation
+and study design are the authors'; that AI assistants were used for code, for
+drafting and restructuring prose, for locating references and for drafting the
+explanation-claim labels; that every reference was checked against its
+publisher, ACL Anthology, Crossref or arXiv record (all 65 entries, checked
+2026-10-01); and that every claim label is released with its check.
 
 ---
 
 ## Pre-submission to-do (from the answers above)
 
-1. Confirm the factual statements in the extended AI-assistant disclosure (E1).
+1. Review the 97 AI-drafted claim labels (`paper/claim-label-review.csv`, with
+   the explanations and evidence in `paper/claim-review-explanations.md`), then run
+   `python3 code/evaluation/claim_review_agreement.py score --review paper/claim-label-review.csv --apply`.
+   The paper text (§4, Limitations, Ethics) is then updated to say that an author
+   verified the labels, with the agreement figure.
 2. Create the anonymous link (or upload the zip as supplementary material) and
    add it to the paper; see `paper/anonymous-review.md`. The anonymized copy is
    built and checked by `scripts/make_anonymous_release.py`.
