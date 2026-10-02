@@ -197,11 +197,19 @@ publisher, ACL Anthology, Crossref or arXiv record (all 65 entries, checked
 
 ## Pre-submission to-do (from the answers above)
 
-1. Review the 97 AI-drafted claim labels (`paper/claim-label-review.csv`, with
-   the explanations and evidence in `paper/claim-review-explanations.md`), then run
-   `python3 code/evaluation/claim_review_agreement.py score --review paper/claim-label-review.csv --apply`.
-   The paper text (§4, Limitations, Ethics) is then updated to say that an author
-   verified the labels, with the agreement figure.
+1. Review the 97 AI-drafted claim labels in `paper/claim-label-review.csv`
+   (explanations and evidence in `paper/claim-review-explanations.md`). The
+   `auto_check` column marks 56 rows as verified by a rule; the 41 rows marked
+   "review closely" need the most attention. Then run
+   `python3 code/evaluation/claim_review_agreement.py score --review paper/claim-label-review.csv --apply`;
+   the paper text (§4, Limitations, Ethics) is then updated to say that an
+   author verified the labels, with the agreement figure.
 2. Create the anonymous link (or upload the zip as supplementary material) and
    add it to the paper; see `paper/anonymous-review.md`. The anonymized copy is
    built and checked by `scripts/make_anonymous_release.py`.
+3. Decide whether to make the public GitHub repository private during review
+   or to rename the system in the paper: the repository name and description
+   contain "SemantOS", so a reviewer searching the system name can find the
+   author. ACL allows preprints, so this is a judgment call, not a violation.
+4. Fill in the ARR form from `paper/arr-submission-form.md`.
+

@@ -359,6 +359,12 @@ summarizes four runs, all on a four-core CPU container with llama-cpp-python
 * [`claim_taxonomy.py`](claim_taxonomy.py) tabulates every labeled claim (local
   and hosted) by model and error type and writes the paper's claim table
   (`python3 claim_taxonomy.py --out ../../paper/claim-taxonomy.tex`).
+* [`claim_label_autocheck.py`](claim_label_autocheck.py) re-derives the expected
+  label of claims whose form a rule can decide (56 of 97: values attributed to
+  the training table, run lists, superlatives, ranges, thresholds, units,
+  no-evidence claims) from the evidence; all drafted labels agree, and a
+  mutation test (`--mutation-test`) detects 76 of 97 flipped labels. With
+  `--csv` it adds an `auto_check` column to the review sheet.
 * [`claim_review_agreement.py`](claim_review_agreement.py) exports the drafted
   claim labels for human review (`paper/claim-label-review.csv`), reports
   agreement and Cohen's kappa between the drafted and reviewed labels, and with
