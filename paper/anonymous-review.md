@@ -39,8 +39,8 @@ Re-run the script after every change and before uploading.
 The authors decided not to use an anonymous mirror service. The zip from step 1
 is uploaded to OpenReview as ARR supplementary material (software and data);
 the paper says the artifacts are "provided as supplementary material". The
-`anonymous-review` branch holds the same anonymized copy and is no longer
-needed for review; it can be deleted after submission.
+`anonymous-review` branch is no longer needed; it is to be deleted in the
+GitHub web interface (the session proxy does not permit branch deletion).
 
 Before uploading, rebuild the zip from the final commit and check that it
 contains `README.md`, `code/evaluation/` and `paper/`, and that the build

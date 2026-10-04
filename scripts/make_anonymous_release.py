@@ -34,6 +34,7 @@ EXCLUDE = [
     'paper/anonymous-review.md',           # instructions that refer to the excluded material
     'paper/claim-label-review.csv',        # internal review worksheet
     'paper/claim-review-explanations.md',  # internal review worksheet
+    'paper/claim-review-41.md',            # internal review worksheet
     'paper/arr-submission-form.md',        # mentions the earlier venue
     'code/semantos_logo01.png',            # logo shows the public project name
     'scripts/make_anonymous_release.py',   # lists the identifying terms itself
