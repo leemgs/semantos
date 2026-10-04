@@ -6,7 +6,8 @@ paths in EXCLUDE, which hold author names, the earlier venue's submission and
 review history, or internal notes. Every remaining text file is then scanned
 for FORBIDDEN patterns and the build fails if any match, so the output can be
 mirrored (e.g., on anonymous.4open.science) or uploaded as supplementary
-material without revealing the authors. Git history is not included.
+material without revealing the authors. The public project name is replaced by
+the paper's system name (RENAME). Git history is not included.
 
 Usage:
     python3 scripts/make_anonymous_release.py --out /tmp/semantos-anon
@@ -34,11 +35,16 @@ EXCLUDE = [
     'paper/claim-label-review.csv',        # internal review worksheet
     'paper/claim-review-explanations.md',  # internal review worksheet
     'paper/arr-submission-form.md',        # mentions the earlier venue
+    'code/semantos_logo01.png',            # logo shows the public project name
     'scripts/make_anonymous_release.py',   # lists the identifying terms itself
 ]
 
+# The public project name is searchable and leads to the authors' repository, so
+# the release uses the paper's system name instead (in file contents and paths).
+RENAME = [('SemantOS', 'GroundKern'), ('SEMANTOS', 'GROUNDKERN'), ('semantos', 'groundkern')]
+
 # Patterns that must not appear in any released text file (case-insensitive).
-FORBIDDEN = [
+FORBIDDEN = [r'semantos',
     r'geunsik', r'leemgs', r'\bG\.\s*Lim\b', r'\bLim,\s*G', r'@gmail\.com',
     r'\bAAAI\b', r'openreview', r'submission\s+4088', r'github\.com/leemgs',
     r'claude-session', r'/home/[a-z][\w.-]*', r'/Users/\w+',
@@ -74,15 +80,27 @@ def main():
     for rel in files:
         data = subprocess.run(['git', '-C', str(ROOT), 'show', f'{a.rev}:{rel}'],
                               check=True, capture_output=True).stdout
-        dest = a.out / rel
+        out_rel = rel
+        for old, new in RENAME:
+            out_rel = out_rel.replace(old, new)
+        if is_text(data):
+            text = data.decode('utf-8', errors='replace')
+            for old, new in RENAME:
+                text = text.replace(old, new)
+            data = text.encode('utf-8')
+        dest = a.out / out_rel
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(data)
         if is_text(data):
-            text = data.decode('utf-8', errors='replace')
             for pat in patterns:
                 for m in pat.finditer(text):
                     line = text.count('\n', 0, m.start()) + 1
                     hits.append(f'{rel}:{line}: {m.group(0)!r}')
+        elif rel.endswith('.pdf') and shutil.which('pdftotext'):
+            text = subprocess.run(['pdftotext', '-q', str(dest), '-'], capture_output=True, text=True).stdout
+            for pat in patterns:
+                for m in pat.finditer(text):
+                    hits.append(f'{rel} (PDF text): {m.group(0)!r}')
         else:
             binaries.append(rel)
 
@@ -93,7 +111,7 @@ def main():
     if a.zip:
         shutil.make_archive(str(a.out), 'zip', root_dir=a.out)
     print(f'{len(files)} files written to {a.out}' + (f' and {a.out}.zip' if a.zip else ''))
-    print('Binary files (not text-scanned; check metadata by hand):', *binaries, sep='\n  ')
+    print('Binary files (not text-scanned; check metadata by hand):', *(binaries or ['none']), sep='\n  ')
 
 
 if __name__ == '__main__':

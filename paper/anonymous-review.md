@@ -22,12 +22,15 @@ out:
 | `paper/aaai2027.bib` | leftover template file from the earlier venue |
 | `paper/responsible-nlp-checklist.md`, this file, the script itself | internal notes; the script lists the identifying terms |
 
-It then scans every remaining text file for the author's name, user name and
-e-mail, the earlier venue and submission number, home-directory paths and
-session links, and aborts without writing anything if one is found. The
-current `HEAD` passes: 189 files, about 9 MB unpacked, 1.4 MB zipped. The three
-binary files (`code/semantos_logo01.png`, `paper/figures/gate_replay.pdf`,
-`paper/main.pdf`) were checked by hand and carry no author metadata.
+The public project name "SemantOS" leads to the authors' public repository, so
+the paper calls the system GroundKern (macro `\sysname` in `main.tex`) and the
+script replaces SemantOS/semantos with GroundKern/groundkern in every released
+file's contents and path; the logo, which shows the old name, is left out.
+
+It then scans every remaining text file, and the text of every PDF, for the
+author's name, user name and e-mail, the old project name, the earlier venue
+and submission number, home-directory paths and session links, and aborts
+without writing anything if one is found.
 
 Re-run the script after every change and before uploading.
 

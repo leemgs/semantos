@@ -207,9 +207,9 @@ publisher, ACL Anthology, Crossref or arXiv record (all 65 entries, checked
 2. Create the anonymous link (or upload the zip as supplementary material) and
    add it to the paper; see `paper/anonymous-review.md`. The anonymized copy is
    built and checked by `scripts/make_anonymous_release.py`.
-3. Decide whether to make the public GitHub repository private during review
-   or to rename the system in the paper: the repository name and description
-   contain "SemantOS", so a reviewer searching the system name can find the
-   author. ACL allows preprints, so this is a judgment call, not a violation.
+3. Done: the paper now calls the system GroundKern and the anonymized release
+   renames it, so searching the paper's system name no longer leads to the
+   public repository. Making the repository private during review would remove
+   the remaining, small risk that reviewers find it through other wording.
 4. Fill in the ARR form from `paper/arr-submission-form.md`.
 

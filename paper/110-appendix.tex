@@ -1,8 +1,8 @@
 \appendix
-\section{SemantOS Testbed Details}
+\section{\sysname Testbed Details}
 \label{app:testbed}
 \paragraph{Design hypotheses.}
-SemantOS is motivated by three hypotheses. First, a configuration's utility may depend on workload and hardware. Second, joint knob effects may be non-additive. Third, performance, failure probability and intervention cost may conflict. Each hypothesis requires measured interventions with explicit baselines.
+\sysname is motivated by three hypotheses. First, a configuration's utility may depend on workload and hardware. Second, joint knob effects may be non-additive. Third, performance, failure probability and intervention cost may conflict. Each hypothesis requires measured interventions with explicit baselines.
 
 For a loss $L$, define an interaction contrast from four independently measured configurations:
 \[
@@ -137,7 +137,7 @@ Each workload had 10 separate invocations of 100 measured operations, preceded b
 The anomaly denominator is all measured operations, including failures; an operation counts once if either it fails or exceeds the deadline. This label is independent of veto and rollback. Zero events in these short runs is not evidence of zero population risk. We do not pool heterogeneous workload latencies or infer kernel tuning effects from these baseline timings.
 
 \subsection{Temporal-Holdout Kernel Interventions}
-We additionally executed real Linux timer-slack and CPU-affinity interventions in fresh owned child processes, without modifying host-wide sysctls. The two factors were timer slack (50\,$\mu$s or 1\,ms, set by PR\_SET\_TIMERSLACK) and affinity (all four available CPUs or CPU 0). Every child checked kernel readback before recording events. This isolated measurement driver is separate from the dry-run SemantOS actuator.
+We additionally executed real Linux timer-slack and CPU-affinity interventions in fresh owned child processes, without modifying host-wide sysctls. The two factors were timer slack (50\,$\mu$s or 1\,ms, set by PR\_SET\_TIMERSLACK) and affinity (all four available CPUs or CPU 0). Every child checked kernel readback before recording events. This isolated measurement driver is separate from the dry-run \sysname actuator.
 
 For each periodic wake-up interval (2 or 5\,ms), five training blocks and ten subsequent test blocks evaluated all four configurations. Within each block, the eight interval/configuration cases were randomly ordered using seed 4088. Each fresh process performed ten warm-up and 80 measured wake-ups against absolute monotonic-clock targets. The plan was written before execution; the configuration minimizing mean training-run P95 lateness was frozen before test execution. This is temporal holdout within one host and workload family, not the independent workload/hardware split required for claims of generalization. The complete 120-process experiment retained 9,600 event timestamps, readbacks, frozen selections and hashes. No external competing load was introduced.
 
