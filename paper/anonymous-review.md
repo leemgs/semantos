@@ -34,39 +34,15 @@ without writing anything if one is found.
 
 Re-run the script after every change and before uploading.
 
-## 2. Make the link (needs the author's GitHub login)
+## 2. Upload as supplementary material
 
-anonymous.4open.science mirrors a GitHub repository and replaces listed terms,
-but it mirrors *every* file in the chosen branch. Point it at a branch that
-contains only the anonymized copy, not at `main`, because `archive/` contains
-PDFs and slides with the author's name that term replacement cannot clean.
+The authors decided not to use an anonymous mirror service. The zip from step 1
+is uploaded to OpenReview as ARR supplementary material (software and data);
+the paper says the artifacts are "provided as supplementary material". The
+`anonymous-review` branch holds the same anonymized copy and is no longer
+needed for review; it can be deleted after submission.
 
-1. The branch `anonymous-review` holds the anonymized copy as a single
-   commit with no history (created 2026-10-01 from `main` at `312fe3f`). After
-   changing the paper or code, rebuild the copy and replace the branch's
-   contents with a new commit.
-2. Sign in at https://anonymous.4open.science with GitHub and choose
-   "Anonymize a repository".
-3. Repository: this repository; branch: `anonymous-review`.
-4. Terms to anonymize (one per line, as a second safety net): the author's
-   given name, family name and GitHub user name, and the repository owner.
-5. Expiration: after the ARR cycle's decision date.
-6. Copy the generated URL, of the form
-   `https://anonymous.4open.science/r/<id>`, and open it in a private browser
-   window to check that no name appears in files, README or the page header.
+Before uploading, rebuild the zip from the final commit and check that it
+contains `README.md`, `code/evaluation/` and `paper/`, and that the build
+reported no identifying content.
 
-## 3. Put the link in the paper
-
-Add one sentence at the end of the abstract, or a footnote in §1:
-
-```
-Code and data: \url{https://anonymous.4open.science/r/<id>}.
-```
-
-Rebuild with `make` in `paper/` and check that the body still ends on page 8.
-
-## Alternative: supplementary upload
-
-ARR also accepts software and data as supplementary material. The zip from
-step 1 (1.4 MB) can be uploaded directly; in that case write "Code and data are
-provided as supplementary material" instead of a URL.

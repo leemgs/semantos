@@ -21,6 +21,6 @@ Auditing ten LLMs, from 7B open-weight to hosted frontier models, on real Linux 
 \paragraph{Contributions.}
 (i)~An audit protocol for evidence-grounded LLM advice that combines a matched-information non-LLM baseline, evidence-source ablations, cited versus matched uncited deletion, claim-level verification of explanations against the supplied evidence, and outcome labels independent of enforcement, with all data roles frozen before test data are opened (\S\ref{sec:protocol}).
 (ii)~An audit of ten LLMs reported with every denominator, including an analysis of what models cite and a claim-level taxonomy of explanation errors (\S\ref{sec:results}).
-(iii)~The \sysname testbed, whose calibrated risk gate provides a cautionary result on selective prediction under shift, together with released prompts, raw responses, per-claim annotations and measurement logs (\S\ref{sec:testbed}).
+(iii)~The \sysname testbed, whose calibrated risk gate provides a cautionary result on selective prediction under shift, with prompts, raw responses, per-claim annotations, code and measurement logs provided as supplementary material (\S\ref{sec:testbed}).
 
 The task is deliberately small, one workload family on one host, and its default configuration is best, so the audit can reveal failures of added value but not successes; we make no LLM-superiority, deployment-efficacy or production-safety claim (see Limitations).

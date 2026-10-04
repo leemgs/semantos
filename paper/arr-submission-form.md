@@ -36,8 +36,7 @@ retrieval-augmented generation
 
 - Model analysis & interpretability
 - Data analysis / evaluation methodology
-- Publicly available software and/or pre-trained models: code and data are
-  released (anonymous link to be added)
+- Software and data: provided as supplementary material (anonymized zip)
 
 ## Languages studied
 
@@ -57,5 +56,6 @@ current cycle's call for papers in case it asks about this.
 
 ## Software / data upload
 
-Either the anonymous link (see `anonymous-review.md`) or the zip built by
-`python3 scripts/make_anonymous_release.py --out <dir> --zip`.
+Upload the zip built by
+`python3 scripts/make_anonymous_release.py --out <dir> --zip` from the final
+commit as supplementary software and data.

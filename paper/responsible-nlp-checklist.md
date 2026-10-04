@@ -204,9 +204,9 @@ publisher, ACL Anthology, Crossref or arXiv record (all 65 entries, checked
    `python3 code/evaluation/claim_review_agreement.py score --review paper/claim-label-review.csv --apply`;
    the paper text (§4, Limitations, Ethics) is then updated to say that an
    author verified the labels, with the agreement figure.
-2. Create the anonymous link (or upload the zip as supplementary material) and
-   add it to the paper; see `paper/anonymous-review.md`. The anonymized copy is
-   built and checked by `scripts/make_anonymous_release.py`.
+2. Upload the anonymized zip as supplementary material (software and data):
+   `python3 scripts/make_anonymous_release.py --out <dir> --zip`, run on the
+   final commit; see `paper/anonymous-review.md`.
 3. Done: the paper now calls the system GroundKern and the anonymized release
    renames it, so searching the paper's system name no longer leads to the
    public repository. Making the repository private during review would remove
