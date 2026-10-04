@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from pathlib import Path
 import json, os, datetime, asyncio, httpx
 
-app = FastAPI(title="SemantOS Operator Console", version="0.2.2")
+app = FastAPI(title="GroundKern Operator Console", version="0.2.2")
 
 BASE = Path(__file__).resolve().parents[1]
 OUTPUTS = Path(os.environ.get("OUTPUTS_DIR", str(BASE / "outputs")))
@@ -80,7 +80,7 @@ async def index(request: Request):
     html = """
 <html>
 <head>
-  <title>SemantOS Operator Console</title>
+  <title>GroundKern Operator Console</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;margin:20px;max-width:1100px}
@@ -98,7 +98,7 @@ async def index(request: Request):
 </head>
 <body>
   <div class="title">
-    <h1>SemantOS Dry-run Console</h1>
+    <h1>GroundKern Dry-run Console</h1>
     <div class="muted">v0.2.2</div>
   </div>
 

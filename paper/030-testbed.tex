@@ -1,7 +1,6 @@
-\section{Testbed: SemantOS}
+\section{Testbed: \sysname}
 \label{sec:testbed}
-\label{sec:semantos}
-SemantOS is an evidence-grounded generation pipeline for system configuration that we use as an instrument (Figure~\ref{fig:runtime-path}). Four properties matter for the audit. The evidence is \emph{addressable} (every citation resolves to one item), \emph{portable} (a non-LLM selector can receive the same object) and \emph{editable} (kinds or items can be removed), and enforcement is \emph{independent} of generation, so its errors can be counted against labels the generator never sees.
+\sysname is an evidence-grounded generation pipeline for system configuration that we use as an instrument (Figure~\ref{fig:runtime-path}). Four properties matter for the audit. The evidence is \emph{addressable} (every citation resolves to one item), \emph{portable} (a non-LLM selector can receive the same object) and \emph{editable} (kinds or items can be removed), and enforcement is \emph{independent} of generation, so its errors can be counted against labels the generator never sees.
 
 \paragraph{Evidence as a structured context.}
 The store holds typed items, each with a stable ID, a kind and a provenance record: summary tables, individual measurement traces, and edges of a knob-interaction graph. The graph is a small knowledge representation with a strict admission rule: for a lower-is-better loss $L$ and baseline values $a_0,b_0$, an edge requires the contrast $I_{ab}=L(a,b)-L(a,b_0)-L(a_0,b)+L(a_0,b_0)$ from independently measured configurations, with a bootstrap interval over runs that excludes zero, and records its scope, values, measurement IDs and interval. Edges describe empirical interactions, not causal couplings (Appendix~\ref{app:testbed}). For the audit, the evidence is frozen and serialized as a JSON list that is identical for every advisor.
@@ -36,7 +35,7 @@ The reasoner retrieves typed neighbors and lexically matched trace text~\cite{Le
 \node[tag, anchor=south east] at (cal.north east) {independent labels};
 \end{tikzpicture}
 \end{adjustbox}
-\caption{SemantOS decision path. Evidence, generation and enforcement are separate components: the frozen evidence object can be given to a non-LLM selector, ablated or partially deleted, citations can be resolved against its item IDs, and gate errors can be counted against independently defined labels. The REST runtime is a dry run; a separate per-thread actuator applies, verifies and restores timer slack and affinity in owned child processes.}
+\caption{\sysname decision path. Evidence, generation and enforcement are separate components: the frozen evidence object can be given to a non-LLM selector, ablated or partially deleted, citations can be resolved against its item IDs, and gate errors can be counted against independently defined labels. The REST runtime is a dry run; a separate per-thread actuator applies, verifies and restores timer slack and affinity in owned child processes.}
 \label{fig:runtime-path}
 \end{figure}
 

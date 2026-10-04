@@ -1,4 +1,4 @@
-# SemantOS prototype and measurement tools
+# GroundKern prototype and measurement tools
 
 **Runtime scope: dry run.** `/apply` validates and gates one complete bundle,
 returns `applied: []`, and reports simulated members separately. Staging and
@@ -19,7 +19,7 @@ python3 -m unittest discover -s tests -v
 See [evaluation/README.md](evaluation/README.md) for prerequisites, formats,
 metrics, leakage checks, graph induction and the controlled experiment protocol.
 These tools consume measured outcomes, never manuscript targets. The checked-in
-local baseline has no interventions and does not prove SemantOS improves latency.
+local baseline has no interventions and does not prove GroundKern improves latency.
 
 ## Prototype services
 

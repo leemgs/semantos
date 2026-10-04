@@ -13,7 +13,7 @@ from pathlib import Path
 from fastapi import FastAPI, Body, HTTPException
 from safety_core import SlidingCalibrator
 
-app = FastAPI(title='SemantOS dry-run runtime', version='2.0.0')
+app = FastAPI(title='GroundKern dry-run runtime', version='2.0.0')
 calibrator = SlidingCalibrator(
     alpha=float(os.environ.get('CONFORMAL_ALPHA', '0.1')),
     window=int(os.environ.get('CAL_WINDOW', '400')),

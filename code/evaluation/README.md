@@ -129,7 +129,7 @@ run dependence. These tasks are not TPC-C, Kafka/Spark, web, audio or GPU worklo
    graph or other artifact. Use disjoint train/retrieval/calibration/test groups.
 4. Measure unchanged kernel and expert profiles, cold conventional optimization,
    graph-aware conventional optimization with the same evidence, deterministic
-   graph policy, full SemantOS, and no-graph/no-RAG/no-LLM variants. Charge the same
+   graph policy, full GroundKern, and no-graph/no-RAG/no-LLM variants. Charge the same
    online budgets and separately report all offline costs. No-safety trials require
    an isolated host; they must never be run on production traffic.
 5. A real actuator must be implemented and tested before this comparison: snapshot,
@@ -204,7 +204,7 @@ may bias all conditional metrics; the tool makes no recovery or efficacy claim.
 ```bash
 python3 -m pip install -r tests/requirements.txt
 make test
-python3 evaluation/package_revision.py --out /tmp/semantos-revision.zip
+python3 evaluation/package_revision.py --out /tmp/groundkern-revision.zip
 ```
 
 Regression-test fixtures are synthetic by design and test mathematics/data handling;
@@ -218,7 +218,7 @@ Check the ZIP against the target venue's anonymity rules before uploading it.
 `PR_SET_TIMERSLACK` and CPU affinity, then measures periodic wake-up lateness.
 It needs no host sysctl writes or network service. It leaves parent settings
 unchanged. Python overhead and uncontrolled shared-host load remain part of the
-measurement. This driver is independent of the SemantOS dry-run actuator.
+measurement. This driver is independent of the GroundKern dry-run actuator.
 
 ```sh
 python code/evaluation/measure_kernel_local.py --out /tmp/new-kernel-measurement
@@ -240,7 +240,7 @@ The temporal split does not demonstrate generalization to held-out workloads.
 Read [the measured summary](results/kernel-local-2026-09-26/summary.md).
 The selected policy equals control at both periods: measured selected-policy
 gain is zero. Other configurations are sensitivity interventions, not proposed
-SemantOS recommendations. No LLM or graph optimizer result follows from this.
+GroundKern recommendations. No LLM or graph optimizer result follows from this.
 
 Interface definitions: [Linux timer slack](https://man7.org/linux/man-pages/man2/PR_SET_TIMERSLACK.2const.html)
 and [CPU affinity](https://man7.org/linux/man-pages/man2/sched_setaffinity.2.html).

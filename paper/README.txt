@@ -1,4 +1,4 @@
-SemantOS paper sources
+GroundKern paper sources
 ======================
 Target venue: ACL 2027 (ACL Rolling Review), long paper, anonymous review mode.
 `make` builds main.pdf from main.tex with the official ACL style files
@@ -8,7 +8,7 @@ Statement follow the Conclusion and do not count toward the 8-page limit.
 
 Framing: the paper is an NLP audit of evidence-grounded LLM configuration
 advice (decision value vs. an equally informed selector, explanation-claim
-verification, deletion-based reliance); SemantOS is the testbed. Section files:
+verification, deletion-based reliance); GroundKern is the testbed. Section files:
 010 introduction, 015 related work, 030 testbed, 040 audit protocol,
 050 results, 060 discussion, 100 conclusion, 090 limitations, 085 ethics,
 110 appendix (testbed details, extra measurements, prompt and schema).

@@ -1,4 +1,4 @@
-# SemantOS ACL 2027 paper build.
+# GroundKern ACL 2027 paper build.
 #
 # `make` builds main.pdf (the anonymous review version) from main.tex using the
 # official ACL style files (acl.sty / acl_natbib.bst). Reference URLs are

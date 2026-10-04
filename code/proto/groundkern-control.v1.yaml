@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: SemantOS dry-run control contract
+  title: GroundKern dry-run control contract
   version: 2.0.0
   description: >-
     Runtime only. No kernel writes or empirical safety guarantee. Reasoner

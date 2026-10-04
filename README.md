@@ -1,4 +1,4 @@
-# SemantOS
+# GroundKern
 
 Code and data for *Cited but Not Correct: Auditing Evidence-Grounded LLM
 Configuration Advice against Equally Informed Baselines* (ACL 2027 submission,
@@ -7,7 +7,7 @@ supplied evidence at four levels: the decision (against a non-LLM selector given
 the same frozen evidence), the citations, the quantitative claims in the
 explanation, and the reliance of the decision on what is cited.
 
-SemantOS is the testbed: an evidence-grounded generation pipeline for Linux
+GroundKern is the testbed: an evidence-grounded generation pipeline for Linux
 configuration that separates evidence (typed graph and measurement traces),
 LLM proposals and enforcement. The REST runtime is **dry-run only**. A separate
 bounded experiment applies and restores timer slack and affinity in owned child

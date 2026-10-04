@@ -23,7 +23,7 @@ SELF_CONSISTENCY_K = int(os.environ.get("SELF_CONSISTENCY_K", "3"))
 
 app = FastAPI(title="reasoner", version="1.0.0")
 
-SYSTEM_PROMPT = """You are SemantOS Reasoner.
+SYSTEM_PROMPT = """You are GroundKern Reasoner.
 Generate guarded, explainable Linux kernel tuning recommendations from the
 provided telemetry, retrieved traces, and the TYPED dependency neighborhood.
 Rules:

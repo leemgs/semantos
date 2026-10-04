@@ -1,5 +1,5 @@
 """
-kb-service — SemantOS Knowledge Base.
+kb-service — GroundKern Knowledge Base.
 
 Two coupled stores (paper Sec. 4.2):
   1. A *typed, signed, weighted* inter-knob dependency graph in Neo4j.

@@ -1,4 +1,4 @@
-"""Aggregate independently collected SemantOS hardware runs.
+"""Aggregate independently collected GroundKern hardware runs.
 
 This program deliberately has no response simulator and no manuscript targets.
 Its only input is immutable, run-level CSV exported by the experiment runner.
