@@ -18,6 +18,11 @@ per-process kernel experiment, and a prospective role-separated follow-up with
 8,000 grid events and 80 staged executions, plus the LLM audit records. No
 tuning gain is claimed.
 
+**Reviewers and reusers:** see [ARTIFACTS.md](ARTIFACTS.md) for a one-command
+reproduction (`python3 code/evaluation/reproduce_paper.py`), a map from each
+result in the paper to its data and script, a data statement, and how to apply
+the audit to another advisor.
+
 | Path | Contents |
 |---|---|
 | [paper/](paper/) | Manuscript sources and built PDFs |
