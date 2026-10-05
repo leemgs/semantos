@@ -218,3 +218,16 @@ publisher, ACL Anthology, Crossref or arXiv record (all 65 entries, checked
    the remaining, small risk that reviewers find it through other wording.
 4. Fill in the ARR form from `paper/arr-submission-form.md`.
 
+## Final format check (2026-10-05)
+
+- Official ACL style files, unmodified (`acl.sty`, `acl_natbib.bst` identical
+  to acl-org/acl-style-files); review mode with line numbers; A4.
+- Body ends on page 8; unnumbered Limitations (required) and Ethics Statement
+  on page 9; references and appendix follow.
+- Abstract 200 words (ACL limit: no more than 200).
+- No undefined references or citations, no overfull boxes; all fonts
+  embedded, no Type 3 fonts; PDF metadata carries no author.
+- Anonymity: no author name, e-mail, earlier venue, old project name, self-
+  citation or acknowledgments in the PDF text; system named GroundKern.
+- aclpubcheck (final-mode build): "All Clear!".
+

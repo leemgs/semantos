@@ -40,5 +40,6 @@ paired offline replay. Claim labels were drafted with an AI assistant
 and verified by one author, who changed none (claim-label-review.csv). No
 LLM-superiority, deployment-efficacy or production-safety result is claimed.
 
-Current PDF: 17 pages (body fills pages 1-8; Limitations and Ethics Statement
-on page 9; references on pages 9-13; appendix from page 13).
+Current PDF: 18 pages (body fills pages 1-8; Limitations and Ethics Statement
+on page 9; references on pages 10-13; appendix from page 13). Abstract: 200
+words (ACL limit).
