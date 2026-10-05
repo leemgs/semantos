@@ -171,13 +171,23 @@ in the released `plan.json` files.
 
 ## D. Did you use human annotators (e.g., crowdworkers) or research with human participants?
 
-No (current state). The 97 explanation-claim labels were drafted with an AI
-assistant applying the rules in §4; no human annotators or participants were
-involved. **[저자 검토 후 갱신]** Once an author has reviewed every label with
-`paper/claim-label-review.csv` and `claim_review_agreement.py score --apply`,
-answer "Yes, one author verified all labels" and report the agreement with the
-AI draft; D1 then points to §4 and D2–D5 remain N/A (author annotator, no
-recruitment or payment, no data from people).
+Yes, in a limited sense: one author verified the 97 explanation-claim labels,
+which were drafted with an AI assistant, and changed none (2026-10-05). No
+crowdworkers or external participants were involved.
+
+**D1.** Yes. The labeling rules (label set, definition of a misstated claim,
+segmentation rule, overstatement rule) are given in §4 and stored with every
+label in `claim-audit.json`; the review procedure is in Appendix C.
+
+**D2.** N/A. The reviewer is an author; no one was recruited or paid.
+
+**D3.** N/A. No data from people are used.
+
+**D4.** N/A. No human-subjects data were collected (Ethics Statement).
+
+**D5.** N/A. A single author reviewer; the labels are factual checks of
+numbers against a table. The paper states that this is a confirmation of an AI
+draft, not an independent double annotation (Limitations, Appendix C).
 
 ---
 
@@ -197,13 +207,8 @@ publisher, ACL Anthology, Crossref or arXiv record (all 65 entries, checked
 
 ## Pre-submission to-do (from the answers above)
 
-1. Review the 97 AI-drafted claim labels in `paper/claim-label-review.csv`
-   (explanations and evidence in `paper/claim-review-explanations.md`). The
-   `auto_check` column marks 56 rows as verified by a rule; the 41 rows marked
-   "review closely" need the most attention. Then run
-   `python3 code/evaluation/claim_review_agreement.py score --review paper/claim-label-review.csv --apply`;
-   the paper text (§4, Limitations, Ethics) is then updated to say that an
-   author verified the labels, with the agreement figure.
+1. Done (2026-10-05): one author verified all 97 claim labels with no changes;
+   `claim-audit.json`, §4, Limitations, Ethics and Appendix C are updated.
 2. Upload the anonymized zip as supplementary material (software and data):
    `python3 scripts/make_anonymous_release.py --out <dir> --zip`, run on the
    final commit; see `paper/anonymous-review.md`.
