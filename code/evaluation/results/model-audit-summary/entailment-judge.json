@@ -64,6 +64,20 @@
       "correct": 51,
       "correct_accepted": 13,
       "balanced_accuracy": 0.591
+    },
+    "Flan-T5-large (yes/no) | sentence": {
+      "misstated": 41,
+      "misstated_accepted": 14,
+      "correct": 51,
+      "correct_accepted": 18,
+      "balanced_accuracy": 0.506
+    },
+    "Flan-T5-large (yes/no) | claim": {
+      "misstated": 41,
+      "misstated_accepted": 13,
+      "correct": 51,
+      "correct_accepted": 34,
+      "balanced_accuracy": 0.675
     }
   },
   "items": [
@@ -108,6 +122,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.6291049718856812
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.6018123626708984
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.8277459144592285
         }
       }
     },
@@ -152,6 +174,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.04436440393328667
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.1791398823261261
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.5375771522521973
         }
       }
     },
@@ -196,6 +226,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.027322113513946533
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.3936472535133362
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.6648622751235962
         }
       }
     },
@@ -235,6 +273,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.03489963337779045
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.7032251358032227
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.47624853253364563
         }
       }
     },
@@ -279,6 +325,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.02728494442999363
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.15822724997997284
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.41677334904670715
         }
       }
     },
@@ -323,6 +377,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.03049815073609352
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.3330664038658142
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.40385621786117554
         }
       }
     },
@@ -367,6 +429,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.03934120386838913
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.10474226623773575
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.4567757248878479
         }
       }
     },
@@ -406,6 +476,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.41677895188331604
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.6317377090454102
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.8149704337120056
         }
       }
     },
@@ -450,6 +528,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.021761981770396233
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.10139604657888412
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.21770229935646057
         }
       }
     },
@@ -494,6 +580,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.08269435167312622
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.36355072259902954
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.6375455856323242
         }
       }
     },
@@ -538,6 +632,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.6614408493041992
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.8746559023857117
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.9253755211830139
         }
       }
     },
@@ -582,6 +684,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.011687196791172028
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.1208323985338211
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.23825348913669586
         }
       }
     },
@@ -626,6 +736,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.6614408493041992
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.9308519959449768
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.9253755211830139
         }
       }
     },
@@ -670,6 +788,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.065884068608284
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.28000882267951965
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.6118406653404236
         }
       }
     },
@@ -710,6 +836,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.044025667011737823
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.7590900659561157
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.5896852016448975
         }
       }
     },
@@ -754,6 +888,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.8957571387290955
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.6863781809806824
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.7738063335418701
         }
       }
     },
@@ -798,6 +940,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.008234419859945774
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.6863781809806824
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.27605733275413513
         }
       }
     },
@@ -842,6 +992,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.8957571387290955
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.6863781809806824
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.7738063335418701
         }
       }
     },
@@ -886,6 +1044,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.008234419859945774
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.6863781809806824
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.27605733275413513
         }
       }
     },
@@ -925,6 +1091,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.02550521120429039
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.863156259059906
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.49416303634643555
         }
       }
     },
@@ -969,6 +1143,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.9031859040260315
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.5020176768302917
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.7637830376625061
         }
       }
     },
@@ -1013,6 +1195,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.00513297226279974
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.5020176768302917
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.34850552678108215
         }
       }
     },
@@ -1057,6 +1247,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.8957571387290955
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.6863781809806824
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.7738063335418701
         }
       }
     },
@@ -1101,6 +1299,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.008232439868152142
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.6863781809806824
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.37523436546325684
         }
       }
     },
@@ -1143,6 +1349,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.8991292715072632
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.28527548909187317
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.8873649835586548
         }
       }
     },
@@ -1187,6 +1401,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.012185904197394848
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.08576441556215286
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.15607336163520813
         }
       }
     },
@@ -1231,6 +1453,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.09827426075935364
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.10763737559318542
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.6882768273353577
         }
       }
     },
@@ -1275,6 +1505,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.008949692361056805
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.08576441556215286
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.20567704737186432
         }
       }
     },
@@ -1319,6 +1557,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.09363292902708054
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.08576441556215286
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.7303103804588318
         }
       }
     },
@@ -1363,6 +1609,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.1662614643573761
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.425759494304657
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.736816942691803
         }
       }
     },
@@ -1407,6 +1661,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.008949692361056805
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.08576441556215286
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.20567704737186432
         }
       }
     },
@@ -1451,6 +1713,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.5956244468688965
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.22452159225940704
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.8197711110115051
         }
       }
     },
@@ -1495,6 +1765,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.007769567891955376
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.6016829013824463
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.811561644077301
         }
       }
     },
@@ -1539,6 +1817,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.5956244468688965
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.22452159225940704
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.8197711110115051
         }
       }
     },
@@ -1583,6 +1869,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.007769567891955376
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.6016829013824463
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.811561644077301
         }
       }
     },
@@ -1627,6 +1921,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.5956244468688965
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.22452159225940704
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.8197711110115051
         }
       }
     },
@@ -1671,6 +1973,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.007769567891955376
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.6016829013824463
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.811561644077301
         }
       }
     },
@@ -1715,6 +2025,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.782965362071991
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.41460296511650085
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.5232637524604797
         }
       }
     },
@@ -1759,6 +2077,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.07624135166406631
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.36720263957977295
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.5128051042556763
         }
       }
     },
@@ -1803,6 +2129,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.17742425203323364
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.36720263957977295
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.5028806924819946
         }
       }
     },
@@ -1847,6 +2181,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.20094993710517883
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.42533281445503235
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.6692980527877808
         }
       }
     },
@@ -1891,6 +2233,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.11723146587610245
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.4966180622577667
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.4511294364929199
         }
       }
     },
@@ -1935,6 +2285,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.06710093468427658
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.4966180622577667
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.2685162127017975
         }
       }
     },
@@ -1979,6 +2337,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.19141989946365356
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.4966180622577667
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.422294020652771
         }
       }
     },
@@ -2023,6 +2389,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.09238288551568985
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.41460296511650085
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.4663031995296478
         }
       }
     },
@@ -2067,6 +2441,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.02100084349513054
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.19313429296016693
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.2685544490814209
         }
       }
     },
@@ -2111,6 +2493,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.20094993710517883
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.42533281445503235
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.6692980527877808
         }
       }
     },
@@ -2155,6 +2545,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.782965362071991
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.41460296511650085
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.5232637524604797
         }
       }
     },
@@ -2199,6 +2597,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.012433006428182125
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.8142272233963013
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.46589377522468567
         }
       }
     },
@@ -2243,6 +2649,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.20216237008571625
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.36720263957977295
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.5496740937232971
         }
       }
     },
@@ -2287,6 +2701,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.062315091490745544
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.4966180622577667
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.3259497582912445
         }
       }
     },
@@ -2331,6 +2753,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.7204611301422119
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.6043922901153564
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.8371434807777405
         }
       }
     },
@@ -2375,6 +2805,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.03631824254989624
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.36553558707237244
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.4872424602508545
         }
       }
     },
@@ -2419,6 +2857,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.09391087293624878
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.48614707589149475
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.5318140387535095
         }
       }
     },
@@ -2463,6 +2909,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.018117589876055717
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.254808247089386
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.3991047143936157
         }
       }
     },
@@ -2507,6 +2961,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.308086097240448
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.5649372935295105
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.6123800277709961
         }
       }
     },
@@ -2551,6 +3013,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.015419897623360157
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.5649372935295105
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.1924540102481842
         }
       }
     },
@@ -2595,6 +3065,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.03631824254989624
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.36553558707237244
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.4872424602508545
         }
       }
     },
@@ -2639,6 +3117,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.06858238577842712
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.36553558707237244
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.5029406547546387
         }
       }
     },
@@ -2683,6 +3169,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.018117589876055717
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.254808247089386
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.3991047143936157
         }
       }
     },
@@ -2727,6 +3221,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.35530659556388855
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.21912230551242828
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.4758572280406952
         }
       }
     },
@@ -2771,6 +3273,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.03631824254989624
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.36553558707237244
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.4872424602508545
         }
       }
     },
@@ -2815,6 +3325,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.07880005985498428
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.48614707589149475
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.42211660742759705
         }
       }
     },
@@ -2859,6 +3377,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.08559370785951614
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.21912230551242828
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.35584014654159546
         }
       }
     },
@@ -2903,6 +3429,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.06467677652835846
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.508496880531311
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.31131964921951294
         }
       }
     },
@@ -2947,6 +3481,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.018117589876055717
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.254808247089386
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.3991047143936157
         }
       }
     },
@@ -2991,6 +3533,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.394882470369339
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.45151486992836
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.6822988390922546
         }
       }
     },
@@ -3035,6 +3585,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.03631824254989624
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.36553558707237244
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.4872424602508545
         }
       }
     },
@@ -3079,6 +3637,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.1495901346206665
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.45151486992836
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.3990793526172638
         }
       }
     },
@@ -3123,6 +3689,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.018117589876055717
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.254808247089386
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.3991047143936157
         }
       }
     },
@@ -3167,6 +3741,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.394882470369339
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.45151486992836
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.6822988390922546
         }
       }
     },
@@ -3211,6 +3793,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.03631824254989624
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.36553558707237244
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.4872424602508545
         }
       }
     },
@@ -3255,6 +3845,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.11368320137262344
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.39758145809173584
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.27848923206329346
         }
       }
     },
@@ -3299,6 +3897,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.018117589876055717
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.254808247089386
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.3991047143936157
         }
       }
     },
@@ -3343,6 +3949,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.011195286177098751
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.41460296511650085
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.4679681062698364
         }
       }
     },
@@ -3387,6 +4001,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.011195286177098751
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.41460296511650085
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.4679681062698364
         }
       }
     },
@@ -3429,6 +4051,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.8539921045303345
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.33731400966644287
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.7659544348716736
         }
       }
     },
@@ -3471,6 +4101,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.35335418581962585
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.7707252502441406
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.6962544918060303
         }
       }
     },
@@ -3513,6 +4151,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.007552420720458031
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.7707252502441406
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.45582446455955505
         }
       }
     },
@@ -3555,6 +4201,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.24850261211395264
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.33731400966644287
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.584801435470581
         }
       }
     },
@@ -3597,6 +4251,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.35335418581962585
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.7707252502441406
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.6962544918060303
         }
       }
     },
@@ -3639,6 +4301,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.24850261211395264
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.33731400966644287
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.584801435470581
         }
       }
     },
@@ -3681,6 +4351,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": true,
           "p_entail": 0.8429959416389465
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.7707252502441406
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.7239726781845093
         }
       }
     },
@@ -3723,6 +4401,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.24850261211395264
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.33731400966644287
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.584801435470581
         }
       }
     },
@@ -3765,6 +4451,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.35335418581962585
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.7707252502441406
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.6962544918060303
         }
       }
     },
@@ -3807,6 +4501,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.007552420720458031
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.7707252502441406
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.45582446455955505
         }
       }
     },
@@ -3849,6 +4551,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.24850261211395264
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.33731400966644287
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.584801435470581
         }
       }
     },
@@ -3891,6 +4601,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.35335418581962585
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.7707252502441406
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.6962544918060303
         }
       }
     },
@@ -3934,6 +4652,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.078878253698349
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.7354102730751038
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.5073761343955994
         }
       }
     },
@@ -3977,6 +4703,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.009227145463228226
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.4831719994544983
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.45177996158599854
         }
       }
     },
@@ -4021,6 +4755,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.016735782846808434
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.24196238815784454
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.17576400935649872
         }
       }
     },
@@ -4064,6 +4806,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.19343335926532745
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": true,
+          "p_entail": 0.7354102730751038
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": true,
+          "p_entail": 0.5672066807746887
         }
       }
     },
@@ -4107,6 +4857,14 @@
         "RoBERTa-large-MNLI | claim": {
           "supported": false,
           "p_entail": 0.009227145463228226
+        },
+        "Flan-T5-large (yes/no) | sentence": {
+          "supported": false,
+          "p_entail": 0.4831719994544983
+        },
+        "Flan-T5-large (yes/no) | claim": {
+          "supported": false,
+          "p_entail": 0.45177996158599854
         }
       }
     }

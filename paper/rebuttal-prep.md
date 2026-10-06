@@ -90,14 +90,21 @@ Limitations and offer concrete additions for the camera-ready version.
 
 ## 11. "Would an entailment-based attribution judge catch these errors?"
 
-- Stated as an open question (§6). Offer: run an NLI/AlignScore-style judge
-  on the 97 claims against their cited items and report how many misstated
-  claims it accepts; the labeled claims make this a ready benchmark.
+- Done (Appendix C, Table 9; §6). Four off-the-shelf judges (three NLI
+  cross-encoders and Flan-T5-large), given the cited items as premise, reach
+  balanced accuracy 0.51–0.68 against the verified labels. Lenient judges
+  accept up to half of the wrong values (11/22); strict judges reject nearly
+  all overstatements but also most correct claims (RoBERTa accepts 4/51).
+  At least one judge accepts 18 of the 41 misstated claims.
+- If asked about stronger judges: TRUE (T5-11B) and AlignScore were not
+  tested; offer them for the camera-ready.
 
 ## Quick additions possible during the response period (no new hardware runs)
 
-1. Second annotator for the 97 claims, with kappa.
-2. Entailment-judge experiment on the existing claims and evidence.
+1. Second annotator for the 97 claims, with kappa (blind package ready:
+   `paper/second-annotator-blind.csv`, guidelines in
+   `paper/second-annotator-guidelines.md`).
+2. Stronger attribution judges (TRUE, AlignScore) on the existing claims.
 3. Re-analysis of existing records by model family and size.
 
 Additions that need new model calls (API budget is small, about 0.5 USD for

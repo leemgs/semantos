@@ -80,6 +80,8 @@ def main():
               f'{n_l}/{len(lc)}, {n_h}/{len(hc)}')
         check('Claim labels verified by an author', audit.get('verification', {}).get('human_verified') is True)
 
+        run('entailment_judge.py', '--out', res/'model-audit-summary/entailment-judge.json', '--tex', tmp/'entailment-judges.tex')
+        same_file('Entailment-judge table (from saved judge outputs)', tmp/'entailment-judges.tex', 'entailment-judges.tex')
         cites = json.loads(run('citation_analysis.py', '--results', res))
         got = (cites['retrieval_chosen'], cites['retrieval_citations'], cites['retrieval_in_first_half'], cites['graph'])
         check('Citations: 252/260 of the chosen configuration, 209 in the first half, graph never cited',

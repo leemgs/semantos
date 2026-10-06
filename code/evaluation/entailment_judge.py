@@ -19,6 +19,8 @@ correct claims are accepted, using the author-verified labels in
 claim-audit.json. Model revisions are pinned; runs on CPU in a few minutes.
 
     python3 entailment_judge.py --out results/model-audit-summary/entailment-judge.json
+    python3 entailment_judge.py --out results/model-audit-summary/entailment-judge.json \
+        --tex ../../paper/entailment-judges.tex   # table only, from the saved results
 """
 import argparse
 import json
@@ -119,10 +121,34 @@ def summarize(items, key):
             'balanced_accuracy': round(0.5 * (acc_c / len(cor) + (len(mis) - acc_m) / len(mis)), 3)}
 
 
+def write_table(saved, path):
+    data = json.loads(saved.read_text())
+    groups = lambda x: 'over' if x['label'] == 'overstated' else 'wrong'
+    lines = [r'\begin{tabular}{@{}llrrrr@{}}', r'\toprule',
+             r'Judge & Hyp. & Wrong & Over. & Correct & BA \\', r'\midrule']
+    short = {'DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI)': 'DeBERTa-v3 (5 NLI sets)',
+             'DeBERTa-v3-large (SNLI/MNLI cross-encoder)': 'DeBERTa-v3 (SNLI/MNLI)',
+             'RoBERTa-large-MNLI': 'RoBERTa-large-MNLI', 'Flan-T5-large (yes/no)': 'Flan-T5-large'}
+    for key, s in data['summary'].items():
+        judge, hyp = key.split(' | ')
+        mis = [x for x in data['items'] if x['label'] in MISSTATED]
+        acc = {g: sum(x['judges'][key]['supported'] for x in mis if groups(x) == g) for g in ('wrong', 'over')}
+        tot = {g: sum(groups(x) == g for x in mis) for g in ('wrong', 'over')}
+        lines.append(f"{short[judge]} & {'sent.' if hyp == 'sentence' else 'claim'} & {acc['wrong']}/{tot['wrong']} & "
+                     f"{acc['over']}/{tot['over']} & {s['correct_accepted']}/{s['correct']} & {s['balanced_accuracy']:.2f} \\\\")
+    lines += [r'\bottomrule', r'\end{tabular}']
+    path.write_text('\n'.join(lines) + '\n')
+    print(f'wrote {path}')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', type=Path, required=True)
+    ap.add_argument('--tex', type=Path, help='only write the LaTeX table from the saved results')
     a = ap.parse_args()
+    if a.tex:
+        write_table(a.out, a.tex)
+        return
     items = build_items()
     summary = {}
     if a.out.exists():  # resume: keep judges already scored
