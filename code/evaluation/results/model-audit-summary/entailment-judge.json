@@ -1,0 +1,2219 @@
+{
+  "judges": [
+    {
+      "label": "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI)",
+      "model": "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli",
+      "revision": "b3546ea6b0346eb6f8d5d68b13c7dc6d0376b3d7"
+    },
+    {
+      "label": "DeBERTa-v3-large (SNLI/MNLI cross-encoder)",
+      "model": "cross-encoder/nli-deberta-v3-large",
+      "revision": "bab4bc7178836f731dcfd18c06ca9def0a137712"
+    },
+    {
+      "label": "RoBERTa-large-MNLI",
+      "model": "FacebookAI/roberta-large-mnli",
+      "revision": "2a8f12d27941090092df78e4ba6f0928eb5eac98"
+    },
+    {
+      "label": "Flan-T5-large (yes/no)",
+      "model": "google/flan-t5-large",
+      "revision": "0613663d0d48ea86ba8cb3d7a44f0f65dc596a2a"
+    }
+  ],
+  "definition": "premise = verbalized cited evidence items; supported = entailment (NLI argmax) or p(yes) > 0.5 (Flan-T5)",
+  "summary": {
+    "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+      "misstated": 41,
+      "misstated_accepted": 10,
+      "correct": 51,
+      "correct_accepted": 17,
+      "balanced_accuracy": 0.545
+    }
+  },
+  "items": [
+    {
+      "id": 0,
+      "model": "Qwen2.5-7B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "wrong attribution",
+      "claim": "training table gives s50000_aall an average P95 of 126.36 us",
+      "sentence": "The training table shows that 's50000_aall' has a significantly lower average P95 latency (126.36 microseconds) compared to other configurations.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.71337890625
+        }
+      }
+    },
+    {
+      "id": 1,
+      "model": "Qwen2.5-7B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "retrieval runs consistently show s50000_aall lowest",
+      "sentence": "Additionally, the retrieval runs consistently show that 's50000_aall' has the lowest P95 latency across various",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.0088653564453125
+        }
+      }
+    },
+    {
+      "id": 2,
+      "model": "Qwen2.5-7B",
+      "variant": "no_graph",
+      "seed": 4088,
+      "label": "wrong",
+      "claim": "s50000_aall has the lowest P95 with a value of 93.049 us",
+      "sentence": "The configuration 's50000_aall' has the lowest P95 latency among the provided evidence, with a value of 93.049 microseconds.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.0272216796875
+        }
+      }
+    },
+    {
+      "id": 3,
+      "model": "Qwen2.5-7B",
+      "variant": "no_retrieval",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall has the lowest training P95, 132.9413",
+      "sentence": "Based on the training summaries provided in the 'training-table', the configuration 's50000_aall' has the lowest periodic wake-up P95 latency at 132.9413.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds.",
+      "cited_ids": [
+        "training-table"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.99365234375
+        }
+      }
+    },
+    {
+      "id": 5,
+      "model": "Llama-3.1-8B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "wrong",
+      "claim": "s50000_aone has the lowest P95, 571.84 us",
+      "sentence": "The config 's50000_aone' has the lowest P95 latency of 571.84 us among all the allowed configs.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 571.84 microseconds. Retrieval run retrieval-3-1-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 272.927 microseconds. Retrieval run retrieval-3-2-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 151.299 microseconds. Retrieval run retrieval-3-3-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 254.509 microseconds. Retrieval run retrieval-3-4-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 170.306 microseconds. Retrieval run retrieval-3-5-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 430.654 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aone",
+        "retrieval-3-1-s50000_aone",
+        "retrieval-3-2-s50000_aone",
+        "retrieval-3-3-s50000_aone",
+        "retrieval-3-4-s50000_aone",
+        "retrieval-3-5-s50000_aone"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.935546875
+        }
+      }
+    },
+    {
+      "id": 6,
+      "model": "Llama-3.1-8B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "wrong",
+      "claim": "lowest in 6 of 9 retrieval runs",
+      "sentence": "This is because it has the lowest P95 latency in 6 out of the 9 retrieval runs, indicating that it is the most efficient config for minimizing periodic wake-up latency.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 571.84 microseconds. Retrieval run retrieval-3-1-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 272.927 microseconds. Retrieval run retrieval-3-2-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 151.299 microseconds. Retrieval run retrieval-3-3-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 254.509 microseconds. Retrieval run retrieval-3-4-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 170.306 microseconds. Retrieval run retrieval-3-5-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 430.654 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aone",
+        "retrieval-3-1-s50000_aone",
+        "retrieval-3-2-s50000_aone",
+        "retrieval-3-3-s50000_aone",
+        "retrieval-3-4-s50000_aone",
+        "retrieval-3-5-s50000_aone"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.0082855224609375
+        }
+      }
+    },
+    {
+      "id": 7,
+      "model": "Llama-3.1-8B",
+      "variant": "no_graph",
+      "seed": 4088,
+      "label": "wrong",
+      "claim": "lowest average across retrieval runs, 272.927 us",
+      "sentence": "The config 's50000_aone' has the lowest average P95 latency across all retrieval runs, with an average of 272.927 us.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 571.84 microseconds. Retrieval run retrieval-3-1-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 272.927 microseconds. Retrieval run retrieval-3-2-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 151.299 microseconds. Retrieval run retrieval-3-3-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 254.509 microseconds. Retrieval run retrieval-3-4-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 170.306 microseconds. Retrieval run retrieval-3-5-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 430.654 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aone",
+        "retrieval-3-1-s50000_aone",
+        "retrieval-3-2-s50000_aone",
+        "retrieval-3-3-s50000_aone",
+        "retrieval-3-4-s50000_aone",
+        "retrieval-3-5-s50000_aone"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.277587890625
+        }
+      }
+    },
+    {
+      "id": 8,
+      "model": "Llama-3.1-8B",
+      "variant": "no_retrieval",
+      "seed": 4088,
+      "label": "wrong",
+      "claim": "lowest training summary value, 277.4647",
+      "sentence": "Based on the provided evidence, the configuration 's50000_aone' has the lowest measured training summary value of 277.4647, indicating the lowest periodic wake-up P95 latency.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds.",
+      "cited_ids": [
+        "training-table"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.990234375
+        }
+      }
+    },
+    {
+      "id": 10,
+      "model": "Llama-3.1-8B",
+      "variant": "delete_cited",
+      "seed": 4088,
+      "label": "wrong",
+      "claim": "s1000000_aall has the lowest P95, 748.404 us",
+      "sentence": "The config 's1000000_aall' has the lowest P95 latency of 748.404 us among all the allowed configs.",
+      "premise": "Retrieval run retrieval-3-0-s1000000_aall: configuration s1000000_aall, period 3 ms, P95 wake-up latency 1023.152 microseconds. Retrieval run retrieval-3-1-s1000000_aall: configuration s1000000_aall, period 3 ms, P95 wake-up latency 1000.735 microseconds. Retrieval run retrieval-3-2-s1000000_aall: configuration s1000000_aall, period 3 ms, P95 wake-up latency 983.2 microseconds. Retrieval run retrieval-3-3-s1000000_aall: configuration s1000000_aall, period 3 ms, P95 wake-up latency 1019.124 microseconds. Retrieval run retrieval-3-4-s1000000_aall: configuration s1000000_aall, period 3 ms, P95 wake-up latency 1016.898 microseconds. Retrieval run retrieval-3-5-s1000000_aall: configuration s1000000_aall, period 3 ms, P95 wake-up latency 960.925 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s1000000_aall",
+        "retrieval-3-1-s1000000_aall",
+        "retrieval-3-2-s1000000_aall",
+        "retrieval-3-3-s1000000_aall",
+        "retrieval-3-4-s1000000_aall",
+        "retrieval-3-5-s1000000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.0006976127624511719
+        }
+      }
+    },
+    {
+      "id": 11,
+      "model": "Llama-3.1-8B",
+      "variant": "delete_uncited",
+      "seed": 4088,
+      "label": "partly wrong",
+      "claim": "s50000_aall lowest at 82.488; all five cited runs below 100 us",
+      "sentence": "The config 's50000_aall' has the lowest P95 latency of 82.488 us among all the allowed configs.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-6-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 109.519 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds. Retrieval run retrieval-3-8-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.387 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-6-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.07635498046875
+        }
+      }
+    },
+    {
+      "id": 12,
+      "model": "Qwen2.5-14B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "wrong unit",
+      "claim": "training table gives s50000_aall 132.9413 ms",
+      "sentence": "The training summary shows that 's50000_aall' has a P95 latency of 132.9413 ms, which is significantly lower than the other configurations.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.88232421875
+        }
+      }
+    },
+    {
+      "id": 13,
+      "model": "Qwen2.5-14B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "s50000_aall has the lowest P95 across all retrieval runs",
+      "sentence": "Based on the provided evidence, the configuration 's50000_aall' has the lowest P95 latency across all retrieval runs.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.57177734375
+        }
+      }
+    },
+    {
+      "id": 14,
+      "model": "Qwen2.5-14B",
+      "variant": "no_graph",
+      "seed": 4088,
+      "label": "wrong unit",
+      "claim": "training table gives s50000_aall 132.9413 ms",
+      "sentence": "According to the training summary table, 's50000_aall' has a P95 latency of 132.9413 ms.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.99853515625
+        }
+      }
+    },
+    {
+      "id": 15,
+      "model": "Qwen2.5-14B",
+      "variant": "no_graph",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall retrieval runs range from 82.488 to 183.217",
+      "sentence": "Additionally, the retrieval runs show that 's50000_aall' consistently has the lowest P95 latency across multiple runs, with the highest being 183.217 ms and the lowest being 82.488 ms.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.009613037109375
+        }
+      }
+    },
+    {
+      "id": 16,
+      "model": "Qwen2.5-14B",
+      "variant": "no_retrieval",
+      "seed": 4088,
+      "label": "wrong unit",
+      "claim": "s50000_aall has the lowest P95, 132.9413 milliseconds",
+      "sentence": "Based on the provided evidence, the configuration 's50000_aall' has the lowest periodic wake-up P95 latency of 132.9413 milliseconds.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Interaction item: training contrast -18.6 microseconds; no graph edges.",
+      "cited_ids": [
+        "training-table",
+        "interaction"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.99609375
+        }
+      }
+    },
+    {
+      "id": 18,
+      "model": "Phi-4",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall runs are 126.36, 140.554, 94.81, 99.853, 93.049, 183.217",
+      "sentence": "The P95 latencies for 's50000_aall' are 126.36, 140.554, 94.81, 99.853, 93.049, and 183.217 microseconds, which are significantly lower than those of the other configurations.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.053680419921875
+        }
+      }
+    },
+    {
+      "id": 19,
+      "model": "Phi-4",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "these are significantly lower than those of the other configurations",
+      "sentence": "The P95 latencies for 's50000_aall' are 126.36, 140.554, 94.81, 99.853, 93.049, and 183.217 microseconds, which are significantly lower than those of the other configurations.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.053680419921875
+        }
+      }
+    },
+    {
+      "id": 20,
+      "model": "Phi-4",
+      "variant": "no_graph",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall runs are 126.36, 140.554, 94.81, 99.853, 93.049, 183.217",
+      "sentence": "The P95 latencies for 's50000_aall' are 126.36, 140.554, 94.81, 99.853, 93.049, and 183.217 microseconds, which are significantly lower than those of the other configurations.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.053680419921875
+        }
+      }
+    },
+    {
+      "id": 21,
+      "model": "Phi-4",
+      "variant": "no_graph",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "these are significantly lower than those of the other configurations",
+      "sentence": "The P95 latencies for 's50000_aall' are 126.36, 140.554, 94.81, 99.853, 93.049, and 183.217 microseconds, which are significantly lower than those of the other configurations.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.053680419921875
+        }
+      }
+    },
+    {
+      "id": 22,
+      "model": "Phi-4",
+      "variant": "no_retrieval",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "lists the four training means and s50000_aall as lowest",
+      "sentence": "From the 'training-table' evidence, the P95 latencies for the configurations are as follows: 's50000_aall' has a latency of 132.9413, 's50000_aone' has 277.4647, 's1000000_aall' has 954.7558, and 's1000000_aone' has 1080.6555.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds.",
+      "cited_ids": [
+        "training-table"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.99560546875
+        }
+      }
+    },
+    {
+      "id": 24,
+      "model": "Phi-4",
+      "variant": "delete_cited",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aone runs are 571.84, 272.927, 151.299, 254.509, 170.306, 430.654",
+      "sentence": "The P95 latencies for 's50000_aone' are 571.84, 272.927, 151.299, 254.509, 170.306, and 430.654 microseconds, which are significantly lower than those of the other configurations.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 571.84 microseconds. Retrieval run retrieval-3-1-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 272.927 microseconds. Retrieval run retrieval-3-2-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 151.299 microseconds. Retrieval run retrieval-3-3-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 254.509 microseconds. Retrieval run retrieval-3-4-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 170.306 microseconds. Retrieval run retrieval-3-5-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 430.654 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aone",
+        "retrieval-3-1-s50000_aone",
+        "retrieval-3-2-s50000_aone",
+        "retrieval-3-3-s50000_aone",
+        "retrieval-3-4-s50000_aone",
+        "retrieval-3-5-s50000_aone"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.08837890625
+        }
+      }
+    },
+    {
+      "id": 25,
+      "model": "Phi-4",
+      "variant": "delete_cited",
+      "seed": 4088,
+      "label": "wrong",
+      "claim": "these are significantly lower than those of the other configurations",
+      "sentence": "The P95 latencies for 's50000_aone' are 571.84, 272.927, 151.299, 254.509, 170.306, and 430.654 microseconds, which are significantly lower than those of the other configurations.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 571.84 microseconds. Retrieval run retrieval-3-1-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 272.927 microseconds. Retrieval run retrieval-3-2-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 151.299 microseconds. Retrieval run retrieval-3-3-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 254.509 microseconds. Retrieval run retrieval-3-4-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 170.306 microseconds. Retrieval run retrieval-3-5-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 430.654 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aone",
+        "retrieval-3-1-s50000_aone",
+        "retrieval-3-2-s50000_aone",
+        "retrieval-3-3-s50000_aone",
+        "retrieval-3-4-s50000_aone",
+        "retrieval-3-5-s50000_aone"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.08837890625
+        }
+      }
+    },
+    {
+      "id": 26,
+      "model": "Phi-4",
+      "variant": "delete_uncited",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall runs are 126.36, 140.554, 94.81, 99.853, 93.049, 183.217",
+      "sentence": "The P95 latencies for 's50000_aall' are 126.36, 140.554, 94.81, 99.853, 93.049, and 183.217 microseconds, which are significantly lower than those of the other configurations.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.053680419921875
+        }
+      }
+    },
+    {
+      "id": 27,
+      "model": "Phi-4",
+      "variant": "delete_uncited",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "these are significantly lower than those of other configurations",
+      "sentence": "The P95 latencies for 's50000_aall' are 126.36, 140.554, 94.81, 99.853, 93.049, and 183.217 microseconds, which are significantly lower than those of the other configurations.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.053680419921875
+        }
+      }
+    },
+    {
+      "id": 28,
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "seed": 4092,
+      "label": "correct",
+      "claim": "values 94.81, 82.488, 87.387, 87.347 for the cited s50000_aall runs",
+      "sentence": "The config 's50000_aall' has the lowest average p95 latency across multiple retrieval runs (94.81, 82.488, 87.387, 87.347) compared to other configs.",
+      "premise": "Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds. Retrieval run retrieval-3-8-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.387 microseconds. Retrieval run retrieval-3-9-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.347 microseconds.",
+      "cited_ids": [
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.0018701553344726562
+        }
+      }
+    },
+    {
+      "id": 29,
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall has the lowest average P95 across retrieval runs",
+      "sentence": "The config 's50000_aall' has the lowest average p95 latency across multiple retrieval runs, with values ranging from 82.488 to 183.217 us.",
+      "premise": "Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds. Retrieval run retrieval-3-8-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.387 microseconds. Retrieval run retrieval-3-9-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.347 microseconds.",
+      "cited_ids": [
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.058563232421875
+        }
+      }
+    },
+    {
+      "id": 30,
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "seed": 4089,
+      "label": "wrong",
+      "claim": "s50000_aall values range from 82.488 to 140.554",
+      "sentence": "The config 's50000_aall' has the lowest P95 latency values across multiple retrieval runs, with values ranging from 82.488 to 140.554.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-6-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 109.519 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-6-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.041015625
+        }
+      }
+    },
+    {
+      "id": 31,
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall has the lowest average P95",
+      "sentence": "The config 's50000_aall' has the lowest average p95 latency across multiple retrieval runs, with values ranging from 82.488 to 183.217 us.",
+      "premise": "Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds. Retrieval run retrieval-3-8-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.387 microseconds. Retrieval run retrieval-3-9-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.347 microseconds.",
+      "cited_ids": [
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.058563232421875
+        }
+      }
+    },
+    {
+      "id": 32,
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall values range from 82.488 to 183.217",
+      "sentence": "The config 's50000_aall' has the lowest average p95 latency across multiple retrieval runs, with values ranging from 82.488 to 183.217 us.",
+      "premise": "Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds. Retrieval run retrieval-3-8-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.387 microseconds. Retrieval run retrieval-3-9-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.347 microseconds.",
+      "cited_ids": [
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.058563232421875
+        }
+      }
+    },
+    {
+      "id": 33,
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "seed": 4090,
+      "label": "wrong",
+      "claim": "cited s50000_aall values range from 82.488 to 126.36",
+      "sentence": "The config 's50000_aall' has the lowest average p95 latency across multiple retrieval runs (e.g., 'retrieval-3-2-s50000_aall', 'retrieval-3-3-s50000_aall', 'retrieval-3-4-s50000_aall', 'retrieval-3-7-s50000_aall', 'retrieval-3-8-s50000_aall', 'retrieval-3-9-s50000_aall') with values ranging from 82.488 to 126.36, indicating a more consistent and lower periodic wake-up P95 latency compared to other",
+      "premise": "Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds. Retrieval run retrieval-3-8-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.387 microseconds. Retrieval run retrieval-3-9-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.347 microseconds.",
+      "cited_ids": [
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.185791015625
+        }
+      }
+    },
+    {
+      "id": 34,
+      "model": "Llama-3.3-70B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall has the lowest average P95",
+      "sentence": "The config 's50000_aall' has the lowest average p95 latency across multiple retrieval runs, with values ranging from 82.488 to 183.217 us.",
+      "premise": "Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds. Retrieval run retrieval-3-8-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.387 microseconds. Retrieval run retrieval-3-9-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.347 microseconds.",
+      "cited_ids": [
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.058563232421875
+        }
+      }
+    },
+    {
+      "id": 35,
+      "model": "Qwen3-235B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall runs include 126.36, 140.554, 94.81; highest 183.217",
+      "sentence": "Among all configurations, 's50000_aall' consistently shows the lowest P95 latency across multiple retrieval runs (e.g., 126.36 us, 140.554 us, 94.81 us, etc.), with the highest observed P95 being 183.217 us.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.2364501953125
+        }
+      }
+    },
+    {
+      "id": 36,
+      "model": "Qwen3-235B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "all other configurations exhibit significantly higher P95",
+      "sentence": "In contrast, all other configurations (including 's50000_aone', 's1000000_aall', and 's1000000_aone') exhibit significantly higherP",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.008331298828125
+        }
+      }
+    },
+    {
+      "id": 37,
+      "model": "Qwen3-235B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall runs include 126.36, 140.554, 94.81; highest 183.217",
+      "sentence": "Among all configurations, 's50000_aall' consistently shows the lowest P95 latency across multiple retrieval runs (e.g., 126.36 us, 140.554 us, 94.81 us, etc.), with the highest observed P95 being 183.217 us.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.2364501953125
+        }
+      }
+    },
+    {
+      "id": 38,
+      "model": "Qwen3-235B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "all other configurations exhibit significantly higher P95",
+      "sentence": "In contrast, all other configurations (including 's50000_aone', 's1000000_aall', and 's1000000_aone') exhibit significantly higherP",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.008331298828125
+        }
+      }
+    },
+    {
+      "id": 39,
+      "model": "Qwen3-235B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall runs include 126.36, 140.554, 94.81; highest 183.217",
+      "sentence": "Among all configurations, 's50000_aall' consistently shows the lowest P95 latency across multiple retrieval runs (e.g., 126.36 us, 140.554 us, 94.81 us, etc.), with the highest observed P95 being 183.217 us.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.2364501953125
+        }
+      }
+    },
+    {
+      "id": 40,
+      "model": "Qwen3-235B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "all other configurations exhibit significantly higher P95",
+      "sentence": "In contrast, all other configurations (including 's50000_aone', 's1000000_aall', and 's1000000_aone') exhibit significantly higherP",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.008331298828125
+        }
+      }
+    },
+    {
+      "id": 41,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall runs 126.36, 140.554, 94.81, 99.853, 93.049",
+      "sentence": "Among all retrieval runs, s50000_aall consistently shows the lowest P95 latencies across multiple trials (e.g., 126.36 \u03bcs, 140.554 \u03bcs, 94.81 \u03bcs, 99.853 \u03bcs, 93.049 \u03bcs), with most values under 150 \u03bcs.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.92724609375
+        }
+      }
+    },
+    {
+      "id": 42,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aone often higher, e.g. 571.84, 272.927",
+      "sentence": "In contrast, s50000_aone shows higher variability and often higher latencies (e.g., 571.84 \u03bcs, 272.927 \u03bcs), while both s1000000 configurations are consistently above 800 \u03bcs.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.35302734375
+        }
+      }
+    },
+    {
+      "id": 43,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4088,
+      "label": "wrong",
+      "claim": "both s1000000 configurations consistently above 800 us",
+      "sentence": "In contrast, s50000_aone shows higher variability and often higher latencies (e.g., 571.84 \u03bcs, 272.927 \u03bcs), while both s1000000 configurations are consistently above 800 \u03bcs.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.35302734375
+        }
+      }
+    },
+    {
+      "id": 44,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4089,
+      "label": "correct",
+      "claim": "training table: s50000_aall lowest, 132.9413 us",
+      "sentence": "The evidence includes a training summary table showing average latencies, where s50000_aall has the lowest average (132.9413 \u00b5s).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.99755859375
+        }
+      }
+    },
+    {
+      "id": 45,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4091,
+      "label": "correct",
+      "claim": "s50000_aall runs range 82.488-183.217 us",
+      "sentence": "For s50000_aall, the retrieval P95 values range from 82.488 \u00b5s to 183.217 \u00b5s across 10 runs, consistently lower than any retrieval values for s1000000_aall (748.404 \u00b5s to 1023.152 \u00b5s), s1000000_aone (817.997 \u00b5s to 1419.669 \u00b5s), and s50000_aone (85.033 \u00b5s to 571.84 \u00b5s).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.0819091796875
+        }
+      }
+    },
+    {
+      "id": 46,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4091,
+      "label": "wrong",
+      "claim": "s50000_aall consistently lower than any s50000_aone run (85.033-571.84)",
+      "sentence": "For s50000_aall, the retrieval P95 values range from 82.488 \u00b5s to 183.217 \u00b5s across 10 runs, consistently lower than any retrieval values for s1000000_aall (748.404 \u00b5s to 1023.152 \u00b5s), s1000000_aone (817.997 \u00b5s to 1419.669 \u00b5s), and s50000_aone (85.033 \u00b5s to 571.84 \u00b5s).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.0819091796875
+        }
+      }
+    },
+    {
+      "id": 47,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4091,
+      "label": "correct",
+      "claim": "s1000000 configurations range 748.404-1419.669 us",
+      "sentence": "For s50000_aall, the retrieval P95 values range from 82.488 \u00b5s to 183.217 \u00b5s across 10 runs, consistently lower than any retrieval values for s1000000_aall (748.404 \u00b5s to 1023.152 \u00b5s), s1000000_aone (817.997 \u00b5s to 1419.669 \u00b5s), and s50000_aone (85.033 \u00b5s to 571.84 \u00b5s).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.0819091796875
+        }
+      }
+    },
+    {
+      "id": 48,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "lists all ten s50000_aall values",
+      "sentence": "Among all retrieval runs, s50000_aall consistently shows the lowest P95 latencies across multiple trials (e.g., 126.36 \u03bcs, 140.554 \u03bcs, 94.81 \u03bcs, 99.853 \u03bcs, 93.049 \u03bcs), with most values under 150 \u03bcs.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.92724609375
+        }
+      }
+    },
+    {
+      "id": 49,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4089,
+      "label": "wrong",
+      "claim": "maximum 183.217 is lower than the lowest P95 of any other config",
+      "sentence": "The maximum among these is 183.217 \u00b5s, which is lower than the lowest P95 observed for any other config (e.g., s50000_aone has runs up to 571.84 \u00b5s, and s1000000 configs are all above 748 \u00b5s).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.8173828125
+        }
+      }
+    },
+    {
+      "id": 50,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4089,
+      "label": "correct",
+      "claim": "training table: s50000_aall lowest, 132.9413 us",
+      "sentence": "The evidence includes a training summary table showing average latencies, where s50000_aall has the lowest average (132.9413 \u00b5s).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.99755859375
+        }
+      }
+    },
+    {
+      "id": 51,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall runs 126.36, 140.554, 94.81, 99.853, 93.049",
+      "sentence": "Among all retrieval runs, s50000_aall consistently shows the lowest P95 latencies across multiple trials (e.g., 126.36 \u03bcs, 140.554 \u03bcs, 94.81 \u03bcs, 99.853 \u03bcs, 93.049 \u03bcs), with most values under 150 \u03bcs.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.92724609375
+        }
+      }
+    },
+    {
+      "id": 52,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4090,
+      "label": "correct",
+      "claim": "other configs, especially s1000000, typically exceed 800 us",
+      "sentence": "The retrieval runs consistently show s50000_aall has the lowest p95 latencies across multiple trials (e.g., 126.36 \u00b5s, 140.554 \u00b5s, 94.81 \u00b5s, 99.853 \u00b5s, 93.049 \u00b5s), with most under 150 \u00b5s, while other configs (especially s1000000_aall and s1000000_aone) typically exceed 800 \u00b5s.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.8017578125
+        }
+      }
+    },
+    {
+      "id": 53,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "ranges for all four configurations",
+      "sentence": "In contrast, s50000_aone shows higher variability and often higher latencies (e.g., 571.84 \u03bcs, 272.927 \u03bcs), while both s1000000 configurations are consistently above 800 \u03bcs.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.35302734375
+        }
+      }
+    },
+    {
+      "id": 54,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4091,
+      "label": "wrong",
+      "claim": "s50000_aall consistently lower than any s50000_aone value",
+      "sentence": "For s50000_aall, the retrieval P95 values range from 82.488 \u00b5s to 183.217 \u00b5s across 10 runs, consistently lower than any retrieval values for s1000000_aall (748.404 \u00b5s to 1023.152 \u00b5s), s1000000_aone (817.997 \u00b5s to 1419.669 \u00b5s), and s50000_aone (85.033 \u00b5s to 571.84 \u00b5s).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.0819091796875
+        }
+      }
+    },
+    {
+      "id": 55,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "cited s50000_aall runs range 93.049-183.217",
+      "sentence": "Its P95 values range from 93.049 to 183.217 microseconds, which are significantly lower than the other configurations.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.009521484375
+        }
+      }
+    },
+    {
+      "id": 56,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4089,
+      "label": "wrong",
+      "claim": "s50000_aone ranges from 85.0 to 430.7 us",
+      "sentence": "In contrast, s50000_aone shows higher variability (85.0 to 430.7 microseconds), while both s1000000_aall and s1000000_aone consistently exceed 748 microseconds.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.002758026123046875
+        }
+      }
+    },
+    {
+      "id": 57,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s1000000_aall ranges 748.404-1023.152",
+      "sentence": "For comparison, s50000_aone ranges from 85.033 to 430.654 microseconds, s1000000_aall from 748.404 to 1023.152 microseconds, and s1000000_aone from 817.997",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.00835418701171875
+        }
+      }
+    },
+    {
+      "id": 58,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "s50000_aall is lowest across all retrieval runs",
+      "sentence": "Among the allowed configurations, s50000_aall consistently shows the lowest P95 latency across all retrieval runs (runs 0-5).",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.004528045654296875
+        }
+      }
+    },
+    {
+      "id": 59,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4089,
+      "label": "correct",
+      "claim": "s50000_aall ranges 82.5-183.2",
+      "sentence": "Its P95 values range from 82.5 to 183.2 microseconds, with most runs below 150 microseconds.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.94677734375
+        }
+      }
+    },
+    {
+      "id": 60,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4089,
+      "label": "correct",
+      "claim": "most s50000_aall runs are below 150 us",
+      "sentence": "Its P95 values range from 82.5 to 183.2 microseconds, with most runs below 150 microseconds.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.94677734375
+        }
+      }
+    },
+    {
+      "id": 61,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4089,
+      "label": "wrong",
+      "claim": "s50000_aone ranges from 85.0 to 430.7 us",
+      "sentence": "In contrast, s50000_aone shows higher variability (85.0 to 430.7 microseconds), while both s1000000_aall and s1000000_aone consistently exceed 748 microseconds.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.002758026123046875
+        }
+      }
+    },
+    {
+      "id": 62,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4089,
+      "label": "correct",
+      "claim": "both s1000000 configurations exceed 748 us",
+      "sentence": "In contrast, s50000_aone shows higher variability (85.0 to 430.7 microseconds), while both s1000000_aall and s1000000_aone consistently exceed 748 microseconds.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.002758026123046875
+        }
+      }
+    },
+    {
+      "id": 63,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "s50000_aall is lowest across all retrieval runs",
+      "sentence": "Among the allowed configurations, s50000_aall consistently shows the lowest P95 latency across all retrieval runs (runs 0-5).",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.004528045654296875
+        }
+      }
+    },
+    {
+      "id": 64,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4090,
+      "label": "correct",
+      "claim": "s50000_aall ranges ~82-183",
+      "sentence": "Its P95 values range from ~82-183 \u03bcs, while s50000_aone ranges from ~85-431 \u03bcs, s1000000_aall from ~748-1023 \u03bcs, and s1000000_aone from ~817-1420 \u03bcs.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.1849365234375
+        }
+      }
+    },
+    {
+      "id": 65,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4089,
+      "label": "wrong",
+      "claim": "s50000_aone ranges from 85.0 to 430.7 us",
+      "sentence": "In contrast, s50000_aone shows higher variability (85.0 to 430.7 microseconds), while both s1000000_aall and s1000000_aone consistently exceed 748 microseconds.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.002758026123046875
+        }
+      }
+    },
+    {
+      "id": 66,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s1000000_aall ranges ~748-1023",
+      "sentence": "For comparison, s50000_aone ranges from 85.033 to 430.654 microseconds, s1000000_aall from 748.404 to 1023.152 microseconds, and s1000000_aone from 817.997",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.00835418701171875
+        }
+      }
+    },
+    {
+      "id": 67,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4090,
+      "label": "correct",
+      "claim": "s1000000_aone ranges ~817-1420",
+      "sentence": "Its P95 values range from ~82-183 \u03bcs, while s50000_aone ranges from ~85-431 \u03bcs, s1000000_aall from ~748-1023 \u03bcs, and s1000000_aone from ~817-1420 \u03bcs.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.1849365234375
+        }
+      }
+    },
+    {
+      "id": 68,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4090,
+      "label": "correct",
+      "claim": "training table: s50000_aall lowest, 132.94",
+      "sentence": "The training-table evidence (id: training-table) also confirms s50000_aall has the lowest measured value (132.94)",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.0024623870849609375
+        }
+      }
+    },
+    {
+      "id": 69,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "s50000_aall is lowest across all retrieval runs",
+      "sentence": "Among the allowed configurations, s50000_aall consistently shows the lowest P95 latency across all retrieval runs (runs 0-5).",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.004528045654296875
+        }
+      }
+    },
+    {
+      "id": 70,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4091,
+      "label": "correct",
+      "claim": "s50000_aall ranges 82.488-183.217",
+      "sentence": "The P95 values for s50000_aall range from 82.488 to 183.217 microseconds, while s50000_aone ranges from 85.033 to 430.654 microseconds, and the s1000000 configurations show significantly higher latencies (748.404 to 1419.669 microseconds).",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.0269317626953125
+        }
+      }
+    },
+    {
+      "id": 71,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4089,
+      "label": "wrong",
+      "claim": "s50000_aone ranges from 85.0 to 430.7 us",
+      "sentence": "In contrast, s50000_aone shows higher variability (85.0 to 430.7 microseconds), while both s1000000_aall and s1000000_aone consistently exceed 748 microseconds.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.002758026123046875
+        }
+      }
+    },
+    {
+      "id": 72,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4091,
+      "label": "correct",
+      "claim": "s1000000 configurations range 748.404-1419.669",
+      "sentence": "The P95 values for s50000_aall range from 82.488 to 183.217 microseconds, while s50000_aone ranges from 85.033 to 430.654 microseconds, and the s1000000 configurations show significantly higher latencies (748.404 to 1419.669 microseconds).",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.0269317626953125
+        }
+      }
+    },
+    {
+      "id": 73,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "s50000_aall is lowest across all retrieval runs",
+      "sentence": "Among the allowed configurations, s50000_aall consistently shows the lowest P95 latency across all retrieval runs (runs 0-5).",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.004528045654296875
+        }
+      }
+    },
+    {
+      "id": 74,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4091,
+      "label": "correct",
+      "claim": "s50000_aall ranges 82.488-183.217",
+      "sentence": "The P95 values for s50000_aall range from 82.488 to 183.217 microseconds, while s50000_aone ranges from 85.033 to 430.654 microseconds, and the s1000000 configurations show significantly higher latencies (748.404 to 1419.669 microseconds).",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.0269317626953125
+        }
+      }
+    },
+    {
+      "id": 75,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4089,
+      "label": "wrong",
+      "claim": "s50000_aone ranges from 85.0 to 430.7 us",
+      "sentence": "In contrast, s50000_aone shows higher variability (85.0 to 430.7 microseconds), while both s1000000_aall and s1000000_aone consistently exceed 748 microseconds.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.002758026123046875
+        }
+      }
+    },
+    {
+      "id": 76,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4092,
+      "label": "correct",
+      "claim": "s1000000 configurations all above 748 us",
+      "sentence": "The P95 values for s50000_aall range from 82.488 to 183.217 microseconds, while s50000_aone ranges from 85.033 to 430.654 microseconds, and the s1000000 configurations are all above 748 microseconds.",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.019012451171875
+        }
+      }
+    },
+    {
+      "id": 77,
+      "model": "Nemotron-3-Ultra-550B",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "s50000_aall is lowest across all retrieval runs",
+      "sentence": "Among the allowed configurations, s50000_aall consistently shows the lowest P95 latency across all retrieval runs (runs 0-5).",
+      "premise": "Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-5-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 183.217 microseconds.",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.004528045654296875
+        }
+      }
+    },
+    {
+      "id": 78,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "s50000_aall is consistently the lowest in retrieval runs",
+      "sentence": "Among all retrieval runs, s50000_aall consistently shows the lowest P95 latencies across multiple trials (e.g., 126.36 \u03bcs, 140.554 \u03bcs, 94.81 \u03bcs, 99.853 \u03bcs, 93.049 \u03bcs), with most values under 150 \u03bcs.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.92724609375
+        }
+      }
+    },
+    {
+      "id": 79,
+      "model": "DeepSeek-V3.2",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "s50000_aall is consistently the lowest in retrieval runs",
+      "sentence": "Among all retrieval runs, s50000_aall consistently shows the lowest P95 latencies across multiple trials (e.g., 126.36 \u03bcs, 140.554 \u03bcs, 94.81 \u03bcs, 99.853 \u03bcs, 93.049 \u03bcs), with most values under 150 \u03bcs.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-1-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 140.554 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-3-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 99.853 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.92724609375
+        }
+      }
+    },
+    {
+      "id": 80,
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "training mean for s50000_aall is 132.94 us",
+      "sentence": "In training-table, s50000_aall demonstrated the lowest overall mean P95 latency (132.94 us compared to 277.46 us for s50000_aone and >950 us for s1000000 configurations).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.998046875
+        }
+      }
+    },
+    {
+      "id": 81,
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall reaches as low as 82.49 us",
+      "sentence": "This is further confirmed across retrieval runs where s50000_aall consistently yielded low latencies, such as 126.36 us in retrieval-3-0, 93.05 us in retrieval-3-4, and 82.49 us in retrieval-3-7.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.033843994140625
+        }
+      }
+    },
+    {
+      "id": 82,
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "s50000_aall is consistently the lowest in retrieval runs",
+      "sentence": "This is further confirmed across retrieval runs where s50000_aall consistently yielded low latencies, such as 126.36 us in retrieval-3-0, 93.05 us in retrieval-3-4, and 82.49 us in retrieval-3-7.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.033843994140625
+        }
+      }
+    },
+    {
+      "id": 83,
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "training table: s50000_aall 132.94 us versus 277.46 us and >950 us",
+      "sentence": "In training-table, s50000_aall demonstrated the lowest overall mean P95 latency (132.94 us compared to 277.46 us for s50000_aone and >950 us for s1000000 configurations).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.998046875
+        }
+      }
+    },
+    {
+      "id": 84,
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall reaches as low as 82.49 us",
+      "sentence": "This is further confirmed across retrieval runs where s50000_aall consistently yielded low latencies, such as 126.36 us in retrieval-3-0, 93.05 us in retrieval-3-4, and 82.49 us in retrieval-3-7.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.033843994140625
+        }
+      }
+    },
+    {
+      "id": 85,
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "training table: s50000_aall 132.94 us versus 277.46 us and >950 us",
+      "sentence": "In training-table, s50000_aall demonstrated the lowest overall mean P95 latency (132.94 us compared to 277.46 us for s50000_aone and >950 us for s1000000 configurations).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.998046875
+        }
+      }
+    },
+    {
+      "id": 86,
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "retrieval runs 0, 4, 7 give 126.36, 93.05, 82.49 us",
+      "sentence": "This is further confirmed across retrieval runs where s50000_aall consistently yielded low latencies, such as 126.36 us in retrieval-3-0, 93.05 us in retrieval-3-4, and 82.49 us in retrieval-3-7.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.033843994140625
+        }
+      }
+    },
+    {
+      "id": 87,
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "training table: s50000_aall 132.94 us versus 277.46 us and >950 us",
+      "sentence": "In training-table, s50000_aall demonstrated the lowest overall mean P95 latency (132.94 us compared to 277.46 us for s50000_aone and >950 us for s1000000 configurations).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.998046875
+        }
+      }
+    },
+    {
+      "id": 88,
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall reaches as low as 82.49 us",
+      "sentence": "This is further confirmed across retrieval runs where s50000_aall consistently yielded low latencies, such as 126.36 us in retrieval-3-0, 93.05 us in retrieval-3-4, and 82.49 us in retrieval-3-7.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.033843994140625
+        }
+      }
+    },
+    {
+      "id": 89,
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "s50000_aall is consistently the lowest in retrieval runs",
+      "sentence": "This is further confirmed across retrieval runs where s50000_aall consistently yielded low latencies, such as 126.36 us in retrieval-3-0, 93.05 us in retrieval-3-4, and 82.49 us in retrieval-3-7.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.033843994140625
+        }
+      }
+    },
+    {
+      "id": 90,
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "training table: s50000_aall 132.94 us versus 277.46 us and >950 us",
+      "sentence": "In training-table, s50000_aall demonstrated the lowest overall mean P95 latency (132.94 us compared to 277.46 us for s50000_aone and >950 us for s1000000 configurations).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.998046875
+        }
+      }
+    },
+    {
+      "id": 91,
+      "model": "Gemini-3.8-Flash",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "s50000_aall reaches as low as 82.49 us",
+      "sentence": "This is further confirmed across retrieval runs where s50000_aall consistently yielded low latencies, such as 126.36 us in retrieval-3-0, 93.05 us in retrieval-3-4, and 82.49 us in retrieval-3-7.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-0-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 126.36 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.033843994140625
+        }
+      }
+    },
+    {
+      "id": 92,
+      "model": "Gemini-3.1-Pro",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "training table: s50000_aall lowest at 132.94 us",
+      "sentence": "The training summary shows s50000_aall achieves a P95 latency of 132.94 us, significantly lower than s50000_aone (277.46 us) and the 1,000,000 configurations (>950 us).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-4-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 170.306 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds. Retrieval run retrieval-3-7-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 89.789 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-4-s50000_aone",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-7-s50000_aone"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.994140625
+        }
+      }
+    },
+    {
+      "id": 93,
+      "model": "Gemini-3.1-Pro",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "s50000_aall is consistently the lowest in retrieval runs",
+      "sentence": "Individual retrieval runs consistently confirm s50000_aall as the lowest latency option.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-4-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 170.306 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds. Retrieval run retrieval-3-7-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 89.789 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-4-s50000_aone",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-7-s50000_aone"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.3046875
+        }
+      }
+    },
+    {
+      "id": 94,
+      "model": "Gemini-3.1-Pro",
+      "variant": "full",
+      "seed": 4090,
+      "label": "correct",
+      "claim": "s50000_aall frequently drops below 100 us",
+      "sentence": "This is corroborated by multiple retrieval runs where s50000_aall consistently achieves the lowest P95 latency, frequently dropping below 100 us.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-2-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 94.81 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds. Retrieval run retrieval-3-8-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.387 microseconds. Retrieval run retrieval-3-9-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 87.347 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.07489013671875
+        }
+      }
+    },
+    {
+      "id": 95,
+      "model": "Gemini-3.1-Pro",
+      "variant": "full",
+      "seed": 4088,
+      "label": "correct",
+      "claim": "training table: s50000_aall 132.94 us versus 277.46 us and >950 us",
+      "sentence": "The training summary shows s50000_aall achieves a P95 latency of 132.94 us, significantly lower than s50000_aone (277.46 us) and the 1,000,000 configurations (>950 us).",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-4-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 170.306 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds. Retrieval run retrieval-3-7-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 89.789 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-4-s50000_aone",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-7-s50000_aone"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": true,
+          "p_entail": 0.994140625
+        }
+      }
+    },
+    {
+      "id": 96,
+      "model": "Gemini-3.1-Pro",
+      "variant": "full",
+      "seed": 4088,
+      "label": "overstated",
+      "claim": "s50000_aall is consistently the lowest in retrieval runs",
+      "sentence": "Individual retrieval runs consistently confirm s50000_aall as the lowest latency option.",
+      "premise": "Training table of mean P95 wake-up latency: s1000000_aall 954.7558 microseconds; s1000000_aone 1080.6555 microseconds; s50000_aall 132.9413 microseconds; s50000_aone 277.4647 microseconds. Retrieval run retrieval-3-4-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 93.049 microseconds. Retrieval run retrieval-3-4-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 170.306 microseconds. Retrieval run retrieval-3-7-s50000_aall: configuration s50000_aall, period 3 ms, P95 wake-up latency 82.488 microseconds. Retrieval run retrieval-3-7-s50000_aone: configuration s50000_aone, period 3 ms, P95 wake-up latency 89.789 microseconds.",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-4-s50000_aone",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-7-s50000_aone"
+      ],
+      "judges": {
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
+          "supported": false,
+          "p_entail": 0.3046875
+        }
+      }
+    }
+  ]
+}
