@@ -125,22 +125,31 @@ def main():
     a = ap.parse_args()
     items = build_items()
     summary = {}
+    if a.out.exists():  # resume: keep judges already scored
+        prev = json.loads(a.out.read_text())
+        summary = prev.get('summary', {})
+        done = {x['id']: x.get('judges', {}) for x in prev.get('items', [])}
+        for x in items:
+            x['judges'] = done.get(x['id'], {})
     for label, name, rev, kind in JUDGES:
         for hyp in ('sentence', 'claim'):
+            key = f'{label} | {hyp}'
+            if key in summary:
+                continue
             pairs = [(x['premise'], x[hyp]) for x in items]
             res = run_nli(name, rev, pairs) if kind == 'nli' else run_t5(name, rev, pairs)
-            key = f'{label} | {hyp}'
             for x, r in zip(items, res):
                 x.setdefault('judges', {})[key] = r
             summary[key] = summarize([dict(x, _=x['judges'][key]) for x in items], '_')
             s = summary[key]
             print(f"{key}: misstated accepted {s['misstated_accepted']}/{s['misstated']}, "
-                  f"correct accepted {s['correct_accepted']}/{s['correct']}, balanced acc {s['balanced_accuracy']}")
-    a.out.write_text(json.dumps({'judges': [{'label': l, 'model': n, 'revision': r} for l, n, r, _ in JUDGES],
-                                 'definition': 'premise = verbalized cited evidence items; supported = entailment '
-                                               '(NLI argmax) or p(yes) > 0.5 (Flan-T5)',
-                                 'summary': summary, 'items': items}, indent=2) + '\n')
-    print(f'wrote {a.out}')
+                  f"correct accepted {s['correct_accepted']}/{s['correct']}, balanced acc {s['balanced_accuracy']}",
+                  flush=True)
+            a.out.write_text(json.dumps({'judges': [{'label': l, 'model': n, 'revision': r} for l, n, r, _ in JUDGES],
+                                         'definition': 'premise = verbalized cited evidence items; supported = '
+                                                       'entailment (NLI argmax) or p(yes) > 0.5 (Flan-T5)',
+                                         'summary': summary, 'items': items}, indent=2) + '\n')
+    print(f'wrote {a.out}', flush=True)
 
 
 if __name__ == '__main__':
