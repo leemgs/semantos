@@ -36,6 +36,8 @@ EXCLUDE = [
     'paper/claim-review-explanations.md',  # internal review worksheet
     'paper/claim-review-41.md',            # internal review worksheet
     'paper/rebuttal-prep.md',              # internal rebuttal notes
+    'paper/second-annotator-blind.csv',    # blind sheet for the second annotator
+    'paper/second-annotator-guidelines.md',# instructions for the second annotator
     'paper/arr-submission-form.md',        # mentions the earlier venue
     'code/semantos_logo01.png',            # logo shows the public project name
     'scripts/make_anonymous_release.py',   # lists the identifying terms itself
