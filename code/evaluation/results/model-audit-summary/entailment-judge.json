@@ -29,6 +29,41 @@
       "correct": 51,
       "correct_accepted": 17,
       "balanced_accuracy": 0.545
+    },
+    "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+      "misstated": 41,
+      "misstated_accepted": 12,
+      "correct": 51,
+      "correct_accepted": 29,
+      "balanced_accuracy": 0.638
+    },
+    "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+      "misstated": 41,
+      "misstated_accepted": 3,
+      "correct": 51,
+      "correct_accepted": 11,
+      "balanced_accuracy": 0.571
+    },
+    "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+      "misstated": 41,
+      "misstated_accepted": 3,
+      "correct": 51,
+      "correct_accepted": 19,
+      "balanced_accuracy": 0.65
+    },
+    "RoBERTa-large-MNLI | sentence": {
+      "misstated": 41,
+      "misstated_accepted": 1,
+      "correct": 51,
+      "correct_accepted": 4,
+      "balanced_accuracy": 0.527
+    },
+    "RoBERTa-large-MNLI | claim": {
+      "misstated": 41,
+      "misstated_accepted": 3,
+      "correct": 51,
+      "correct_accepted": 13,
+      "balanced_accuracy": 0.591
     }
   },
   "items": [
@@ -53,6 +88,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.71337890625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.68115234375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.06739604473114014
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.9798200726509094
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.16218997538089752
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.6291049718856812
         }
       }
     },
@@ -77,6 +132,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.0088653564453125
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.970703125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0007668020552955568
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.005304485559463501
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.0013788305222988129
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.04436440393328667
         }
       }
     },
@@ -101,6 +176,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.0272216796875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.00698089599609375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0006700803060084581
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0042109861969947815
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.15448921918869019
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.027322113513946533
         }
       }
     },
@@ -120,6 +215,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.99365234375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.92333984375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.9924788475036621
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0020779375918209553
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.08571884781122208
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.03489963337779045
         }
       }
     },
@@ -144,6 +259,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.935546875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.072509765625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.011889596469700336
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.08530567586421967
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.04499722644686699
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.02728494442999363
         }
       }
     },
@@ -168,6 +303,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.0082855224609375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.98974609375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.00016312257503159344
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0006812386563979089
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.0010515270987525582
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.03049815073609352
         }
       }
     },
@@ -192,6 +347,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.277587890625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.98388671875
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.027974678203463554
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0009974890854209661
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.037863582372665405
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.03934120386838913
         }
       }
     },
@@ -211,6 +386,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.990234375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.406005859375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.9716913104057312
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0011772667057812214
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.1330750733613968
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.41677895188331604
         }
       }
     },
@@ -235,6 +430,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.0006976127624511719
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0025691986083984375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.03647253289818764
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.007530019152909517
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.02241157926619053
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.021761981770396233
         }
       }
     },
@@ -259,6 +474,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.07635498046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.978515625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.001207520253956318
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0370827317237854
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.03818142041563988
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.08269435167312622
         }
       }
     },
@@ -283,6 +518,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.88232421875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99609375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.11721967160701752
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.6448637843132019
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.14059115946292877
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.6614408493041992
         }
       }
     },
@@ -307,6 +562,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.57177734375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.005962371826171875
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0069544147700071335
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.00045220777974464
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.028817949816584587
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.011687196791172028
         }
       }
     },
@@ -331,6 +606,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.99853515625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99609375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.9599882960319519
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.6448637843132019
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": true,
+          "p_entail": 0.8619914054870605
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.6614408493041992
         }
       }
     },
@@ -355,6 +650,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.009613037109375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.1602783203125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.00122234842274338
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.2001386135816574
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.002020718762651086
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.065884068608284
         }
       }
     },
@@ -375,6 +690,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.99609375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.97412109375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.9954379200935364
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0035581125412136316
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.295725017786026
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.044025667011737823
         }
       }
     },
@@ -399,6 +734,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.053680419921875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.98876953125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0027083582244813442
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.9490202069282532
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.015037414617836475
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.8957571387290955
         }
       }
     },
@@ -423,6 +778,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.053680419921875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0024127960205078125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0027083582244813442
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0008382128435187042
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.015037414617836475
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.008234419859945774
         }
       }
     },
@@ -447,6 +822,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.053680419921875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.98876953125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0027083582244813442
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.9490202069282532
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.015037414617836475
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.8957571387290955
         }
       }
     },
@@ -471,6 +866,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.053680419921875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0024127960205078125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0027083582244813442
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0008382128435187042
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.015037414617836475
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.008234419859945774
         }
       }
     },
@@ -490,6 +905,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.99560546875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.9873046875
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.9971550703048706
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 9.396971290698275e-05
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.44652751088142395
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.02550521120429039
         }
       }
     },
@@ -514,6 +949,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.08837890625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.9853515625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0010467527899891138
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.8737088441848755
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.008331297896802425
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.9031859040260315
         }
       }
     },
@@ -538,6 +993,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.08837890625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.004169464111328125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0010467527899891138
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0006576830055564642
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.008331297896802425
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.00513297226279974
         }
       }
     },
@@ -562,6 +1037,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.053680419921875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.98876953125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0027083582244813442
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.9490202069282532
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.015037414617836475
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.8957571387290955
         }
       }
     },
@@ -586,6 +1081,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.053680419921875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0008101463317871094
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0027083582244813442
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.00044180554687045515
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.015037414617836475
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.008232439868152142
         }
       }
     },
@@ -608,6 +1123,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.0018701553344726562
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99853515625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0003424905298743397
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.9856441020965576
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.011175082996487617
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.8991292715072632
         }
       }
     },
@@ -632,6 +1167,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.058563232421875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.00298309326171875
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.011031368747353554
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.00039807686698623
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.017047027125954628
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.012185904197394848
         }
       }
     },
@@ -656,6 +1211,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.041015625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.6796875
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0011344996746629477
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.008226007223129272
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.019508687779307365
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.09827426075935364
         }
       }
     },
@@ -680,6 +1255,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.058563232421875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0007119178771972656
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.011031368747353554
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.005309352185577154
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.017047027125954628
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.008949692361056805
         }
       }
     },
@@ -704,6 +1299,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.058563232421875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.73974609375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.011031368747353554
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.005399114917963743
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.017047027125954628
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.09363292902708054
         }
       }
     },
@@ -728,6 +1343,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.185791015625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.9375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.022876612842082977
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.007337423041462898
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.06326893717050552
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.1662614643573761
         }
       }
     },
@@ -752,6 +1387,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.058563232421875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0007119178771972656
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.011031368747353554
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.005309352185577154
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.017047027125954628
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.008949692361056805
         }
       }
     },
@@ -776,6 +1431,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.2364501953125
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99267578125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.04005914553999901
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.8782370090484619
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.2407165765762329
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.5956244468688965
         }
       }
     },
@@ -800,6 +1475,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.008331298828125
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.35400390625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0004004272632300854
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0001507904817117378
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.0034590354189276695
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.007769567891955376
         }
       }
     },
@@ -824,6 +1519,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.2364501953125
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99267578125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.04005914553999901
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.8782370090484619
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.2407165765762329
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.5956244468688965
         }
       }
     },
@@ -848,6 +1563,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.008331298828125
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.35400390625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0004004272632300854
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0001507904817117378
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.0034590354189276695
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.007769567891955376
         }
       }
     },
@@ -872,6 +1607,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.2364501953125
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99267578125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.04005914553999901
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.8782370090484619
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.2407165765762329
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.5956244468688965
         }
       }
     },
@@ -896,6 +1651,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.008331298828125
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.35400390625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0004004272632300854
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0001507904817117378
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.0034590354189276695
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.007769567891955376
         }
       }
     },
@@ -920,6 +1695,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.92724609375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99072265625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.002132277935743332
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.8947184085845947
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.05822546035051346
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.782965362071991
         }
       }
     },
@@ -944,6 +1739,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.35302734375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.426025390625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.004707977641373873
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.08265882730484009
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.039418622851371765
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.07624135166406631
         }
       }
     },
@@ -968,6 +1783,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.35302734375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.367919921875
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.004707977641373873
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.019155334681272507
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.039418622851371765
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.17742425203323364
         }
       }
     },
@@ -992,6 +1827,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.99755859375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.09222412109375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.7352596521377563
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.17670592665672302
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": true,
+          "p_entail": 0.5531851649284363
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.20094993710517883
         }
       }
     },
@@ -1016,6 +1871,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.0819091796875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.1939697265625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.31687116622924805
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.2280198037624359
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.15323781967163086
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.11723146587610245
         }
       }
     },
@@ -1040,6 +1915,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.0819091796875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.70166015625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.31687116622924805
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.01835705153644085
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.15323781967163086
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.06710093468427658
         }
       }
     },
@@ -1064,6 +1959,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.0819091796875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.01145172119140625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.31687116622924805
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.23731832206249237
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.15323781967163086
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.19141989946365356
         }
       }
     },
@@ -1088,6 +2003,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.92724609375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0035228729248046875
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.002132277935743332
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.003297136165201664
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.05822546035051346
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.09238288551568985
         }
       }
     },
@@ -1112,6 +2047,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.8173828125
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.94384765625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.03598897531628609
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.012400577776134014
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.06562748551368713
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.02100084349513054
         }
       }
     },
@@ -1136,6 +2091,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.99755859375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.09222412109375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.7352596521377563
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.17670592665672302
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": true,
+          "p_entail": 0.5531851649284363
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.20094993710517883
         }
       }
     },
@@ -1160,6 +2135,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.92724609375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99072265625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.002132277935743332
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.8947184085845947
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.05822546035051346
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.782965362071991
         }
       }
     },
@@ -1184,6 +2179,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.8017578125
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.051116943359375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.023109054192900658
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0007013322901912034
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.08468855917453766
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.012433006428182125
         }
       }
     },
@@ -1208,6 +2223,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.35302734375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.98583984375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.004707977641373873
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.03131833299994469
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.039418622851371765
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.20216237008571625
         }
       }
     },
@@ -1232,6 +2267,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.0819091796875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.904296875
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.31687116622924805
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.03217141702771187
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.15323781967163086
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.062315091490745544
         }
       }
     },
@@ -1256,6 +2311,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.009521484375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99609375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0014693435514345765
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.9912810921669006
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.3094165623188019
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.7204611301422119
         }
       }
     },
@@ -1280,6 +2355,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.002758026123046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0181732177734375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0020218249410390854
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.07926954329013824
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.016104184091091156
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.03631824254989624
         }
       }
     },
@@ -1304,6 +2399,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.00835418701171875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.019439697265625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.023872988298535347
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.10811565071344376
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.10027027875185013
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.09391087293624878
         }
       }
     },
@@ -1328,6 +2443,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.004528045654296875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.01151275634765625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.005112478509545326
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.00022792574600316584
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.1644769310951233
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.018117589876055717
         }
       }
     },
@@ -1352,6 +2487,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.94677734375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.7021484375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0012790517648681998
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.6880161762237549
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.2007812112569809
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.308086097240448
         }
       }
     },
@@ -1376,6 +2531,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.94677734375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.110107421875
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0012790517648681998
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0005131040816195309
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.2007812112569809
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.015419897623360157
         }
       }
     },
@@ -1400,6 +2575,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.002758026123046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0181732177734375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0020218249410390854
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.07926954329013824
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.016104184091091156
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.03631824254989624
         }
       }
     },
@@ -1424,6 +2619,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.002758026123046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.1328125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0020218249410390854
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.14700162410736084
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.016104184091091156
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.06858238577842712
         }
       }
     },
@@ -1448,6 +2663,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.004528045654296875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.01151275634765625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.005112478509545326
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.00022792574600316584
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.1644769310951233
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.018117589876055717
         }
       }
     },
@@ -1472,6 +2707,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.1849365234375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.97265625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.20480893552303314
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.8593477606773376
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": true,
+          "p_entail": 0.4246390163898468
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.35530659556388855
         }
       }
     },
@@ -1496,6 +2751,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.002758026123046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0181732177734375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0020218249410390854
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.07926954329013824
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.016104184091091156
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.03631824254989624
         }
       }
     },
@@ -1520,6 +2795,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.00835418701171875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0172119140625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.023872988298535347
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.24656003713607788
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.10027027875185013
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.07880005985498428
         }
       }
     },
@@ -1544,6 +2839,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.1849365234375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.00910186767578125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.20480893552303314
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.324351042509079
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": true,
+          "p_entail": 0.4246390163898468
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.08559370785951614
         }
       }
     },
@@ -1568,6 +2883,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.0024623870849609375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.03277587890625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0015887422487139702
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.08045683801174164
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.004449719563126564
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.06467677652835846
         }
       }
     },
@@ -1592,6 +2927,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.004528045654296875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.01151275634765625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.005112478509545326
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.00022792574600316584
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.1644769310951233
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.018117589876055717
         }
       }
     },
@@ -1616,6 +2971,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.0269317626953125
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.2880859375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.008382744155824184
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.18266326189041138
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.20742249488830566
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.394882470369339
         }
       }
     },
@@ -1640,6 +3015,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.002758026123046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0181732177734375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0020218249410390854
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.07926954329013824
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.016104184091091156
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.03631824254989624
         }
       }
     },
@@ -1664,6 +3059,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.0269317626953125
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0168609619140625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.008382744155824184
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.22491681575775146
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.20742249488830566
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.1495901346206665
         }
       }
     },
@@ -1688,6 +3103,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.004528045654296875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.01151275634765625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.005112478509545326
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.00022792574600316584
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.1644769310951233
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.018117589876055717
         }
       }
     },
@@ -1712,6 +3147,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.0269317626953125
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.2880859375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.008382744155824184
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.18266326189041138
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.20742249488830566
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.394882470369339
         }
       }
     },
@@ -1736,6 +3191,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.002758026123046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0181732177734375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0020218249410390854
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.07926954329013824
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.016104184091091156
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.03631824254989624
         }
       }
     },
@@ -1760,6 +3235,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.019012451171875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.01219940185546875
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.017957985401153564
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.44563502073287964
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.3725982904434204
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.11368320137262344
         }
       }
     },
@@ -1784,6 +3279,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.004528045654296875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.01151275634765625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.005112478509545326
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.00022792574600316584
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.1644769310951233
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.018117589876055717
         }
       }
     },
@@ -1808,6 +3323,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.92724609375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0033054351806640625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.002132277935743332
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.00013850227696821094
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.05822546035051346
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.011195286177098751
         }
       }
     },
@@ -1832,6 +3367,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.92724609375
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0033054351806640625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.002132277935743332
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.00013850227696821094
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.05822546035051346
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.011195286177098751
         }
       }
     },
@@ -1854,6 +3409,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.998046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.98974609375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.9793749451637268
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.08454686403274536
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.35344040393829346
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.8539921045303345
         }
       }
     },
@@ -1876,6 +3451,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.033843994140625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99072265625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0007799752638675272
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.40388813614845276
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.004245712421834469
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.35335418581962585
         }
       }
     },
@@ -1898,6 +3493,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.033843994140625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0145416259765625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0007799752638675272
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 9.853576921159402e-05
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.004245712421834469
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.007552420720458031
         }
       }
     },
@@ -1920,6 +3535,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.998046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.9970703125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.9793749451637268
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.6786060929298401
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.35344040393829346
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.24850261211395264
         }
       }
     },
@@ -1942,6 +3577,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.033843994140625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99072265625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0007799752638675272
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.40388813614845276
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.004245712421834469
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.35335418581962585
         }
       }
     },
@@ -1964,6 +3619,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.998046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.9970703125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.9793749451637268
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.6786060929298401
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.35344040393829346
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.24850261211395264
         }
       }
     },
@@ -1986,6 +3661,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.033843994140625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99365234375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0007799752638675272
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.30956900119781494
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.004245712421834469
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": true,
+          "p_entail": 0.8429959416389465
         }
       }
     },
@@ -2008,6 +3703,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.998046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.9970703125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.9793749451637268
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.6786060929298401
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.35344040393829346
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.24850261211395264
         }
       }
     },
@@ -2030,6 +3745,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.033843994140625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99072265625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0007799752638675272
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.40388813614845276
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.004245712421834469
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.35335418581962585
         }
       }
     },
@@ -2052,6 +3787,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.033843994140625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.0145416259765625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0007799752638675272
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 9.853576921159402e-05
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.004245712421834469
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.007552420720458031
         }
       }
     },
@@ -2074,6 +3829,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.998046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.9970703125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.9793749451637268
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.6786060929298401
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.35344040393829346
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.24850261211395264
         }
       }
     },
@@ -2096,6 +3871,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.033843994140625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99072265625
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0007799752638675272
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.40388813614845276
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.004245712421834469
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.35335418581962585
         }
       }
     },
@@ -2119,6 +3914,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.994140625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99267578125
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.9731095433235168
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.04727988690137863
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.3039719760417938
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.078878253698349
         }
       }
     },
@@ -2142,6 +3957,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.3046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.002777099609375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.00010307742923032492
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0001147783113992773
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.018648002296686172
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.009227145463228226
         }
       }
     },
@@ -2166,6 +4001,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.07489013671875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.005214691162109375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.0004179593815933913
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.08553202450275421
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.0012390305055305362
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.016735782846808434
         }
       }
     },
@@ -2189,6 +4044,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": true,
           "p_entail": 0.994140625
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": true,
+          "p_entail": 0.99755859375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": true,
+          "p_entail": 0.9731095433235168
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": true,
+          "p_entail": 0.8807176351547241
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.3039719760417938
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.19343335926532745
         }
       }
     },
@@ -2212,6 +4087,26 @@
         "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | sentence": {
           "supported": false,
           "p_entail": 0.3046875
+        },
+        "DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI) | claim": {
+          "supported": false,
+          "p_entail": 0.002777099609375
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | sentence": {
+          "supported": false,
+          "p_entail": 0.00010307742923032492
+        },
+        "DeBERTa-v3-large (SNLI/MNLI cross-encoder) | claim": {
+          "supported": false,
+          "p_entail": 0.0001147783113992773
+        },
+        "RoBERTa-large-MNLI | sentence": {
+          "supported": false,
+          "p_entail": 0.018648002296686172
+        },
+        "RoBERTa-large-MNLI | claim": {
+          "supported": false,
+          "p_entail": 0.009227145463228226
         }
       }
     }
