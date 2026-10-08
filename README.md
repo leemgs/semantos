@@ -31,7 +31,7 @@ the audit to another advisor.
 | [Kernel experiment](code/evaluation/results/kernel-local-2026-09-26/summary.md) | Per-process timer-slack/affinity interventions |
 | [Controlled follow-up](code/evaluation/results/controlled-2026-09-26/summary.md) | Frozen selectors, gate confusion counts, real restoration and source lineage |
 | [BO/RL baselines](code/evaluation/results/optimizer-baselines-2026-09-27/summary.md) | Matched-budget random search, epsilon-greedy, UCB1 and GP-EI BO replayed on the recorded training runs |
-| [Model audit](code/evaluation/results/model-audit-summary/summary.md) | Four local models (Qwen2.5-7B/14B, Llama-3.1-8B, Phi-4) and six hosted ones (Llama-3.3-70B, Qwen3-235B, DeepSeek-V3.2, Nemotron-3-Ultra-550B, Gemini 3.8 Flash, Gemini 3.1 Pro preview) on the frozen follow-up evidence, held-out replay, deletion controls and a claim check (labels drafted with an AI assistant, verified by an author) |
+| [Model audit](code/evaluation/results/model-audit-summary/summary.md) | Four local models (Qwen2.5-7B/14B, Llama-3.1-8B, Phi-4) and six hosted ones (Llama-3.3-70B, Qwen3-235B, DeepSeek-V3.2, Nemotron-3-Ultra-550B, Gemini 3.8 Flash, Gemini 3.1 Pro preview) on the frozen follow-up evidence, held-out replay, deletion controls and a claim check (labels drafted with an AI assistant, verified by an author; blind second annotator, kappa 0.92) |
 | [Earlier audit attempt](code/evaluation/results/model-audit-2026-09-26/status.json) | Recorded backend failure (kept as history) |
 
 Training selected the baseline configuration in both kernel experiments; no

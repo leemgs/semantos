@@ -14,7 +14,7 @@ python3 code/evaluation/reproduce_paper.py
 The script copies `code/evaluation/results/` to a temporary directory, reruns
 every analysis on the raw logs, and compares the regenerated LaTeX tables
 byte for byte with the files the paper includes. It also recomputes the
-numbers quoted in the text. Expected output: `13 of 13 checks passed`
+numbers quoted in the text. Expected output: `14 of 14 checks passed`
 (about 20 seconds on a laptop CPU; no GPU, no API key, no network).
 
 ## 2. Where each claim in the paper comes from
@@ -51,9 +51,11 @@ the explanations, each with a label and a one-line check against the evidence.
 **How the claim labels were made.** Labels were drafted with an AI assistant
 under fixed rules (paper §4), re-checked where possible by
 `claim_label_autocheck.py` (56 of 97 claims are decided by a rule), and then
-verified by one author, who changed none. This is a confirmation of the draft,
-not an independent double annotation; `code/evaluation/claim_review_agreement.py`
-lets a second annotator re-label the claims and reports agreement.
+verified by one author, who changed none. A second annotator who is not an
+author then labeled all 97 claims blind (`paper/second-annotator-labels.csv`):
+Cohen's kappa 0.918 over the seven labels and 0.914 for misstated vs not; the
+five disagreements are listed in `claim-audit.json`. `claim_review_agreement.py`
+(`export-blind`, `kappa`) lets further annotators repeat this.
 
 **Language and domain.** English prompts and responses; Linux per-thread
 timing configuration on one host (Intel Core i5-3570, Linux 6.17).
@@ -100,7 +102,7 @@ Then:
   uncited items (`delete_cited` / `delete_uncited` variants).
 
 Extensions the paper calls for: tasks where the default is not optimal and
-documentation priors could help, multi-annotator claim labels (a blind
-annotation package is produced by `claim_review_agreement.py export-blind`),
+documentation priors could help, more annotators beyond the two reported
+(a blind annotation package is produced by `claim_review_agreement.py export-blind`),
 and stronger attribution judges than the four off-the-shelf ones tested here
 (balanced accuracy 0.51–0.68 on the 93 evidence-based claims).

@@ -21,14 +21,14 @@ Limitations and offer concrete additions for the camera-ready version.
 ## 2. "The claim labels come from an AI assistant and a single author."
 
 - Disclosed in §4, Limitations, Ethics and Appendix C.
-- Mitigations already in the paper: a rule-based check decides 56 of 97 labels
-  directly from the evidence and agrees with all of them; a mutation test
-  detects 76 of 97 flipped labels; every label is supplied with its check.
-- Most claims are factual checks of numbers against a small table (e.g.,
-  "ranges from 85.0 to 430.7" vs. a maximum of 571.84), where disagreement is
-  unlikely.
-- Offer: add a second, independent annotator for all 97 claims in the
-  camera-ready and report Cohen's kappa (`claim_review_agreement.py` is ready).
+- Done: a second annotator who is not an author labeled all 97 claims blind
+  (without drafted labels or checks): Cohen's kappa 0.918 over seven labels,
+  0.914 for misstated vs not. All five disagreements are claims the second
+  annotator judged correct (three "significantly lower", one partly wrong,
+  one cited range); with the second annotator's labels the misstated count is
+  37/97 instead of 41/97, so the conclusion does not depend on who labels.
+- Also: the rule check decides 56 of 97 labels and agrees with all; a mutation
+  test detects 76 of 97 flipped labels.
 
 ## 3. "Why is kernel tuning an ACL paper?"
 
@@ -101,9 +101,7 @@ Limitations and offer concrete additions for the camera-ready version.
 
 ## Quick additions possible during the response period (no new hardware runs)
 
-1. Second annotator for the 97 claims, with kappa (blind package ready:
-   `paper/second-annotator-blind.csv`, guidelines in
-   `paper/second-annotator-guidelines.md`).
+1. A third annotator or adjudication of the five disagreements, if asked.
 2. Stronger attribution judges (TRUE, AlignScore) on the existing claims.
 3. Re-analysis of existing records by model family and size.
 

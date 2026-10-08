@@ -37,7 +37,9 @@ which re-runs the hash/lineage checks and asserts its counts match analysis.json
 
 The follow-up covers one workload family on one host. Selector comparisons are
 paired offline replay. Claim labels were drafted with an AI assistant
-and verified by one author, who changed none (claim-label-review.csv). No
+and verified by one author, who changed none (claim-label-review.csv); a
+blind second annotator (not an author) agrees with kappa 0.92
+(second-annotator-labels.csv). No
 LLM-superiority, deployment-efficacy or production-safety result is claimed.
 
 Current PDF: 18 pages (body fills pages 1-8; Limitations and Ethics Statement

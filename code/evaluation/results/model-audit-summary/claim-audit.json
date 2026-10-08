@@ -869,5 +869,33 @@
     "changed_labels": 0,
     "agreement_with_draft": 1.0,
     "cohen_kappa_with_draft": 1.0
+  },
+  "second_annotator": {
+    "claims": 97,
+    "agreement_7": 0.9485,
+    "kappa_7": 0.918,
+    "agreement_binary": 0.9588,
+    "kappa_binary": 0.9144,
+    "procedure": "independent annotator labeled blind (without drafted labels or checks)",
+    "annotator": "one person who is not an author, labeling blind from second-annotator-blind.csv and the written guidelines",
+    "disagreements": [
+      {
+        "id": 11
+      },
+      {
+        "id": 19
+      },
+      {
+        "id": 21
+      },
+      {
+        "id": 27
+      },
+      {
+        "id": 33
+      }
+    ],
+    "resolution": "final labels remain the author-verified labels; all five disagreements are cases the second annotator judged correct",
+    "misstated_by_second_annotator": 37
   }
 }

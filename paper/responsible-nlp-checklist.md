@@ -171,23 +171,26 @@ in the released `plan.json` files.
 
 ## D. Did you use human annotators (e.g., crowdworkers) or research with human participants?
 
-Yes, in a limited sense: one author verified the 97 explanation-claim labels,
-which were drafted with an AI assistant, and changed none (2026-10-05). No
-crowdworkers or external participants were involved.
+Yes. One author verified the 97 AI-drafted explanation-claim labels, and one
+further annotator who is not an author labeled all claims blind for an
+agreement study (Cohen's kappa 0.918). No crowdworkers were involved.
 
-**D1.** Yes. The labeling rules (label set, definition of a misstated claim,
-segmentation rule, overstatement rule) are given in §4 and stored with every
-label in `claim-audit.json`; the review procedure is in Appendix C.
+**D1.** Yes. The labeling rules are in §4; the second annotator received the
+written guidelines (`paper/second-annotator-guidelines.md`, label definitions,
+rules and the evidence values) and the blind sheet.
 
-**D2.** N/A. The reviewer is an author; no one was recruited or paid.
+**D2.** **[확인 필요]** State how the second annotator was recruited (e.g., a
+colleague who volunteered) and whether they were paid; if unpaid volunteer,
+answer "a colleague who volunteered; no payment".
 
-**D3.** N/A. No data from people are used.
+**D3.** The second annotator agreed to label and to have aggregate agreement
+reported; no data from people are used. **[확인 필요]** Confirm consent.
 
-**D4.** N/A. No human-subjects data were collected (Ethics Statement).
+**D4.** N/A. Labeling numeric claims about machine measurements is not
+human-subjects research; no personal data were collected.
 
-**D5.** N/A. A single author reviewer; the labels are factual checks of
-numbers against a table. The paper states that this is a confirmation of an AI
-draft, not an independent double annotation (Limitations, Appendix C).
+**D5.** N/A beyond "one author and one non-author annotator"; the labels are
+factual checks of numbers against a table.
 
 ---
 

@@ -79,6 +79,9 @@ def main():
         check('Misstated claims 16/28 (local), 25/69 (hosted), 41/97', (n_l, len(lc), n_h, len(hc)) == (16, 28, 25, 69),
               f'{n_l}/{len(lc)}, {n_h}/{len(hc)}')
         check('Claim labels verified by an author', audit.get('verification', {}).get('human_verified') is True)
+        sa = audit.get('second_annotator', {})
+        check('Second blind annotator: kappa 0.918 (seven labels), 0.914 (misstated vs not)',
+              (sa.get('kappa_7'), sa.get('kappa_binary')) == (0.918, 0.9144), str((sa.get('kappa_7'), sa.get('kappa_binary'))))
 
         run('entailment_judge.py', '--out', res/'model-audit-summary/entailment-judge.json', '--tex', tmp/'entailment-judges.tex')
         same_file('Entailment-judge table (from saved judge outputs)', tmp/'entailment-judges.tex', 'entailment-judges.tex')

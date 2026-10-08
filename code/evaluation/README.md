@@ -351,7 +351,8 @@ summarizes four runs, all on a four-core CPU container with llama-cpp-python
   for Qwen in one deterministic response; this is not a faithfulness estimate.
 * [`claim-audit.json`](results/model-audit-summary/claim-audit.json) checks all 28
   quantitative claims in the 20 distinct explanations (labels drafted with an AI
-  assistant, verified by one author with no changes, and released with their
+  assistant, verified by one author with no changes, labeled blind by a second
+  annotator who is not an author (Cohen's kappa 0.918), and released with their
   checks; see `claim_review_agreement.py`): 7 correct, 1 partly
   wrong, 4 unsupported priors, 16 wrong, misattributed, overstated or in the wrong
   unit (8 of 12 for the 7-8B models, 8 of 16 for the 14B models). All quoted
