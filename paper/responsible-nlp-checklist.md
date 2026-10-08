@@ -179,12 +179,13 @@ agreement study (Cohen's kappa 0.918). No crowdworkers were involved.
 written guidelines (`paper/second-annotator-guidelines.md`, label definitions,
 rules and the evidence values) and the blind sheet.
 
-**D2.** **[확인 필요]** State how the second annotator was recruited (e.g., a
-colleague who volunteered) and whether they were paid; if unpaid volunteer,
-answer "a colleague who volunteered; no payment".
+**D2.** Yes. The second annotator is a fellow researcher who volunteered to
+contribute to the research without payment; no one was recruited through a
+platform or paid.
 
-**D3.** The second annotator agreed to label and to have aggregate agreement
-reported; no data from people are used. **[확인 필요]** Confirm consent.
+**D3.** Yes. The second annotator consented to labeling and to the public
+release of their labels and the aggregate agreement (in anonymized form). No
+data from people are used.
 
 **D4.** N/A. Labeling numeric claims about machine measurements is not
 human-subjects research; no personal data were collected.

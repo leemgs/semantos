@@ -877,7 +877,7 @@
     "agreement_binary": 0.9588,
     "kappa_binary": 0.9144,
     "procedure": "independent annotator labeled blind (without drafted labels or checks)",
-    "annotator": "one person who is not an author, labeling blind from second-annotator-blind.csv and the written guidelines",
+    "annotator": "one fellow researcher who is not an author, volunteering without payment, labeling blind from second-annotator-blind.csv and the written guidelines; consented to the release of the labels and agreement",
     "disagreements": [
       {
         "id": 11
