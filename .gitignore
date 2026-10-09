@@ -13,3 +13,4 @@ paper/*.synctex.gz
 # Local build/packaging outputs (never commit)
 /*.patch
 /*.zip
+/submission/
