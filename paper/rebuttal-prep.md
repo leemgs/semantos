@@ -27,6 +27,12 @@ Limitations and offer concrete additions for the camera-ready version.
   annotator judged correct (three "significantly lower", one partly wrong,
   one cited range); with the second annotator's labels the misstated count is
   37/97 instead of 41/97, so the conclusion does not depend on who labels.
+- Done: a third, independent blind annotator (not an author): kappa 0.856 /
+  0.808 with the verified labels; Fleiss' kappa 0.847 over all three; the
+  majority label equals the verified label for all 97 claims; misstated count
+  38/97. Five of its nine disagreements read "(runs 0-5)" as restricting "all
+  retrieval runs"; two came from a blind-sheet error (rows 48, 53 showed a
+  sentence from another seed), now fixed and disclosed in Appendix C.
 - Also: the rule check decides 56 of 97 labels and agrees with all; a mutation
   test detects 76 of 97 flipped labels.
 
@@ -101,7 +107,7 @@ Limitations and offer concrete additions for the camera-ready version.
 
 ## Quick additions possible during the response period (no new hardware runs)
 
-1. A third annotator or adjudication of the five disagreements, if asked.
+1. Adjudication of the disagreements, if asked.
 2. Stronger attribution judges (TRUE, AlignScore) on the existing claims.
 3. Re-analysis of existing records by model family and size.
 

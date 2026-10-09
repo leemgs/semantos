@@ -13,12 +13,15 @@ checks) and prints one PASS/FAIL line per item. Exit status is non-zero if any
 item fails.
 """
 import argparse
+import collections
 import json
 import shutil
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 HERE = Path(__file__).resolve().parent
 PAPER = HERE.parent.parent/'paper'
@@ -79,9 +82,23 @@ def main():
         check('Misstated claims 16/28 (local), 25/69 (hosted), 41/97', (n_l, len(lc), n_h, len(hc)) == (16, 28, 25, 69),
               f'{n_l}/{len(lc)}, {n_h}/{len(hc)}')
         check('Claim labels verified by an author', audit.get('verification', {}).get('human_verified') is True)
-        sa = audit.get('second_annotator', {})
-        check('Second blind annotator: kappa 0.918 (seven labels), 0.914 (misstated vs not)',
-              (sa.get('kappa_7'), sa.get('kappa_binary')) == (0.918, 0.9144), str((sa.get('kappa_7'), sa.get('kappa_binary'))))
+        import claim_review_agreement as cra
+        verified = [c['verdict'] for c in audit['claims']]
+        annot = [cra.read_annotator(PAPER/f, len(verified))
+                 for f in ('second-annotator-labels.csv', 'third-annotator-labels.csv')]
+        ks = []
+        for lab in annot:
+            ks += [round(cra.cohen_kappa(verified, lab)[1], 3),
+                   round(cra.cohen_kappa([x in cra.MISSTATED for x in verified], [x in cra.MISSTATED for x in lab])[1], 3)]
+        check('Blind annotators: kappa 0.918/0.914 and 0.856/0.808 (seven labels/misstated vs not)',
+              ks == [0.918, 0.914, 0.856, 0.808], str(ks))
+        items = list(zip(verified, *annot))
+        f7 = round(cra.fleiss_kappa(items), 3)
+        fb = round(cra.fleiss_kappa([[x in cra.MISSTATED for x in it] for it in items]), 3)
+        maj = sum(collections.Counter(it).most_common(1)[0][0] == it[0] for it in items)
+        mis_a = [sum(x in cra.MISSTATED for x in lab) for lab in annot]
+        check("Fleiss' kappa 0.847/0.814, majority = verified label for 97/97, annotators' misstated 37 and 38",
+              (f7, fb, maj, mis_a) == (0.847, 0.814, 97, [37, 38]), str((f7, fb, maj, mis_a)))
 
         run('entailment_judge.py', '--out', res/'model-audit-summary/entailment-judge.json', '--tex', tmp/'entailment-judges.tex')
         same_file('Entailment-judge table (from saved judge outputs)', tmp/'entailment-judges.tex', 'entailment-judges.tex')

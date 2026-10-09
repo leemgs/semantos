@@ -475,7 +475,9 @@
       "claim": "lists all ten s50000_aall values",
       "verdict": "correct",
       "check": "runs 0-9",
-      "drafted_verdict": "correct"
+      "drafted_verdict": "correct",
+      "seed": 4089,
+      "source_hint": "183.217, 109.519, 82.488"
     },
     {
       "model": "DeepSeek-V3.2",
@@ -515,7 +517,9 @@
       "claim": "ranges for all four configurations",
       "verdict": "correct",
       "check": "all minima and maxima match",
-      "drafted_verdict": "correct"
+      "drafted_verdict": "correct",
+      "seed": 4091,
+      "source_hint": "s1000000_aall (748.404"
     },
     {
       "model": "DeepSeek-V3.2",
@@ -880,22 +884,116 @@
     "annotator": "one fellow researcher who is not an author, volunteering without payment, labeling blind from second-annotator-blind.csv and the written guidelines; consented to the release of the labels and agreement",
     "disagreements": [
       {
-        "id": 11
+        "id": 11,
+        "verified": "partly wrong",
+        "annotator": "correct"
       },
       {
-        "id": 19
+        "id": 19,
+        "verified": "overstated",
+        "annotator": "correct"
       },
       {
-        "id": 21
+        "id": 21,
+        "verified": "overstated",
+        "annotator": "correct"
       },
       {
-        "id": 27
+        "id": 27,
+        "verified": "overstated",
+        "annotator": "correct"
       },
       {
-        "id": 33
+        "id": 33,
+        "verified": "wrong",
+        "annotator": "correct"
       }
     ],
     "resolution": "final labels remain the author-verified labels; all five disagreements are cases the second annotator judged correct",
-    "misstated_by_second_annotator": 37
+    "misstated_by_annotator": 37
+  },
+  "third_annotator": {
+    "claims": 97,
+    "agreement_7": 0.9072,
+    "kappa_7": 0.8558,
+    "agreement_binary": 0.9072,
+    "kappa_binary": 0.808,
+    "procedure": "independent annotator labeled blind (without drafted labels or checks)",
+    "disagreements": [
+      {
+        "id": 25,
+        "verified": "wrong",
+        "annotator": "partly wrong",
+        "note": "both labels mark the claim as false; the annotator saw it as partly true (lower than the s1000000 configurations)"
+      },
+      {
+        "id": 48,
+        "verified": "correct",
+        "annotator": "wrong",
+        "note": "blind-sheet error: the sheet showed a sentence from another seed that lists five example values, not the ten-value list the claim refers to; the annotator judged the sentence shown"
+      },
+      {
+        "id": 53,
+        "verified": "correct",
+        "annotator": "wrong",
+        "note": "blind-sheet error: the sheet showed a sentence from another seed that gives no ranges for all four configurations; the annotator judged the sentence shown"
+      },
+      {
+        "id": 55,
+        "verified": "correct",
+        "annotator": "wrong",
+        "note": "annotator judged the range against all runs; the verified label judges it against the cited runs 0-5"
+      },
+      {
+        "id": 58,
+        "verified": "overstated",
+        "annotator": "correct",
+        "note": "sentence restricts 'all retrieval runs' to '(runs 0-5)', in which s50000_aall is lowest; the verified label reads 'all retrieval runs' as all ten blocks"
+      },
+      {
+        "id": 63,
+        "verified": "overstated",
+        "annotator": "correct",
+        "note": "sentence restricts 'all retrieval runs' to '(runs 0-5)', in which s50000_aall is lowest; the verified label reads 'all retrieval runs' as all ten blocks"
+      },
+      {
+        "id": 69,
+        "verified": "overstated",
+        "annotator": "correct",
+        "note": "sentence restricts 'all retrieval runs' to '(runs 0-5)', in which s50000_aall is lowest; the verified label reads 'all retrieval runs' as all ten blocks"
+      },
+      {
+        "id": 73,
+        "verified": "overstated",
+        "annotator": "correct",
+        "note": "sentence restricts 'all retrieval runs' to '(runs 0-5)', in which s50000_aall is lowest; the verified label reads 'all retrieval runs' as all ten blocks"
+      },
+      {
+        "id": 77,
+        "verified": "overstated",
+        "annotator": "correct",
+        "note": "sentence restricts 'all retrieval runs' to '(runs 0-5)', in which s50000_aall is lowest; the verified label reads 'all retrieval runs' as all ten blocks"
+      }
+    ],
+    "misstated_by_annotator": 38,
+    "annotator": "a second fellow researcher who is not an author, volunteering without payment, labeling blind and independently (without the other annotator's labels or discussion) from the same blind sheet and written guidelines; consented to the release of the labels and agreement",
+    "resolution": "final labels remain the author-verified labels; the majority label of the verified labels and the two blind annotators equals the verified label for all 97 claims"
+  },
+  "annotator_panel": {
+    "raters": [
+      "author-verified labels",
+      "blind annotator 2",
+      "blind annotator 3"
+    ],
+    "fleiss_kappa_7": 0.8475,
+    "fleiss_kappa_binary": 0.8136,
+    "majority_equals_verified": 97,
+    "items_without_majority": 0,
+    "pairwise_annotators": {
+      "2-3": {
+        "kappa_7": 0.7679,
+        "kappa_binary": 0.7175
+      }
+    }
   }
 }

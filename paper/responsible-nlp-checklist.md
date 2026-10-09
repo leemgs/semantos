@@ -18,7 +18,7 @@ All items are answered; no open decisions remain.
 **A1. Did you describe the limitations of your work?**
 Yes. The unnumbered Limitations section covers task and generality (one task,
 English prompts, small numeric evidence, opaque labels), annotation (AI-drafted labels
-verified by one author, one further blind annotator, 97 claims), models and prompting (one prompt, no decoding or
+verified by one author, two further blind annotators, 97 claims), models and prompting (one prompt, no decoding or
 formatting variation, quantized local weights, non-reproducible hosted
 serving, citation cap confounding the position effect), reliance measurement,
 measurement scope and system/safety scope.
@@ -170,26 +170,27 @@ in the released `plan.json` files.
 
 ## D. Did you use human annotators (e.g., crowdworkers) or research with human participants?
 
-Yes. One author verified the 97 AI-drafted explanation-claim labels, and one
-further annotator who is not an author labeled all claims blind for an
-agreement study (Cohen's kappa 0.918). No crowdworkers were involved.
+Yes. One author verified the 97 AI-drafted explanation-claim labels, and two
+further annotators who are not authors labeled all claims blind and
+independently for an agreement study (Cohen's kappa 0.918 and 0.856; Fleiss'
+kappa 0.847). No crowdworkers were involved.
 
-**D1.** Yes. The labeling rules are in §4; the second annotator received the
+**D1.** Yes. The labeling rules are in §4; both annotators received the
 written guidelines (`paper/second-annotator-guidelines.md`, label definitions,
 rules and the evidence values) and the blind sheet.
 
-**D2.** Yes. The second annotator is a fellow researcher who volunteered to
+**D2.** Yes. Both annotators are fellow researchers who volunteered to
 contribute to the research without payment; no one was recruited through a
 platform or paid.
 
-**D3.** Yes. The second annotator consented to labeling and to the public
+**D3.** Yes. Both annotators consented to labeling and to the public
 release of their labels and the aggregate agreement (in anonymized form). No
 data from people are used.
 
 **D4.** N/A. Labeling numeric claims about machine measurements is not
 human-subjects research; no personal data were collected.
 
-**D5.** N/A beyond "one author and one non-author annotator"; the labels are
+**D5.** N/A beyond "one author and two non-author annotators"; the labels are
 factual checks of numbers against a table.
 
 ---

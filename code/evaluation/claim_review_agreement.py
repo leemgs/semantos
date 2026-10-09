@@ -6,13 +6,18 @@
     python3 claim_review_agreement.py score  --review ... --apply
     python3 claim_review_agreement.py export-blind --out second-annotator.csv
     python3 claim_review_agreement.py kappa --second second-annotator.csv
+    python3 claim_review_agreement.py kappa --second third.csv --key third_annotator
+    python3 claim_review_agreement.py panel second-annotator.csv third.csv
 
 `export-blind` writes the same claims for an independent second annotator
 without the drafted labels or checks, with the explanation sentence that
 states each claim. `kappa` compares the second annotator's labels with the
 verified labels in claim-audit.json (Cohen's kappa over all seven labels and
 over the binary misstated / not-misstated distinction) and writes the result
-into claim-audit.json under "second_annotator".
+into claim-audit.json under "second_annotator" (or --key), keeping fields
+written by hand. `panel` reports Fleiss' kappa over the verified labels and
+all blind annotators, and how often their majority label equals the verified
+label.
 
 `export` writes one row per claim in results/model-audit-summary/claim-audit.json
 with the drafted label and its check, plus empty columns for the reviewer.
@@ -102,9 +107,12 @@ DIRS = {'Qwen2.5-7B': 'qwen2.5-7b', 'Llama-3.1-8B': 'llama3.1-8b', 'Qwen2.5-14B'
 
 
 def source_sentence(c):
+    # Optional 'seed' and 'source_hint' fields in a claim pin its explanation
+    # and sentence where the number/word scoring would pick another one.
     import re
     recs = [r for r in json.loads((HERE/f"results/model-audit-{DIRS[c['model']]}/records.json").read_text())
-            if r.get('variant') == c['variant'] and r.get('status') == 'valid']
+            if r.get('variant') == c['variant'] and r.get('status') == 'valid'
+            and ('seed' not in c or r.get('seed') == c['seed'])]
     nums = re.findall(r'\d+(?:\.\d+)?', c['claim'])
     words = re.findall(r'[a-z]{5,}', c['claim'].lower())
 
@@ -112,6 +120,8 @@ def source_sentence(c):
         return 3 * sum(n in t for n in nums) + sum(w in t.lower() for w in words)
     expl = max((r['answer']['explanation'] for r in recs), key=sc)
     sents = [x for x in re.split(r'(?<=[.;])\s+', expl) if x.strip()]
+    if 'source_hint' in c:  # claims whose sentence the scoring heuristic misses
+        sents = [x for x in sents if c['source_hint'] in x]
     return max(sents, key=sc), bool(json.loads(recs[0]['prompt'])['evidence'])
 
 
@@ -129,24 +139,96 @@ def export_blind(args):
     print(f"wrote {len(audit['claims'])} blind rows to {args.out}")
 
 
-def kappa(args):
-    audit = json.loads(AUDIT.read_text())
-    rows = list(csv.DictReader(open(args.second, encoding='utf-8')))
-    if len(rows) != len(audit['claims']) or any(not r['second_label'].strip() for r in rows):
-        raise SystemExit('the second annotator must label every row')
-    first, second = [], []
+def read_annotator(path, n):
+    rows = list(csv.DictReader(open(path, encoding='utf-8-sig')))
+    if len(rows) != n or any(not r['second_label'].strip() for r in rows):
+        raise SystemExit(f'{path}: the annotator must label every row')
+    labels = [None] * n
     for r in rows:
         lab = r['second_label'].strip().lower()
         if lab not in LABELS:
-            raise SystemExit(f"row {r['id']}: unknown label {lab!r}")
-        first.append(audit['claims'][int(r['id'])]['verdict'])
-        second.append(lab)
+            raise SystemExit(f"{path} row {r['id']}: unknown label {lab!r}")
+        labels[int(r['id'])] = lab
+    return labels
+
+
+def kappa(args):
+    """Compare one blind annotator with the verified labels.
+
+    The result is merged into claim-audit.json under --key, so fields written
+    by hand (annotator description, resolution) are kept.
+    """
+    audit = json.loads(AUDIT.read_text())
+    first = [c['verdict'] for c in audit['claims']]
+    second = read_annotator(args.second, len(first))
     po, k = cohen_kappa(first, second)
     pb, kb = cohen_kappa([x in MISSTATED for x in first], [x in MISSTATED for x in second])
     print(f'seven labels: agreement {po:.3f}, kappa {k:.3f}; misstated vs not: agreement {pb:.3f}, kappa {kb:.3f}')
-    audit['second_annotator'] = {'claims': len(rows), 'agreement_7': round(po, 4), 'kappa_7': round(k, 4),
-                                 'agreement_binary': round(pb, 4), 'kappa_binary': round(kb, 4),
-                                 'procedure': 'independent annotator labeled blind (without drafted labels or checks)'}
+    rec = audit.get(args.key, {})
+    notes = {d['id']: d['note'] for d in rec.get('disagreements', []) if d.get('note')}
+    disagreements = []
+    for i, (v, lab) in enumerate(zip(first, second)):
+        if v != lab:
+            disagreements.append({'id': i, 'verified': v, 'annotator': lab, **({'note': notes[i]} if i in notes else {})})
+    rec.update({'claims': len(first), 'agreement_7': round(po, 4), 'kappa_7': round(k, 4),
+                'agreement_binary': round(pb, 4), 'kappa_binary': round(kb, 4),
+                'procedure': 'independent annotator labeled blind (without drafted labels or checks)',
+                'disagreements': disagreements,
+                'misstated_by_annotator': sum(x in MISSTATED for x in second)})
+    rec.pop('misstated_by_second_annotator', None)
+    audit[args.key] = rec
+    AUDIT.write_text(json.dumps(audit, indent=2, ensure_ascii=False) + '\n')
+
+
+def fleiss_kappa(table):
+    """Fleiss' kappa for a list of per-item label lists (same rater count)."""
+    n_items, n = len(table), len(table[0])
+    totals = collections.Counter()
+    p_items = []
+    for labels in table:
+        c = collections.Counter(labels)
+        totals.update(c)
+        p_items.append((sum(v * v for v in c.values()) - n) / (n * (n - 1)))
+    p_bar = sum(p_items) / n_items
+    p_e = sum((v / (n_items * n)) ** 2 for v in totals.values())
+    return (p_bar - p_e) / (1 - p_e)
+
+
+def panel(args):
+    """Agreement of the verified labels and all blind annotators together.
+
+    Reports Fleiss' kappa (seven labels and misstated vs not), pairwise Cohen's
+    kappa between annotators, and how often the majority label equals the
+    verified label; writes the result under "annotator_panel".
+    """
+    audit = json.loads(AUDIT.read_text())
+    verified = [c['verdict'] for c in audit['claims']]
+    annot = [read_annotator(p, len(verified)) for p in args.annotators]
+    raters = [verified] + annot
+    items = list(zip(*raters))
+    f7 = fleiss_kappa(items)
+    fb = fleiss_kappa([[x in MISSTATED for x in it] for it in items])
+    majority, no_majority = [], 0
+    for it in items:
+        lab, cnt = collections.Counter(it).most_common(1)[0]
+        no_majority += cnt * 2 <= len(it)
+        majority.append(lab)
+    same = sum(m == v for m, v in zip(majority, verified))
+    pairs = {}
+    for i in range(len(annot)):
+        for j in range(i + 1, len(annot)):
+            _, k = cohen_kappa(annot[i], annot[j])
+            _, kb = cohen_kappa([x in MISSTATED for x in annot[i]], [x in MISSTATED for x in annot[j]])
+            pairs[f'{i + 2}-{j + 2}'] = {'kappa_7': round(k, 4), 'kappa_binary': round(kb, 4)}
+    print(f'Fleiss kappa: seven labels {f7:.3f}, misstated vs not {fb:.3f}; '
+          f'majority = verified label for {same} of {len(verified)} claims ({no_majority} without majority)')
+    for key, v in pairs.items():
+        print(f'annotators {key}: kappa {v["kappa_7"]:.3f} (seven labels), {v["kappa_binary"]:.3f} (binary)')
+    audit['annotator_panel'] = {
+        'raters': ['author-verified labels'] + [f'blind annotator {i + 2}' for i in range(len(annot))],
+        'fleiss_kappa_7': round(f7, 4), 'fleiss_kappa_binary': round(fb, 4),
+        'majority_equals_verified': same, 'items_without_majority': no_majority,
+        'pairwise_annotators': pairs}
     AUDIT.write_text(json.dumps(audit, indent=2, ensure_ascii=False) + '\n')
 
 
@@ -158,8 +240,10 @@ def main():
     s.add_argument('--apply', action='store_true')
     b = sub.add_parser('export-blind'); b.add_argument('--out', required=True, type=Path)
     k = sub.add_parser('kappa'); k.add_argument('--second', required=True, type=Path)
+    k.add_argument('--key', default='second_annotator', help='record name in claim-audit.json')
+    p = sub.add_parser('panel'); p.add_argument('annotators', nargs='+', type=Path)
     a = ap.parse_args()
-    {'export': export, 'score': score, 'export-blind': export_blind, 'kappa': kappa}[a.cmd](a)
+    {'export': export, 'score': score, 'export-blind': export_blind, 'kappa': kappa, 'panel': panel}[a.cmd](a)
 
 
 if __name__ == '__main__':
