@@ -9,8 +9,7 @@ Section numbers refer to the current `paper/main.pdf`:
 Appendix A (testbed details), B (additional measurements), C (prompt and schema).
 
 Answers are written in English so they can be pasted into the ARR form.
-Lines marked **[확인 필요]** need a decision or a fact check by the authors
-before submission.
+All items are answered; no open decisions remain.
 
 ---
 
@@ -18,8 +17,8 @@ before submission.
 
 **A1. Did you describe the limitations of your work?**
 Yes. The unnumbered Limitations section covers task and generality (one task,
-English prompts, small numeric evidence, opaque labels), annotation (single
-annotator, 97 claims), models and prompting (one prompt, no decoding or
+English prompts, small numeric evidence, opaque labels), annotation (AI-drafted labels
+verified by one author, one further blind annotator, 97 claims), models and prompting (one prompt, no decoding or
 formatting variation, quantized local weights, non-reproducible hosted
 serving, citation cap confounding the position effect), reliance measurement,
 measurement scope and system/safety scope.
@@ -51,8 +50,8 @@ llama.cpp and OpenRouter are cited with footnote URLs at their first mention
 
 **B2. Did you discuss the license or terms for use and/or distribution of any
 artifacts?**
-Partially — add the following to the camera-ready appendix or the release
-README. All open-weight licenses below were checked against the Hugging Face
+Yes, in the release README (licenses of every model and tool) and the
+Ethics Statement. All open-weight licenses below were checked against the Hugging Face
 model cards on 2026-10-01.
 - Qwen2.5-7B-Instruct, Qwen2.5-14B-Instruct: Apache 2.0.
 - Qwen3-235B-A22B-Instruct-2507: Apache 2.0.

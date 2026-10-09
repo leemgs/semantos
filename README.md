@@ -65,3 +65,18 @@ Exceptions:
   to Google's Gemini API Additional Terms, which make users responsible for how
   generated content is used and prohibit using the services to develop
   competing models.
+
+Licenses of the models and tools used (checked 2026-10-01 against the model
+cards and license files):
+
+| Model or tool | License or terms |
+|---|---|
+| Qwen2.5-7B/14B-Instruct, Qwen3-235B-A22B-Instruct-2507 | Apache 2.0 |
+| Llama-3.1-8B-Instruct, Llama-3.3-70B-Instruct | Llama 3.1 / 3.3 Community License |
+| Phi-4 | MIT |
+| DeepSeek-V3.2 | MIT |
+| Nemotron-3-Ultra-550B-A55B | OpenMDW License Agreement 1.1 |
+| Gemini 3.8 Flash, Gemini 3.1 Pro preview | proprietary; Gemini API Additional Terms via OpenRouter |
+| llama.cpp, llama-cpp-python 0.3.35 | MIT |
+
+All models were used for research inference only; no weights are redistributed.
