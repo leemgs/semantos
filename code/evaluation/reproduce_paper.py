@@ -102,6 +102,15 @@ def main():
 
         run('entailment_judge.py', '--out', res/'model-audit-summary/entailment-judge.json', '--tex', tmp/'entailment-judges.tex')
         same_file('Entailment-judge table (from saved judge outputs)', tmp/'entailment-judges.tex', 'entailment-judges.tex')
+        run('scale_family_analysis.py', '--out', tmp/'scale-family.json', '--tex', tmp/'scale-family.tex')
+        sf = json.loads((tmp/'scale-family.json').read_text())
+        same_file('Scale and family table', tmp/'scale-family.tex', 'scale-family.tex')
+        got = (sf['groups']['local']['misstated'], sf['groups']['local']['claims'],
+               sf['groups']['hosted open']['misstated'], sf['groups']['hosted open']['claims'],
+               sf['spearman_logparams_vs_misstated_share']['rho'], sf['spearman_logparams_vs_misstated_share']['p'],
+               sf['fisher_local_vs_hosted_open']['p'])
+        check('Scale: misstated 7/8 (local) vs 21/52 (hosted open), Spearman rho -0.784 (p 0.021), Fisher p 0.020',
+              got == (7, 8, 21, 52, -0.784, 0.021, 0.02), str(got))
         cites = json.loads(run('citation_analysis.py', '--results', res))
         got = (cites['retrieval_chosen'], cites['retrieval_citations'], cites['retrieval_in_first_half'], cites['graph'])
         check('Citations: 252/260 of the chosen configuration, 209 in the first half, graph never cited',

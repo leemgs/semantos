@@ -185,3 +185,16 @@ To test whether citation-support judges catch these errors, \texttt{entailment\_
 \paragraph{Compute budget.}
 Local models ran as 4-bit GGUF files (Q4\_K\_M; Phi-4 Q4\_K) with llama-cpp-python 0.3.35 (\url{https://github.com/abetlen/llama-cpp-python}) on a four-core CPU container without a GPU, with an 8,192-token context and at most 384 output tokens. Their 100 calls took 11,580\,s of wall time (about 3.2 CPU-hours): Qwen2.5-7B 1,603\,s, Llama-3.1-8B 2,325\,s, Qwen2.5-14B 3,136\,s and Phi-4 4,516\,s. The 150 hosted calls through OpenRouter, with at most 4,096 output tokens, took 1,224\,s in total and cost about 0.5\,USD. Kernel measurements ran on the Intel Core i5-3570 host described in Appendix~\ref{app:measurements}; acquiring the training, retrieval and calibration roles took 6.54, 8.29 and 10.15\,s. Optimizer replays over 1,000 seeds take seconds on one CPU.
 
+
+\section{Results by Model Scale and Family}
+\label{app:scale}
+\texttt{scale\_family\_analysis.py} re-analyses the existing records by scale and family without new model calls (Table~\ref{tab:scale}). It uses only full-context answers, since local models were also audited on ablated prompts; claims of local models are counted once per distinct explanation because their greedy outputs repeat across seeds, whereas hosted explanations vary and repeat claims across seeds. Among the eight open-weight models, the misstated share falls with log total parameters (Spearman $\rho=-0.78$, $p=0.02$), and local models misstate more often than hosted open-weight models (7/8 versus 21/52; Fisher's exact test $p=0.02$). With eight local claims and repeated hosted claims, this is a trend, not an estimate. The error types change with scale: wrong units and source attributions occur only in 7--15B models, whereas overstatements and wrong values occur at every scale and in every family. Citation behavior does not track scale: every open-weight model cites only runs of its chosen configuration; Gemini-Pro is the only model that cites runs of other configurations (8 of 21), and front-loading is strongest in local models (100 of 110 cited runs in the first half) and weakest in Llama-70B (14 of 28). Within the Qwen and Llama families, the larger model misstates a smaller share (Qwen 2/2 and 2/2 at 7B and 14B versus 3/6 at 235B; Llama 2/2 versus 2/7).
+
+\begin{table}[h]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{Full-context results by model: answers choosing the selector's configuration (Sel.), cited retrieval runs of the chosen configuration and from the first half of the evidence list, misstated claims, and misstated claims by type (overstated / wrong value / wrong unit or source). Gemini parameter counts are undisclosed.}
+\label{tab:scale}
+\begin{adjustbox}{max width=\columnwidth}
+\input{scale-family.tex}
+\end{adjustbox}
+\end{table}

@@ -30,6 +30,7 @@ numbers quoted in the text. Expected output: `15 of 15 checks passed`
 | §5.5 gate replay; Appendix figure | `results/controlled-2026-09-26/` | `analyze_controlled.py`, `plot_gate_replay.py` |
 | Appendix C rule check and intervals | `claim-audit.json`, prompts in `records.json` | `claim_label_autocheck.py --mutation-test` |
 | §6 and Appendix C entailment-judge experiment (Table 9) | `model-audit-summary/entailment-judge.json` | `entailment_judge.py` (rerunning the judges needs `torch`, `transformers` and about 4 GB of model downloads; `--tex` rebuilds the table from the saved outputs) |
+| §6 scale paragraph; Appendix D (Table 10): results by model scale and family | `model-audit-*/records.json`, `claim-audit.json` | `scale_family_analysis.py` → `model-audit-summary/scale-family.json` |
 | Appendix B local and temporal-holdout measurements | `results/local-2026-09-26/`, `results/kernel-local-2026-09-26/` | `analyze.py`, `analyze_kernel_local.py` |
 
 Each result directory contains a `plan.json` written before data collection

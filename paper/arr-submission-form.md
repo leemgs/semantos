@@ -20,17 +20,31 @@ that reads the same evidence, cites it one-sidedly, and misstates it in 41 of
 
 ## Keywords
 
-attribution; grounded generation; explanation faithfulness; citation
-evaluation; claim verification; LLM evaluation; decision support;
-retrieval-augmented generation
+Use these, in this order (the first ones drive reviewer matching toward
+attribution and faithfulness expertise rather than systems):
 
-## Suggested area (choose one)
+attribution evaluation; citation faithfulness; explanation faithfulness;
+claim verification; data-to-text factual accuracy; grounded generation;
+LLM evaluation; decision support
 
-1. Interpretability and Analysis of Models for NLP — explanation correctness,
-   citation behavior and reliance tests are the core findings.
-2. Resources and Evaluation — if the audit protocol and released annotations
-   are to be emphasized.
-3. NLP Applications — if the configuration-advice setting is to be emphasized.
+## Area (recommended)
+
+**Primary: Interpretability and Analysis of Models for NLP.** The paper's
+findings are about model rationales: whether cited evidence is represented
+correctly (claim level), which evidence is selected (citation level) and
+whether decisions depend on it (reliance level). Reviewers in this area know
+faithfulness and attribution work (AIS, ALCE, deletion-based tests), which is
+the comparison the paper invites.
+
+Fallback if the cycle has no such area or it is over-subscribed: Resources
+and Evaluation (emphasize the audit protocol, the released per-claim
+annotations with three-rater agreement, and the reproduction script).
+
+Avoid NLP Applications: it invites reviewers who judge the configuration task
+itself, where the paper deliberately makes no performance claim.
+
+Check the exact area names against the current ARR cycle's list before
+submitting; names change between cycles.
 
 ## Contribution types (check the matching boxes)
 
