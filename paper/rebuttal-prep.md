@@ -59,15 +59,20 @@ Limitations and offer concrete additions for the camera-ready version.
 - Conceded in Limitations ("Models and prompting").
 - The error types recur across ten models from six families and a wide range of scales
   (§6 "Scale does not remove the error types").
-- Offer: a prompt-variation and sampling study (temperature > 0, reworded
-  instructions, shuffled evidence order) for the camera-ready; shuffled
-  evidence order would also test the position effect directly.
+- Done (Appendix E): hosted models rerun with a paraphrased prompt, reversed
+  and shuffled evidence, no citation cap and temperature 0.7. Decisions
+  (180/180 across all conditions incl. the original) and one-sided citation
+  (100% of cited runs in every new condition) do not change; the quantifier
+  overstatement proxy fires in 9-21 of 30 explanations per condition.
+- Open: verified claim labels for the new answers; local models.
 
 ## 6. "The citation position effect is confounded by the six-citation cap."
 
-- Conceded (§5.2, Limitations). The cap explains selecting few items, not
-  selecting items of the chosen configuration (252/260) or the earliest ones.
-- Offer: rerun with shuffled evidence order and with no cap.
+- Tested (§5.2, Appendix E): with the runs reversed, four of six hosted
+  models cite the runs listed first (88/138 in the first half of the list,
+  50/138 from blocks 0-4); without the cap they cite 9.0 runs per answer. So
+  the prefix comes from the cap plus list position, and the paper now says so;
+  one-sidedness does not depend on the cap (256/256).
 
 ## 7. "Deletion was non-estimable for half the models."
 
@@ -96,21 +101,22 @@ Limitations and offer concrete additions for the camera-ready version.
 
 ## 11. "Would an entailment-based attribution judge catch these errors?"
 
-- Done (Appendix C, Table 9; §6). Four off-the-shelf judges (three NLI
-  cross-encoders and Flan-T5-large), given the cited items as premise, reach
-  balanced accuracy 0.51–0.68 against the verified labels. Lenient judges
+- Done (Appendix C, Table 9; §6). Eight judges (three NLI cross-encoders,
+  Flan-T5-large, AlignScore-large and three MiniCheck models), given the cited
+  items as premise, reach balanced accuracy 0.47–0.68 against the verified
+  labels; with all 42 evidence items as premise, MiniCheck stays at 0.49-0.52. Lenient judges
   accept up to half of the wrong values (11/22); strict judges reject nearly
   all overstatements but also most correct claims (RoBERTa accepts 4/51).
-  At least one judge accepts 18 of the 41 misstated claims.
-- If asked about stronger judges: TRUE (T5-11B) and AlignScore were not
-  tested; offer them for the camera-ready.
+  At least one judge accepts 28 of the 41 misstated claims.
+- TRUE (T5-11B) did not fit the 15 GB CPU container; offer it for the
+  camera-ready if asked.
 
 ## Quick additions possible during the response period (no new hardware runs)
 
 1. Adjudication of the disagreements, if asked.
-2. Stronger attribution judges (TRUE, AlignScore) on the existing claims.
-3. Re-analysis of existing records by model family and size.
+2. TRUE (T5-11B) or an LLM judge on the existing claims.
+3. Verified claim labels for the robustness answers (Appendix E).
 
-Additions that need new model calls (API budget is small, about 0.5 USD for
-the original hosted runs): prompt variants, shuffled evidence order, no
-citation cap, temperature sampling.
+Done since the first draft: results by scale and family (Appendix D), prompt,
+order, cap and decoding robustness (Appendix E, 0.83 USD), and four more
+attribution judges (Appendix C).

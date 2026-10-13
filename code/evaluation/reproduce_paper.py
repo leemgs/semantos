@@ -102,6 +102,22 @@ def main():
 
         run('entailment_judge.py', '--out', res/'model-audit-summary/entailment-judge.json', '--tex', tmp/'entailment-judges.tex')
         same_file('Entailment-judge table (from saved judge outputs)', tmp/'entailment-judges.tex', 'entailment-judges.tex')
+        ej = json.loads((res/'model-audit-summary/entailment-judge.json').read_text())
+        bas = [v['balanced_accuracy'] for v in ej['summary'].values()]
+        mis = [x for x in ej['items'] if x['label'] in cra.MISSTATED]
+        anyacc = sum(any(v['supported'] for v in x['judges'].values()) for x in mis)
+        check('Judges: 18 judge/hypothesis rows, balanced accuracy 0.47-0.68, 28/41 misstated accepted by some judge',
+              (len(bas), round(min(bas), 2), round(max(bas), 2), anyacc, len(mis)) == (18, 0.47, 0.68, 28, 41),
+              str((len(bas), round(min(bas), 2), round(max(bas), 2), anyacc, len(mis))))
+        shutil.copytree(HERE/'results/prompt-robustness', tmp/'prompt-robustness')
+        run('prompt_robustness.py', 'score', '--out', tmp/'prompt-robustness', '--tex', tmp/'prompt-robustness.tex')
+        same_file('Robustness table (from saved API records)', tmp/'prompt-robustness.tex', 'prompt-robustness.tex')
+        rb = json.loads((tmp/'prompt-robustness/summary.json').read_text())['conditions']
+        got = (rb['reversed']['cited_first_half_presented'], rb['reversed']['cited_blocks_0_4'],
+               rb['reversed']['retrieval_citations'], rb['nocap']['mean_citations'], rb['nocap']['cited_chosen_config'],
+               rb['nocap']['retrieval_citations'], sum(c['selector_choice'] for c in rb.values()))
+        check('Robustness: reversed 88/50 of 138, uncapped 9.0 citations, 256/256 chosen, 180/180 selector choice',
+              got == (88, 50, 138, 9.03, 256, 256, 180), str(got))
         run('scale_family_analysis.py', '--out', tmp/'scale-family.json', '--tex', tmp/'scale-family.tex')
         sf = json.loads((tmp/'scale-family.json').read_text())
         same_file('Scale and family table', tmp/'scale-family.tex', 'scale-family.tex')

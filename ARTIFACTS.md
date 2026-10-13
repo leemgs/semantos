@@ -14,7 +14,7 @@ python3 code/evaluation/reproduce_paper.py
 The script copies `code/evaluation/results/` to a temporary directory, reruns
 every analysis on the raw logs, and compares the regenerated LaTeX tables
 byte for byte with the files the paper includes. It also recomputes the
-numbers quoted in the text. Expected output: `15 of 15 checks passed`
+numbers quoted in the text. Expected output: `20 of 20 checks passed`
 (about 20 seconds on a laptop CPU; no GPU, no API key, no network).
 
 ## 2. Where each claim in the paper comes from
@@ -29,8 +29,9 @@ numbers quoted in the text. Expected output: `15 of 15 checks passed`
 | §5.4 deletion results | `model-audit-*/records.json` (`delete_cited`, `delete_uncited`) | `summarize_model_audit.py` |
 | §5.5 gate replay; Appendix figure | `results/controlled-2026-09-26/` | `analyze_controlled.py`, `plot_gate_replay.py` |
 | Appendix C rule check and intervals | `claim-audit.json`, prompts in `records.json` | `claim_label_autocheck.py --mutation-test` |
-| §6 and Appendix C entailment-judge experiment (Table 9) | `model-audit-summary/entailment-judge.json` | `entailment_judge.py` (rerunning the judges needs `torch`, `transformers` and about 4 GB of model downloads; `--tex` rebuilds the table from the saved outputs) |
+| §6 and Appendix C attribution-judge experiment (Table 9; eight judges incl. AlignScore and MiniCheck) | `model-audit-summary/entailment-judge.json` | `entailment_judge.py` (rerunning the judges needs `torch`, `transformers` and about 4 GB of model downloads; `--tex` rebuilds the table from the saved outputs) |
 | §6 scale paragraph; Appendix D (Table 10): results by model scale and family | `model-audit-*/records.json`, `claim-audit.json` | `scale_family_analysis.py` → `model-audit-summary/scale-family.json` |
+| §5.2 position effect, Limitations; Appendix E (Table 11): prompt, order, cap and decoding robustness of the hosted models | `results/prompt-robustness/` (`plan.json`, `records.jsonl`) | `prompt_robustness.py score` (rerunning `run` needs `OPENROUTER_API_KEY`; 150 calls cost 0.83 USD) |
 | Appendix B local and temporal-holdout measurements | `results/local-2026-09-26/`, `results/kernel-local-2026-09-26/` | `analyze.py`, `analyze_kernel_local.py` |
 
 Each result directory contains a `plan.json` written before data collection
@@ -109,5 +110,8 @@ Then:
 Extensions the paper calls for: tasks where the default is not optimal and
 documentation priors could help, more annotators beyond the two blind annotators reported
 (a blind annotation package is produced by `claim_review_agreement.py export-blind`),
-and stronger attribution judges than the four off-the-shelf ones tested here
-(balanced accuracy 0.51–0.68 on the 93 evidence-based claims).
+and claim checkers that aggregate evidence: the eight attribution judges tested
+here, including the fact-checkers AlignScore and MiniCheck, reach balanced
+accuracy 0.47–0.68 on the 93 evidence-based claims, even with all evidence as
+premise. Prompt and decoding robustness was tested only for hosted models and
+scored with automatic proxies; verified claim labels for those answers are open.

@@ -10,13 +10,16 @@ the hypothesis:
 
 * three NLI cross-encoders (entailment = supported), and
 * Flan-T5-large asked "Is the claim fully supported by the evidence?"
-  (yes = supported).
+  (yes = supported), and
+* four judges trained for fact-checking against grounding documents:
+  AlignScore-large and MiniCheck (RoBERTa-large, DeBERTa-v3-large, Flan-T5-large),
+  each with its default threshold of 0.5.
 
 A second condition uses the extracted claim text instead of the sentence.
 The script reports, per judge, how many misstated claims (wrong, wrong
 attribution, wrong unit, overstated) are accepted as supported and how many
 correct claims are accepted, using the author-verified labels in
-claim-audit.json. Model revisions are pinned; runs on CPU in a few minutes.
+claim-audit.json. Model revisions are pinned; runs on CPU in well under an hour.
 
     python3 entailment_judge.py --out results/model-audit-summary/entailment-judge.json
     python3 entailment_judge.py --out results/model-audit-summary/entailment-judge.json \
@@ -40,7 +43,19 @@ JUDGES = [
      'bab4bc7178836f731dcfd18c06ca9def0a137712', 'nli'),
     ('RoBERTa-large-MNLI', 'FacebookAI/roberta-large-mnli', '2a8f12d27941090092df78e4ba6f0928eb5eac98', 'nli'),
     ('Flan-T5-large (yes/no)', 'google/flan-t5-large', '0613663d0d48ea86ba8cb3d7a44f0f65dc596a2a', 't5'),
+    # Fact-checking judges trained to verify claims against grounding documents.
+    ('AlignScore-large', 'yzha/AlignScore', '8509e78d25bb914939fc585c626500c9b2944249', 'alignscore'),
+    ('MiniCheck-RoBERTa-large', 'lytang/MiniCheck-RoBERTa-Large', '74c8919647e61ed0f71bc177d94f10930f090068',
+     'minicheck'),
+    ('MiniCheck-DeBERTa-v3-large', 'lytang/MiniCheck-DeBERTa-v3-Large', '2f2d01a54fa022a7ffadb76260e1ea8bc88c82bb',
+     'minicheck'),
+    ('MiniCheck-Flan-T5-large', 'lytang/MiniCheck-Flan-T5-Large', '96eafd01cee2d16cf81aaa2fb226b14f422a37b3',
+     'minicheck_t5'),
 ]
+RUNNERS = {}
+# Long-context judges also scored with all supplied evidence as premise, to test whether
+# restricting the premise to the cited items explains their rejection of correct claims.
+ALL_EVIDENCE_JUDGES = {'MiniCheck-DeBERTa-v3-large': 2048, 'MiniCheck-Flan-T5-large': 2048}
 MISSTATED = {'wrong', 'wrong attribution', 'wrong unit', 'overstated'}
 
 
@@ -67,15 +82,19 @@ def build_items():
         if c['variant'] == 'model_only':
             continue
         recs = [r for r in json.loads((RES/f"model-audit-{DIRS[c['model']]}/records.json").read_text())
-                if r.get('variant') == c['variant'] and r.get('status') == 'valid']
+                if r.get('variant') == c['variant'] and r.get('status') == 'valid'
+                and ('seed' not in c or r.get('seed') == c['seed'])]
         rec = max(recs, key=lambda r: score(r['answer']['explanation'], c['claim']))
         evidence = {e['id']: e for e in json.loads(rec['prompt'])['evidence']}
         cited = [evidence[x] for x in rec['answer']['cited_ids'] if x in evidence]
         sents = [s for s in re.split(r'(?<=[.;])\s+', rec['answer']['explanation']) if s.strip()]
+        if 'source_hint' in c:  # pinned where the scoring heuristic picks another sentence
+            sents = [s for s in sents if c['source_hint'] in s]
         sentence = max(sents, key=lambda s: score(s, c['claim']))
         items.append({'id': i, 'model': c['model'], 'variant': c['variant'], 'seed': rec['seed'],
                       'label': c['verdict'], 'claim': c['claim'], 'sentence': sentence,
-                      'premise': ' '.join(verbalize(e) for e in cited), 'cited_ids': rec['answer']['cited_ids']})
+                      'premise': ' '.join(verbalize(e) for e in cited), 'cited_ids': rec['answer']['cited_ids'],
+                      'premise_all': ' '.join(verbalize(e) for e in evidence.values())})
     return items
 
 
@@ -112,6 +131,71 @@ def run_t5(name, rev, pairs):
     return out
 
 
+def run_alignscore(name, rev, pairs):
+    """AlignScore-large (Zha et al., 2023) in its NLI mode: P(aligned) from the three-way head on the pooled
+    RoBERTa output, averaged over the hypothesis sentences. Premises here fit one 512-token chunk, so no
+    premise chunking is needed. Loads the released checkpoint's weights without its Lightning wrapper."""
+    import torch
+    from huggingface_hub import hf_hub_download
+    from transformers import AutoTokenizer, RobertaModel
+    state = torch.load(hf_hub_download(name, 'AlignScore-large.ckpt', revision=rev), map_location='cpu',
+                       weights_only=False)['state_dict']
+    tok = AutoTokenizer.from_pretrained('FacebookAI/roberta-large')
+    base = RobertaModel.from_pretrained('FacebookAI/roberta-large', add_pooling_layer=True).eval()
+    missing = base.load_state_dict({k[len('base_model.'):]: v for k, v in state.items() if k.startswith('base_model.')},
+                                   strict=False)
+    assert not [k for k in missing.missing_keys if 'position_ids' not in k], missing.missing_keys
+    tri = torch.nn.Linear(base.config.hidden_size, 3)
+    tri.load_state_dict({'weight': state['tri_layer.weight'], 'bias': state['tri_layer.bias']})
+    out = []
+    with torch.no_grad():
+        for p, h in pairs:
+            probs = []
+            for sent in [x for x in re.split(r'(?<=[.!?])\s+', h) if x.strip()] or [h]:
+                enc = tok(p, sent, truncation='only_first', max_length=512, return_tensors='pt')
+                probs.append(torch.softmax(tri(base(**enc).pooler_output)[0], -1)[0].item())
+            score = sum(probs) / len(probs)
+            out.append({'supported': score > 0.5, 'p_entail': score})
+    return out
+
+
+def run_minicheck(name, rev, pairs, max_length=None):
+    """MiniCheck (Tang et al., 2024) RoBERTa/DeBERTa: one sequence 'document<eos>claim', P(label 1).
+    Context: 512 tokens (RoBERTa) or 2048 (DeBERTa), as in MiniCheck."""
+    import torch
+    from transformers import AutoModelForSequenceClassification, AutoTokenizer
+    tok = AutoTokenizer.from_pretrained(name, revision=rev, use_fast=True)
+    model = AutoModelForSequenceClassification.from_pretrained(name, revision=rev, num_labels=2).eval()
+    out = []
+    with torch.no_grad():
+        for p, h in pairs:
+            enc = tok(tok.eos_token.join([p, h]), truncation=True,
+                      max_length=max_length or (2048 if 'DeBERTa' in name else 512), return_tensors='pt')
+            prob = torch.softmax(model(**enc).logits[0], -1)[1].item()
+            out.append({'supported': prob > 0.5, 'p_entail': prob})
+    return out
+
+
+def run_minicheck_t5(name, rev, pairs):
+    """MiniCheck Flan-T5: 'predict: document</s>claim', P(token '1') against '0' at the first decoder step."""
+    import torch
+    from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+    tok = AutoTokenizer.from_pretrained(name, revision=rev)
+    model = AutoModelForSeq2SeqLM.from_pretrained(name, revision=rev).eval()
+    out = []
+    with torch.no_grad():
+        for p, h in pairs:
+            enc = tok('predict: ' + tok.eos_token.join([p, h]), truncation=True, max_length=2048, return_tensors='pt')
+            logits = model(**enc, decoder_input_ids=torch.zeros((1, 1), dtype=torch.long)).logits[0, -1]
+            prob = torch.softmax(logits[[3, 209]], -1)[1].item()  # token ids of '0' and '1', as in MiniCheck
+            out.append({'supported': prob > 0.5, 'p_entail': prob})
+    return out
+
+
+RUNNERS.update({'nli': run_nli, 't5': run_t5, 'alignscore': run_alignscore, 'minicheck': run_minicheck,
+                'minicheck_t5': run_minicheck_t5})
+
+
 def summarize(items, key):
     mis = [x for x in items if x['label'] in MISSTATED]
     cor = [x for x in items if x['label'] == 'correct']
@@ -128,13 +212,16 @@ def write_table(saved, path):
              r'Judge & Hyp. & Wrong & Over. & Correct & BA \\', r'\midrule']
     short = {'DeBERTa-v3-large (MNLI/FEVER/ANLI/LingNLI/WANLI)': 'DeBERTa-v3 (5 NLI sets)',
              'DeBERTa-v3-large (SNLI/MNLI cross-encoder)': 'DeBERTa-v3 (SNLI/MNLI)',
-             'RoBERTa-large-MNLI': 'RoBERTa-large-MNLI', 'Flan-T5-large (yes/no)': 'Flan-T5-large'}
+             'RoBERTa-large-MNLI': 'RoBERTa-large-MNLI', 'Flan-T5-large (yes/no)': 'Flan-T5-large',
+             'AlignScore-large': 'AlignScore-large', 'MiniCheck-RoBERTa-large': 'MiniCheck-RoBERTa',
+             'MiniCheck-DeBERTa-v3-large': 'MiniCheck-DeBERTa', 'MiniCheck-Flan-T5-large': 'MiniCheck-Flan-T5'}
     for key, s in data['summary'].items():
         judge, hyp = key.split(' | ')
         mis = [x for x in data['items'] if x['label'] in MISSTATED]
         acc = {g: sum(x['judges'][key]['supported'] for x in mis if groups(x) == g) for g in ('wrong', 'over')}
         tot = {g: sum(groups(x) == g for x in mis) for g in ('wrong', 'over')}
-        lines.append(f"{short[judge]} & {'sent.' if hyp == 'sentence' else 'claim'} & {acc['wrong']}/{tot['wrong']} & "
+        hyp_short = {'sentence': 'sent.', 'claim': 'claim', 'claim, all evidence': 'claim$^*$'}[hyp]
+        lines.append(f"{short[judge]} & {hyp_short} & {acc['wrong']}/{tot['wrong']} & "
                      f"{acc['over']}/{tot['over']} & {s['correct_accepted']}/{s['correct']} & {s['balanced_accuracy']:.2f} \\\\")
     lines += [r'\bottomrule', r'\end{tabular}']
     path.write_text('\n'.join(lines) + '\n')
@@ -158,12 +245,13 @@ def main():
         for x in items:
             x['judges'] = done.get(x['id'], {})
     for label, name, rev, kind in JUDGES:
-        for hyp in ('sentence', 'claim'):
+        for hyp in ('sentence', 'claim') + (('claim, all evidence',) if label in ALL_EVIDENCE_JUDGES else ()):
             key = f'{label} | {hyp}'
             if key in summary:
                 continue
-            pairs = [(x['premise'], x[hyp]) for x in items]
-            res = run_nli(name, rev, pairs) if kind == 'nli' else run_t5(name, rev, pairs)
+            pairs = [(x['premise_all'], x['claim']) if hyp == 'claim, all evidence' else (x['premise'], x[hyp])
+                     for x in items]
+            res = RUNNERS[kind](name, rev, pairs)
             for x, r in zip(items, res):
                 x.setdefault('judges', {})[key] = r
             summary[key] = summarize([dict(x, _=x['judges'][key]) for x in items], '_')
@@ -173,7 +261,9 @@ def main():
                   flush=True)
             a.out.write_text(json.dumps({'judges': [{'label': l, 'model': n, 'revision': r} for l, n, r, _ in JUDGES],
                                          'definition': 'premise = verbalized cited evidence items; supported = '
-                                                       'entailment (NLI argmax) or p(yes) > 0.5 (Flan-T5)',
+                                                       'entailment (NLI argmax), p(yes) > 0.5 (Flan-T5), '
+                                                       'P(aligned) > 0.5 (AlignScore) or P(supported) > 0.5 '
+                                                       '(MiniCheck)',
                                          'summary': summary, 'items': items}, indent=2) + '\n')
     print(f'wrote {a.out}', flush=True)
 

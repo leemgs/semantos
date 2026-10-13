@@ -408,3 +408,15 @@ Hosted runs (2026-09-27, OpenRouter, `--response-format json_schema`,
   minutes per call); it produced no result and is not reported.
 
 `results/model-audit-2026-09-26/` keeps the earlier failed Ollama attempt as history.
+
+## Re-analyses for the paper's appendices
+
+* `scale_family_analysis.py` (Appendix D): results by model scale and family
+  from the existing full-context records; no model calls.
+* `entailment_judge.py` (Appendix C): eight attribution judges (NLI
+  cross-encoders, Flan-T5-large, AlignScore-large, MiniCheck) on the 93
+  evidence-based claims; `--tex` rebuilds the table from the saved outputs.
+* `prompt_robustness.py` (Appendix E): `run` reruns the six hosted models
+  with a paraphrased prompt, reversed or shuffled evidence, no citation cap
+  and temperature 0.7 (needs `OPENROUTER_API_KEY`; 150 calls cost 0.83 USD);
+  `score` recomputes the table from `results/prompt-robustness/records.jsonl`.

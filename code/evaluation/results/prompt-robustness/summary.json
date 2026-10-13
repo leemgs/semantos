@@ -1,0 +1,456 @@
+{
+  "definition": "are scored exactly. Explanations are scored with two\nautomatic proxies, applied identically to the original runs for comparison:\n(a) quantifier overstatement - the explanation attaches \"consistently\",\n\"always\" or \"in all runs\" to a comparison (\"lowest\", \"lower\", \"best\"), or says\n\"significantly\" lower, which the evidence does not support (it is lowest in 8 of 10 blocks and no test\nis reported); (b) unsupported numbers - decimal numbers in the explanation that\nmatch no evidence value, mean, minimum, maximum or difference at the written\nprecision. These proxies are not the human-verified claim labels.",
+  "planned": 150,
+  "valid": 150,
+  "invalid_cells": [],
+  "calls_including_retries": 152,
+  "reported_cost_usd": 0.8269,
+  "conditions": {
+    "original": {
+      "answers": 30,
+      "selector_choice": 30,
+      "retrieval_citations": 150,
+      "cited_chosen_config": 142,
+      "cited_first_half_presented": 109,
+      "cited_blocks_0_4": 109,
+      "mean_citations": 5.5,
+      "overstated_explanations": 21,
+      "explanations_with_unsupported_numbers": 0,
+      "unsupported_numbers": 0
+    },
+    "paraphrase": {
+      "answers": 30,
+      "selector_choice": 30,
+      "retrieval_citations": 131,
+      "cited_chosen_config": 131,
+      "cited_first_half_presented": 94,
+      "cited_blocks_0_4": 94,
+      "mean_citations": 4.83,
+      "overstated_explanations": 15,
+      "explanations_with_unsupported_numbers": 0,
+      "unsupported_numbers": 0
+    },
+    "reversed": {
+      "answers": 30,
+      "selector_choice": 30,
+      "retrieval_citations": 138,
+      "cited_chosen_config": 138,
+      "cited_first_half_presented": 88,
+      "cited_blocks_0_4": 50,
+      "mean_citations": 5.1,
+      "overstated_explanations": 13,
+      "explanations_with_unsupported_numbers": 0,
+      "unsupported_numbers": 0
+    },
+    "shuffled": {
+      "answers": 30,
+      "selector_choice": 30,
+      "retrieval_citations": 138,
+      "cited_chosen_config": 138,
+      "cited_first_half_presented": 76,
+      "cited_blocks_0_4": 67,
+      "mean_citations": 5.13,
+      "overstated_explanations": 9,
+      "explanations_with_unsupported_numbers": 1,
+      "unsupported_numbers": 1
+    },
+    "nocap": {
+      "answers": 30,
+      "selector_choice": 30,
+      "retrieval_citations": 256,
+      "cited_chosen_config": 256,
+      "cited_first_half_presented": 128,
+      "cited_blocks_0_4": 128,
+      "mean_citations": 9.03,
+      "overstated_explanations": 21,
+      "explanations_with_unsupported_numbers": 0,
+      "unsupported_numbers": 0
+    },
+    "sampled": {
+      "answers": 30,
+      "selector_choice": 30,
+      "retrieval_citations": 138,
+      "cited_chosen_config": 138,
+      "cited_first_half_presented": 94,
+      "cited_blocks_0_4": 94,
+      "mean_citations": 5.07,
+      "overstated_explanations": 13,
+      "explanations_with_unsupported_numbers": 1,
+      "unsupported_numbers": 2
+    }
+  },
+  "per_model": {
+    "Llama-3.3-70B": {
+      "paraphrase": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 21,
+        "cited_chosen_config": 21,
+        "cited_first_half_presented": 12,
+        "cited_blocks_0_4": 12,
+        "mean_citations": 4.2,
+        "overstated_explanations": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "reversed": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "cited_chosen_config": 30,
+        "cited_first_half_presented": 20,
+        "cited_blocks_0_4": 10,
+        "mean_citations": 6.0,
+        "overstated_explanations": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "shuffled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 24,
+        "cited_chosen_config": 24,
+        "cited_first_half_presented": 10,
+        "cited_blocks_0_4": 8,
+        "mean_citations": 4.8,
+        "overstated_explanations": 1,
+        "explanations_with_unsupported_numbers": 1,
+        "unsupported_numbers": 1
+      },
+      "nocap": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 26,
+        "cited_chosen_config": 26,
+        "cited_first_half_presented": 11,
+        "cited_blocks_0_4": 11,
+        "mean_citations": 5.2,
+        "overstated_explanations": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "sampled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 21,
+        "cited_chosen_config": 21,
+        "cited_first_half_presented": 8,
+        "cited_blocks_0_4": 8,
+        "mean_citations": 4.2,
+        "overstated_explanations": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      }
+    },
+    "Qwen3-235B": {
+      "paraphrase": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "cited_chosen_config": 30,
+        "cited_first_half_presented": 25,
+        "cited_blocks_0_4": 25,
+        "mean_citations": 6.0,
+        "overstated_explanations": 5,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "reversed": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "cited_chosen_config": 30,
+        "cited_first_half_presented": 25,
+        "cited_blocks_0_4": 5,
+        "mean_citations": 6.0,
+        "overstated_explanations": 5,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "shuffled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 29,
+        "cited_chosen_config": 29,
+        "cited_first_half_presented": 19,
+        "cited_blocks_0_4": 12,
+        "mean_citations": 6.0,
+        "overstated_explanations": 4,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "nocap": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 50,
+        "cited_chosen_config": 50,
+        "cited_first_half_presented": 25,
+        "cited_blocks_0_4": 25,
+        "mean_citations": 10.0,
+        "overstated_explanations": 5,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "sampled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "cited_chosen_config": 30,
+        "cited_first_half_presented": 25,
+        "cited_blocks_0_4": 25,
+        "mean_citations": 6.0,
+        "overstated_explanations": 5,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      }
+    },
+    "DeepSeek-V3.2": {
+      "paraphrase": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 29,
+        "cited_chosen_config": 29,
+        "cited_first_half_presented": 25,
+        "cited_blocks_0_4": 25,
+        "mean_citations": 6.0,
+        "overstated_explanations": 1,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "reversed": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 25,
+        "cited_chosen_config": 25,
+        "cited_first_half_presented": 15,
+        "cited_blocks_0_4": 10,
+        "mean_citations": 6.0,
+        "overstated_explanations": 1,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "shuffled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 25,
+        "cited_chosen_config": 25,
+        "cited_first_half_presented": 17,
+        "cited_blocks_0_4": 16,
+        "mean_citations": 6.0,
+        "overstated_explanations": 3,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "nocap": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 50,
+        "cited_chosen_config": 50,
+        "cited_first_half_presented": 25,
+        "cited_blocks_0_4": 25,
+        "mean_citations": 11.0,
+        "overstated_explanations": 4,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "sampled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 26,
+        "cited_chosen_config": 26,
+        "cited_first_half_presented": 25,
+        "cited_blocks_0_4": 25,
+        "mean_citations": 6.0,
+        "overstated_explanations": 4,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      }
+    },
+    "Nemotron-3-Ultra-550B": {
+      "paraphrase": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 27,
+        "cited_chosen_config": 27,
+        "cited_first_half_presented": 25,
+        "cited_blocks_0_4": 25,
+        "mean_citations": 6.0,
+        "overstated_explanations": 5,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "reversed": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "cited_chosen_config": 30,
+        "cited_first_half_presented": 5,
+        "cited_blocks_0_4": 25,
+        "mean_citations": 6.0,
+        "overstated_explanations": 5,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "shuffled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "cited_chosen_config": 30,
+        "cited_first_half_presented": 16,
+        "cited_blocks_0_4": 25,
+        "mean_citations": 6.0,
+        "overstated_explanations": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "nocap": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 50,
+        "cited_chosen_config": 50,
+        "cited_first_half_presented": 25,
+        "cited_blocks_0_4": 25,
+        "mean_citations": 10.0,
+        "overstated_explanations": 5,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "sampled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "cited_chosen_config": 30,
+        "cited_first_half_presented": 25,
+        "cited_blocks_0_4": 25,
+        "mean_citations": 6.0,
+        "overstated_explanations": 3,
+        "explanations_with_unsupported_numbers": 1,
+        "unsupported_numbers": 2
+      }
+    },
+    "Gemini-3.8-Flash": {
+      "paraphrase": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 18,
+        "cited_chosen_config": 18,
+        "cited_first_half_presented": 7,
+        "cited_blocks_0_4": 7,
+        "mean_citations": 4.6,
+        "overstated_explanations": 3,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "reversed": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 13,
+        "cited_chosen_config": 13,
+        "cited_first_half_presented": 13,
+        "cited_blocks_0_4": 0,
+        "mean_citations": 3.6,
+        "overstated_explanations": 2,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "shuffled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 11,
+        "cited_chosen_config": 11,
+        "cited_first_half_presented": 5,
+        "cited_blocks_0_4": 0,
+        "mean_citations": 3.2,
+        "overstated_explanations": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "nocap": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "cited_chosen_config": 30,
+        "cited_first_half_presented": 17,
+        "cited_blocks_0_4": 17,
+        "mean_citations": 7.0,
+        "overstated_explanations": 2,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "sampled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 14,
+        "cited_chosen_config": 14,
+        "cited_first_half_presented": 6,
+        "cited_blocks_0_4": 6,
+        "mean_citations": 3.8,
+        "overstated_explanations": 1,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      }
+    },
+    "Gemini-3.1-Pro": {
+      "paraphrase": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 6,
+        "cited_chosen_config": 6,
+        "cited_first_half_presented": 0,
+        "cited_blocks_0_4": 0,
+        "mean_citations": 2.2,
+        "overstated_explanations": 1,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "reversed": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 10,
+        "cited_chosen_config": 10,
+        "cited_first_half_presented": 10,
+        "cited_blocks_0_4": 0,
+        "mean_citations": 3.0,
+        "overstated_explanations": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "shuffled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 19,
+        "cited_chosen_config": 19,
+        "cited_first_half_presented": 9,
+        "cited_blocks_0_4": 6,
+        "mean_citations": 4.8,
+        "overstated_explanations": 1,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "nocap": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 50,
+        "cited_chosen_config": 50,
+        "cited_first_half_presented": 25,
+        "cited_blocks_0_4": 25,
+        "mean_citations": 11.0,
+        "overstated_explanations": 5,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      },
+      "sampled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 17,
+        "cited_chosen_config": 17,
+        "cited_first_half_presented": 5,
+        "cited_blocks_0_4": 5,
+        "mean_citations": 4.4,
+        "overstated_explanations": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "unsupported_numbers": 0
+      }
+    }
+  }
+}

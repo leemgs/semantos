@@ -6,7 +6,9 @@ Section numbers refer to the current `paper/main.pdf`:
 §1 Introduction, §2 Related Work, §3 Testbed, §4 Audit Protocol,
 §5 Results (§5.1 decisions, §5.2 citations, §5.3 explanations, §5.4 reliance,
 §5.5 gate), §6 Discussion, §7 Conclusion, Limitations, Ethics Statement,
-Appendix A (testbed details), B (additional measurements), C (prompt and schema).
+Appendix A (testbed details), B (additional measurements), C (prompt and schema,
+claim-label checks, attribution judges, compute budget), D (scale and family),
+E (prompt, order, cap and decoding robustness).
 
 Answers are written in English so they can be pasted into the ARR form.
 All items are answered; no open decisions remain.
@@ -69,6 +71,10 @@ model cards on 2026-10-01.
 - Gemini 3.8 Flash, Gemini 3.1 Pro preview: proprietary, accessed under the
   Google/OpenRouter API terms of service.
 - llama-cpp-python 0.3.35 and llama.cpp: MIT.
+- Attribution judges (Appendix C), used for inference only and not
+  redistributed: AlignScore and MiniCheck checkpoints (MIT, per their Hugging
+  Face model cards), the NLI cross-encoders and Flan-T5-large under their
+  model-card licenses; AlignScore and MiniCheck are cited.
 - Released artifacts (code, measurements, prompts, responses, annotations):
   Apache License 2.0 (`LICENSE` at the repository root). The bundled ACL style
   files keep their own terms (`acl_natbib.bst`: LaTeX Project Public License),
@@ -132,7 +138,10 @@ Yes. Parameter scale is given by the model names (7B–550B); Appendix C
   11,580 s (about 3.2 CPU-hours): Qwen2.5-7B 1,603 s, Llama-3.1-8B 2,325 s,
   Qwen2.5-14B 3,136 s, Phi-4 4,516 s.
 - Hosted models via OpenRouter: 1,224 s total wall time over 150 calls; total
-  cost about 0.5 USD.
+  cost about 0.5 USD. Robustness rerun (Appendix E): 150 calls plus two
+  retries, 0.83 USD, about 2.5 h of wall time.
+- Attribution judges (Appendix C): eight judges with pinned revisions on the
+  same four-core CPU container, no GPU.
 - Kernel measurements: one Intel Core i5-3570 host (four logical CPUs,
   Linux 6.17.0-23-generic); acquisition took 6.54 s (training), 8.29 s
   (retrieval) and 10.15 s (calibration), plus the test grid.
@@ -144,7 +153,9 @@ Yes. §4 and Appendix C: temperature 0 (greedy), five seeds (4088–4092), one
 system prompt, JSON schema (config enum, at most six citations restricted to
 supplied IDs, explanation of at most 400 characters), local `max_tokens` 384,
 hosted `max_tokens` 4096. No prompt or hyperparameter search was performed;
-the prompt was fixed before the runs. Optimizer settings (ε = 0.1, budgets
+the prompt was fixed before the runs. Appendix E reruns the hosted models
+with a paraphrased prompt, reversed and shuffled evidence order, no citation
+cap and temperature 0.7 (five seeds each). Optimizer settings (ε = 0.1, budgets
 4/8/16/40, GP-EI) are in Appendix B.
 
 **C3. Did you report descriptive statistics about your results (e.g., error
@@ -155,7 +166,8 @@ Yes. Held-out outcomes are means of ten block-level P95 values with 95%
 Student-t half-widths (Table 2, §5.1); every claim, citation and decision
 count is reported with its denominator. The paper states that greedy local
 runs were byte-identical across seeds, so seeds are not independent
-replicates (§4, Limitations).
+replicates (§4, Limitations). Results by model scale and family, with
+Spearman's rho and Fisher's exact test, are in Appendix D.
 
 **C4. If you used existing packages (e.g., for preprocessing, normalization,
 or evaluation), did you report the implementation, model, and parameter

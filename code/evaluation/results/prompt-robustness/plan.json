@@ -1,0 +1,32 @@
+{
+  "models": [
+    "meta-llama/llama-3.3-70b-instruct",
+    "qwen/qwen3-235b-a22b-2507",
+    "deepseek/deepseek-v3.2",
+    "nvidia/nemotron-3-ultra-550b-a55b",
+    "google/gemini-3.8-flash",
+    "google/gemini-3.1-pro-preview"
+  ],
+  "conditions": [
+    "paraphrase",
+    "reversed",
+    "shuffled",
+    "nocap",
+    "sampled"
+  ],
+  "seeds": [
+    4088,
+    4089,
+    4090,
+    4091,
+    4092
+  ],
+  "paraphrase_system_prompt": "Your task is to choose, from the allowed configurations, the one that gives the lowest P95 latency of periodic wake-ups. Answer in JSON with the fields config (one allowed name, spelled exactly), cited_ids (the IDs of the evidence items you rely on) and explanation. The evidence consists of measured training summaries and retrieval runs; it contains no held-out test results. Use only the evidence provided.",
+  "sampled_temperature": 0.7,
+  "max_tokens": 4096,
+  "response_format": "strict json_schema",
+  "provider_require_parameters": true,
+  "key_env": "OPENROUTER_API_KEY",
+  "source_sha256": "af63faab25eb1e85ab3ffb7b5b4f4a09c29c39c0495ac068865d5ec9182b8bf6",
+  "started_utc_ns": 1791896126669361304
+}
