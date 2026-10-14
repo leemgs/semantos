@@ -112,7 +112,7 @@ Random search, $\epsilon$-greedy Q-learning ($\epsilon=0.1$), UCB1 and GP-EI BO 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/gate_replay.pdf}
-\caption{Frozen-gate replay on the 80 held-out test runs; each point is one run. Positive means unsafe (dashed line) and a gate-positive decision is veto. Counts at every tested $\alpha$ (all give $\tau=.9225$): 5\,ms, 20 accepted / 20 vetoed, TP~20, FP~0, FN~5, TN~15; 8\,ms, 20 / 20, TP~20, FP~0, FN~4, TN~16. Blue points above the line are the accepted unsafe runs. Generated from raw logs by \texttt{plot\_gate\_replay.py}.}
+\caption{Frozen-gate replay on the 80 held-out test runs; each point is one run, grouped by timer slack (50\,$\mu$s or 1\,ms) and CPU affinity (all CPUs or one). Positive means unsafe (more than 10\% of deadlines missed, dashed line) and a gate-positive decision is veto. Counts at every tested $\alpha$ (all give $\tau=.9225$): 5\,ms, 20 accepted / 20 vetoed, TP~20, FP~0, FN~5, TN~15; 8\,ms, 20 / 20, TP~20, FP~0, FN~4, TN~16. Blue points above the line are the accepted unsafe runs. Generated from raw logs by \texttt{plot\_gate\_replay.py}.}
 \label{fig:gate-replay}
 \end{figure}
 
@@ -188,26 +188,24 @@ Local models ran as 4-bit GGUF files (Q4\_K\_M; Phi-4 Q4\_K) with llama-cpp-pyth
 
 \section{Results by Model Scale and Family}
 \label{app:scale}
-\texttt{scale\_family\_analysis.py} re-analyses the existing records by scale and family without new model calls (Table~\ref{tab:scale}). It uses only full-context answers, since local models were also audited on ablated prompts; claims of local models are counted once per distinct explanation because their greedy outputs repeat across seeds, whereas hosted explanations vary and repeat claims across seeds. Among the eight open-weight models, the misstated share falls with log total parameters (Spearman $\rho=-0.78$, $p=0.02$), and local models misstate more often than hosted open-weight models (7/8 versus 21/52; Fisher's exact test $p=0.02$). With eight local claims and repeated hosted claims, this is a trend, not an estimate. The error types change with scale: wrong units and source attributions occur only in 7--15B models, whereas overstatements and wrong values occur at every scale and in every family. Citation behavior does not track scale: every open-weight model cites only runs of its chosen configuration; Gemini-Pro is the only model that cites runs of other configurations (8 of 21), and front-loading is strongest in local models (100 of 110 cited runs in the first half) and weakest in Llama-70B (14 of 28). Within the Qwen and Llama families, the larger model misstates a smaller share (Qwen 2/2 and 2/2 at 7B and 14B versus 3/6 at 235B; Llama 2/2 versus 2/7).
-
-\begin{table}[h]
+\begin{table*}[t]
 \centering\footnotesize\setlength{\tabcolsep}{3pt}
 \caption{Full-context results by model: answers choosing the selector's configuration (Sel.), cited retrieval runs of the chosen configuration and from the first half of the evidence list, misstated claims, and misstated claims by type (overstated / wrong value / wrong unit or source). Gemini parameter counts are undisclosed.}
 \label{tab:scale}
-\begin{adjustbox}{max width=\columnwidth}
 \input{scale-family.tex}
-\end{adjustbox}
-\end{table}
+\end{table*}
+
+\begin{table*}[t]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{Hosted models under prompt, order, cap and decoding variations (30 answers per condition): answers choosing the selector's configuration (Sel.), mean citations per answer, cited retrieval runs of the chosen configuration, in the first half of the list as presented, and from blocks 0--4, and explanations with a quantifier overstatement (automatic proxy).}
+\label{tab:robust}
+\input{prompt-robustness.tex}
+\end{table*}
+
+\texttt{scale\_family\_analysis.py} re-analyses the existing records by scale and family without new model calls (Table~\ref{tab:scale}). It uses only full-context answers, since local models were also audited on ablated prompts; claims of local models are counted once per distinct explanation because their greedy outputs repeat across seeds, whereas hosted explanations vary and repeat claims across seeds. Among the eight open-weight models, the misstated share falls with log total parameters (Spearman $\rho=-0.78$, $p=0.02$), and local models misstate more often than hosted open-weight models (7/8 versus 21/52; Fisher's exact test $p=0.02$). With eight local claims and repeated hosted claims, this is a trend, not an estimate. The error types change with scale: wrong units and source attributions occur only in 7--15B models, whereas overstatements and wrong values occur at every scale and in every family. Citation behavior does not track scale: every open-weight model cites only runs of its chosen configuration; Gemini-Pro is the only model that cites runs of other configurations (8 of 21), and front-loading is strongest in local models (100 of 110 cited runs in the first half) and weakest in Llama-70B (14 of 28). Within the Qwen and Llama families, the larger model misstates a smaller share (Qwen 2/2 and 2/2 at 7B and 14B versus 3/6 at 235B; Llama 2/2 versus 2/7).
+
 
 \section{Robustness to Prompt, Evidence Order, Citation Cap and Decoding}
 \label{app:robust}
 \texttt{prompt\_robustness.py} reruns the full-context prompt of the six hosted models, five seeds each, with the same frozen evidence, strict JSON schema and OpenRouter settings as the main audit, under five conditions: a paraphrased system prompt; retrieval runs in reverse order; retrieval runs in a seed-specific random order; no citation cap (any number of supplied IDs); and sampling at temperature 0.7. All 150 answers are valid after one retry of two answers that a provider truncated. Table~\ref{tab:robust} reports the results. Every answer in every condition chooses the selector's configuration, and every cited run belongs to the chosen configuration (in the original runs only Gemini-Pro cites others). Reversing the runs moves citations with list position for four models (Llama-70B, Qwen3-235B and both Gemini models), whereas Nemotron keeps citing blocks 0--4 and DeepSeek-V3.2 falls in between; without the cap, four models cite all ten runs of the chosen configuration. The explanations of these new answers have no verified claim labels, so we score them with two automatic proxies, applied identically to the original runs: a universal quantifier attached to a comparison (``consistently the lowest'', ``lower in all runs'') or ``significantly lower'', which the evidence does not support; and decimal numbers that match no evidence value or derived minimum, maximum, mean or difference. The quantifier overstatement recurs in every condition (9 to 21 of 30 explanations, 21 in the original runs), while unsupported numbers are rare (at most two per condition), consistent with the verified finding that misstated claims mostly quote correct numbers.
 
-\begin{table}[h]
-\centering\footnotesize\setlength{\tabcolsep}{3pt}
-\caption{Hosted models under prompt, order, cap and decoding variations (30 answers per condition): answers choosing the selector's configuration (Sel.), mean citations per answer, cited retrieval runs of the chosen configuration, in the first half of the list as presented, and from blocks 0--4, and explanations with a quantifier overstatement (automatic proxy).}
-\label{tab:robust}
-\begin{adjustbox}{max width=\columnwidth}
-\input{prompt-robustness.tex}
-\end{adjustbox}
-\end{table}

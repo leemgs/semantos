@@ -234,7 +234,7 @@ publisher, ACL Anthology, Crossref or arXiv record (all 65 entries, checked
    the remaining, small risk that reviewers find it through other wording.
 4. Fill in the ARR form from `paper/arr-submission-form.md`.
 
-## Final format check (2026-10-05)
+## Final format check (2026-10-14)
 
 - Official ACL style files, unmodified (`acl.sty`, `acl_natbib.bst` identical
   to acl-org/acl-style-files); review mode with line numbers; A4.
@@ -246,4 +246,9 @@ publisher, ACL Anthology, Crossref or arXiv record (all 65 entries, checked
 - Anonymity: no author name, e-mail, earlier venue, old project name, self-
   citation or acknowledgments in the PDF text; system named GroundKern.
 - aclpubcheck (final-mode build): "All Clear!".
+- Widths: no table, figure or text extends beyond the text block or a column
+  on any page (checked on the rendered PDF). Tables 10 and 11 are full-width
+  appendix tables at natural size; no float is shrunk below about 7 pt;
+  Figure 3 is drawn at the column width with 7-8 pt labels.
+- No changed margins, line spacing, caption spacing or negative vertical space.
 

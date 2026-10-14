@@ -20,7 +20,7 @@ ACCEPT = '#2a78d6'   # categorical slot 1 (validated palette, light surface)
 VETO = '#eb6834'     # categorical slot 2
 INK, MUTED = '#0b0b0b', '#52514e'
 ORDER = ['s50000_aall', 's50000_aone', 's1000000_aall', 's1000000_aone']
-LABELS = ['50µs\nall CPUs', '50µs\none CPU', '1ms\nall CPUs', '1ms\none CPU']
+LABELS = ['50µs\nall', '50µs\none', '1ms\nall', '1ms\none']  # timer slack / CPUs
 
 
 def gate_points(root):
@@ -49,9 +49,9 @@ def main():
                 for s in json.loads((a.root / 'analysis.json').read_text())['safety_replay']}
 
     plt.rcParams.update({'font.family': 'serif', 'font.serif': ['Nimbus Roman', 'DejaVu Serif'],
-                         'font.size': 7, 'pdf.fonttype': 42, 'mathtext.fontset': 'stix', 'axes.edgecolor': MUTED,
+                         'font.size': 8, 'pdf.fonttype': 42, 'mathtext.fontset': 'stix', 'axes.edgecolor': MUTED,
                          'axes.labelcolor': INK, 'xtick.color': MUTED, 'ytick.color': MUTED})
-    fig, axes = plt.subplots(1, 2, figsize=(3.3, 1.9), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(3.03, 2.3), sharey=True)  # ACL column width, no rescaling
     rng = random.Random(4088)
     for ax, period in zip(axes, sorted(points)):
         pts = points[period]
@@ -65,23 +65,23 @@ def main():
             ax.scatter(x, frac, s=14, marker='o' if acc else '^', color=ACCEPT if acc else VETO,
                        edgecolors='white', linewidths=0.6, zorder=3)
         ax.axhline(unsafe, color=MUTED, lw=0.8, ls=(0, (3, 2)), zorder=1)
-        ax.set_title(f'{period} ms test period', fontsize=7, color=INK, pad=3)
-        ax.text(0.03, 0.80, f'accepted & unsafe:\n{fn} of {n_unsafe} unsafe runs', transform=ax.transAxes,
-                va='top', ha='left', fontsize=6.5, color=INK)
-        ax.set_xticks(range(4), LABELS, fontsize=5.8)
+        ax.set_title(f'{period} ms test period', fontsize=8, color=INK, pad=3)
+        ax.text(0.03, 0.80, f'accepted &\nunsafe: {fn}/{n_unsafe}', transform=ax.transAxes,
+                va='top', ha='left', fontsize=7.5, color=INK)
+        ax.set_xticks(range(4), LABELS, fontsize=7)
         ax.set_xlim(-0.5, 3.5)
         ax.set_ylim(-0.03, 1.03)
         ax.grid(axis='y', color='#e4e3df', lw=0.5, zorder=0)
         for side in ('top', 'right'):
             ax.spines[side].set_visible(False)
         ax.tick_params(length=2, width=0.5)
-    axes[0].set_ylabel('Deadline-miss fraction per run')
-    axes[1].text(3.5, unsafe + 0.02, 'unsafe label (>10%)', ha='right', va='bottom', fontsize=5.8, color=MUTED)
+    axes[0].set_ylabel('Deadline-miss fraction')
+    axes[0].text(3.5, unsafe + 0.02, 'unsafe', ha='right', va='bottom', fontsize=7, color=MUTED)
     handles = [plt.Line2D([], [], marker='o', ls='', color=ACCEPT, markeredgecolor='white', label=f'accepted ($u<\\tau={tau}$)'),
                plt.Line2D([], [], marker='^', ls='', color=VETO, markeredgecolor='white', label='vetoed')]
-    fig.legend(handles=handles, loc='lower center', ncol=2, frameon=False, fontsize=6.5,
+    fig.legend(handles=handles, loc='lower center', ncol=2, frameon=False, fontsize=7.5,
                bbox_to_anchor=(0.55, -0.01), handletextpad=0.2, columnspacing=1.2)
-    fig.tight_layout(rect=(0, 0.07, 1, 1), w_pad=0.6)
+    fig.tight_layout(rect=(0, 0.08, 1, 1), w_pad=0.5)
     fig.savefig(a.out)
     print(json.dumps({'out': str(a.out), 'tau': tau,
                       'fn_over_unsafe': {k: f"{reported[(k, 0.05)]['fn']}/{reported[(k, 0.05)]['fn'] + reported[(k, 0.05)]['tp']}" for k in sorted(points)}}))
