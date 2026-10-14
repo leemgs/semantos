@@ -216,8 +216,10 @@ Yes. The Ethics Statement states that the research idea, problem formulation
 and study design are the authors'; that AI assistants were used for code, for
 drafting and restructuring prose, for locating references and for drafting the
 explanation-claim labels; that every reference was checked against its
-publisher, ACL Anthology, Crossref or arXiv record (all 65 entries, checked
-2026-10-01); and that every claim label is released with its check.
+publisher, ACL Anthology, Crossref, OpenReview or arXiv record (all 67 entries,
+last checked 2026-10-14 with `scripts/check_references.py`; see
+`paper/reference-check.md`); and that every claim label is released with its
+check.
 
 ---
 
