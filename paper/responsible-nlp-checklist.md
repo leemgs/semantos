@@ -1,7 +1,7 @@
 # ARR Responsible NLP Checklist — draft answers
 
 Draft for the ACL 2027 (ARR) submission *Cited but Not Correct: Auditing
-Evidence-Grounded LLM Configuration Advice against Equally Informed Baselines*.
+Decisions, Citations and Claims in Evidence-Grounded LLM Advice*.
 Section numbers refer to the current `paper/main.pdf`:
 §1 Introduction, §2 Related Work, §3 Testbed, §4 Audit Protocol,
 §5 Results (§5.1 decisions, §5.2 citations, §5.3 explanations, §5.4 reliance,

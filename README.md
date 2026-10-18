@@ -1,7 +1,7 @@
 # SemantOS
 
-Code and data for *Cited but Not Correct: Auditing Evidence-Grounded LLM
-Configuration Advice against Equally Informed Baselines* (ACL 2027 submission,
+Code and data for *Cited but Not Correct: Auditing Decisions, Citations
+and Claims in Evidence-Grounded LLM Advice* (ACL 2027 submission,
 sources in [paper/](paper/)). The paper audits LLM recommendations that cite
 supplied evidence at four levels: the decision (against a non-LLM selector given
 the same frozen evidence), the citations, the quantitative claims in the

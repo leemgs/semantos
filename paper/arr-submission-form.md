@@ -1,12 +1,13 @@
-# ARR submission form — draft fields
+# ARR submission form — draft fields (target venue: ACL 2027)
 
 Plain-text versions of the fields asked for on OpenReview, taken from the
-current paper. Paste them into the form; the chosen area and keywords are
+current paper. Target: the ARR cycle feeding ACL 2027, then commitment to ACL
+2027 after reviews. Paste them into the form; the chosen area and keywords are
 suggestions.
 
 ## Title
 
-Cited but Not Correct: Auditing Evidence-Grounded LLM Configuration Advice against Equally Informed Baselines
+Cited but Not Correct: Auditing Decisions, Citations and Claims in Evidence-Grounded LLM Advice
 
 ## Abstract (199 words, plain text)
 
