@@ -20,7 +20,8 @@ All items are answered; no open decisions remain.
 **A1. Did you describe the limitations of your work?**
 Yes. The unnumbered Limitations section covers task and generality (one task,
 English prompts, small numeric evidence, opaque labels), annotation (AI-drafted labels
-verified by one author, two further blind annotators, 97 claims), models and prompting (one prompt, no decoding or
+verified by one author, two further blind annotators, 97 claims; claim
+extraction not independently validated), models and prompting (one prompt, no decoding or
 formatting variation, quantized local weights, non-reproducible hosted
 serving, citation cap confounding the position effect), reliance measurement,
 measurement scope and system/safety scope.

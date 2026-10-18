@@ -111,6 +111,23 @@ Limitations and offer concrete additions for the camera-ready version.
 - TRUE (T5-11B) did not fit the 15 GB CPU container; offer it for the
   camera-ready if asked.
 
+## 12. "Who decided what counts as a claim?"
+
+- Conceded (Limitations, Annotation): the blind annotators labeled claims that
+  had already been extracted; extraction was not independently validated, and
+  only quantitative or comparative claims were audited.
+- Offer: an independent annotator segments the 50 full-context explanations
+  from scratch; report claim-level recall/precision of the extraction and the
+  misstated count on the union of claims.
+
+## 13. "Is the gate failure statistically meaningful?"
+
+- Stated precisely in §5.5: unsafe acceptance (5/25, 4/24) is significantly
+  above 5% for this calibration draw (one-sided binomial p = .007, .03) but
+  within sampling error of 10% (p = .10, .21). The bound is marginal over
+  calibration draws, so one draw is a single realization.
+- Offer: repeat calibration/test over additional period pairs.
+
 ## Quick additions possible during the response period (no new hardware runs)
 
 1. Adjudication of the disagreements, if asked.

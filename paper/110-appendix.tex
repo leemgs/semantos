@@ -12,6 +12,15 @@ For lower-is-better loss, negative $I_{ab}$ indicates a beneficial non-additive 
 
 A \textsc{depends-on} edge requires a validated admissibility rule or measured range conditioning; it cannot be inferred solely from the sign of $I_{ab}$. The seed graph is empty until edges pass this test. The principal question is whether a reasoner can use independently acquired evidence more effectively than an optimizer with the same inputs, after charging the cost of acquiring that evidence.
 
+\paragraph{Restricted rank gate.}
+The gate of \S\ref{sec:testbed} sets $\tau$ as follows; $Y=1$ marks an unsafe outcome.
+\begin{proposition}[Restricted rank gate]\label{prop:recal}
+Fix a score function before calibration. Suppose $n$ unsafe calibration scores and the next unsafe test score are jointly exchangeable. Set $j=\lfloor\alpha(n+1)\rfloor$ for $0<\alpha<1$. If $j=0$, veto all; otherwise let $\tau$ be the $j$th smallest unsafe calibration score and accept only when $u<\tau$. Then the unsafe-class acceptance probability, marginal over calibration and test scores, is at most $j/(n+1)\le\alpha$.
+\end{proposition}
+\noindent\emph{Proof.} By exchangeability the test score's rank among the $n+1$ scores is uniform; it falls below the $j$th calibration score only in the first $j$ ranks, and ties only reduce this.\hfill$\square$
+
+The bound controls misses among unsafe actions, $\Pr(A=1\mid Y=1)$, not the unsafe fraction among accepted actions; a cost-selected threshold is capped at the rank threshold, and no unsafe calibration example implies veto-all. The gate accepts any fixed score; \S\ref{subsec:gate} evaluates it with a measured risk score rather than $u$.
+
 \paragraph{Disagreement score.}
 For a knob--value pair proposed in $v$ of $k$ samples, the reasoner's score is $u=0.7(1-v/k)+0.3(1-w)$, clipped to $[0.02,1]$, where $w$ is the strongest retrieved synergy weight (zero when absent). It is neither predictive entropy nor a calibrated probability. Failed samples stay in the denominator, and repeated copies of a fallback are not counted as independent votes.
 
