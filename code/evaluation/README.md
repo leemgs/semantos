@@ -420,3 +420,7 @@ Hosted runs (2026-09-27, OpenRouter, `--response-format json_schema`,
   with a paraphrased prompt, reversed or shuffled evidence, no citation cap
   and temperature 0.7 (needs `OPENROUTER_API_KEY`; 150 calls cost 0.83 USD);
   `score` recomputes the table from `results/prompt-robustness/records.jsonl`.
+* `mitigation_baseline.py` (Appendix F): reruns the six hosted models with a
+  verify instruction, precomputed summary statistics and both; `validate`
+  compares its automatic checks with the verified labels on the original runs;
+  `score` rebuilds the table from `results/mitigation-baseline/records.jsonl`.

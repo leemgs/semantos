@@ -1,0 +1,31 @@
+{
+  "models": [
+    "meta-llama/llama-3.3-70b-instruct",
+    "qwen/qwen3-235b-a22b-2507",
+    "deepseek/deepseek-v3.2",
+    "nvidia/nemotron-3-ultra-550b-a55b",
+    "google/gemini-3.8-flash",
+    "google/gemini-3.1-pro-preview"
+  ],
+  "conditions": [
+    "verify",
+    "stats",
+    "verify+stats"
+  ],
+  "seeds": [
+    4088,
+    4089,
+    4090,
+    4091,
+    4092
+  ],
+  "verify_instruction": " Before writing the explanation, check every number, range, minimum, maximum and comparison you state against the evidence items, and state only what the evidence supports: do not say \"consistently\", \"always\", \"in all runs\" or \"significantly\" unless every relevant item supports it. Cite evidence that favors other configurations as well as evidence that favors your choice.",
+  "temperature": 0,
+  "max_tokens": 4096,
+  "response_format": "strict json_schema",
+  "citation_cap": 6,
+  "provider_require_parameters": true,
+  "key_env": "OPENROUTER_API_KEY",
+  "source_sha256": "af83f62fa1df9f492ecad4b2a06754f9a80b0e9b60ec6d6ff8420414d7aab2e2",
+  "started_utc_ns": 1792311825974910644
+}

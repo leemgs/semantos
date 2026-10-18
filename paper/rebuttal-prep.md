@@ -111,6 +111,17 @@ Limitations and offer concrete additions for the camera-ready version.
 - TRUE (T5-11B) did not fit the 15 GB CPU container; offer it for the
   camera-ready if asked.
 
+## 11b. "So how would you fix it?"
+
+- Done (§5.3, Appendix F): verify instruction, precomputed summary statistics
+  and both, on the six hosted models (90 answers, 0.70 USD). Flagged
+  quantifiers 21 -> 1 / 4 / 0 of 30, range errors 7 -> 2 / 0 / 0; decisions
+  unchanged. The automatic checks match the verified labels on the original
+  answers (range check: exactly the 7 explanations with a verified wrong
+  range), but see only two error types; reading the explanations found
+  residual false comparisons. Open: verified labels for the 90 explanations
+  (`results/mitigation-baseline/explanations-for-review.csv`).
+
 ## 12. "Who decided what counts as a claim?"
 
 - Conceded (Limitations, Annotation): the blind annotators labeled claims that

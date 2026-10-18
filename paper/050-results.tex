@@ -65,6 +65,8 @@ The explanations are often wrong about what the cited items say (Table~\ref{tab:
 
 These errors are largely decoupled from the decision: 35 of the 41 misstated claims accompany a choice of the control. Nor does variation in wording track variation in decisions: hosted models produced two to five distinct full-context explanations each while choosing the control in every seed. Valid citations thus establish provenance, and a correct decision can coexist with an incorrect account of the evidence that supports it.
 
+\emph{Mitigations help but do not certify.} For the hosted models, an instruction to verify every stated number cuts flagged quantifiers from 21 to 1 of 30 explanations and range errors from 7 to 2, and precomputed summaries remove range errors; yet reading the explanations finds false comparisons the automatic checks miss, and these answers lack verified labels (Appendix~\ref{app:mitigation}).
+
 \subsection{Reliance: Rarely Estimable, Rarely Specific}
 \label{subsec:reliance}
 Five models cite the training table in their full-context answers, so matched deletion is non-estimable for them. Among estimable models, only Phi-4 shows citation-specific reliance: deleting its six cited retrieval runs changes its choice in all five seeds while matched uncited deletion does not, but the new choice (\texttt{s50000\_aone}) contradicts the training table that remains in the prompt. Llama-3.1-8B changes its choice under both deletions, which indicates sensitivity to context rather than reliance on what it cites. Llama-3.3-70B, Qwen3 and Nemotron change under neither, which is consistent with the remaining evidence still favoring the control but uninformative about reliance.

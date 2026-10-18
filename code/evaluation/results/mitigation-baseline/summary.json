@@ -1,0 +1,1172 @@
+{
+  "planned": 90,
+  "valid": 90,
+  "invalid_cells": [],
+  "calls_including_retries": 95,
+  "reported_cost_usd": 0.6983,
+  "conditions": {
+    "original": {
+      "answers": 30,
+      "selector_choice": 30,
+      "retrieval_citations": 150,
+      "contrary_citations": 8,
+      "answers_citing_contrary": 4,
+      "evidence_citations": 150,
+      "contrary_evidence": 8,
+      "answers_citing_contrary_evidence": 4,
+      "answers_citing_summary": 0,
+      "overstated_explanations": 21,
+      "explanations_with_range_errors": 7,
+      "explanations_with_unsupported_numbers": 0,
+      "mean_chars": 417
+    },
+    "verify": {
+      "answers": 30,
+      "selector_choice": 30,
+      "retrieval_citations": 146,
+      "contrary_citations": 19,
+      "answers_citing_contrary": 10,
+      "evidence_citations": 146,
+      "contrary_evidence": 19,
+      "answers_citing_contrary_evidence": 10,
+      "answers_citing_summary": 0,
+      "overstated_explanations": 1,
+      "explanations_with_range_errors": 2,
+      "explanations_with_unsupported_numbers": 0,
+      "mean_chars": 390
+    },
+    "stats": {
+      "answers": 30,
+      "selector_choice": 30,
+      "retrieval_citations": 32,
+      "contrary_citations": 0,
+      "answers_citing_contrary": 0,
+      "evidence_citations": 102,
+      "contrary_evidence": 42,
+      "answers_citing_contrary_evidence": 19,
+      "answers_citing_summary": 28,
+      "overstated_explanations": 4,
+      "explanations_with_range_errors": 0,
+      "explanations_with_unsupported_numbers": 0,
+      "mean_chars": 309
+    },
+    "verify+stats": {
+      "answers": 30,
+      "selector_choice": 30,
+      "retrieval_citations": 45,
+      "contrary_citations": 8,
+      "answers_citing_contrary": 6,
+      "evidence_citations": 124,
+      "contrary_evidence": 63,
+      "answers_citing_contrary_evidence": 24,
+      "answers_citing_summary": 24,
+      "overstated_explanations": 0,
+      "explanations_with_range_errors": 0,
+      "explanations_with_unsupported_numbers": 0,
+      "mean_chars": 395
+    }
+  },
+  "per_model": {
+    "Llama-3.3-70B": {
+      "original": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 28,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 28,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 2,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 265
+      },
+      "verify": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 30,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      },
+      "stats": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 0,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 5,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 5,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 152
+      },
+      "verify+stats": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 0,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 20,
+        "contrary_evidence": 15,
+        "answers_citing_contrary_evidence": 5,
+        "answers_citing_summary": 5,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      }
+    },
+    "Qwen3-235B": {
+      "original": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 30,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 5,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      },
+      "verify": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 25,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 25,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      },
+      "stats": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 27,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 30,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 3,
+        "overstated_explanations": 3,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      },
+      "verify+stats": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 26,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 26,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      }
+    },
+    "DeepSeek-V3.2": {
+      "original": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 25,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 25,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 4,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 775
+      },
+      "verify": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 25,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 25,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      },
+      "stats": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 4,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 21,
+        "contrary_evidence": 12,
+        "answers_citing_contrary_evidence": 4,
+        "answers_citing_summary": 5,
+        "overstated_explanations": 1,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      },
+      "verify+stats": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 7,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 23,
+        "contrary_evidence": 12,
+        "answers_citing_contrary_evidence": 4,
+        "answers_citing_summary": 4,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      }
+    },
+    "Nemotron-3-Ultra-550B": {
+      "original": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 30,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 5,
+        "explanations_with_range_errors": 5,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      },
+      "verify": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 26,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 26,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 1,
+        "explanations_with_range_errors": 2,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      },
+      "stats": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 0,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 20,
+        "contrary_evidence": 15,
+        "answers_citing_contrary_evidence": 5,
+        "answers_citing_summary": 5,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 347
+      },
+      "verify+stats": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 0,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 20,
+        "contrary_evidence": 15,
+        "answers_citing_contrary_evidence": 5,
+        "answers_citing_summary": 5,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      }
+    },
+    "Gemini-3.8-Flash": {
+      "original": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 16,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 16,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 2,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 290
+      },
+      "verify": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 21,
+        "contrary_citations": 11,
+        "answers_citing_contrary": 5,
+        "evidence_citations": 21,
+        "contrary_evidence": 11,
+        "answers_citing_contrary_evidence": 5,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 328
+      },
+      "stats": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 1,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 16,
+        "contrary_evidence": 10,
+        "answers_citing_contrary_evidence": 5,
+        "answers_citing_summary": 5,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 224
+      },
+      "verify+stats": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 10,
+        "contrary_citations": 7,
+        "answers_citing_contrary": 5,
+        "evidence_citations": 20,
+        "contrary_evidence": 12,
+        "answers_citing_contrary_evidence": 5,
+        "answers_citing_summary": 5,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 356
+      }
+    },
+    "Gemini-3.1-Pro": {
+      "original": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 21,
+        "contrary_citations": 8,
+        "answers_citing_contrary": 4,
+        "evidence_citations": 21,
+        "contrary_evidence": 8,
+        "answers_citing_contrary_evidence": 4,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 5,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 373
+      },
+      "verify": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 19,
+        "contrary_citations": 8,
+        "answers_citing_contrary": 5,
+        "evidence_citations": 19,
+        "contrary_evidence": 8,
+        "answers_citing_contrary_evidence": 5,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 415
+      },
+      "stats": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 0,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 10,
+        "contrary_evidence": 5,
+        "answers_citing_contrary_evidence": 5,
+        "answers_citing_summary": 5,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 329
+      },
+      "verify+stats": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 2,
+        "contrary_citations": 1,
+        "answers_citing_contrary": 1,
+        "evidence_citations": 15,
+        "contrary_evidence": 9,
+        "answers_citing_contrary_evidence": 5,
+        "answers_citing_summary": 5,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 415
+      }
+    }
+  },
+  "flagged": [
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "verify",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "verify",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "verify",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "verify",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "verify",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "stats",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "stats",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "stats",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "stats",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "stats",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "verify+stats",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "verify+stats",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "verify+stats",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "verify+stats",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Llama-3.3-70B",
+      "condition": "verify+stats",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "verify",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "verify",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "verify",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "verify",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "verify",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "stats",
+      "seed": 4088,
+      "overstated": true,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "stats",
+      "seed": 4089,
+      "overstated": true,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "stats",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "stats",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "stats",
+      "seed": 4092,
+      "overstated": true,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "verify+stats",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "verify+stats",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "verify+stats",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "verify+stats",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Qwen3-235B",
+      "condition": "verify+stats",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "verify",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "verify",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "verify",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "verify",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "verify",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "stats",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "stats",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "stats",
+      "seed": 4090,
+      "overstated": true,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "stats",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "stats",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "verify+stats",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "verify+stats",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "verify+stats",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "verify+stats",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "condition": "verify+stats",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "verify",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "verify",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [
+        "s50000_aall: 93.049-183.217",
+        "s50000_aone: 151.299-430.654",
+        "s1000000_aall: 875.788-1023.152"
+      ],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "verify",
+      "seed": 4090,
+      "overstated": true,
+      "range_errors": [
+        "s50000_aone: 151.299-571.84",
+        "s1000000_aall: 875.788-1023.152"
+      ],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "verify",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "verify",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "stats",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "stats",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "stats",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "stats",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "stats",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "verify+stats",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "verify+stats",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "verify+stats",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "verify+stats",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Nemotron-3-Ultra-550B",
+      "condition": "verify+stats",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "verify",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "verify",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "verify",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "verify",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "verify",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "stats",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "stats",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "stats",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "stats",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "stats",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "verify+stats",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "verify+stats",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "verify+stats",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "verify+stats",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.8-Flash",
+      "condition": "verify+stats",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "verify",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "verify",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "verify",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "verify",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "verify",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "stats",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "stats",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "stats",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "stats",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "stats",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "verify+stats",
+      "seed": 4088,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "verify+stats",
+      "seed": 4089,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "verify+stats",
+      "seed": 4090,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "verify+stats",
+      "seed": 4091,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    },
+    {
+      "model": "Gemini-3.1-Pro",
+      "condition": "verify+stats",
+      "seed": 4092,
+      "overstated": false,
+      "range_errors": [],
+      "unsupported_numbers": []
+    }
+  ]
+}

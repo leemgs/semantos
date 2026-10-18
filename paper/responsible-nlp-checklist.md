@@ -140,7 +140,8 @@ Yes. Parameter scale is given by the model names (7B–550B); Appendix C
   Qwen2.5-14B 3,136 s, Phi-4 4,516 s.
 - Hosted models via OpenRouter: 1,224 s total wall time over 150 calls; total
   cost about 0.5 USD. Robustness rerun (Appendix E): 150 calls plus two
-  retries, 0.83 USD, about 2.5 h of wall time.
+  retries, 0.83 USD, about 2.5 h of wall time. Mitigation rerun (Appendix F):
+  90 calls plus five retries, 0.70 USD.
 - Attribution judges (Appendix C): eight judges with pinned revisions on the
   same four-core CPU container, no GPU.
 - Kernel measurements: one Intel Core i5-3570 host (four logical CPUs,
@@ -156,7 +157,8 @@ supplied IDs, explanation of at most 400 characters), local `max_tokens` 384,
 hosted `max_tokens` 4096. No prompt or hyperparameter search was performed;
 the prompt was fixed before the runs. Appendix E reruns the hosted models
 with a paraphrased prompt, reversed and shuffled evidence order, no citation
-cap and temperature 0.7 (five seeds each). Optimizer settings (ε = 0.1, budgets
+cap and temperature 0.7 (five seeds each); Appendix F reruns them with a
+verify instruction and precomputed summary statistics. Optimizer settings (ε = 0.1, budgets
 4/8/16/40, GP-EI) are in Appendix B.
 
 **C3. Did you report descriptive statistics about your results (e.g., error

@@ -112,6 +112,14 @@ def main():
         shutil.copytree(HERE/'results/prompt-robustness', tmp/'prompt-robustness')
         run('prompt_robustness.py', 'score', '--out', tmp/'prompt-robustness', '--tex', tmp/'prompt-robustness.tex')
         same_file('Robustness table (from saved API records)', tmp/'prompt-robustness.tex', 'prompt-robustness.tex')
+        shutil.copytree(HERE/'results/mitigation-baseline', tmp/'mitigation-baseline')
+        run('mitigation_baseline.py', 'score', '--out', tmp/'mitigation-baseline', '--tex', tmp/'mitigation.tex')
+        same_file('Mitigation table (from saved API records)', tmp/'mitigation.tex', 'mitigation.tex')
+        mb = json.loads((tmp/'mitigation-baseline/summary.json').read_text())['conditions']
+        got = tuple((mb[c]['overstated_explanations'], mb[c]['explanations_with_range_errors']) for c in
+                    ('original', 'verify', 'stats', 'verify+stats'))
+        check('Mitigations: flagged quantifiers 21/1/4/0 and range errors 7/2/0/0 of 30',
+              got == ((21, 7), (1, 2), (4, 0), (0, 0)), str(got))
         rb = json.loads((tmp/'prompt-robustness/summary.json').read_text())['conditions']
         got = (rb['reversed']['cited_first_half_presented'], rb['reversed']['cited_blocks_0_4'],
                rb['reversed']['retrieval_citations'], rb['nocap']['mean_citations'], rb['nocap']['cited_chosen_config'],
