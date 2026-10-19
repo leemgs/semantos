@@ -263,3 +263,18 @@ Table~\ref{tab:precision} summarizes the comparison. In every evidence and no-ev
 \input{precision.tex}
 \end{adjustbox}
 \end{table}
+
+\section{Redesigned Reliance Test}
+\label{app:reliance}
+The main audit's matched deletion has two weaknesses: the training table is a single item, so models that cite it have no same-kind control, and the uncited controls are runs of other configurations, so the two deletions differ in what the removed evidence says. \texttt{reliance\_redesign.py} reruns the test on the same frozen evidence, five seeds per model, for the six hosted models and for Llama-3.1-8B and Phi-4 with bf16 weights (Appendix~\ref{app:precision}). The training table is split into four per-configuration items, and two deletion tests follow each full-context answer: (A) the main audit's kind-matched test, now estimable when a table item is cited; and (B) a configuration-matched test that deletes $k$ cited retrieval runs of the chosen configuration versus $k$ uncited runs of the same configuration, with $k$ the smaller count (4--5 here). Controls are drawn with a seed-specific RNG.
+
+Splitting the table leaves every hosted model's choice unchanged but turns bf16 Llama-3.1-8B from \texttt{s50000\_aone} to the control in all five seeds, so its earlier wrong choice depends on how the table is presented. Table~\ref{tab:reliance} gives the outcomes. Test A is estimable for 32 seeds and test B for 35; Gemini Flash cites all four table items, which leaves no table control. Under test B no hosted model and not Phi-4 ever changes its choice, while bf16 Llama-3.1-8B switches to \texttt{s50000\_aone} in all five seeds when its cited runs (blocks 0--4 of the control) are deleted and keeps the control when five uncited control runs are deleted. Test A agrees for Llama-3.1-8B and adds one DeepSeek-V3.2 seed, but its cited deletion removes the chosen configuration's own table entry while the control removes another configuration's, so test A still confounds citation with content. Even test B leaves different blocks in the prompt (in blocks 5--9 the competitor wins twice), so a change under cited deletion shows sensitivity to the cited items, not that the model's computation used them. Together with Appendix~\ref{app:precision}, these results show that citation-specific reliance appears in at most one model per design and that which model shows it depends on weight precision and on how the evidence is formatted.
+
+\begin{table}[h]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{Redesigned deletion test (five seeds per model, split training table): full-context answers citing a table item, and estimable seeds whose choice changes under cited deletion only / both / uncited deletion only / neither, for the kind-matched test A and the configuration-matched test B.}
+\label{tab:reliance}
+\begin{adjustbox}{max width=\columnwidth}
+\input{reliance-redesign.tex}
+\end{adjustbox}
+\end{table}

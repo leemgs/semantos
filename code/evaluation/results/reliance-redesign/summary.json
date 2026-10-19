@@ -1,0 +1,205 @@
+{
+  "rows": [
+    {
+      "model": "Llama-3.3-70B",
+      "seeds": 5,
+      "full_valid": 5,
+      "cites_table": 1,
+      "choices": [
+        "s50000_aall"
+      ],
+      "A": {
+        "estimable": 5,
+        "invalid": 0,
+        "cited_only": 0,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 5
+      },
+      "B": {
+        "estimable": 4,
+        "invalid": 1,
+        "cited_only": 0,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 4
+      }
+    },
+    {
+      "model": "Qwen3-235B",
+      "seeds": 5,
+      "full_valid": 5,
+      "cites_table": 5,
+      "choices": [
+        "s50000_aall"
+      ],
+      "A": {
+        "estimable": 5,
+        "invalid": 0,
+        "cited_only": 0,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 5
+      },
+      "B": {
+        "estimable": 5,
+        "invalid": 0,
+        "cited_only": 0,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 5
+      }
+    },
+    {
+      "model": "DeepSeek-V3.2",
+      "seeds": 5,
+      "full_valid": 5,
+      "cites_table": 5,
+      "choices": [
+        "s50000_aall"
+      ],
+      "A": {
+        "estimable": 5,
+        "invalid": 0,
+        "cited_only": 1,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 4
+      },
+      "B": {
+        "estimable": 5,
+        "invalid": 0,
+        "cited_only": 0,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 5
+      }
+    },
+    {
+      "model": "Nemotron-550B",
+      "seeds": 5,
+      "full_valid": 5,
+      "cites_table": 5,
+      "choices": [
+        "s50000_aall"
+      ],
+      "A": {
+        "estimable": 5,
+        "invalid": 0,
+        "cited_only": 0,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 5
+      },
+      "B": {
+        "estimable": 5,
+        "invalid": 0,
+        "cited_only": 0,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 5
+      }
+    },
+    {
+      "model": "Gemini-Flash",
+      "seeds": 5,
+      "full_valid": 5,
+      "cites_table": 5,
+      "choices": [
+        "s50000_aall"
+      ],
+      "A": {
+        "estimable": 0,
+        "invalid": 0,
+        "cited_only": 0,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 0
+      },
+      "B": {
+        "estimable": 2,
+        "invalid": 0,
+        "cited_only": 0,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 2
+      }
+    },
+    {
+      "model": "Gemini-Pro",
+      "seeds": 5,
+      "full_valid": 5,
+      "cites_table": 5,
+      "choices": [
+        "s50000_aall"
+      ],
+      "A": {
+        "estimable": 2,
+        "invalid": 0,
+        "cited_only": 0,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 2
+      },
+      "B": {
+        "estimable": 5,
+        "invalid": 0,
+        "cited_only": 0,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 5
+      }
+    },
+    {
+      "model": "Llama-8B (bf16)",
+      "seeds": 5,
+      "full_valid": 5,
+      "cites_table": 5,
+      "choices": [
+        "s50000_aall"
+      ],
+      "A": {
+        "estimable": 5,
+        "invalid": 0,
+        "cited_only": 5,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 0
+      },
+      "B": {
+        "estimable": 5,
+        "invalid": 0,
+        "cited_only": 5,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 0
+      }
+    },
+    {
+      "model": "Phi-4 (bf16)",
+      "seeds": 5,
+      "full_valid": 5,
+      "cites_table": 5,
+      "choices": [
+        "s50000_aall"
+      ],
+      "A": {
+        "estimable": 5,
+        "invalid": 0,
+        "cited_only": 0,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 5
+      },
+      "B": {
+        "estimable": 4,
+        "invalid": 1,
+        "cited_only": 0,
+        "both": 0,
+        "uncited_only": 0,
+        "neither": 4
+      }
+    }
+  ],
+  "reported_cost_usd": 0.6402
+}

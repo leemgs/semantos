@@ -76,9 +76,13 @@ Limitations and offer concrete additions for the camera-ready version.
 
 ## 7. "Deletion was non-estimable for half the models."
 
-- Reported as a finding about the method (§5.4, §6): matched deletion needs
-  redundant same-kind evidence. Offer: duplicate the training-table item in
-  split form so every cited item has a matched control.
+- Done (Appendix I): with the table split into per-configuration items and
+  configuration-matched controls, the test is estimable for 32 (A) and 35 (B)
+  seeds. No hosted model changes under either deletion; only bf16
+  Llama-3.1-8B switches under cited deletion alone (5/5). Splitting the table
+  also flipped that model's full-context choice to the control. Conceded:
+  reliance under deletion is rare and unstable across precision and format,
+  and controls still differ in which blocks remain.
 
 ## 8. "Hosted models are not reproducible."
 

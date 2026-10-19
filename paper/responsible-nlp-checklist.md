@@ -151,6 +151,7 @@ Yes. Parameter scale is given by the model names (7B–550B); Appendix C
 - Optimizer baselines: replay over 1,000 seeds on the same CPU (seconds).
 - Precision reruns (Appendix H): Llama-3.1-8B and Phi-4 with bf16 weights via
   OpenRouter (about 60 calls); Qwen2.5-7B Q8_0 GGUF on the same CPU container.
+- Redesigned reliance test (Appendix I): about 200 calls, 0.64 USD.
 
 **C2. Did you discuss the experimental setup, including hyperparameter search
 and best-found hyperparameter values?**

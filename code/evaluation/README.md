@@ -433,3 +433,7 @@ Hosted runs (2026-09-27, OpenRouter, `--response-format json_schema`,
 * `precision_check.py` (Appendix H): compares the 4-bit local runs with bf16
   reruns of Llama-3.1-8B and Phi-4 (`model_audit.py --provider-order ...
   --quantization bf16`) and an 8-bit Q8_0 rerun of Qwen2.5-7B in llama.cpp.
+* `reliance_redesign.py` (Appendix I): cited-versus-uncited deletion with the
+  training table split into per-configuration items (kind-matched test A) and
+  with configuration-matched controls (test B), for the hosted models and the
+  bf16 Llama-3.1-8B and Phi-4.

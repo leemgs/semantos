@@ -14,7 +14,7 @@ python3 code/evaluation/reproduce_paper.py
 The script copies `code/evaluation/results/` to a temporary directory, reruns
 every analysis on the raw logs, and compares the regenerated LaTeX tables
 byte for byte with the files the paper includes. It also recomputes the
-numbers quoted in the text. Expected output: `26 of 26 checks passed`
+numbers quoted in the text. Expected output: `28 of 28 checks passed`
 (about 20 seconds on a laptop CPU; no GPU, no API key, no network).
 
 ## 2. Where each claim in the paper comes from
@@ -35,6 +35,7 @@ numbers quoted in the text. Expected output: `26 of 26 checks passed`
 | §5.3 mitigation paragraph; Appendix F (Table 12): verify instruction and summary statistics | `results/mitigation-baseline/` (`plan.json`, `records.jsonl`, `explanations-for-review.csv`) | `mitigation_baseline.py score` (`validate` compares the automatic checks with the verified labels; `run` needs `OPENROUTER_API_KEY`, 0.70 USD) |
 | §5.3, Limitations; Appendix G (Table 13): within-model reasoning toggles | `results/reasoning-models/` (`records.jsonl`; `attempt1-records.jsonl` keeps the discarded first attempt in which providers dropped reasoning) | `reasoning_models.py score` (`run` needs `OPENROUTER_API_KEY`, 0.18 USD incl. the first attempt) |
 | §5.4, Limitations; Appendix H (Table 14): local models at higher precision | `results/model-audit-fp-llama3.1-8b/`, `results/model-audit-fp-phi-4/` (bf16, OpenRouter), `results/model-audit-q8-qwen2.5-7b/` (Q8\_0 GGUF, shard hashes match the official files) | `precision_check.py` |
+| §5.4, Limitations; Appendix I (Table 15): redesigned reliance test (split table; kind- and configuration-matched controls) | `results/reliance-redesign/` | `reliance_redesign.py score` (`run` needs `OPENROUTER_API_KEY`, 0.64 USD) |
 | Appendix B local and temporal-holdout measurements | `results/local-2026-09-26/`, `results/kernel-local-2026-09-26/` | `analyze.py`, `analyze_kernel_local.py` |
 
 Each result directory contains a `plan.json` written before data collection

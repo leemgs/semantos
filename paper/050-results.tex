@@ -67,9 +67,9 @@ These errors are largely decoupled from the decision: 35 of the 41 misstated cla
 
 \emph{Mitigations help but do not certify.} For the hosted models, an instruction to verify every stated number cuts flagged quantifiers from 21 to 1 of 30 explanations and range errors from 7 to 2, and precomputed summaries remove range errors, whereas enabling internal reasoning leaves the overstatement in place; reading the explanations still finds false comparisons the automatic checks miss, and these answers lack verified labels (Appendices~\ref{app:mitigation} and~\ref{app:reasoning}).
 
-\subsection{Reliance: Rarely Estimable, Rarely Specific}
+\subsection{Reliance: Rarely Specific, Rarely Stable}
 \label{subsec:reliance}
-Five models cite the training table in their full-context answers, so matched deletion is non-estimable for them. Among estimable models, only Phi-4 shows citation-specific reliance: deleting its six cited retrieval runs changes its choice in all five seeds while matched uncited deletion does not, but the new choice (\texttt{s50000\_aone}) contradicts the training table that remains in the prompt, and with bf16 weights it keeps the control (Appendix~\ref{app:precision}), so this case is fragile. Llama-3.1-8B changes its choice under both deletions, which indicates sensitivity to context rather than reliance on what it cites. Llama-3.3-70B, Qwen3 and Nemotron change under neither, which is uninformative about reliance.
+Five models cite the single training table, so matched deletion is non-estimable for them. Among the others, only Phi-4 changes its choice under cited but not uncited deletion (all five seeds), to a choice that contradicts the remaining table, and only at 4 bits (Appendix~\ref{app:precision}); Llama-3.1-8B changes under both deletions, and Llama-3.3-70B, Qwen3 and Nemotron under neither. A redesign with a split table and configuration-matched controls is estimable for most models (Appendix~\ref{app:reliance}): no hosted model then changes, and only bf16 Llama-3.1-8B switches under cited deletion alone.
 
 \subsection{Enforcement: A Calibrated Gate under Shift}
 \label{subsec:gate}

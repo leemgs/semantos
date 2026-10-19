@@ -118,6 +118,14 @@ def main():
         mb = json.loads((tmp/'mitigation-baseline/summary.json').read_text())['conditions']
         got = tuple((mb[c]['overstated_explanations'], mb[c]['explanations_with_range_errors']) for c in
                     ('original', 'verify', 'stats', 'verify+stats'))
+        shutil.copytree(HERE/'results/reliance-redesign', tmp/'reliance-redesign')
+        run('reliance_redesign.py', 'score', '--out', tmp/'reliance-redesign', '--tex', tmp/'reliance-redesign.tex')
+        same_file('Redesigned reliance table (from saved API records)', tmp/'reliance-redesign.tex', 'reliance-redesign.tex')
+        rr = {r['model']: r for r in json.loads((tmp/'reliance-redesign/summary.json').read_text())['rows']}
+        got_rr = (rr['Llama-8B (bf16)']['B']['cited_only'], sum(r['B']['cited_only'] for m, r in rr.items()),
+                  sum(r['A']['estimable'] for r in rr.values()), sum(r['B']['estimable'] for r in rr.values()))
+        check('Reliance redesign: test B cited-only changes 5 (bf16 Llama-8B) of 5 in total; 32 and 35 estimable seeds',
+              got_rr == (5, 5, 32, 35), str(got_rr))
         run('precision_check.py', '--out', tmp/'precision.json', '--tex', tmp/'precision.tex')
         same_file('Precision table (4-bit vs bf16/8-bit reruns)', tmp/'precision.tex', 'precision.tex')
         pc = {r['model']: r for r in json.loads((tmp/'precision.json').read_text())}
