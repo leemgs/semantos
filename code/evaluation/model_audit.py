@@ -163,7 +163,7 @@ PROVIDERS = {
 
 
 def api_backend(provider, model, response_format='json_schema', max_tokens=1024,
-                min_interval=6.0, retries=6, opener=urllib.request.urlopen):
+                min_interval=6.0, retries=6, opener=urllib.request.urlopen, provider_order=None, quantizations=None):
     """Hosted model via an OpenAI-compatible API.
 
     Unlike local GGUF runs, hosted weights cannot be hashed and providers may change
@@ -190,6 +190,10 @@ def api_backend(provider, model, response_format='json_schema', max_tokens=1024,
             payload['response_format'] = {'type': 'json_object'}
         if provider == 'openrouter':
             payload['provider'] = {'require_parameters': response_format != 'none'}
+            if provider_order:  # pin the serving provider (no silent fallback to another one)
+                payload['provider'].update(order=provider_order, allow_fallbacks=False)
+            if quantizations:  # only endpoints that declare these weight precisions
+                payload['provider']['quantizations'] = quantizations
         attempts = []
         for attempt in range(retries+1):
             time.sleep(max(0.0, last[0]+min_interval-time.monotonic()))
@@ -223,7 +227,7 @@ def api_backend(provider, model, response_format='json_schema', max_tokens=1024,
     manifest = {'format': 'hosted API (weights not hashable)', 'provider': provider, 'endpoint': url,
                 'requested_model': model, 'response_format': response_format, 'max_tokens': max_tokens,
                 'temperature': 0, 'min_interval_seconds': min_interval, 'key_env': key_env,
-                'sha256': None}
+                'provider_order': provider_order, 'quantizations': quantizations, 'sha256': None}
     return backend, manifest
 
 
@@ -274,6 +278,8 @@ def main():
     p.add_argument('--response-format', default='json_schema', choices=['json_schema', 'json_object', 'none'])
     p.add_argument('--max-tokens', type=int, default=1024, help='api: completion token limit')
     p.add_argument('--min-interval', type=float, default=6.0, help='api: seconds between requests')
+    p.add_argument('--provider-order', nargs='+', help='api/openrouter: serving providers to use, no fallback')
+    p.add_argument('--quantization', nargs='+', help='api/openrouter: allowed declared weight precisions, e.g. bf16')
     p.add_argument('--purpose', default='experiment', choices=['experiment', 'pipeline-check'],
                    help='pipeline-check runs are plumbing tests and must not be reported as results')
     args = p.parse_args()
@@ -292,7 +298,8 @@ def main():
         manifest_sha = manifest['sha256']
     elif args.backend == 'api':
         backend, manifest = api_backend(args.provider, args.model, args.response_format,
-                                        args.max_tokens, args.min_interval)
+                                        args.max_tokens, args.min_interval, provider_order=args.provider_order,
+                                        quantizations=args.quantization)
         manifest_sha = None
     else:
         manifest = json.loads(args.manifest.read_text())
