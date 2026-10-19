@@ -1,0 +1,63 @@
+{
+  "arms": [
+    {
+      "label": "DeepSeek-V3.2 +reasoning",
+      "original": "api-deepseek-v3.2",
+      "model": "deepseek/deepseek-v3.2",
+      "reasoning": {
+        "enabled": true
+      },
+      "strict_schema": true,
+      "provider": {
+        "order": [
+          "Google"
+        ],
+        "allow_fallbacks": false
+      }
+    },
+    {
+      "label": "Nemotron-550B +reasoning",
+      "original": "api-nemotron3-ultra-550b",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b",
+      "reasoning": {
+        "enabled": true
+      },
+      "strict_schema": false,
+      "provider": null
+    },
+    {
+      "label": "Qwen3-235B thinking",
+      "original": "api-qwen3-235b",
+      "model": "qwen/qwen3-235b-a22b-thinking-2507",
+      "reasoning": {
+        "enabled": true
+      },
+      "strict_schema": false,
+      "provider": null
+    },
+    {
+      "label": "Gemini-3.8-Flash minimal reasoning",
+      "original": "api-gemini-3.8-flash",
+      "model": "google/gemini-3.8-flash",
+      "reasoning": {
+        "effort": "minimal"
+      },
+      "strict_schema": true,
+      "provider": null
+    }
+  ],
+  "seeds": [
+    4088,
+    4089,
+    4090,
+    4091,
+    4092
+  ],
+  "temperature": 0,
+  "max_tokens": 16000,
+  "schema_note_when_not_strict": " Respond with only a JSON object with the keys \"config\" (one of the allowed names), \"cited_ids\" (a list of at most six evidence IDs from the prompt) and \"explanation\" (at most 400 characters).",
+  "rule": "an arm requesting reasoning counts an answer only if reasoning tokens > 0",
+  "key_env": "OPENROUTER_API_KEY",
+  "source_sha256": "ad7fa23342a63a23680eed9bc330715f8605ec8537281734d746070a4449a88f",
+  "started_utc_ns": 1792368213932201663
+}

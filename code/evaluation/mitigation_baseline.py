@@ -79,13 +79,15 @@ def build(condition, context):
 # --- exact range check -------------------------------------------------------------------------------------
 NUM = r'~?\s*(\d+(?:\.\d+)?)'
 RANGE = re.compile(rf'(?:from|between|range\w*(?:\s+from)?|\()\s*{NUM}\s*(?:µs|μs|us|microseconds)?\s*(?:to|-|–|—|and)\s*{NUM}', re.I)
-CFG = re.compile(r's(?:50000|1000000)_a(?:all|one)|(?:both\s+)?s1000000(?:\s+(?:configs?|configurations?))', re.I)
+CFG = re.compile(r's(?:50000|1000000)_a(?:all|one)|(?:both\s+)?s1000000(?:\s+(?:configs?|configurations?|variants?|settings?))', re.I)
 
 
-def _matches(x, target, approx):
+def _matches(tok, target, approx):
+    """tok is the number as written; its decimals set the precision. '~' allows 1% relative error."""
+    x = float(tok)
     if approx:
-        return abs(x - target) <= 1.0
-    prec = len(str(x).split('.')[1]) if '.' in str(x) else 0
+        return abs(x - target) <= max(1.0, 0.01 * abs(target))
+    prec = len(tok.split('.')[1]) if '.' in tok else 0
     return abs(round(target, prec) - x) <= 10 ** -prec + 1e-9
 
 
@@ -100,7 +102,7 @@ def range_errors(text, ev, cited):
                 continue
             name = before[-1].group(0).lower()
             cfgs = [c for c in CONFIGS if c.startswith('s1000000')] if '_' not in name else [name]
-            a, b = float(m.group(1)), float(m.group(2))
+            a, b = m.group(1), m.group(2)
             approx = '~' in m.group(0)
             ok = False
             for subset in ([e for e in runs if e['config'] in cfgs],

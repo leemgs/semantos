@@ -424,3 +424,9 @@ Hosted runs (2026-09-27, OpenRouter, `--response-format json_schema`,
   verify instruction, precomputed summary statistics and both; `validate`
   compares its automatic checks with the verified labels on the original runs;
   `score` rebuilds the table from `results/mitigation-baseline/records.jsonl`.
+* `reasoning_models.py` (Appendix G): within-model reasoning toggles for four
+  hosted models (reasoning on for DeepSeek-V3.2 and Nemotron, the Qwen3
+  thinking variant, minimal reasoning for Gemini Flash); an answer counts only
+  if the requested reasoning was spent. `attempt1-records.jsonl` keeps the
+  first attempt, in which some providers silently dropped reasoning under a
+  strict JSON schema.

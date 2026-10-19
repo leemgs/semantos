@@ -192,7 +192,7 @@ To test whether citation-support judges catch these errors, \texttt{entailment\_
 \end{table}
 
 \paragraph{Compute budget.}
-Local models ran as 4-bit GGUF files (Q4\_K\_M; Phi-4 Q4\_K) with llama-cpp-python 0.3.35 (\url{https://github.com/abetlen/llama-cpp-python}) on a four-core CPU container without a GPU, with an 8,192-token context and at most 384 output tokens. Their 100 calls took 11,580\,s of wall time (about 3.2 CPU-hours): Qwen2.5-7B 1,603\,s, Llama-3.1-8B 2,325\,s, Qwen2.5-14B 3,136\,s and Phi-4 4,516\,s. The 150 hosted calls through OpenRouter, with at most 4,096 output tokens, took 1,224\,s in total and cost about 0.5\,USD; the 150 robustness calls (plus two retries) cost 0.83\,USD over about 2.5\,h of wall time, and the 90 mitigation calls (plus five retries) 0.70\,USD. The eight attribution judges ran on the same CPU container. Kernel measurements ran on the Intel Core i5-3570 host described in Appendix~\ref{app:measurements}; acquiring the training, retrieval and calibration roles took 6.54, 8.29 and 10.15\,s. Optimizer replays over 1,000 seeds take seconds on one CPU.
+Local models ran as 4-bit GGUF files (Q4\_K\_M; Phi-4 Q4\_K) with llama-cpp-python 0.3.35 (\url{https://github.com/abetlen/llama-cpp-python}) on a four-core CPU container without a GPU, with an 8,192-token context and at most 384 output tokens. Their 100 calls took 11,580\,s of wall time (about 3.2 CPU-hours): Qwen2.5-7B 1,603\,s, Llama-3.1-8B 2,325\,s, Qwen2.5-14B 3,136\,s and Phi-4 4,516\,s. The 150 hosted calls through OpenRouter, with at most 4,096 output tokens, took 1,224\,s in total and cost about 0.5\,USD; the 150 robustness calls (plus two retries) cost 0.83\,USD over about 2.5\,h of wall time, the 90 mitigation calls (plus five retries) 0.70\,USD, and the 40 reasoning-toggle calls (20 in a discarded first attempt) 0.18\,USD. The eight attribution judges ran on the same CPU container. Kernel measurements ran on the Intel Core i5-3570 host described in Appendix~\ref{app:measurements}; acquiring the training, retrieval and calibration roles took 6.54, 8.29 and 10.15\,s. Optimizer replays over 1,000 seeds take seconds on one CPU.
 
 
 \section{Results by Model Scale and Family}
@@ -231,5 +231,20 @@ Every answer in every condition still chooses the selector's configuration. The 
 \label{tab:mitigation}
 \begin{adjustbox}{max width=\columnwidth}
 \input{mitigation.tex}
+\end{adjustbox}
+\end{table}
+
+\section{Reasoning Models}
+\label{app:reasoning}
+In the main audit, the two Gemini models reasoned internally by default (about 490 and 1,100 hidden reasoning tokens per answer for Flash and Pro); the other hosted models produced none. \texttt{reasoning\_models.py} toggles reasoning within a model on the full-context prompt, five seeds each, and compares with the same model's original answers: reasoning enabled for DeepSeek-V3.2 and Nemotron-3-Ultra-550B, the thinking variant of Qwen3-235B-A22B (Thinking-2507), and minimal reasoning effort for Gemini~3.8 Flash, whose endpoint refuses to disable reasoning. A first attempt showed that some providers silently drop reasoning when a strict JSON schema is requested, so an answer counts only if the requested reasoning was spent; DeepSeek-V3.2 is pinned to a provider that applies both, while Nemotron and the Qwen3 thinking variant, whose endpoints do not combine them, receive the schema in the prompt and are validated with the same rules. All 20 answers are valid and every reasoning arm spent 585 to 5,306 reasoning tokens.
+
+Table~\ref{tab:reasoning} reports the automatic checks of Appendix~\ref{app:mitigation}. Reasoning changes no decision and does not make any model cite a competing configuration. It does not remove the quantifier overstatement: DeepSeek-V3.2 and the Qwen3 thinking variant still call the control ``consistently'' lowest in four and five of five explanations. Nemotron with reasoning makes fewer flagged errors (two overstatements and one wrong range, down from five each), but its explanations are also about half as long (190 versus 400 characters), so fewer claims are made; Gemini~Flash with minimal reasoning flags one explanation instead of two. These checks see only two error types and the answers have no verified labels, so the comparison shows that internal reasoning is not sufficient to remove the errors, not how many remain.
+
+\begin{table}[h]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{Within-model reasoning toggles (five answers each, original $\to$ toggled): mean reasoning tokens per answer, answers choosing the selector's configuration, cited runs of a competing configuration, and explanations flagged by the quantifier-overstatement proxy and the exact range check. Automatic checks, not verified labels.}
+\label{tab:reasoning}
+\begin{adjustbox}{max width=\columnwidth}
+\input{reasoning.tex}
 \end{adjustbox}
 \end{table}

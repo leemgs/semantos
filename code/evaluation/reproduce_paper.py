@@ -118,6 +118,14 @@ def main():
         mb = json.loads((tmp/'mitigation-baseline/summary.json').read_text())['conditions']
         got = tuple((mb[c]['overstated_explanations'], mb[c]['explanations_with_range_errors']) for c in
                     ('original', 'verify', 'stats', 'verify+stats'))
+        shutil.copytree(HERE/'results/reasoning-models', tmp/'reasoning-models')
+        run('reasoning_models.py', 'score', '--out', tmp/'reasoning-models', '--tex', tmp/'reasoning.tex')
+        same_file('Reasoning-toggle table (from saved API records)', tmp/'reasoning.tex', 'reasoning.tex')
+        ra = json.loads((tmp/'reasoning-models/summary.json').read_text())['arms']
+        got_r = tuple((a['toggled']['answers'], a['toggled']['overstated_explanations'],
+                       a['toggled']['explanations_with_range_errors']) for a in ra)
+        check('Reasoning toggles: 5 answers each; flagged quantifiers 4/2/5/1, range errors 0/1/0/0',
+              got_r == ((5, 4, 0), (5, 2, 1), (5, 5, 0), (5, 1, 0)), str(got_r))
         check('Mitigations: flagged quantifiers 21/1/4/0 and range errors 7/2/0/0 of 30',
               got == ((21, 7), (1, 2), (4, 0), (0, 0)), str(got))
         rb = json.loads((tmp/'prompt-robustness/summary.json').read_text())['conditions']

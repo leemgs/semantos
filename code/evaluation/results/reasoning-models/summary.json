@@ -1,0 +1,218 @@
+{
+  "arms": [
+    {
+      "arm": "DeepSeek-V3.2 +reasoning",
+      "model": "deepseek/deepseek-v3.2",
+      "reasoning": {
+        "enabled": true
+      },
+      "strict_schema": true,
+      "original": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 25,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 25,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 4,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 775
+      },
+      "toggled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 29,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 29,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 4,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      },
+      "original_reasoning_tokens": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "toggled_reasoning_tokens": [
+        1798,
+        3242,
+        4269,
+        5306,
+        2850
+      ],
+      "invalid_cells": []
+    },
+    {
+      "arm": "Nemotron-550B +reasoning",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b",
+      "reasoning": {
+        "enabled": true
+      },
+      "strict_schema": false,
+      "original": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 30,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 5,
+        "explanations_with_range_errors": 5,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      },
+      "toggled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 26,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 26,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 2,
+        "explanations_with_range_errors": 1,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 190
+      },
+      "original_reasoning_tokens": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "toggled_reasoning_tokens": [
+        1864,
+        1681,
+        2298,
+        1577,
+        1112
+      ],
+      "invalid_cells": []
+    },
+    {
+      "arm": "Qwen3-235B thinking",
+      "model": "qwen/qwen3-235b-a22b-thinking-2507",
+      "reasoning": {
+        "enabled": true
+      },
+      "strict_schema": false,
+      "original": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 30,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 5,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      },
+      "toggled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 15,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 15,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 5,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 258
+      },
+      "original_reasoning_tokens": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "toggled_reasoning_tokens": [
+        585,
+        1752,
+        1049,
+        993,
+        1235
+      ],
+      "invalid_cells": []
+    },
+    {
+      "arm": "Gemini-3.8-Flash minimal reasoning",
+      "model": "google/gemini-3.8-flash",
+      "reasoning": {
+        "effort": "minimal"
+      },
+      "strict_schema": true,
+      "original": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 16,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 16,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 2,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 290
+      },
+      "toggled": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 15,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 15,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 1,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 341
+      },
+      "original_reasoning_tokens": [
+        495,
+        455,
+        533,
+        513,
+        468
+      ],
+      "toggled_reasoning_tokens": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "invalid_cells": []
+    }
+  ],
+  "calls_including_retries": 20,
+  "reported_cost_usd": 0.1239
+}

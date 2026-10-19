@@ -122,6 +122,16 @@ Limitations and offer concrete additions for the camera-ready version.
   residual false comparisons. Open: verified labels for the 90 explanations
   (`results/mitigation-baseline/explanations-for-review.csv`).
 
+## 11c. "Would reasoning models get it right?"
+
+- Done (§5.3, Appendix G): within-model toggles for four hosted models.
+  Decisions unchanged, no contrary citations; DeepSeek-V3.2 (reasoning on) and
+  the Qwen3 thinking variant still flag the "consistently lowest"
+  overstatement in 4/5 and 5/5 explanations; Nemotron with reasoning flags
+  fewer (2 and 1 of 5) but writes half-length explanations. Note: both
+  Gemini models already reasoned by default in the main audit (~490 and
+  ~1,100 reasoning tokens). Automatic checks only.
+
 ## 12. "Who decided what counts as a claim?"
 
 - Conceded (Limitations, Annotation): the blind annotators labeled claims that

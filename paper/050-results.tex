@@ -63,9 +63,9 @@ The explanations are often wrong about what the cited items say (Table~\ref{tab:
 
 \emph{Invented semantics.} Without evidence, all four local models justify their choice by assigning meanings to opaque identifiers, for instance reading ``50000'' as a smaller dataset size or ``one'' as a more aggressive approach. The configuration names carry no such information.
 
-These errors are largely decoupled from the decision: 35 of the 41 misstated claims accompany a choice of the control. Nor does variation in wording track variation in decisions: hosted models produced two to five distinct full-context explanations each while choosing the control in every seed. Valid citations thus establish provenance, and a correct decision can coexist with an incorrect account of the evidence that supports it.
+These errors are largely decoupled from the decision: 35 of the 41 misstated claims accompany a choice of the control. Wording also varies without the decision: hosted models gave two to five distinct explanations each while always choosing the control. Valid citations thus establish provenance, and a correct decision can coexist with an incorrect account of the evidence that supports it.
 
-\emph{Mitigations help but do not certify.} For the hosted models, an instruction to verify every stated number cuts flagged quantifiers from 21 to 1 of 30 explanations and range errors from 7 to 2, and precomputed summaries remove range errors; yet reading the explanations finds false comparisons the automatic checks miss, and these answers lack verified labels (Appendix~\ref{app:mitigation}).
+\emph{Mitigations help but do not certify.} For the hosted models, an instruction to verify every stated number cuts flagged quantifiers from 21 to 1 of 30 explanations and range errors from 7 to 2, and precomputed summaries remove range errors, whereas enabling internal reasoning leaves the overstatement in place; reading the explanations still finds false comparisons the automatic checks miss, and these answers lack verified labels (Appendices~\ref{app:mitigation} and~\ref{app:reasoning}).
 
 \subsection{Reliance: Rarely Estimable, Rarely Specific}
 \label{subsec:reliance}
