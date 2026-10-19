@@ -1,0 +1,38 @@
+{
+  "model": "microsoft/phi-4",
+  "backend": "api",
+  "purpose": "experiment",
+  "manifest": {
+    "format": "hosted API (weights not hashable)",
+    "provider": "openrouter",
+    "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+    "requested_model": "microsoft/phi-4",
+    "response_format": "json_schema",
+    "max_tokens": 384,
+    "temperature": 0,
+    "min_interval_seconds": 2.0,
+    "key_env": "OPENROUTER_API_KEY",
+    "provider_order": [
+      "DeepInfra"
+    ],
+    "quantizations": [
+      "bf16"
+    ],
+    "sha256": null
+  },
+  "manifest_sha256": null,
+  "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+  "seeds": [
+    4088,
+    4089,
+    4090,
+    4091,
+    4092
+  ],
+  "temperature": 0,
+  "num_predict": 256,
+  "source_sha256": "94aa121e689bdf0c14778bb4a9413967bb3626e76f0f7c1b549fbd87f9f7ea3d",
+  "input_hashes_sha256": "d5a1ec2d425fd9ea1ea45b5e65b2cca91f87ca88eff3b3cf879e80435d130b2c",
+  "scope": "retrospective frozen-input selection audit; no test outcomes in prompts",
+  "started_utc_ns": 1792388861659729528
+}
