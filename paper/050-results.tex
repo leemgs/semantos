@@ -69,7 +69,7 @@ These errors are largely decoupled from the decision: 35 of the 41 misstated cla
 
 \subsection{Reliance: Rarely Estimable, Rarely Specific}
 \label{subsec:reliance}
-Five models cite the training table in their full-context answers, so matched deletion is non-estimable for them. Among estimable models, only Phi-4 shows citation-specific reliance: deleting its six cited retrieval runs changes its choice in all five seeds while matched uncited deletion does not, but the new choice (\texttt{s50000\_aone}) contradicts the training table that remains in the prompt. Llama-3.1-8B changes its choice under both deletions, which indicates sensitivity to context rather than reliance on what it cites. Llama-3.3-70B, Qwen3 and Nemotron change under neither, which is consistent with the remaining evidence still favoring the control but uninformative about reliance.
+Five models cite the training table in their full-context answers, so matched deletion is non-estimable for them. Among estimable models, only Phi-4 shows citation-specific reliance: deleting its six cited retrieval runs changes its choice in all five seeds while matched uncited deletion does not, but the new choice (\texttt{s50000\_aone}) contradicts the training table that remains in the prompt, and with bf16 weights it keeps the control (Appendix~\ref{app:precision}), so this case is fragile. Llama-3.1-8B changes its choice under both deletions, which indicates sensitivity to context rather than reliance on what it cites. Llama-3.3-70B, Qwen3 and Nemotron change under neither, which is uninformative about reliance.
 
 \subsection{Enforcement: A Calibrated Gate under Shift}
 \label{subsec:gate}

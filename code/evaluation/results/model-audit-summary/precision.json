@@ -1,0 +1,403 @@
+[
+  {
+    "model": "Qwen2.5-7B",
+    "precision": "8-bit (Q8_0)",
+    "four_bit": {
+      "choices": {
+        "full": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        },
+        "no_graph": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        },
+        "no_retrieval": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        },
+        "model_only": {
+          "4088": "s50000_aone",
+          "4089": "s50000_aone",
+          "4090": "s50000_aone",
+          "4091": "s50000_aone",
+          "4092": "s50000_aone"
+        }
+      },
+      "deletion_estimable": 0,
+      "cited_changed": 0,
+      "uncited_changed": 0,
+      "full_checks": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 25,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 25,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 5,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      },
+      "invalid": 0,
+      "plan_model": "Qwen2.5-7B-Instruct-Q4_K_M"
+    },
+    "higher": {
+      "choices": {
+        "full": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        },
+        "no_graph": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        },
+        "no_retrieval": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        },
+        "model_only": {
+          "4088": "s50000_aone",
+          "4089": "s50000_aone",
+          "4090": "s50000_aone",
+          "4091": "s50000_aone",
+          "4092": "s50000_aone"
+        }
+      },
+      "deletion_estimable": 0,
+      "cited_changed": 0,
+      "uncited_changed": 0,
+      "full_checks": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 25,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 25,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 5,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 400
+      },
+      "invalid": 0,
+      "plan_model": "Qwen2.5-7B-Instruct-Q8_0"
+    },
+    "same_choice_by_variant": {
+      "full": true,
+      "no_graph": true,
+      "no_retrieval": true,
+      "model_only": true
+    }
+  },
+  {
+    "model": "Llama-3.1-8B",
+    "precision": "bf16",
+    "four_bit": {
+      "choices": {
+        "full": {
+          "4088": "s50000_aone",
+          "4089": "s50000_aone",
+          "4090": "s50000_aone",
+          "4091": "s50000_aone",
+          "4092": "s50000_aone"
+        },
+        "no_graph": {
+          "4088": "s50000_aone",
+          "4089": "s50000_aone",
+          "4090": "s50000_aone",
+          "4091": "s50000_aone",
+          "4092": "s50000_aone"
+        },
+        "no_retrieval": {
+          "4088": "s50000_aone",
+          "4089": "s50000_aone",
+          "4090": "s50000_aone",
+          "4091": "s50000_aone",
+          "4092": "s50000_aone"
+        },
+        "model_only": {
+          "4088": "s50000_aone",
+          "4089": "s50000_aone",
+          "4090": "s50000_aone",
+          "4091": "s50000_aone",
+          "4092": "s50000_aone"
+        },
+        "delete_cited": {
+          "4088": "s1000000_aall",
+          "4089": "s1000000_aall",
+          "4090": "s1000000_aall",
+          "4091": "s1000000_aall",
+          "4092": "s1000000_aall"
+        },
+        "delete_uncited": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        }
+      },
+      "deletion_estimable": 5,
+      "cited_changed": 5,
+      "uncited_changed": 5,
+      "full_checks": {
+        "answers": 5,
+        "selector_choice": 0,
+        "retrieval_citations": 30,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 30,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 0,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 264
+      },
+      "invalid": 0,
+      "plan_model": "Meta-Llama-3.1-8B-Instruct-Q4_K_M"
+    },
+    "higher": {
+      "choices": {
+        "full": {
+          "4088": "s50000_aone",
+          "4089": "s50000_aone",
+          "4090": "s50000_aone",
+          "4091": "s50000_aone",
+          "4092": "s50000_aone"
+        },
+        "no_graph": {
+          "4088": "s50000_aone",
+          "4089": "s50000_aone",
+          "4090": "s50000_aone",
+          "4091": "s50000_aone",
+          "4092": "s50000_aone"
+        },
+        "no_retrieval": {
+          "4088": "s50000_aone",
+          "4089": "s50000_aone",
+          "4090": "s50000_aone",
+          "4091": "s50000_aone",
+          "4092": "s50000_aone"
+        },
+        "model_only": {
+          "4088": "s50000_aone",
+          "4089": "s50000_aone",
+          "4090": "s50000_aone",
+          "4091": "s50000_aone",
+          "4092": "s50000_aone"
+        },
+        "delete_cited": {
+          "4088": "s1000000_aone",
+          "4089": "s1000000_aone",
+          "4090": "s1000000_aone",
+          "4091": "s1000000_aone",
+          "4092": "s1000000_aone"
+        },
+        "delete_uncited": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        }
+      },
+      "deletion_estimable": 5,
+      "cited_changed": 5,
+      "uncited_changed": 5,
+      "full_checks": {
+        "answers": 5,
+        "selector_choice": 0,
+        "retrieval_citations": 30,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 30,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 5,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 276
+      },
+      "invalid": 0,
+      "plan_model": "meta-llama/llama-3.1-8b-instruct"
+    },
+    "same_choice_by_variant": {
+      "full": true,
+      "no_graph": true,
+      "no_retrieval": true,
+      "model_only": true,
+      "delete_cited": false,
+      "delete_uncited": true
+    }
+  },
+  {
+    "model": "Phi-4",
+    "precision": "bf16",
+    "four_bit": {
+      "choices": {
+        "full": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        },
+        "no_graph": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        },
+        "no_retrieval": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        },
+        "model_only": {
+          "4088": "s1000000_aone",
+          "4089": "s1000000_aone",
+          "4090": "s1000000_aone",
+          "4091": "s1000000_aone",
+          "4092": "s1000000_aone"
+        },
+        "delete_cited": {
+          "4088": "s50000_aone",
+          "4089": "s50000_aone",
+          "4090": "s50000_aone",
+          "4091": "s50000_aone",
+          "4092": "s50000_aone"
+        },
+        "delete_uncited": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        }
+      },
+      "deletion_estimable": 5,
+      "cited_changed": 5,
+      "uncited_changed": 0,
+      "full_checks": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 30,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 5,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 367
+      },
+      "invalid": 0,
+      "plan_model": "phi-4-Q4_K"
+    },
+    "higher": {
+      "choices": {
+        "full": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        },
+        "no_graph": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        },
+        "no_retrieval": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        },
+        "model_only": {
+          "4088": "s1000000_aone",
+          "4089": "s1000000_aone",
+          "4090": "s1000000_aone",
+          "4091": "s1000000_aone"
+        },
+        "delete_cited": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        },
+        "delete_uncited": {
+          "4088": "s50000_aall",
+          "4089": "s50000_aall",
+          "4090": "s50000_aall",
+          "4091": "s50000_aall",
+          "4092": "s50000_aall"
+        }
+      },
+      "deletion_estimable": 5,
+      "cited_changed": 0,
+      "uncited_changed": 0,
+      "full_checks": {
+        "answers": 5,
+        "selector_choice": 5,
+        "retrieval_citations": 30,
+        "contrary_citations": 0,
+        "answers_citing_contrary": 0,
+        "evidence_citations": 30,
+        "contrary_evidence": 0,
+        "answers_citing_contrary_evidence": 0,
+        "answers_citing_summary": 0,
+        "overstated_explanations": 5,
+        "explanations_with_range_errors": 0,
+        "explanations_with_unsupported_numbers": 0,
+        "mean_chars": 363
+      },
+      "invalid": 1,
+      "plan_model": "microsoft/phi-4"
+    },
+    "same_choice_by_variant": {
+      "full": true,
+      "no_graph": true,
+      "no_retrieval": true,
+      "model_only": true,
+      "delete_cited": false,
+      "delete_uncited": true
+    }
+  }
+]

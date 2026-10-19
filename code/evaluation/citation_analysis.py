@@ -48,6 +48,8 @@ def main():
     a = p.parse_args()
     per_model = {}
     for path in sorted(a.results.glob('model-audit-*/records.json')):
+        if path.parent.name.startswith(('model-audit-fp-', 'model-audit-q8-')):
+            continue  # precision reruns of local models (Appendix H), not part of the main audit
         result = analyze(json.loads(path.read_text()))
         if result['answers']:
             per_model[path.parent.name] = result

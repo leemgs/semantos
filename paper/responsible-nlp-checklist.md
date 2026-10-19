@@ -149,6 +149,8 @@ Yes. Parameter scale is given by the model names (7B–550B); Appendix C
   Linux 6.17.0-23-generic); acquisition took 6.54 s (training), 8.29 s
   (retrieval) and 10.15 s (calibration), plus the test grid.
 - Optimizer baselines: replay over 1,000 seeds on the same CPU (seconds).
+- Precision reruns (Appendix H): Llama-3.1-8B and Phi-4 with bf16 weights via
+  OpenRouter (about 60 calls); Qwen2.5-7B Q8_0 GGUF on the same CPU container.
 
 **C2. Did you discuss the experimental setup, including hyperparameter search
 and best-found hyperparameter values?**

@@ -118,6 +118,14 @@ def main():
         mb = json.loads((tmp/'mitigation-baseline/summary.json').read_text())['conditions']
         got = tuple((mb[c]['overstated_explanations'], mb[c]['explanations_with_range_errors']) for c in
                     ('original', 'verify', 'stats', 'verify+stats'))
+        run('precision_check.py', '--out', tmp/'precision.json', '--tex', tmp/'precision.tex')
+        same_file('Precision table (4-bit vs bf16/8-bit reruns)', tmp/'precision.tex', 'precision.tex')
+        pc = {r['model']: r for r in json.loads((tmp/'precision.json').read_text())}
+        got_p = (pc['Phi-4']['four_bit']['cited_changed'], pc['Phi-4']['higher']['cited_changed'],
+                 all(all(v for k, v in r['same_choice_by_variant'].items() if not k.startswith('delete'))
+                     for r in pc.values()))
+        check('Precision: Phi-4 cited-deletion change 5 -> 0; evidence/no-evidence choices unchanged for all three',
+              got_p == (5, 0, True), str(got_p))
         shutil.copytree(HERE/'results/reasoning-models', tmp/'reasoning-models')
         run('reasoning_models.py', 'score', '--out', tmp/'reasoning-models', '--tex', tmp/'reasoning.tex')
         same_file('Reasoning-toggle table (from saved API records)', tmp/'reasoning.tex', 'reasoning.tex')

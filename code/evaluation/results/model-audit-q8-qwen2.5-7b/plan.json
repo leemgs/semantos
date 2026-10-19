@@ -1,0 +1,57 @@
+{
+  "model": "Qwen2.5-7B-Instruct-Q8_0",
+  "backend": "llamacpp",
+  "purpose": "experiment",
+  "manifest": {
+    "format": "gguf",
+    "file": "qwen2.5-7b-instruct-q8_0-00001-of-00003.gguf",
+    "bytes": 8098525408,
+    "sha256": "26e30cb4559f0d9e9e11f34d351292af6f42199ce3fa742b5e7c5af4bc35b0f0",
+    "gguf_general_metadata": {
+      "general.file_type": "7",
+      "general.architecture": "qwen2",
+      "general.name": "qwen2.5-7b-instruct",
+      "general.version": "v0.1",
+      "general.finetune": "qwen2.5-7b-instruct",
+      "general.type": "model",
+      "general.size_label": "7.6B",
+      "general.quantization_version": "2"
+    },
+    "shards": [
+      {
+        "file": "qwen2.5-7b-instruct-q8_0-00001-of-00003.gguf",
+        "bytes": 3980069248,
+        "sha256": "26e30cb4559f0d9e9e11f34d351292af6f42199ce3fa742b5e7c5af4bc35b0f0"
+      },
+      {
+        "file": "qwen2.5-7b-instruct-q8_0-00002-of-00003.gguf",
+        "bytes": 3942935680,
+        "sha256": "e93856ce0cb05d5abd698eb439c0fea3acd412d9040f5ab7d2d4d088add5287d"
+      },
+      {
+        "file": "qwen2.5-7b-instruct-q8_0-00003-of-00003.gguf",
+        "bytes": 175520480,
+        "sha256": "8f29c0e4173d4d92d35c52a7c5807c34a3edfe6bb078ea785d145b7d88c16e44"
+      }
+    ],
+    "runtime": "llama-cpp-python 0.3.35",
+    "n_ctx": 8192,
+    "response_format": "JSON schema grammar: config enum; <=6 citations restricted to supplied IDs; <=400-char explanation",
+    "max_tokens": 384
+  },
+  "manifest_sha256": "26e30cb4559f0d9e9e11f34d351292af6f42199ce3fa742b5e7c5af4bc35b0f0",
+  "endpoint": null,
+  "seeds": [
+    4088,
+    4089,
+    4090,
+    4091,
+    4092
+  ],
+  "temperature": 0,
+  "num_predict": 256,
+  "source_sha256": "94aa121e689bdf0c14778bb4a9413967bb3626e76f0f7c1b549fbd87f9f7ea3d",
+  "input_hashes_sha256": "d5a1ec2d425fd9ea1ea45b5e65b2cca91f87ca88eff3b3cf879e80435d130b2c",
+  "scope": "retrospective frozen-input selection audit; no test outcomes in prompts",
+  "started_utc_ns": 1792389289744270805
+}

@@ -132,6 +132,17 @@ Limitations and offer concrete additions for the camera-ready version.
   Gemini models already reasoned by default in the main audit (~490 and
   ~1,100 reasoning tokens). Automatic checks only.
 
+## 11d. "Are the local results a quantization artifact?"
+
+- Done (Appendix H): bf16 reruns of Llama-3.1-8B and Phi-4 (providers that
+  declare bf16) and an 8-bit rerun of Qwen2.5-7B reproduce every evidence and
+  no-evidence decision, including Llama's wrong choice, and the explanation
+  errors recur. Qwen2.5-14B has no full-precision endpoint.
+- Conceded: Phi-4's citation-specific reliance (the only such case) does not
+  survive: with bf16 weights it cites the same runs but keeps the control
+  when they are deleted. The abstract, §5.4 and conclusion now say so; the
+  difference may come from precision or from the serving stack.
+
 ## 12. "Who decided what counts as a claim?"
 
 - Conceded (Limitations, Annotation): the blind annotators labeled claims that

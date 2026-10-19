@@ -248,3 +248,18 @@ Table~\ref{tab:reasoning} reports the automatic checks of Appendix~\ref{app:miti
 \input{reasoning.tex}
 \end{adjustbox}
 \end{table}
+
+\section{Precision of the Local Models}
+\label{app:precision}
+The local models of the main audit ran as 4-bit GGUF files. \texttt{precision\_check.py} compares them with higher-precision reruns through the same \texttt{model\_audit.py} pipeline, with all input variants, cited and matched uncited deletion, five seeds, temperature~0 and the same 384-token limit: Llama-3.1-8B and Phi-4 with bf16 weights through OpenRouter, pinned to providers that declare bf16 (CoreWeave and DeepInfra), and Qwen2.5-7B as the official 8-bit (Q8\_0) GGUF in llama.cpp, the highest precision that fits our 15\,GB CPU machine. Qwen2.5-14B has no full-precision endpoint and was not rerun. The bf16 runs use a different serving stack and strict JSON schemas rather than a llama.cpp grammar, so any difference may come from precision or from serving.
+
+Table~\ref{tab:precision} summarizes the comparison. In every evidence and no-evidence variant, each model makes the same choice as at 4 bits on every valid seed, including Llama-3.1-8B's wrong choice of \texttt{s50000\_aone} and the no-evidence choices; one bf16 Phi-4 answer without evidence is invalid. Explanation errors recur: Qwen2.5-7B again attributes the retrieval value 126.36 to the training table and again reads meanings into the configuration names without evidence; Phi-4 repeats its ``significantly lower'' claims almost verbatim; and Llama-3.1-8B, whose 4-bit explanations misstated values, now calls a list of single runs an average and claims the lowest average ``across all retrieval runs''. The one difference concerns reliance. With bf16 weights, Phi-4 cites the same six runs, but deleting them no longer changes its choice in any seed, whereas the 4-bit model switched in all five. Llama-3.1-8B changes its choice under both deletions at either precision (to a different wrong setting under cited deletion). The paper's only case of citation-specific reliance therefore does not survive a change of precision and serving stack.
+
+\begin{table}[h]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{Local models at 4 bits versus higher precision: input variants with the same choice on every common valid seed, seeds whose choice changes under cited and under matched uncited deletion (4-bit $\to$ higher precision; n/e: non-estimable), and full-context explanations flagged by the quantifier-overstatement proxy.}
+\label{tab:precision}
+\begin{adjustbox}{max width=\columnwidth}
+\input{precision.tex}
+\end{adjustbox}
+\end{table}

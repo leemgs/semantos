@@ -430,3 +430,6 @@ Hosted runs (2026-09-27, OpenRouter, `--response-format json_schema`,
   if the requested reasoning was spent. `attempt1-records.jsonl` keeps the
   first attempt, in which some providers silently dropped reasoning under a
   strict JSON schema.
+* `precision_check.py` (Appendix H): compares the 4-bit local runs with bf16
+  reruns of Llama-3.1-8B and Phi-4 (`model_audit.py --provider-order ...
+  --quantization bf16`) and an 8-bit Q8_0 rerun of Qwen2.5-7B in llama.cpp.
