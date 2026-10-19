@@ -36,6 +36,7 @@ numbers quoted in the text. Expected output: `28 of 28 checks passed`
 | §5.3, Limitations; Appendix G (Table 13): within-model reasoning toggles | `results/reasoning-models/` (`records.jsonl`; `attempt1-records.jsonl` keeps the discarded first attempt in which providers dropped reasoning) | `reasoning_models.py score` (`run` needs `OPENROUTER_API_KEY`, 0.18 USD incl. the first attempt) |
 | §5.4, Limitations; Appendix H (Table 14): local models at higher precision | `results/model-audit-fp-llama3.1-8b/`, `results/model-audit-fp-phi-4/` (bf16, OpenRouter), `results/model-audit-q8-qwen2.5-7b/` (Q8\_0 GGUF, shard hashes match the official files) | `precision_check.py` |
 | §5.4, Limitations; Appendix I (Table 15): redesigned reliance test (split table; kind- and configuration-matched controls) | `results/reliance-redesign/` | `reliance_redesign.py score` (`run` needs `OPENROUTER_API_KEY`, 0.64 USD) |
+| Not in the paper: human-impact study materials (protocol, consent template, stimuli, instrument; not yet run, no human data) | `paper/human-study/` | `human_study.py build`, `power`, `analyze` |
 | Appendix B local and temporal-holdout measurements | `results/local-2026-09-26/`, `results/kernel-local-2026-09-26/` | `analyze.py`, `analyze_kernel_local.py` |
 
 Each result directory contains a `plan.json` written before data collection

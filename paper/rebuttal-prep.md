@@ -164,6 +164,17 @@ Limitations and offer concrete additions for the camera-ready version.
   calibration draws, so one draw is a single realization.
 - Offer: repeat calibration/test over additional period pairs.
 
+## 14. "Does a misstated rationale actually mislead people?"
+
+- Not measured; the paper claims only that the rationale misstates checkable
+  facts, not that readers are misled.
+- Prepared: a pre-registered between-subjects study (misstated vs. minimally
+  corrected vs. no rationale; six verbatim stimuli; six evidence probes;
+  60 per arm for power ≈ .85 under stated assumptions), with consent template,
+  static instrument and analysis script (`paper/human-study/`,
+  `human_study.py`). Needs ethics approval and recruitment before it can run;
+  report results only after real data exist.
+
 ## Quick additions possible during the response period (no new hardware runs)
 
 1. Adjudication of the disagreements, if asked.

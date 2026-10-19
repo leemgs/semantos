@@ -1,0 +1,198 @@
+{
+  "design": "between subjects: condition (M, C, N) x stimulus (S1-S6), one brief per participant",
+  "probes": [
+    {
+      "id": "P1",
+      "question": "Is the highest P95 among the s50000_aone retrieval runs above 500 us?",
+      "answer": "yes"
+    },
+    {
+      "id": "P2",
+      "question": "Does any run of a configuration other than s50000_aall have a P95 below the highest s50000_aall run?",
+      "answer": "yes"
+    },
+    {
+      "id": "P3",
+      "question": "Is every s1000000 run (both s1000000 configurations) above 800 us?",
+      "answer": "no"
+    },
+    {
+      "id": "P4",
+      "question": "Is the highest P95 among the s50000_aall retrieval runs above 150 us?",
+      "answer": "yes"
+    },
+    {
+      "id": "P5",
+      "question": "Does s50000_aall have the lowest P95 in every one of the ten retrieval blocks?",
+      "answer": "no"
+    },
+    {
+      "id": "P6",
+      "question": "Does the evidence report a statistical significance test between configurations?",
+      "answer": "no"
+    }
+  ],
+  "evidence_facts": {
+    "block_wins": {
+      "s50000_aall": 8,
+      "s50000_aone": 2
+    },
+    "blocks": 10,
+    "min_max": {
+      "s50000_aone": [
+        85.033,
+        571.84
+      ],
+      "s1000000_aall": [
+        748.404,
+        1023.152
+      ],
+      "s1000000_aone": [
+        817.997,
+        1419.669
+      ],
+      "s50000_aall": [
+        82.488,
+        183.217
+      ]
+    }
+  },
+  "stimuli": [
+    {
+      "id": "S1",
+      "source_model_dir": "api-nemotron3-ultra-550b",
+      "seed": 4089,
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "targets": [
+        "P1",
+        "P5"
+      ],
+      "M": "Among the allowed configurations, s50000_aall consistently achieves the lowest periodic wake-up P95 latency across all retrieval runs. Its P95 values range from 82.5 to 183.2 microseconds, with most runs below 150 microseconds. In contrast, s50000_aone shows higher variability (85.0 to 430.7 microseconds), while both s1000000_aall and s1000000_aone consistently exceed 748 microseconds.",
+      "C": "Among the allowed configurations, s50000_aall achieves the lowest periodic wake-up P95 latency in 8 of the 10 retrieval blocks. Its P95 values range from 82.5 to 183.2 microseconds, with most runs below 150 microseconds. In contrast, s50000_aone shows higher variability (85.0 to 571.8 microseconds), while both s1000000_aall and s1000000_aone consistently exceed 748 microseconds.",
+      "C_status": "AI-drafted correction; author verification required",
+      "M_note": "verbatim up to the last complete sentence (the stored explanation is truncated)",
+      "source_explanation_sha256": "d74070d86191430f716b1a8712007132c6d0be04c46659a809f2fd9ddb4c179c"
+    },
+    {
+      "id": "S2",
+      "source_model_dir": "api-deepseek-v3.2",
+      "seed": 4089,
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "targets": [
+        "P2"
+      ],
+      "M": "The goal is to minimize periodic wake-up P95 latency. The evidence includes a training summary table showing average latencies, where s50000_aall has the lowest average (132.9413 µs). More importantly, the retrieval runs provide direct P95 latency measurements for each config at a 3 ms period. For s50000_aall, the P95 latencies across 10 runs are consistently low: 126.36, 140.554, 94.81, 99.853, 93.049, 183.217, 109.519, 82.488, 87.387, 87.347 µs. The maximum among these is 183.217 µs, which is lower than the lowest P95 observed for any other config (e.g., s50000_aone has runs up to 571.84 µs, and s1000000 configs are all above 748 µs). Therefore, s50000_aall has the lowest worst-case P95 latency based on the measured retrieval runs, making it the best choice to minimize periodic wake-up P95 latency.",
+      "C": "The goal is to minimize periodic wake-up P95 latency. The evidence includes a training summary table showing average latencies, where s50000_aall has the lowest average (132.9413 µs). More importantly, the retrieval runs provide direct P95 latency measurements for each config at a 3 ms period. For s50000_aall, the P95 latencies across 10 runs are consistently low: 126.36, 140.554, 94.81, 99.853, 93.049, 183.217, 109.519, 82.488, 87.387, 87.347 µs. The maximum among these is 183.217 µs, which is lower than every run of the two s1000000 configs (all above 748 µs), although some s50000_aone runs are lower (down to 85.033 µs) and others reach 571.84 µs. Therefore, s50000_aall has the lowest worst-case P95 latency based on the measured retrieval runs, making it the best choice to minimize periodic wake-up P95 latency.",
+      "C_status": "AI-drafted correction; author verification required",
+      "M_note": "verbatim",
+      "source_explanation_sha256": "cd588b20bd3d30d06c3d66fc1a0239c720e552db3f1480bf81a3ff4d54136184"
+    },
+    {
+      "id": "S3",
+      "source_model_dir": "api-deepseek-v3.2",
+      "seed": 4088,
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall"
+      ],
+      "targets": [
+        "P3",
+        "P5"
+      ],
+      "M": "The goal is to minimize periodic wake-up P95 latency. The evidence includes a training summary table showing average latencies, but the primary evidence for periodic wake-up latency should come from the retrieval runs, which are measured at a fixed period_ns of 3,000,000 ns (3 ms). Among all retrieval runs, s50000_aall consistently shows the lowest P95 latencies across multiple trials (e.g., 126.36 μs, 140.554 μs, 94.81 μs, 99.853 μs, 93.049 μs), with most values under 150 μs. In contrast, s50000_aone shows higher variability and often higher latencies (e.g., 571.84 μs, 272.927 μs), while both s1000000 configurations are consistently above 800 μs. Therefore, s50000_aall is the clear choice for minimizing P95 latency based on the retrieval run evidence.",
+      "C": "The goal is to minimize periodic wake-up P95 latency. The evidence includes a training summary table showing average latencies, but the primary evidence for periodic wake-up latency should come from the retrieval runs, which are measured at a fixed period_ns of 3,000,000 ns (3 ms). Among all retrieval runs, s50000_aall shows the lowest P95 latency in 8 of the 10 retrieval blocks (e.g., 126.36 μs, 140.554 μs, 94.81 μs, 99.853 μs, 93.049 μs), with most values under 150 μs. In contrast, s50000_aone shows higher variability and often higher latencies (e.g., 571.84 μs, 272.927 μs), while both s1000000 configurations are above 748 μs in every run. Therefore, s50000_aall is the clear choice for minimizing P95 latency based on the retrieval run evidence.",
+      "C_status": "AI-drafted correction; author verification required",
+      "M_note": "verbatim",
+      "source_explanation_sha256": "73683f80ff34c4160d51d5a9ed21d93001e0129305a6c0cf26726eb8d6e06747"
+    },
+    {
+      "id": "S4",
+      "source_model_dir": "api-llama3.3-70b",
+      "seed": 4089,
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-6-s50000_aall",
+        "retrieval-3-7-s50000_aall"
+      ],
+      "targets": [
+        "P4"
+      ],
+      "M": "The config 's50000_aall' has the lowest P95 latency values across multiple retrieval runs, with values ranging from 82.488 to 140.554. This suggests that 's50000_aall' is the most effective config for minimizing periodic wake-up P95 latency.",
+      "C": "The config 's50000_aall' has the lowest P95 latency values across multiple retrieval runs, with values ranging from 82.488 to 183.217. This suggests that 's50000_aall' is the most effective config for minimizing periodic wake-up P95 latency.",
+      "C_status": "AI-drafted correction; author verification required",
+      "M_note": "verbatim",
+      "source_explanation_sha256": "be100d341ed746217f1f3a1f88ac9612e5189a9d0b6746814315742ed58dc906"
+    },
+    {
+      "id": "S5",
+      "source_model_dir": "api-qwen3-235b",
+      "seed": 4088,
+      "config": "s50000_aall",
+      "cited_ids": [
+        "retrieval-3-0-s50000_aall",
+        "retrieval-3-1-s50000_aall",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-3-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-5-s50000_aall"
+      ],
+      "targets": [
+        "P5",
+        "P6"
+      ],
+      "M": "The goal is to minimize P95 latency during periodic wake-up. Among all configurations, 's50000_aall' consistently shows the lowest P95 latency across multiple retrieval runs (e.g., 126.36 us, 140.554 us, 94.81 us, etc.), with the highest observed P95 being 183.217 us. In contrast, all other configurations (including 's50000_aone', 's1000000_aall', and 's1000000_aone') exhibit significantly higher P95 latency.",
+      "C": "The goal is to minimize P95 latency during periodic wake-up. Among all configurations, 's50000_aall' shows the lowest P95 latency in 8 of the 10 retrieval blocks (e.g., 126.36 us, 140.554 us, 94.81 us, etc.), with the highest observed P95 being 183.217 us. In contrast, the other configurations have higher mean P95 latency (227.4, 953.1 and 1014.0 us versus 110.5 us), although some s50000_aone runs are lower than some s50000_aall runs; the evidence contains no significance test.",
+      "C_status": "AI-drafted correction; author verification required",
+      "M_note": "verbatim up to the last complete sentence (the stored explanation is truncated); its cut final sentence is completed",
+      "source_explanation_sha256": "da8332a2e6295969c7e636af47bf21e0b5b9d0e1dc6b01be286d29907d83ba06"
+    },
+    {
+      "id": "S6",
+      "source_model_dir": "api-gemini-3.1-pro",
+      "seed": 4090,
+      "config": "s50000_aall",
+      "cited_ids": [
+        "training-table",
+        "retrieval-3-2-s50000_aall",
+        "retrieval-3-4-s50000_aall",
+        "retrieval-3-7-s50000_aall",
+        "retrieval-3-8-s50000_aall",
+        "retrieval-3-9-s50000_aall"
+      ],
+      "targets": [
+        "P5"
+      ],
+      "M": "The configuration s50000_aall minimizes the periodic wake-up P95 latency. The training table shows it has the lowest average P95 latency at 132.94 us, outperforming all other configurations. This is corroborated by multiple retrieval runs where s50000_aall consistently achieves the lowest P95 latency, frequently dropping below 100 us.",
+      "C": "The configuration s50000_aall minimizes the periodic wake-up P95 latency. The training table shows it has the lowest average P95 latency at 132.94 us, outperforming all other configurations. This is corroborated by multiple retrieval runs where s50000_aall achieves the lowest P95 latency in 8 of the 10 retrieval blocks, frequently dropping below 100 us.",
+      "C_status": "AI-drafted correction; author verification required",
+      "M_note": "verbatim",
+      "source_explanation_sha256": "5b0ae823104da4c4ff50fe1d9ee4cfff61def2af90c4b3bcdd4e334b5c082a07"
+    }
+  ],
+  "assignment": "participant k (0-based): condition CONDITIONS[k % 3], stimulus STIMULI[(k // 3) % 6]"
+}
