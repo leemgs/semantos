@@ -33,3 +33,15 @@ confirmed.
   OpenReview by hand; the script's search returned the CoRR copy first.
 - Herodotou2020Survey pages "43:1--43:37": ACM's article-number form of
   Crossref's 1-37.
+
+## Re-run 2026-10-20 (pre-submission)
+
+`refcheck.py` was run against the official records (ACL Anthology, Crossref,
+arXiv, OpenReview and landing pages) for all 67 bib entries, 66 of them cited.
+57 cited entries match exactly. The 9 flagged entries are the cases already
+resolved above: name particles (Van Aken, Baldini Soares), team authors (Qwen,
+DeepSeek-AI), ACM article-number pages (Herodotou), and ICLR papers whose
+accepted OpenReview record the API search does not return (Wang 2023, Kuhn
+2023, Chen 2020, Quach 2024; confirmed earlier on the venue pages). No new
+discrepancy was found. LinuxVM is not cited, so it does not appear in the
+bibliography.
