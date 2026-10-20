@@ -133,6 +133,14 @@ def main():
         mb = json.loads((tmp/'mitigation-baseline/summary.json').read_text())['conditions']
         got = tuple((mb[c]['overstated_explanations'], mb[c]['explanations_with_range_errors']) for c in
                     ('original', 'verify', 'stats', 'verify+stats'))
+        shutil.copytree(HERE/'results/evidence-instances', tmp/'evidence-instances')
+        run('evidence_instances.py', 'score', '--out', tmp/'evidence-instances', '--tex', tmp/'evidence-instances.tex')
+        same_file('Evidence-instance table (from saved API records)', tmp/'evidence-instances.tex', 'evidence-instances.tex')
+        ei = {r['instance']: r for r in json.loads((tmp/'evidence-instances/summary.json').read_text())['rows']}
+        got_ei = tuple((ei[k]['selector_choice'], ei[k]['contrary_citations'], ei[k]['overstated_explanations'],
+                        ei[k]['explanations_with_range_errors']) for k in ('4ms', 'relabel', 'session'))
+        check('Evidence instances: selector choice 24/30/30, contrary 6/0/0, proxy 13/18/13, range 6/0/4',
+              got_ei == ((24, 6, 13, 6), (30, 0, 18, 0), (30, 0, 13, 4)), str(got_ei))
         shutil.copytree(HERE/'results/reliance-redesign', tmp/'reliance-redesign')
         run('reliance_redesign.py', 'score', '--out', tmp/'reliance-redesign', '--tex', tmp/'reliance-redesign.tex')
         same_file('Redesigned reliance table (from saved API records)', tmp/'reliance-redesign.tex', 'reliance-redesign.tex')

@@ -1,0 +1,1431 @@
+{
+  "rows": [
+    {
+      "answers": 30,
+      "selector_choice": 30,
+      "retrieval_citations": 150,
+      "contrary_citations": 8,
+      "answers_citing_contrary": 4,
+      "evidence_citations": 150,
+      "contrary_evidence": 8,
+      "answers_citing_contrary_evidence": 4,
+      "answers_citing_summary": 0,
+      "overstated_explanations": 21,
+      "explanations_with_range_errors": 7,
+      "explanations_with_unsupported_numbers": 0,
+      "mean_chars": 417,
+      "instance": "main",
+      "invalid": 0,
+      "selector": "s50000_aall",
+      "first_half": 109,
+      "chosen_wins_all_blocks": false,
+      "selector_block_wins": "8/10",
+      "choices": [
+        "s50000_aall"
+      ]
+    },
+    {
+      "answers": 30,
+      "selector_choice": 24,
+      "retrieval_citations": 155,
+      "contrary_citations": 6,
+      "answers_citing_contrary": 3,
+      "evidence_citations": 155,
+      "contrary_evidence": 6,
+      "answers_citing_contrary_evidence": 3,
+      "answers_citing_summary": 0,
+      "overstated_explanations": 13,
+      "explanations_with_range_errors": 6,
+      "explanations_with_unsupported_numbers": 0,
+      "mean_chars": 366,
+      "instance": "4ms",
+      "invalid": 0,
+      "selector": "s50000_aall",
+      "first_half": 113,
+      "chosen_wins_all_blocks": false,
+      "selector_block_wins": "5/10",
+      "choices": [
+        "s50000_aall",
+        "s50000_aone"
+      ]
+    },
+    {
+      "answers": 30,
+      "selector_choice": 30,
+      "retrieval_citations": 152,
+      "contrary_citations": 0,
+      "answers_citing_contrary": 0,
+      "evidence_citations": 152,
+      "contrary_evidence": 0,
+      "answers_citing_contrary_evidence": 0,
+      "answers_citing_summary": 0,
+      "overstated_explanations": 18,
+      "explanations_with_range_errors": 0,
+      "explanations_with_unsupported_numbers": 0,
+      "mean_chars": 330,
+      "instance": "relabel",
+      "invalid": 0,
+      "selector": "s1000000_aone",
+      "first_half": 104,
+      "chosen_wins_all_blocks": false,
+      "selector_block_wins": "8/10",
+      "choices": [
+        "s1000000_aone"
+      ]
+    },
+    {
+      "answers": 30,
+      "selector_choice": 30,
+      "retrieval_citations": 148,
+      "contrary_citations": 0,
+      "answers_citing_contrary": 0,
+      "evidence_citations": 148,
+      "contrary_evidence": 0,
+      "answers_citing_contrary_evidence": 0,
+      "answers_citing_summary": 0,
+      "overstated_explanations": 13,
+      "explanations_with_range_errors": 4,
+      "explanations_with_unsupported_numbers": 5,
+      "mean_chars": 336,
+      "instance": "session",
+      "invalid": 0,
+      "selector": "s50000_aall",
+      "first_half": 59,
+      "chosen_wins_all_blocks": false,
+      "selector_block_wins": "4/5",
+      "choices": [
+        "s50000_aall"
+      ]
+    }
+  ],
+  "per_model": {
+    "main": {
+      "Llama-3.3-70B": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 3
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [
+            "s50000_aall: 82.488-140.554"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 4
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [
+            "s50000_aall: 82.488-126.36"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 3
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 3
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 1
+        }
+      ],
+      "Qwen3-235B": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        }
+      ],
+      "DeepSeek-V3.2": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        }
+      ],
+      "Nemotron-3-Ultra-550B": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [
+            "s50000_aone: 85.033-430.654"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [
+            "s50000_aone: 85.0-430.7"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [
+            "s50000_aone: 85-431"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [
+            "s50000_aone: 85.033-430.654"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [
+            "s50000_aone: 85.033-430.654"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        }
+      ],
+      "Gemini-3.8-Flash": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        }
+      ],
+      "Gemini-3.1-Pro": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 2,
+          "first_half": 2
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 2,
+          "first_half": 2
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 2,
+          "first_half": 2
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 2,
+          "first_half": 2
+        }
+      ]
+    },
+    "4ms": {
+      "Llama-3.3-70B": [
+        {
+          "seed": 4088,
+          "config": "s50000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aone",
+          "overstated": false,
+          "range_errors": [
+            "s50000_aone: 76.186-148.876"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aone",
+          "overstated": false,
+          "range_errors": [
+            "s50000_aone: 76.186-697.378"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        }
+      ],
+      "Qwen3-235B": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        }
+      ],
+      "DeepSeek-V3.2": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        }
+      ],
+      "Nemotron-3-Ultra-550B": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [
+            "s50000_aall: 85.9-129.5"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [
+            "s50000_aall: 85.9-129.5"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [
+            "s50000_aone: 76-697"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        }
+      ],
+      "Gemini-3.8-Flash": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 1
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 2,
+          "first_half": 2
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 2,
+          "first_half": 2
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [
+            "s50000_aall: 85-102"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 2,
+          "first_half": 2
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 1
+        }
+      ],
+      "Gemini-3.1-Pro": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 1
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 1
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 1
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 1
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 1
+        }
+      ]
+    },
+    "relabel": {
+      "Llama-3.3-70B": [
+        {
+          "seed": 4088,
+          "config": "s1000000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4089,
+          "config": "s1000000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4090,
+          "config": "s1000000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4091,
+          "config": "s1000000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4092,
+          "config": "s1000000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        }
+      ],
+      "Qwen3-235B": [
+        {
+          "seed": 4088,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4089,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4090,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4091,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4092,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        }
+      ],
+      "DeepSeek-V3.2": [
+        {
+          "seed": 4088,
+          "config": "s1000000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4089,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4090,
+          "config": "s1000000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4091,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4092,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        }
+      ],
+      "Nemotron-3-Ultra-550B": [
+        {
+          "seed": 4088,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4089,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4090,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4091,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        },
+        {
+          "seed": 4092,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 5
+        }
+      ],
+      "Gemini-3.8-Flash": [
+        {
+          "seed": 4088,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 1
+        },
+        {
+          "seed": 4089,
+          "config": "s1000000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 1
+        },
+        {
+          "seed": 4090,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 0
+        },
+        {
+          "seed": 4091,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4092,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 0
+        }
+      ],
+      "Gemini-3.1-Pro": [
+        {
+          "seed": 4088,
+          "config": "s1000000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 0
+        },
+        {
+          "seed": 4089,
+          "config": "s1000000_aone",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 0
+        },
+        {
+          "seed": 4090,
+          "config": "s1000000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 0
+        },
+        {
+          "seed": 4091,
+          "config": "s1000000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 0
+        },
+        {
+          "seed": 4092,
+          "config": "s1000000_aone",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 0
+        }
+      ]
+    },
+    "session": {
+      "Llama-3.3-70B": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [
+            "93.3188"
+          ],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [
+            "93.39"
+          ],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [
+            "93.3392"
+          ],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [
+            "93.39"
+          ],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [
+            "93.39"
+          ],
+          "contrary_citations": 0,
+          "first_half": 2
+        }
+      ],
+      "Qwen3-235B": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        }
+      ],
+      "DeepSeek-V3.2": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        }
+      ],
+      "Nemotron-3-Ultra-550B": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [
+            "s50000_aone: 466.089-152.215"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [
+            "s1000000 configs: 900-1500"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [
+            "s50000_aone: 466.089-152.215"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [
+            "s50000_aone: 466.089-152.215"
+          ],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        }
+      ],
+      "Gemini-3.8-Flash": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        }
+      ],
+      "Gemini-3.1-Pro": [
+        {
+          "seed": 4088,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4089,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 1
+        },
+        {
+          "seed": 4090,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4091,
+          "config": "s50000_aall",
+          "overstated": false,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        },
+        {
+          "seed": 4092,
+          "config": "s50000_aall",
+          "overstated": true,
+          "range_errors": [],
+          "unsupported_numbers": [],
+          "contrary_citations": 0,
+          "first_half": 2
+        }
+      ]
+    }
+  },
+  "facts": {
+    "main": {
+      "selector": "s50000_aall",
+      "table": {
+        "s50000_aall": 132.9413,
+        "s50000_aone": 277.4647,
+        "s1000000_aall": 954.7558,
+        "s1000000_aone": 1080.6555
+      },
+      "blocks": 10,
+      "block_wins": {
+        "s50000_aall": 8,
+        "s50000_aone": 2
+      },
+      "min_max_mean": {
+        "s50000_aone": [
+          85.033,
+          571.84,
+          227.446
+        ],
+        "s1000000_aall": [
+          748.404,
+          1023.152,
+          953.054
+        ],
+        "s1000000_aone": [
+          817.997,
+          1419.669,
+          1013.992
+        ],
+        "s50000_aall": [
+          82.488,
+          183.217,
+          110.458
+        ]
+      }
+    },
+    "4ms": {
+      "selector": "s50000_aall",
+      "table": {
+        "s50000_aall": 132.9413,
+        "s50000_aone": 277.4647,
+        "s1000000_aall": 954.7558,
+        "s1000000_aone": 1080.6555
+      },
+      "blocks": 10,
+      "block_wins": {
+        "s50000_aone": 5,
+        "s50000_aall": 5
+      },
+      "min_max_mean": {
+        "s50000_aone": [
+          76.186,
+          705.847,
+          263.031
+        ],
+        "s1000000_aall": [
+          732.866,
+          1039.293,
+          977.95
+        ],
+        "s1000000_aone": [
+          162.269,
+          1177.662,
+          897.624
+        ],
+        "s50000_aall": [
+          85.941,
+          312.316,
+          121.495
+        ]
+      }
+    },
+    "relabel": {
+      "selector": "s1000000_aone",
+      "table": {
+        "s1000000_aone": 132.9413,
+        "s1000000_aall": 277.4647,
+        "s50000_aone": 954.7558,
+        "s50000_aall": 1080.6555
+      },
+      "blocks": 10,
+      "block_wins": {
+        "s1000000_aone": 8,
+        "s1000000_aall": 2
+      },
+      "min_max_mean": {
+        "s1000000_aall": [
+          85.033,
+          571.84,
+          227.446
+        ],
+        "s50000_aone": [
+          748.404,
+          1023.152,
+          953.054
+        ],
+        "s50000_aall": [
+          817.997,
+          1419.669,
+          1013.992
+        ],
+        "s1000000_aone": [
+          82.488,
+          183.217,
+          110.458
+        ]
+      }
+    },
+    "session": {
+      "selector": "s50000_aall",
+      "table": {
+        "s50000_aall": 97.5958,
+        "s50000_aone": 124.5284,
+        "s1000000_aall": 1003.4796,
+        "s1000000_aone": 952.8776
+      },
+      "blocks": 5,
+      "block_wins": {
+        "s50000_aall": 4,
+        "s50000_aone": 1
+      },
+      "min_max_mean": {
+        "s1000000_aall": [
+          1000.052,
+          1036.239,
+          1018.26
+        ],
+        "s50000_aone": [
+          91.943,
+          466.089,
+          185.728
+        ],
+        "s50000_aall": [
+          87.693,
+          99.264,
+          93.339
+        ],
+        "s1000000_aone": [
+          924.309,
+          1521.04,
+          1151.716
+        ]
+      }
+    }
+  },
+  "reported_cost_usd": 0.446,
+  "cost_of_scored_records_usd": 0.446
+}

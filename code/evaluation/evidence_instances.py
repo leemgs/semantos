@@ -111,6 +111,7 @@ def facts(ev):
 
 
 QUANT = re.compile(pr.OVERSTATE.pattern.split(r'|\bsignificantly')[0], re.I)
+AVERAGE = re.compile(r'\b(?:average|mean|median|typical)\b', re.I)
 SIGNIF = re.compile(r'\bsignificantly (?:lower|better|faster|higher|less)\b', re.I)
 
 
@@ -119,7 +120,8 @@ def check(answer, ev, f):
     c['selector_choice'] = answer['config'] == f['selector']
     wins_all = f['block_wins'].get(answer['config'], 0) == f['blocks']
     expl = answer['explanation']
-    c['overstated'] = bool((QUANT.search(expl) and not wins_all) or SIGNIF.search(expl))
+    quant = [m for m in QUANT.finditer(expl) if not AVERAGE.search(m.group(0))]  # "lowest average" is no regularity
+    c['overstated'] = bool((quant and not wins_all) or SIGNIF.search(expl))
     cited = [i for i in ev if i['id'] in answer['cited_ids'] and i['kind'] == 'retrieval']
     order = [i['id'] for i in ev if i['kind'] == 'retrieval']
     c['first_half'] = sum(order.index(i['id']) < len(order)/2 for i in cited)

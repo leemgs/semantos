@@ -175,6 +175,20 @@ Limitations and offer concrete additions for the camera-ready version.
   `human_study.py`). Needs ethics approval and recruitment before it can run;
   report results only after real data exist.
 
+## 15. "One evidence list is one data point."
+
+- Appendix J reruns the six hosted models on three further instances from
+  training-side data: 4 ms calibration runs as retrieval items, permuted labels
+  and a second measurement session (90 calls, 0.45 USD).
+- Choices follow the evidence under permuted labels (30/30).
+- When the 4 ms runs compete with the table, Llama-3.3-70B leaves the table
+  choice in all five seeds, so sufficiency is qualified.
+- One-sided citation persists (only Gemini Flash cites competitors), and the
+  quantifier proxy fires in 13-18 of 30 explanations per instance.
+- These are automatic checks; an author should verify
+  `results/evidence-instances/explanations-for-review.csv` before the response.
+- Still the same host and workload family; another domain remains open.
+
 ## Quick additions possible during the response period (no new hardware runs)
 
 1. Adjudication of the disagreements, if asked.

@@ -437,6 +437,10 @@ Hosted runs (2026-09-27, OpenRouter, `--response-format json_schema`,
   training table split into per-configuration items (kind-matched test A) and
   with configuration-matched controls (test B), for the hosted models and the
   bf16 Llama-3.1-8B and Phi-4.
+* `evidence_instances.py` (Appendix J): reruns the hosted models on three
+  further evidence instances built from training-side data (4 ms calibration
+  runs as retrieval items, permuted labels, the second measurement session) and
+  scores them with the automatic checks.
 * `human_study.py` (not in the paper; study not yet run): materials for a
   human-impact study ready for pre-registration (`paper/human-study/protocol.md`). `build`
   writes the stimuli (verbatim misstated explanations, minimally corrected
