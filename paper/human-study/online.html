@@ -1,0 +1,188 @@
+<title>Advisor Brief Study</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
+<style>
+/* Layout: one narrow reading column, one step per screen, measurements in a scrollable table drawer. */
+:root{--bg:#f6f7f9;--surface:#ffffff;--fg:#1c2330;--muted:#5b6474;--line:#d5dae2;--accent:#2b5c8a;--accent-fg:#ffffff;--warn:#9a5b00;
+--display:"Source Serif 4",Georgia,serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14181f;--surface:#1c222b;--fg:#e4e8ee;--muted:#9aa4b2;--line:#323a46;--accent:#7fb0de;--accent-fg:#10161e;--warn:#e0a24a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14181f;--surface:#1c222b;--fg:#e4e8ee;--muted:#9aa4b2;--line:#323a46;--accent:#7fb0de;--accent-fg:#10161e;--warn:#e0a24a;color-scheme:dark}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--body)}
+main{max-width:44rem;margin:0 auto;padding-block:24px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+h1,h2{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0}h1{font-size:1.75rem}h2{font-size:1.3rem}
+p{margin:0}.muted{color:var(--muted);font-size:.9rem}.eyebrow{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.step{display:flex;flex-direction:column;gap:16px}
+.brief{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.brief dt{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}.brief dd{margin:0}
+code,.num{font-family:var(--mono);font-size:.88em;font-variant-numeric:tabular-nums}
+.cites{display:flex;flex-wrap:wrap;gap:6px}.cites code{border:1px solid var(--line);border-radius:4px;padding:1px 6px;word-break:break-all}
+fieldset{border:0;border-top:1px solid var(--line);margin:0;padding:14px 0 0;display:flex;flex-direction:column;gap:8px}
+legend{padding:0 0 6px;font-weight:500}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts label{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:6px;padding:6px 12px;background:var(--surface);cursor:pointer}
+.opts input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+button{font:inherit;font-weight:500;border-radius:6px;padding:10px 18px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);align-self:flex-start}
+button.ghost{background:transparent;color:var(--accent)}button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+button:disabled{opacity:.5;cursor:default}
+.drawer{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.scroll{overflow-x:auto}table{border-collapse:collapse;font-family:var(--mono);font-size:.82rem;font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid var(--line);padding:3px 10px;text-align:right;white-space:nowrap}th{font-family:var(--body);font-weight:500;color:var(--muted)}
+.check{display:flex;gap:8px;align-items:flex-start}.msg{color:var(--warn);font-size:.9rem}
+.key{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;font-size:.92rem}
+.admin{border-top:1px dashed var(--line);padding-top:16px}
+</style>
+<main>
+  <section class="step" id="loading"><p class="muted">Loading the study…</p></section>
+
+  <section class="step" id="blocked" hidden>
+    <h1>This study cannot record answers here</h1>
+    <p id="blockedWhy">Responses are saved to your account. Sign in to claude.ai with the account the researcher invited, then reopen this link.</p>
+  </section>
+
+  <section class="step" id="done" hidden>
+    <h1>You have already taken part</h1>
+    <p>Thank you. Your response is saved. Each person takes part once.</p>
+  </section>
+
+  <section class="step" id="consent" hidden>
+    <p class="eyebrow">Step 1 of 3 · Information and consent</p>
+    <h1>Reading AI-written technical advice</h1>
+    <p>You will read a short recommendation that an AI advisor wrote about choosing a computer configuration. Then you answer six yes/no questions about the measurements behind it and say how much you trust the recommendation. It takes about 10 minutes.</p>
+    <p>Some details of the study are explained only at the end, because knowing them first would change how you read. We store your answers, whether and when you open the measurements, and how long the task takes, under an opaque account identifier. We do not store your name or e-mail address. Taking part is voluntary, and you may stop at any time before submitting.</p>
+    <p class="muted" id="contact">Researcher and ethics board contacts are on the information sheet you received.</p>
+    <label class="check"><input type="checkbox" id="c1"><span>I am 18 or older.</span></label>
+    <label class="check"><input type="checkbox" id="c2"><span>I have read the information sheet.</span></label>
+    <label class="check"><input type="checkbox" id="c3"><span>I agree to take part and to the publication of my anonymous responses.</span></label>
+    <button id="startBtn" disabled>Start</button>
+  </section>
+
+  <section class="step" id="task" hidden>
+    <p class="eyebrow">Step 2 of 3 · The brief</p>
+    <h2>Which scheduler configuration should the engineer use?</h2>
+    <p>An engineer must choose one of four configurations to minimize the 95th-percentile (P95) wake-up latency of a periodic task. Lower is better. An AI advisor read the measurements and wrote the brief below. Read it, then answer the questions. You may open the measurements at any time.</p>
+    <dl class="brief">
+      <div><dt>Recommended configuration</dt><dd><code id="cfg"></code></dd></div>
+      <div><dt>Cited evidence</dt><dd class="cites" id="cites"></dd></div>
+      <div id="ratWrap"><dt>Rationale</dt><dd id="rat"></dd></div>
+    </dl>
+    <button class="ghost" id="evBtn" aria-expanded="false" aria-controls="ev">Show the measurements</button>
+    <div class="drawer" id="ev" hidden></div>
+    <p class="eyebrow">Step 3 of 3 · Questions about the measurements</p>
+    <form id="form" class="step"></form>
+  </section>
+
+  <section class="step" id="thanks" hidden>
+    <h1>Thank you, your response is saved</h1>
+    <p>The brief you read was written by a language model. In this study some briefs misstate the measurements even though the recommended configuration is correct. These are the correct answers:</p>
+    <div class="key" id="key"></div>
+  </section>
+
+  <section class="step admin" id="admin" hidden>
+    <p class="eyebrow">Researcher view · only the owner sees this</p>
+    <h2>Responses</h2>
+    <p id="adminCount" class="muted">No responses yet. They appear here as participants submit.</p>
+    <div class="scroll"><table id="adminTable"></table></div>
+    <button class="ghost" id="dlBtn" hidden>Save responses as CSV</button>
+    <p class="msg" id="adminMsg"></p>
+  </section>
+</main>
+<script>
+const D={"stimuli": [{"id": "S1", "source_model_dir": "api-nemotron3-ultra-550b", "seed": 4089, "config": "s50000_aall", "cited_ids": ["retrieval-3-0-s50000_aall", "retrieval-3-1-s50000_aall", "retrieval-3-2-s50000_aall", "retrieval-3-3-s50000_aall", "retrieval-3-4-s50000_aall", "retrieval-3-5-s50000_aall"], "targets": ["P1", "P5"], "M": "Among the allowed configurations, s50000_aall consistently achieves the lowest periodic wake-up P95 latency across all retrieval runs. Its P95 values range from 82.5 to 183.2 microseconds, with most runs below 150 microseconds. In contrast, s50000_aone shows higher variability (85.0 to 430.7 microseconds), while both s1000000_aall and s1000000_aone consistently exceed 748 microseconds.", "C": "Among the allowed configurations, s50000_aall achieves the lowest periodic wake-up P95 latency in 8 of the 10 retrieval blocks. Its P95 values range from 82.5 to 183.2 microseconds, with most runs below 150 microseconds. In contrast, s50000_aone shows higher variability (85.0 to 571.8 microseconds), while both s1000000_aall and s1000000_aone consistently exceed 748 microseconds.", "C_status": "AI-drafted correction; author verification required", "M_note": "verbatim up to the last complete sentence (the stored explanation is truncated)", "source_explanation_sha256": "d74070d86191430f716b1a8712007132c6d0be04c46659a809f2fd9ddb4c179c"}, {"id": "S2", "source_model_dir": "api-deepseek-v3.2", "seed": 4089, "config": "s50000_aall", "cited_ids": ["training-table", "retrieval-3-0-s50000_aall", "retrieval-3-1-s50000_aall", "retrieval-3-2-s50000_aall", "retrieval-3-3-s50000_aall", "retrieval-3-4-s50000_aall"], "targets": ["P2"], "M": "The goal is to minimize periodic wake-up P95 latency. The evidence includes a training summary table showing average latencies, where s50000_aall has the lowest average (132.9413 µs). More importantly, the retrieval runs provide direct P95 latency measurements for each config at a 3 ms period. For s50000_aall, the P95 latencies across 10 runs are consistently low: 126.36, 140.554, 94.81, 99.853, 93.049, 183.217, 109.519, 82.488, 87.387, 87.347 µs. The maximum among these is 183.217 µs, which is lower than the lowest P95 observed for any other config (e.g., s50000_aone has runs up to 571.84 µs, and s1000000 configs are all above 748 µs). Therefore, s50000_aall has the lowest worst-case P95 latency based on the measured retrieval runs, making it the best choice to minimize periodic wake-up P95 latency.", "C": "The goal is to minimize periodic wake-up P95 latency. The evidence includes a training summary table showing average latencies, where s50000_aall has the lowest average (132.9413 µs). More importantly, the retrieval runs provide direct P95 latency measurements for each config at a 3 ms period. For s50000_aall, the P95 latencies across 10 runs are consistently low: 126.36, 140.554, 94.81, 99.853, 93.049, 183.217, 109.519, 82.488, 87.387, 87.347 µs. The maximum among these is 183.217 µs, which is lower than every run of the two s1000000 configs (all above 748 µs), although some s50000_aone runs are lower (down to 85.033 µs) and others reach 571.84 µs. Therefore, s50000_aall has the lowest worst-case P95 latency based on the measured retrieval runs, making it the best choice to minimize periodic wake-up P95 latency.", "C_status": "AI-drafted correction; author verification required", "M_note": "verbatim", "source_explanation_sha256": "cd588b20bd3d30d06c3d66fc1a0239c720e552db3f1480bf81a3ff4d54136184"}, {"id": "S3", "source_model_dir": "api-deepseek-v3.2", "seed": 4088, "config": "s50000_aall", "cited_ids": ["training-table", "retrieval-3-0-s50000_aall", "retrieval-3-1-s50000_aall", "retrieval-3-2-s50000_aall", "retrieval-3-3-s50000_aall", "retrieval-3-4-s50000_aall"], "targets": ["P3", "P5"], "M": "The goal is to minimize periodic wake-up P95 latency. The evidence includes a training summary table showing average latencies, but the primary evidence for periodic wake-up latency should come from the retrieval runs, which are measured at a fixed period_ns of 3,000,000 ns (3 ms). Among all retrieval runs, s50000_aall consistently shows the lowest P95 latencies across multiple trials (e.g., 126.36 μs, 140.554 μs, 94.81 μs, 99.853 μs, 93.049 μs), with most values under 150 μs. In contrast, s50000_aone shows higher variability and often higher latencies (e.g., 571.84 μs, 272.927 μs), while both s1000000 configurations are consistently above 800 μs. Therefore, s50000_aall is the clear choice for minimizing P95 latency based on the retrieval run evidence.", "C": "The goal is to minimize periodic wake-up P95 latency. The evidence includes a training summary table showing average latencies, but the primary evidence for periodic wake-up latency should come from the retrieval runs, which are measured at a fixed period_ns of 3,000,000 ns (3 ms). Among all retrieval runs, s50000_aall shows the lowest P95 latency in 8 of the 10 retrieval blocks (e.g., 126.36 μs, 140.554 μs, 94.81 μs, 99.853 μs, 93.049 μs), with most values under 150 μs. In contrast, s50000_aone shows higher variability and often higher latencies (e.g., 571.84 μs, 272.927 μs), while both s1000000 configurations are above 748 μs in every run. Therefore, s50000_aall is the clear choice for minimizing P95 latency based on the retrieval run evidence.", "C_status": "AI-drafted correction; author verification required", "M_note": "verbatim", "source_explanation_sha256": "73683f80ff34c4160d51d5a9ed21d93001e0129305a6c0cf26726eb8d6e06747"}, {"id": "S4", "source_model_dir": "api-llama3.3-70b", "seed": 4089, "config": "s50000_aall", "cited_ids": ["retrieval-3-0-s50000_aall", "retrieval-3-2-s50000_aall", "retrieval-3-3-s50000_aall", "retrieval-3-4-s50000_aall", "retrieval-3-6-s50000_aall", "retrieval-3-7-s50000_aall"], "targets": ["P4"], "M": "The config 's50000_aall' has the lowest P95 latency values across multiple retrieval runs, with values ranging from 82.488 to 140.554. This suggests that 's50000_aall' is the most effective config for minimizing periodic wake-up P95 latency.", "C": "The config 's50000_aall' has the lowest P95 latency values across multiple retrieval runs, with values ranging from 82.488 to 183.217. This suggests that 's50000_aall' is the most effective config for minimizing periodic wake-up P95 latency.", "C_status": "AI-drafted correction; author verification required", "M_note": "verbatim", "source_explanation_sha256": "be100d341ed746217f1f3a1f88ac9612e5189a9d0b6746814315742ed58dc906"}, {"id": "S5", "source_model_dir": "api-qwen3-235b", "seed": 4088, "config": "s50000_aall", "cited_ids": ["retrieval-3-0-s50000_aall", "retrieval-3-1-s50000_aall", "retrieval-3-2-s50000_aall", "retrieval-3-3-s50000_aall", "retrieval-3-4-s50000_aall", "retrieval-3-5-s50000_aall"], "targets": ["P5", "P6"], "M": "The goal is to minimize P95 latency during periodic wake-up. Among all configurations, 's50000_aall' consistently shows the lowest P95 latency across multiple retrieval runs (e.g., 126.36 us, 140.554 us, 94.81 us, etc.), with the highest observed P95 being 183.217 us. In contrast, all other configurations (including 's50000_aone', 's1000000_aall', and 's1000000_aone') exhibit significantly higher P95 latency.", "C": "The goal is to minimize P95 latency during periodic wake-up. Among all configurations, 's50000_aall' shows the lowest P95 latency in 8 of the 10 retrieval blocks (e.g., 126.36 us, 140.554 us, 94.81 us, etc.), with the highest observed P95 being 183.217 us. In contrast, the other configurations have higher mean P95 latency (227.4, 953.1 and 1014.0 us versus 110.5 us), although some s50000_aone runs are lower than some s50000_aall runs; the evidence contains no significance test.", "C_status": "AI-drafted correction; author verification required", "M_note": "verbatim up to the last complete sentence (the stored explanation is truncated); its cut final sentence is completed", "source_explanation_sha256": "da8332a2e6295969c7e636af47bf21e0b5b9d0e1dc6b01be286d29907d83ba06"}, {"id": "S6", "source_model_dir": "api-gemini-3.1-pro", "seed": 4090, "config": "s50000_aall", "cited_ids": ["training-table", "retrieval-3-2-s50000_aall", "retrieval-3-4-s50000_aall", "retrieval-3-7-s50000_aall", "retrieval-3-8-s50000_aall", "retrieval-3-9-s50000_aall"], "targets": ["P5"], "M": "The configuration s50000_aall minimizes the periodic wake-up P95 latency. The training table shows it has the lowest average P95 latency at 132.94 us, outperforming all other configurations. This is corroborated by multiple retrieval runs where s50000_aall consistently achieves the lowest P95 latency, frequently dropping below 100 us.", "C": "The configuration s50000_aall minimizes the periodic wake-up P95 latency. The training table shows it has the lowest average P95 latency at 132.94 us, outperforming all other configurations. This is corroborated by multiple retrieval runs where s50000_aall achieves the lowest P95 latency in 8 of the 10 retrieval blocks, frequently dropping below 100 us.", "C_status": "AI-drafted correction; author verification required", "M_note": "verbatim", "source_explanation_sha256": "5b0ae823104da4c4ff50fe1d9ee4cfff61def2af90c4b3bcdd4e334b5c082a07"}], "probes": [{"id": "P1", "question": "Is the highest P95 among the s50000_aone retrieval runs above 500 us?", "answer": "yes"}, {"id": "P2", "question": "Does any run of a configuration other than s50000_aall have a P95 below the highest s50000_aall run?", "answer": "yes"}, {"id": "P3", "question": "Is every s1000000 run (both s1000000 configurations) above 800 us?", "answer": "no"}, {"id": "P4", "question": "Is the highest P95 among the s50000_aall retrieval runs above 150 us?", "answer": "yes"}, {"id": "P5", "question": "Does s50000_aall have the lowest P95 in every one of the ten retrieval blocks?", "answer": "no"}, {"id": "P6", "question": "Does the evidence report a statistical significance test between configurations?", "answer": "no"}], "evidence": [{"id": "training-table", "kind": "table", "values": {"s50000_aall": 132.9413, "s50000_aone": 277.4647, "s1000000_aall": 954.7558, "s1000000_aone": 1080.6555}}, {"id": "retrieval-3-0-s50000_aone", "kind": "retrieval", "config": "s50000_aone", "period_ns": 3000000, "p95_us": 571.84}, {"id": "retrieval-3-0-s1000000_aall", "kind": "retrieval", "config": "s1000000_aall", "period_ns": 3000000, "p95_us": 1023.152}, {"id": "retrieval-3-0-s1000000_aone", "kind": "retrieval", "config": "s1000000_aone", "period_ns": 3000000, "p95_us": 1036.014}, {"id": "retrieval-3-0-s50000_aall", "kind": "retrieval", "config": "s50000_aall", "period_ns": 3000000, "p95_us": 126.36}, {"id": "retrieval-3-1-s50000_aall", "kind": "retrieval", "config": "s50000_aall", "period_ns": 3000000, "p95_us": 140.554}, {"id": "retrieval-3-1-s1000000_aall", "kind": "retrieval", "config": "s1000000_aall", "period_ns": 3000000, "p95_us": 1000.735}, {"id": "retrieval-3-1-s50000_aone", "kind": "retrieval", "config": "s50000_aone", "period_ns": 3000000, "p95_us": 272.927}, {"id": "retrieval-3-1-s1000000_aone", "kind": "retrieval", "config": "s1000000_aone", "period_ns": 3000000, "p95_us": 817.997}, {"id": "retrieval-3-2-s50000_aall", "kind": "retrieval", "config": "s50000_aall", "period_ns": 3000000, "p95_us": 94.81}, {"id": "retrieval-3-2-s1000000_aall", "kind": "retrieval", "config": "s1000000_aall", "period_ns": 3000000, "p95_us": 983.2}, {"id": "retrieval-3-2-s1000000_aone", "kind": "retrieval", "config": "s1000000_aone", "period_ns": 3000000, "p95_us": 1419.669}, {"id": "retrieval-3-2-s50000_aone", "kind": "retrieval", "config": "s50000_aone", "period_ns": 3000000, "p95_us": 151.299}, {"id": "retrieval-3-3-s50000_aall", "kind": "retrieval", "config": "s50000_aall", "period_ns": 3000000, "p95_us": 99.853}, {"id": "retrieval-3-3-s50000_aone", "kind": "retrieval", "config": "s50000_aone", "period_ns": 3000000, "p95_us": 254.509}, {"id": "retrieval-3-3-s1000000_aone", "kind": "retrieval", "config": "s1000000_aone", "period_ns": 3000000, "p95_us": 985.673}, {"id": "retrieval-3-3-s1000000_aall", "kind": "retrieval", "config": "s1000000_aall", "period_ns": 3000000, "p95_us": 1019.124}, {"id": "retrieval-3-4-s1000000_aall", "kind": "retrieval", "config": "s1000000_aall", "period_ns": 3000000, "p95_us": 1016.898}, {"id": "retrieval-3-4-s50000_aall", "kind": "retrieval", "config": "s50000_aall", "period_ns": 3000000, "p95_us": 93.049}, {"id": "retrieval-3-4-s50000_aone", "kind": "retrieval", "config": "s50000_aone", "period_ns": 3000000, "p95_us": 170.306}, {"id": "retrieval-3-4-s1000000_aone", "kind": "retrieval", "config": "s1000000_aone", "period_ns": 3000000, "p95_us": 1010.901}, {"id": "retrieval-3-5-s50000_aall", "kind": "retrieval", "config": "s50000_aall", "period_ns": 3000000, "p95_us": 183.217}, {"id": "retrieval-3-5-s50000_aone", "kind": "retrieval", "config": "s50000_aone", "period_ns": 3000000, "p95_us": 430.654}, {"id": "retrieval-3-5-s1000000_aone", "kind": "retrieval", "config": "s1000000_aone", "period_ns": 3000000, "p95_us": 929.63}, {"id": "retrieval-3-5-s1000000_aall", "kind": "retrieval", "config": "s1000000_aall", "period_ns": 3000000, "p95_us": 960.925}, {"id": "retrieval-3-6-s1000000_aall", "kind": "retrieval", "config": "s1000000_aall", "period_ns": 3000000, "p95_us": 875.788}, {"id": "retrieval-3-6-s1000000_aone", "kind": "retrieval", "config": "s1000000_aone", "period_ns": 3000000, "p95_us": 965.994}, {"id": "retrieval-3-6-s50000_aone", "kind": "retrieval", "config": "s50000_aone", "period_ns": 3000000, "p95_us": 97.457}, {"id": "retrieval-3-6-s50000_aall", "kind": "retrieval", "config": "s50000_aall", "period_ns": 3000000, "p95_us": 109.519}, {"id": "retrieval-3-7-s1000000_aone", "kind": "retrieval", "config": "s1000000_aone", "period_ns": 3000000, "p95_us": 1027.923}, {"id": "retrieval-3-7-s50000_aone", "kind": "retrieval", "config": "s50000_aone", "period_ns": 3000000, "p95_us": 89.789}, {"id": "retrieval-3-7-s1000000_aall", "kind": "retrieval", "config": "s1000000_aall", "period_ns": 3000000, "p95_us": 974.613}, {"id": "retrieval-3-7-s50000_aall", "kind": "retrieval", "config": "s50000_aall", "period_ns": 3000000, "p95_us": 82.488}, {"id": "retrieval-3-8-s1000000_aone", "kind": "retrieval", "config": "s1000000_aone", "period_ns": 3000000, "p95_us": 960.755}, {"id": "retrieval-3-8-s50000_aone", "kind": "retrieval", "config": "s50000_aone", "period_ns": 3000000, "p95_us": 85.033}, {"id": "retrieval-3-8-s50000_aall", "kind": "retrieval", "config": "s50000_aall", "period_ns": 3000000, "p95_us": 87.387}, {"id": "retrieval-3-8-s1000000_aall", "kind": "retrieval", "config": "s1000000_aall", "period_ns": 3000000, "p95_us": 748.404}, {"id": "retrieval-3-9-s1000000_aall", "kind": "retrieval", "config": "s1000000_aall", "period_ns": 3000000, "p95_us": 927.701}, {"id": "retrieval-3-9-s50000_aall", "kind": "retrieval", "config": "s50000_aall", "period_ns": 3000000, "p95_us": 87.347}, {"id": "retrieval-3-9-s1000000_aone", "kind": "retrieval", "config": "s1000000_aone", "period_ns": 3000000, "p95_us": 985.365}, {"id": "retrieval-3-9-s50000_aone", "kind": "retrieval", "config": "s50000_aone", "period_ns": 3000000, "p95_us": 150.643}], "version": "714bcfcdfbf9"};
+const CONDITIONS=['M','C','N'];
+const $=id=>document.getElementById(id);
+const show=id=>{for(const s of ['loading','blocked','done','consent','task','thanks'])$(s).hidden=s!==id;scrollTo(0,0)};
+let db=null,uid=null,assigned=null,t0=0,opens=0,firstOpen=null;
+
+function hash(s){let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+
+function renderEvidence(){
+  const tab=D.evidence.find(e=>e.id==='training-table').values, cs=Object.keys(tab), blocks={};
+  D.evidence.filter(e=>e.kind==='retrieval').forEach(e=>{const b=e.id.split('-')[2];(blocks[b]=blocks[b]||{})[e.config]=e.p95_us});
+  const head='<tr><th></th>'+cs.map(c=>'<th>'+c+'</th>').join('')+'</tr>';
+  $('ev').innerHTML='<p><code>training-table</code> · mean P95 per configuration, µs</p><div class="scroll"><table>'+head+
+    '<tr><th>mean</th>'+cs.map(c=>'<td>'+tab[c]+'</td>').join('')+'</tr></table></div>'+
+    '<p><code>retrieval</code> runs · P95 in µs, period 3 ms. Block <i>b</i> holds runs <code>retrieval-3-b-&lt;config&gt;</code>.</p><div class="scroll"><table>'+head+
+    Object.keys(blocks).sort((a,b)=>a-b).map(b=>'<tr><th>block '+b+'</th>'+cs.map(c=>'<td>'+blocks[b][c]+'</td>').join('')+'</tr>').join('')+'</table></div>';
+}
+
+function radios(name,values,labels){return '<div class="opts">'+values.map((v,i)=>'<label><input type="radio" name="'+name+'" id="'+name+'-'+v+'" value="'+v+'"><span>'+labels[i]+'</span></label>').join('')+'</div>'}
+
+function renderTask(){
+  const st=assigned.stimulus;
+  $('cfg').textContent=st.config;
+  $('cites').innerHTML='';st.cited_ids.forEach(c=>{const e=document.createElement('code');e.textContent=c;$('cites').appendChild(e)});
+  $('ratWrap').hidden=assigned.condition==='N';
+  $('rat').textContent=assigned.condition==='N'?'':st[assigned.condition];
+  renderEvidence();
+  $('form').innerHTML=D.probes.map((p,i)=>'<fieldset><legend>'+(i+1)+'. '+p.question.replace(/</g,'&lt;')+'</legend>'+radios(p.id,['yes','no','unsure'],['Yes','No','Not sure'])+'</fieldset>').join('')+
+    '<fieldset><legend>How much do you trust the advisor’s brief? (1 = not at all, 7 = completely)</legend>'+radios('trust',[1,2,3,4,5,6,7],['1','2','3','4','5','6','7'])+'</fieldset>'+
+    '<fieldset><legend>To show you are reading carefully, select “No” here.</legend>'+radios('att',['yes','no'],['Yes','No'])+'</fieldset>'+
+    '<p class="msg" id="formMsg"></p><button type="submit" id="submitBtn">Submit answers</button>';
+}
+
+$('evBtn').addEventListener('click',()=>{const e=$('ev');e.hidden=!e.hidden;$('evBtn').setAttribute('aria-expanded',String(!e.hidden));
+  $('evBtn').textContent=e.hidden?'Show the measurements':'Hide the measurements';
+  if(!e.hidden){opens++;if(firstOpen===null)firstOpen=(Date.now()-t0)/1000}});
+
+['c1','c2','c3'].forEach(id=>$(id).addEventListener('change',()=>{$('startBtn').disabled=!['c1','c2','c3'].every(i=>$(i).checked)}));
+$('startBtn').addEventListener('click',()=>{renderTask();show('task');t0=Date.now()});
+
+const val=n=>{const x=document.querySelector('input[name="'+n+'"]:checked');return x?x.value:''};
+$('form').addEventListener('submit',async ev=>{
+  ev.preventDefault();
+  const row={assignment:assigned.k,condition:assigned.condition,stimulus:assigned.stimulus.id};
+  for(const p of D.probes)row[p.id]=val(p.id);
+  row.trust=val('trust');
+  if(D.probes.some(p=>!row[p.id])||!row.trust||!val('att')){$('formMsg').textContent='Answer every question, then submit again.';return}
+  row.attention=val('att')==='no'?'pass':'fail';row.opened_evidence=opens>0?1:0;row.evidence_opens=opens;
+  row.first_open_seconds=firstOpen===null?'':Number(firstOpen.toFixed(1));row.seconds=Number(((Date.now()-t0)/1000).toFixed(1));
+  row.submitted_at=new Date().toISOString();row.version=D.version;
+  $('submitBtn').disabled=true;$('formMsg').textContent='Saving…';
+  try{await db.doc('responses/'+uid).set(row)}
+  catch(e){$('submitBtn').disabled=false;$('formMsg').textContent='Your answers could not be saved ('+(e&&e.code||'error')+'). Check your connection and submit again.';return}
+  $('key').innerHTML=D.probes.map(p=>'<span class="num">'+p.id+'</span><span>'+p.question.replace(/</g,'&lt;')+'</span><b>'+p.answer+'</b>').join('');
+  show('thanks');
+});
+
+function csv(rows){
+  const cols=['participant','assignment','condition','stimulus',...D.probes.map(p=>p.id),'trust','attention','opened_evidence','evidence_opens','first_open_seconds','seconds','submitted_at','version'];
+  const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+  return cols.join(',')+'\n'+rows.map(r=>cols.map(c=>q(r[c])).join(',')).join('\n')+'\n';
+}
+
+async function adminView(){
+  $('admin').hidden=false;
+  let rows=[];
+  db.collection('responses').onSnapshot(snap=>{
+    rows=snap.docs.map(d=>Object.assign({participant:'p'+hash(d.id).toString(36)},d.data()));
+    const n={};rows.forEach(r=>{n[r.condition+' '+r.stimulus]=(n[r.condition+' '+r.stimulus]||0)+1});
+    $('adminCount').textContent=rows.length?rows.length+' responses. Cells count submissions per condition and stimulus.':'No responses yet. They appear here as participants submit.';
+    const st=D.stimuli.map(s=>s.id);
+    $('adminTable').innerHTML=rows.length?'<tr><th></th>'+st.map(s=>'<th>'+s+'</th>').join('')+'</tr>'+CONDITIONS.map(c=>'<tr><th>'+c+'</th>'+st.map(s=>'<td>'+(n[c+' '+s]||0)+'</td>').join('')+'</tr>').join(''):'';
+    $('dlBtn').hidden=!rows.length;
+  },e=>{$('adminMsg').textContent='Could not load responses ('+(e&&e.code||'error')+').'});
+  const downloads=await claude.use('downloads');
+  if(!downloads){$('dlBtn').remove();return}
+  $('dlBtn').addEventListener('click',async()=>{
+    try{await downloads.save({filename:'responses.csv',data:csv(rows)});$('adminMsg').textContent='Saved responses.csv.'}
+    catch(e){$('adminMsg').textContent='The file was not saved ('+(e&&e.code||'declined')+').'}
+  });
+}
+
+(async function boot(){
+  if(!window.claude){$('blockedWhy').textContent='Open this page through its claude.ai link to take part.';show('blocked');return}
+  const user=await claude.use('user');
+  db=await claude.use('db');
+  if(!db||!user){show('blocked');return}
+  uid=await user.id();
+  if(!uid){show('blocked');return}
+  const owner=await user.isOwner();
+  if(owner){await adminView();$('loading').hidden=true;return}
+  if((await user.can('data.write'))===false){$('blockedWhy').textContent='Your access to this page does not allow saving answers. Ask the researcher to add you as a participant.';show('blocked');return}
+  try{const prev=await db.doc('responses/'+uid).get();if(prev.exists){show('done');return}}catch(e){}
+  const k=hash(uid)%(3*D.stimuli.length);
+  assigned={k,condition:CONDITIONS[k%3],stimulus:D.stimuli[Math.floor(k/3)%D.stimuli.length]};
+  show('consent');
+})();
+</script>

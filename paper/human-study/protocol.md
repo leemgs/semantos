@@ -95,8 +95,30 @@ shows, even when the decision and citations are right? Does the reader notice?
    the measurements, and the correct answers are shown. The participant saves
    the response file and returns it to the researcher.
 
-The instrument is a static page. It sends nothing over the network. It can also
-be rebuilt in a survey platform with the same texts from `stimuli.json`.
+Two instruments use the same texts from `stimuli.json`:
+
+- **`online.html`: online collection on claude.ai.** This is a claude.ai artifact
+  page that saves each response to the artifact's database.
+  - Each participant's own document is at `responses/<account id>`.
+    Participants cannot read anyone else's response; only the owner can read
+    them all.
+  - Assignment is k = hash(account id) mod 18, giving the condition and stimulus
+    as above. A second visit shows "already taken part".
+  - The owner opening the page sees counts per condition × stimulus and a
+    "Save responses as CSV" button. The CSV is the input to `analyze`, and its
+    `participant` column is a hash of the account id.
+  - Constraint: only people who can write to the artifact can submit. In
+    practice that means members of the owner's claude.ai organization (Team or
+    Enterprise) at Contributor level or above, or people invited by e-mail as
+    Editors. Outside visitors with a public link can view but cannot save.
+  - Hash assignment balances conditions only in expectation, so check the counts
+    and stop recruiting when each cell is filled.
+  - Do not republish the page during collection: open views reload to the new
+    version, and the assignment depends on the stimuli.
+- **`instrument.html`: a static page for lab sessions or survey platforms.** It
+  sends nothing over the network. The participant saves a CSV with the same
+  columns and returns it to the researcher. For open online recruitment (e.g.,
+  Prolific), rebuild the same texts in the institution's survey platform.
 
 ## Exclusions (fixed in advance)
 

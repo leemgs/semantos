@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Materials and analysis for the pre-registered human-impact study (not yet run).
+"""Materials and analysis for a human-impact study prepared for pre-registration (not yet run).
 
 Question: does a misstated rationale attached to a correct, cited decision
 change what a reader believes the evidence shows? Each participant sees the
@@ -20,7 +20,7 @@ participant then answers the same six yes/no probes about the evidence; the
 probes a source explanation misstates are its targeted probes. Primary
 outcome: per-participant accuracy on targeted probes, M versus C.
 
-    python3 human_study.py build --out ../../paper/human-study     # stimuli.json, instrument.html
+    python3 human_study.py build --out ../../paper/human-study     # stimuli.json, instrument.html, online.html
     python3 human_study.py power [--sims 2000]                     # simulated power under stated assumptions
     python3 human_study.py analyze --responses responses.csv [--out summary.json]
 
@@ -147,8 +147,12 @@ def build(args):
                                                           'evidence': [i for i in items if i['kind'] != 'graph']},
                                                          ensure_ascii=False))
     (args.out/'instrument.html').write_text(page)
+    data = {'stimuli': stimuli, 'probes': out['probes'], 'evidence': [i for i in items if i['kind'] != 'graph']}
+    data['version'] = hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]
+    online = (args.out/'online-template.html').read_text().replace('/*DATA*/null', json.dumps(data, ensure_ascii=False))
+    (args.out/'online.html').write_text(online)  # claude.ai artifact page; responses go to its db (see protocol)
     print('probe keys', {p: k for p, k in keys.items()})
-    print(f"wrote {args.out/'stimuli.json'} and {args.out/'instrument.html'}")
+    print(f"wrote {args.out/'stimuli.json'}, {args.out/'instrument.html'} and {args.out/'online.html'}")
 
 
 def assign(k):

@@ -438,8 +438,8 @@ Hosted runs (2026-09-27, OpenRouter, `--response-format json_schema`,
   with configuration-matched controls (test B), for the hosted models and the
   bf16 Llama-3.1-8B and Phi-4.
 * `human_study.py` (not in the paper; study not yet run): materials for a
-  pre-registered human-impact study (`paper/human-study/protocol.md`). `build`
+  human-impact study ready for pre-registration (`paper/human-study/protocol.md`). `build`
   writes the stimuli (verbatim misstated explanations, minimally corrected
   versions, probes with answers computed from the evidence) and a static
   response instrument; `power` sizes the study by simulation; `analyze` runs
-  the pre-registered tests on returned response files. No human data exist.
+  the planned tests on returned response files. No human data exist.

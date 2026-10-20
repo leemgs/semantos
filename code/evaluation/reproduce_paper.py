@@ -81,6 +81,21 @@ def main():
         n_l, n_h = sum(c['verdict'] in mis for c in lc), sum(c['verdict'] in mis for c in hc)
         check('Misstated claims 16/28 (local), 25/69 (hosted), 41/97', (n_l, len(lc), n_h, len(hc)) == (16, 28, 25, 69),
               f'{n_l}/{len(lc)}, {n_h}/{len(hc)}')
+        # dependence: distinct (model, claim) pairs, and a bootstrap that resamples models (clusters)
+        import random
+        distinct = {(c['model'], c['claim']): c['verdict'] for c in audit['claims']}
+        by_model = collections.defaultdict(list)
+        for c in audit['claims']:
+            by_model[c['model']].append(c)
+        rng, ms, boot = random.Random(0), list(by_model), []
+        for _ in range(20000):
+            s = [c for m in (rng.choice(ms) for _ in ms) for c in by_model[m]]
+            boot.append(sum(c['verdict'] in mis for c in s)/len(s))
+        boot.sort()
+        lo, hi = round(100*boot[500]), round(100*boot[19499])
+        n_d = sum(v in mis for v in distinct.values())
+        check('Distinct claims 25/67 misstated; model-cluster bootstrap 95% interval 34-52%',
+              (n_d, len(distinct), lo, hi) == (25, 67, 34, 52), f'{n_d}/{len(distinct)}, {lo}-{hi}%')
         check('Claim labels verified by an author', audit.get('verification', {}).get('human_verified') is True)
         import claim_review_agreement as cra
         verified = [c['verdict'] for c in audit['claims']]

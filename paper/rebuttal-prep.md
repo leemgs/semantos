@@ -168,10 +168,10 @@ Limitations and offer concrete additions for the camera-ready version.
 
 - Not measured; the paper claims only that the rationale misstates checkable
   facts, not that readers are misled.
-- Prepared: a pre-registered between-subjects study (misstated vs. minimally
+- Prepared: a between-subjects study protocol, ready for pre-registration (misstated vs. minimally
   corrected vs. no rationale; six verbatim stimuli; six evidence probes;
   60 per arm for power ≈ .85 under stated assumptions), with consent template,
-  static instrument and analysis script (`paper/human-study/`,
+  static and online instruments and analysis script (`paper/human-study/`,
   `human_study.py`). Needs ethics approval and recruitment before it can run;
   report results only after real data exist.
 

@@ -1,0 +1,188 @@
+<title>Advisor Brief Study</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
+<style>
+/* Layout: one narrow reading column, one step per screen, measurements in a scrollable table drawer. */
+:root{--bg:#f6f7f9;--surface:#ffffff;--fg:#1c2330;--muted:#5b6474;--line:#d5dae2;--accent:#2b5c8a;--accent-fg:#ffffff;--warn:#9a5b00;
+--display:"Source Serif 4",Georgia,serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14181f;--surface:#1c222b;--fg:#e4e8ee;--muted:#9aa4b2;--line:#323a46;--accent:#7fb0de;--accent-fg:#10161e;--warn:#e0a24a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14181f;--surface:#1c222b;--fg:#e4e8ee;--muted:#9aa4b2;--line:#323a46;--accent:#7fb0de;--accent-fg:#10161e;--warn:#e0a24a;color-scheme:dark}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--body)}
+main{max-width:44rem;margin:0 auto;padding-block:24px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+h1,h2{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0}h1{font-size:1.75rem}h2{font-size:1.3rem}
+p{margin:0}.muted{color:var(--muted);font-size:.9rem}.eyebrow{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.step{display:flex;flex-direction:column;gap:16px}
+.brief{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.brief dt{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}.brief dd{margin:0}
+code,.num{font-family:var(--mono);font-size:.88em;font-variant-numeric:tabular-nums}
+.cites{display:flex;flex-wrap:wrap;gap:6px}.cites code{border:1px solid var(--line);border-radius:4px;padding:1px 6px;word-break:break-all}
+fieldset{border:0;border-top:1px solid var(--line);margin:0;padding:14px 0 0;display:flex;flex-direction:column;gap:8px}
+legend{padding:0 0 6px;font-weight:500}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts label{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:6px;padding:6px 12px;background:var(--surface);cursor:pointer}
+.opts input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+button{font:inherit;font-weight:500;border-radius:6px;padding:10px 18px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);align-self:flex-start}
+button.ghost{background:transparent;color:var(--accent)}button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+button:disabled{opacity:.5;cursor:default}
+.drawer{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.scroll{overflow-x:auto}table{border-collapse:collapse;font-family:var(--mono);font-size:.82rem;font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid var(--line);padding:3px 10px;text-align:right;white-space:nowrap}th{font-family:var(--body);font-weight:500;color:var(--muted)}
+.check{display:flex;gap:8px;align-items:flex-start}.msg{color:var(--warn);font-size:.9rem}
+.key{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;font-size:.92rem}
+.admin{border-top:1px dashed var(--line);padding-top:16px}
+</style>
+<main>
+  <section class="step" id="loading"><p class="muted">Loading the study…</p></section>
+
+  <section class="step" id="blocked" hidden>
+    <h1>This study cannot record answers here</h1>
+    <p id="blockedWhy">Responses are saved to your account. Sign in to claude.ai with the account the researcher invited, then reopen this link.</p>
+  </section>
+
+  <section class="step" id="done" hidden>
+    <h1>You have already taken part</h1>
+    <p>Thank you. Your response is saved. Each person takes part once.</p>
+  </section>
+
+  <section class="step" id="consent" hidden>
+    <p class="eyebrow">Step 1 of 3 · Information and consent</p>
+    <h1>Reading AI-written technical advice</h1>
+    <p>You will read a short recommendation that an AI advisor wrote about choosing a computer configuration. Then you answer six yes/no questions about the measurements behind it and say how much you trust the recommendation. It takes about 10 minutes.</p>
+    <p>Some details of the study are explained only at the end, because knowing them first would change how you read. We store your answers, whether and when you open the measurements, and how long the task takes, under an opaque account identifier. We do not store your name or e-mail address. Taking part is voluntary, and you may stop at any time before submitting.</p>
+    <p class="muted" id="contact">Researcher and ethics board contacts are on the information sheet you received.</p>
+    <label class="check"><input type="checkbox" id="c1"><span>I am 18 or older.</span></label>
+    <label class="check"><input type="checkbox" id="c2"><span>I have read the information sheet.</span></label>
+    <label class="check"><input type="checkbox" id="c3"><span>I agree to take part and to the publication of my anonymous responses.</span></label>
+    <button id="startBtn" disabled>Start</button>
+  </section>
+
+  <section class="step" id="task" hidden>
+    <p class="eyebrow">Step 2 of 3 · The brief</p>
+    <h2>Which scheduler configuration should the engineer use?</h2>
+    <p>An engineer must choose one of four configurations to minimize the 95th-percentile (P95) wake-up latency of a periodic task. Lower is better. An AI advisor read the measurements and wrote the brief below. Read it, then answer the questions. You may open the measurements at any time.</p>
+    <dl class="brief">
+      <div><dt>Recommended configuration</dt><dd><code id="cfg"></code></dd></div>
+      <div><dt>Cited evidence</dt><dd class="cites" id="cites"></dd></div>
+      <div id="ratWrap"><dt>Rationale</dt><dd id="rat"></dd></div>
+    </dl>
+    <button class="ghost" id="evBtn" aria-expanded="false" aria-controls="ev">Show the measurements</button>
+    <div class="drawer" id="ev" hidden></div>
+    <p class="eyebrow">Step 3 of 3 · Questions about the measurements</p>
+    <form id="form" class="step"></form>
+  </section>
+
+  <section class="step" id="thanks" hidden>
+    <h1>Thank you, your response is saved</h1>
+    <p>The brief you read was written by a language model. In this study some briefs misstate the measurements even though the recommended configuration is correct. These are the correct answers:</p>
+    <div class="key" id="key"></div>
+  </section>
+
+  <section class="step admin" id="admin" hidden>
+    <p class="eyebrow">Researcher view · only the owner sees this</p>
+    <h2>Responses</h2>
+    <p id="adminCount" class="muted">No responses yet. They appear here as participants submit.</p>
+    <div class="scroll"><table id="adminTable"></table></div>
+    <button class="ghost" id="dlBtn" hidden>Save responses as CSV</button>
+    <p class="msg" id="adminMsg"></p>
+  </section>
+</main>
+<script>
+const D=/*DATA*/null;
+const CONDITIONS=['M','C','N'];
+const $=id=>document.getElementById(id);
+const show=id=>{for(const s of ['loading','blocked','done','consent','task','thanks'])$(s).hidden=s!==id;scrollTo(0,0)};
+let db=null,uid=null,assigned=null,t0=0,opens=0,firstOpen=null;
+
+function hash(s){let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+
+function renderEvidence(){
+  const tab=D.evidence.find(e=>e.id==='training-table').values, cs=Object.keys(tab), blocks={};
+  D.evidence.filter(e=>e.kind==='retrieval').forEach(e=>{const b=e.id.split('-')[2];(blocks[b]=blocks[b]||{})[e.config]=e.p95_us});
+  const head='<tr><th></th>'+cs.map(c=>'<th>'+c+'</th>').join('')+'</tr>';
+  $('ev').innerHTML='<p><code>training-table</code> · mean P95 per configuration, µs</p><div class="scroll"><table>'+head+
+    '<tr><th>mean</th>'+cs.map(c=>'<td>'+tab[c]+'</td>').join('')+'</tr></table></div>'+
+    '<p><code>retrieval</code> runs · P95 in µs, period 3 ms. Block <i>b</i> holds runs <code>retrieval-3-b-&lt;config&gt;</code>.</p><div class="scroll"><table>'+head+
+    Object.keys(blocks).sort((a,b)=>a-b).map(b=>'<tr><th>block '+b+'</th>'+cs.map(c=>'<td>'+blocks[b][c]+'</td>').join('')+'</tr>').join('')+'</table></div>';
+}
+
+function radios(name,values,labels){return '<div class="opts">'+values.map((v,i)=>'<label><input type="radio" name="'+name+'" id="'+name+'-'+v+'" value="'+v+'"><span>'+labels[i]+'</span></label>').join('')+'</div>'}
+
+function renderTask(){
+  const st=assigned.stimulus;
+  $('cfg').textContent=st.config;
+  $('cites').innerHTML='';st.cited_ids.forEach(c=>{const e=document.createElement('code');e.textContent=c;$('cites').appendChild(e)});
+  $('ratWrap').hidden=assigned.condition==='N';
+  $('rat').textContent=assigned.condition==='N'?'':st[assigned.condition];
+  renderEvidence();
+  $('form').innerHTML=D.probes.map((p,i)=>'<fieldset><legend>'+(i+1)+'. '+p.question.replace(/</g,'&lt;')+'</legend>'+radios(p.id,['yes','no','unsure'],['Yes','No','Not sure'])+'</fieldset>').join('')+
+    '<fieldset><legend>How much do you trust the advisor’s brief? (1 = not at all, 7 = completely)</legend>'+radios('trust',[1,2,3,4,5,6,7],['1','2','3','4','5','6','7'])+'</fieldset>'+
+    '<fieldset><legend>To show you are reading carefully, select “No” here.</legend>'+radios('att',['yes','no'],['Yes','No'])+'</fieldset>'+
+    '<p class="msg" id="formMsg"></p><button type="submit" id="submitBtn">Submit answers</button>';
+}
+
+$('evBtn').addEventListener('click',()=>{const e=$('ev');e.hidden=!e.hidden;$('evBtn').setAttribute('aria-expanded',String(!e.hidden));
+  $('evBtn').textContent=e.hidden?'Show the measurements':'Hide the measurements';
+  if(!e.hidden){opens++;if(firstOpen===null)firstOpen=(Date.now()-t0)/1000}});
+
+['c1','c2','c3'].forEach(id=>$(id).addEventListener('change',()=>{$('startBtn').disabled=!['c1','c2','c3'].every(i=>$(i).checked)}));
+$('startBtn').addEventListener('click',()=>{renderTask();show('task');t0=Date.now()});
+
+const val=n=>{const x=document.querySelector('input[name="'+n+'"]:checked');return x?x.value:''};
+$('form').addEventListener('submit',async ev=>{
+  ev.preventDefault();
+  const row={assignment:assigned.k,condition:assigned.condition,stimulus:assigned.stimulus.id};
+  for(const p of D.probes)row[p.id]=val(p.id);
+  row.trust=val('trust');
+  if(D.probes.some(p=>!row[p.id])||!row.trust||!val('att')){$('formMsg').textContent='Answer every question, then submit again.';return}
+  row.attention=val('att')==='no'?'pass':'fail';row.opened_evidence=opens>0?1:0;row.evidence_opens=opens;
+  row.first_open_seconds=firstOpen===null?'':Number(firstOpen.toFixed(1));row.seconds=Number(((Date.now()-t0)/1000).toFixed(1));
+  row.submitted_at=new Date().toISOString();row.version=D.version;
+  $('submitBtn').disabled=true;$('formMsg').textContent='Saving…';
+  try{await db.doc('responses/'+uid).set(row)}
+  catch(e){$('submitBtn').disabled=false;$('formMsg').textContent='Your answers could not be saved ('+(e&&e.code||'error')+'). Check your connection and submit again.';return}
+  $('key').innerHTML=D.probes.map(p=>'<span class="num">'+p.id+'</span><span>'+p.question.replace(/</g,'&lt;')+'</span><b>'+p.answer+'</b>').join('');
+  show('thanks');
+});
+
+function csv(rows){
+  const cols=['participant','assignment','condition','stimulus',...D.probes.map(p=>p.id),'trust','attention','opened_evidence','evidence_opens','first_open_seconds','seconds','submitted_at','version'];
+  const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+  return cols.join(',')+'\n'+rows.map(r=>cols.map(c=>q(r[c])).join(',')).join('\n')+'\n';
+}
+
+async function adminView(){
+  $('admin').hidden=false;
+  let rows=[];
+  db.collection('responses').onSnapshot(snap=>{
+    rows=snap.docs.map(d=>Object.assign({participant:'p'+hash(d.id).toString(36)},d.data()));
+    const n={};rows.forEach(r=>{n[r.condition+' '+r.stimulus]=(n[r.condition+' '+r.stimulus]||0)+1});
+    $('adminCount').textContent=rows.length?rows.length+' responses. Cells count submissions per condition and stimulus.':'No responses yet. They appear here as participants submit.';
+    const st=D.stimuli.map(s=>s.id);
+    $('adminTable').innerHTML=rows.length?'<tr><th></th>'+st.map(s=>'<th>'+s+'</th>').join('')+'</tr>'+CONDITIONS.map(c=>'<tr><th>'+c+'</th>'+st.map(s=>'<td>'+(n[c+' '+s]||0)+'</td>').join('')+'</tr>').join(''):'';
+    $('dlBtn').hidden=!rows.length;
+  },e=>{$('adminMsg').textContent='Could not load responses ('+(e&&e.code||'error')+').'});
+  const downloads=await claude.use('downloads');
+  if(!downloads){$('dlBtn').remove();return}
+  $('dlBtn').addEventListener('click',async()=>{
+    try{await downloads.save({filename:'responses.csv',data:csv(rows)});$('adminMsg').textContent='Saved responses.csv.'}
+    catch(e){$('adminMsg').textContent='The file was not saved ('+(e&&e.code||'declined')+').'}
+  });
+}
+
+(async function boot(){
+  if(!window.claude){$('blockedWhy').textContent='Open this page through its claude.ai link to take part.';show('blocked');return}
+  const user=await claude.use('user');
+  db=await claude.use('db');
+  if(!db||!user){show('blocked');return}
+  uid=await user.id();
+  if(!uid){show('blocked');return}
+  const owner=await user.isOwner();
+  if(owner){await adminView();$('loading').hidden=true;return}
+  if((await user.can('data.write'))===false){$('blockedWhy').textContent='Your access to this page does not allow saving answers. Ask the researcher to add you as a participant.';show('blocked');return}
+  try{const prev=await db.doc('responses/'+uid).get();if(prev.exists){show('done');return}}catch(e){}
+  const k=hash(uid)%(3*D.stimuli.length);
+  assigned={k,condition:CONDITIONS[k%3],stimulus:D.stimuli[Math.floor(k/3)%D.stimuli.length]};
+  show('consent');
+})();
+</script>

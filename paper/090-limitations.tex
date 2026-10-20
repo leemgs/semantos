@@ -12,6 +12,9 @@ The main audit uses one system prompt and output schema at temperature~0. A reru
 \paragraph{Reliance.}
 Matched deletion measures the sensitivity of a decision to cited evidence, a form of self-consistency, not faithfulness to internal computation. In the main design it was non-estimable for half of the models, because they cited the only item of its kind; the redesign of Appendix~\ref{app:reliance} is estimable for most, but its controls still differ in which blocks remain, and splitting the table changed one model's choice.
 
+\paragraph{Effect on readers.}
+We show that rationales misstate checkable facts, not that readers are misled by them; no human-subject study was run. The supplement includes a between-subjects protocol prepared for pre-registration (misstated, minimally corrected or no rationale; evidence probes with computed answers), its materials and analysis code, for future work.
+
 \paragraph{Measurement scope.}
 All measurements use one periodic workload family on one shared host, with data roles separated by period rather than by workload family or hardware; run-level intervals do not account for uncontrolled interference or correlated system state and are unadjusted for multiple comparisons. Measured graph induction emits no edge, so the graph item is uninformative in this task. Selector, BO and RL comparisons replay recorded runs rather than executing closed loops, and because control is best they can reveal only losses. The telemetry prototype's scheduler and block-I/O proxies are not end-to-end request latencies, and the local benchmarks in the appendix do not substitute for application workloads such as web serving, databases or GPU inference.
 
