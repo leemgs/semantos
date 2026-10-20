@@ -1,0 +1,176 @@
+{
+  "models": [
+    "meta-llama/llama-3.3-70b-instruct",
+    "qwen/qwen3-235b-a22b-2507",
+    "deepseek/deepseek-v3.2",
+    "nvidia/nemotron-3-ultra-550b-a55b",
+    "google/gemini-3.8-flash",
+    "google/gemini-3.1-pro-preview"
+  ],
+  "instances": [
+    "4ms",
+    "relabel",
+    "session"
+  ],
+  "seeds": [
+    4088,
+    4089,
+    4090,
+    4091,
+    4092
+  ],
+  "temperature": 0,
+  "max_tokens": 4096,
+  "citation_cap": 6,
+  "system": "Select one allowed config to minimize periodic wake-up P95 latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+  "response_format": "strict json_schema",
+  "provider_require_parameters": true,
+  "facts": {
+    "main": {
+      "selector": "s50000_aall",
+      "table": {
+        "s50000_aall": 132.9413,
+        "s50000_aone": 277.4647,
+        "s1000000_aall": 954.7558,
+        "s1000000_aone": 1080.6555
+      },
+      "blocks": 10,
+      "block_wins": {
+        "s50000_aall": 8,
+        "s50000_aone": 2
+      },
+      "min_max_mean": {
+        "s50000_aone": [
+          85.033,
+          571.84,
+          227.446
+        ],
+        "s1000000_aall": [
+          748.404,
+          1023.152,
+          953.054
+        ],
+        "s1000000_aone": [
+          817.997,
+          1419.669,
+          1013.992
+        ],
+        "s50000_aall": [
+          82.488,
+          183.217,
+          110.458
+        ]
+      }
+    },
+    "4ms": {
+      "selector": "s50000_aall",
+      "table": {
+        "s50000_aall": 132.9413,
+        "s50000_aone": 277.4647,
+        "s1000000_aall": 954.7558,
+        "s1000000_aone": 1080.6555
+      },
+      "blocks": 10,
+      "block_wins": {
+        "s50000_aone": 5,
+        "s50000_aall": 5
+      },
+      "min_max_mean": {
+        "s50000_aone": [
+          76.186,
+          705.847,
+          263.031
+        ],
+        "s1000000_aall": [
+          732.866,
+          1039.293,
+          977.95
+        ],
+        "s1000000_aone": [
+          162.269,
+          1177.662,
+          897.624
+        ],
+        "s50000_aall": [
+          85.941,
+          312.316,
+          121.495
+        ]
+      }
+    },
+    "relabel": {
+      "selector": "s1000000_aone",
+      "table": {
+        "s1000000_aone": 132.9413,
+        "s1000000_aall": 277.4647,
+        "s50000_aone": 954.7558,
+        "s50000_aall": 1080.6555
+      },
+      "blocks": 10,
+      "block_wins": {
+        "s1000000_aone": 8,
+        "s1000000_aall": 2
+      },
+      "min_max_mean": {
+        "s1000000_aall": [
+          85.033,
+          571.84,
+          227.446
+        ],
+        "s50000_aone": [
+          748.404,
+          1023.152,
+          953.054
+        ],
+        "s50000_aall": [
+          817.997,
+          1419.669,
+          1013.992
+        ],
+        "s1000000_aone": [
+          82.488,
+          183.217,
+          110.458
+        ]
+      }
+    },
+    "session": {
+      "selector": "s50000_aall",
+      "table": {
+        "s50000_aall": 97.5958,
+        "s50000_aone": 124.5284,
+        "s1000000_aall": 1003.4796,
+        "s1000000_aone": 952.8776
+      },
+      "blocks": 5,
+      "block_wins": {
+        "s50000_aall": 4,
+        "s50000_aone": 1
+      },
+      "min_max_mean": {
+        "s1000000_aall": [
+          1000.052,
+          1036.239,
+          1018.26
+        ],
+        "s50000_aone": [
+          91.943,
+          466.089,
+          185.728
+        ],
+        "s50000_aall": [
+          87.693,
+          99.264,
+          93.339
+        ],
+        "s1000000_aone": [
+          924.309,
+          1521.04,
+          1151.716
+        ]
+      }
+    }
+  },
+  "source_sha256": "36a9e54962a9c59d29b19208d1f11ab4223a47bf0d5098cf55c883c7142bed1d",
+  "started_utc_ns": 1792486212561917529
+}
