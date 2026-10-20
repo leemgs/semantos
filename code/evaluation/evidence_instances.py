@@ -226,10 +226,9 @@ def score(args):
         w.writerows(review)
     print('cost', out['reported_cost_usd'])
     if args.tex:
-        label = {'main': 'Main (3\\,ms runs)', '4ms': 'I1: 4\\,ms runs', 'relabel': 'I2: labels permuted',
-                 'session': 'I3: second session'}
-        lines = [r'\begin{tabular}{@{}lrrrrrr@{}}', r'\toprule',
-                 r'Evidence & Sel.\ wins & Sel.\ choice & Contrary & First half & Overst. & Range err. \\', r'\midrule']
+        label = {'main': 'Main', '4ms': 'I1 (4\\,ms)', 'relabel': 'I2 (relabel)', 'session': 'I3 (session)'}
+        lines = [r'\setlength{\tabcolsep}{2pt}\begin{tabular}{@{}lrrrrrr@{}}', r'\toprule',
+                 r'Evidence & Wins & Sel. & Contr. & 1st half & Overst. & Range \\', r'\midrule']
         for r in rows:
             lines.append(f"{label[r['instance']]} & {r['selector_block_wins']} & {r['selector_choice']}/{r['answers']} & "
                          f"{r['contrary_citations']}/{r['retrieval_citations']} & {r['first_half']}/{r['retrieval_citations']} & "
