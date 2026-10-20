@@ -101,7 +101,7 @@ def facts(ev):
     for i in ev:
         if i['kind'] == 'retrieval':
             runs.setdefault(i['config'], []).append(i['p95_us'])
-            blocks.setdefault(i['id'].split('-')[2], {})[i['config']] = i['p95_us']
+            blocks.setdefault(i.get('block', i['id'].split('-')[2]), {})[i['config']] = i['p95_us']
     wins = {}
     for b in blocks.values():
         c = min(b, key=b.get)

@@ -1,0 +1,649 @@
+{
+  "configs": {
+    "sync_normal_delete": [
+      "NORMAL",
+      "DELETE"
+    ],
+    "sync_normal_wal": [
+      "NORMAL",
+      "WAL"
+    ],
+    "sync_off_delete": [
+      "OFF",
+      "DELETE"
+    ],
+    "sync_off_wal": [
+      "OFF",
+      "WAL"
+    ]
+  },
+  "roles": [
+    [
+      "train",
+      10
+    ],
+    [
+      "retrieval",
+      10
+    ],
+    [
+      "test",
+      10
+    ]
+  ],
+  "warmup": 10,
+  "transactions": 200,
+  "rows_per_transaction": 10,
+  "payload_bytes": 100,
+  "seed": 4088,
+  "objective": "P95 commit latency, us",
+  "selection_rule": "minimum of the training table (mean training-run P95)",
+  "schedule": [
+    {
+      "role": "train",
+      "block": 0,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "train",
+      "block": 0,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "train",
+      "block": 0,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "train",
+      "block": 0,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "train",
+      "block": 1,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "train",
+      "block": 1,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "train",
+      "block": 1,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "train",
+      "block": 1,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "train",
+      "block": 2,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "train",
+      "block": 2,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "train",
+      "block": 2,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "train",
+      "block": 2,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "train",
+      "block": 3,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "train",
+      "block": 3,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "train",
+      "block": 3,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "train",
+      "block": 3,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "train",
+      "block": 4,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "train",
+      "block": 4,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "train",
+      "block": 4,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "train",
+      "block": 4,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "train",
+      "block": 5,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "train",
+      "block": 5,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "train",
+      "block": 5,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "train",
+      "block": 5,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "train",
+      "block": 6,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "train",
+      "block": 6,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "train",
+      "block": 6,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "train",
+      "block": 6,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "train",
+      "block": 7,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "train",
+      "block": 7,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "train",
+      "block": 7,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "train",
+      "block": 7,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "train",
+      "block": 8,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "train",
+      "block": 8,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "train",
+      "block": 8,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "train",
+      "block": 8,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "train",
+      "block": 9,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "train",
+      "block": 9,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "train",
+      "block": 9,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "train",
+      "block": 9,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 0,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 0,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 0,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 0,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 1,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 1,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 1,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 1,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 2,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 2,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 2,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 2,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 3,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 3,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 3,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 3,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 4,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 4,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 4,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 4,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 5,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 5,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 5,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 5,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 6,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 6,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 6,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 6,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 7,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 7,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 7,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 7,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 8,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 8,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 8,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 8,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 9,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 9,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "retrieval",
+      "block": 9,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "retrieval",
+      "block": 9,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "test",
+      "block": 0,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "test",
+      "block": 0,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "test",
+      "block": 0,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "test",
+      "block": 0,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "test",
+      "block": 1,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "test",
+      "block": 1,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "test",
+      "block": 1,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "test",
+      "block": 1,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "test",
+      "block": 2,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "test",
+      "block": 2,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "test",
+      "block": 2,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "test",
+      "block": 2,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "test",
+      "block": 3,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "test",
+      "block": 3,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "test",
+      "block": 3,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "test",
+      "block": 3,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "test",
+      "block": 4,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "test",
+      "block": 4,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "test",
+      "block": 4,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "test",
+      "block": 4,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "test",
+      "block": 5,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "test",
+      "block": 5,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "test",
+      "block": 5,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "test",
+      "block": 5,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "test",
+      "block": 6,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "test",
+      "block": 6,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "test",
+      "block": 6,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "test",
+      "block": 6,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "test",
+      "block": 7,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "test",
+      "block": 7,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "test",
+      "block": 7,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "test",
+      "block": 7,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "test",
+      "block": 8,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "test",
+      "block": 8,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "test",
+      "block": 8,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "test",
+      "block": 8,
+      "name": "sync_normal_wal"
+    },
+    {
+      "role": "test",
+      "block": 9,
+      "name": "sync_normal_delete"
+    },
+    {
+      "role": "test",
+      "block": 9,
+      "name": "sync_off_wal"
+    },
+    {
+      "role": "test",
+      "block": 9,
+      "name": "sync_off_delete"
+    },
+    {
+      "role": "test",
+      "block": 9,
+      "name": "sync_normal_wal"
+    }
+  ],
+  "sqlite_version": "3.45.1",
+  "python": "3.11.15",
+  "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+  "cpu_count": 4,
+  "source_sha256": "4961725fe19545ae6f2717600435a3082b737ac0dc5a584e1f56eed108b98869",
+  "written_utc_ns": 1792536946672491461
+}
