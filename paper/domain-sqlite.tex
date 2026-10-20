@@ -1,0 +1,18 @@
+\begin{tabular}{@{}lll@{}}
+\toprule
+Model & Full evidence & No evidence \\
+\midrule
+Table selector & O/W & -- \\
+Llama-3.3-70B & N/W$^{5}$ & O/W$^{5}$ \\
+Qwen3-235B & N/W$^{5}$ & O/W$^{5}$ \\
+DeepSeek-V3.2 & N/W$^{4}$ & N/D$^{2}$ O/W$^{3}$ \\
+Nemotron-3-Ultra-550B & N/W$^{5}$ & N/W$^{3}$ O/W$^{2}$ \\
+Gemini-3.8-Flash & N/W$^{2}$ O/W$^{1}$ & O/W$^{5}$ \\
+Gemini-3.1-Pro & O/W$^{5}$ & O/W$^{5}$ \\
+\midrule
+\multicolumn{3}{@{}l@{}}{Test P95 vs.\ selector's choice (\%):} \\
+\quad N/D & $+3922.8\pm499.8$ & \\
+\quad N/W & $+20.6\pm26.7$ & \\
+\quad O/D & $+200.2\pm61.4$ & \\
+\bottomrule
+\end{tabular}

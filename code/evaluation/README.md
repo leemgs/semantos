@@ -441,6 +441,12 @@ Hosted runs (2026-09-27, OpenRouter, `--response-format json_schema`,
   further evidence instances built from training-side data (4 ms calibration
   runs as retrieval items, permuted labels, the second measurement session) and
   scores them with the automatic checks.
+* `domain_sqlite.py` (Appendix K): a second domain. `measure` collects 120
+  SQLite runs (synchronous NORMAL/OFF × journal DELETE/WAL; training, retrieval
+  and test roles); `run` queries the hosted models with full and no evidence;
+  `score` scores choices by test replay and explanations by the automatic
+  checks. `explanations-read.csv` holds an AI-assisted reading of the 27
+  full-evidence explanations; it is not verified.
 * `human_study.py` (not in the paper; study not yet run): materials for a
   human-impact study ready for pre-registration (`paper/human-study/protocol.md`). `build`
   writes the stimuli (verbatim misstated explanations, minimally corrected

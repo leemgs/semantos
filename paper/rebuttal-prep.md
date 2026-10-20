@@ -189,6 +189,21 @@ Limitations and offer concrete additions for the camera-ready version.
   `results/evidence-instances/explanations-for-review.csv` before the response.
 - Still the same host and workload family; another domain remains open.
 
+## 16. "Only one domain."
+
+- Appendix K adds SQLite settings (synchronous × journal mode), measured for
+  this paper with training, retrieval and test roles. The data were committed
+  before any model call.
+- The table favours OFF/WAL, the runs favour NORMAL/WAL (8/10 blocks), and the
+  test favours OFF/WAL (7/10 blocks; paired +20.6 ± 26.7 %, not significant).
+- Choices: 21/27 evidence answers follow the runs; without evidence 25/30
+  choose OFF/WAL.
+- Explanations: 13/27 contain a misstatement on an AI-assisted reading, 9 of
+  which misreport the training table as agreeing with the choice. Selective
+  citation persists.
+- To do before the response: an author or annotator verifies
+  `explanations-read.csv`. A third domain with textual evidence remains open.
+
 ## Quick additions possible during the response period (no new hardware runs)
 
 1. Adjudication of the disagreements, if asked.

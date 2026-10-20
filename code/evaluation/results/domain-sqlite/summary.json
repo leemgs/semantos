@@ -1,0 +1,180 @@
+{
+  "facts": {
+    "selector": "sync_off_wal",
+    "table": {
+      "sync_normal_delete": 2404.271,
+      "sync_normal_wal": 99.496,
+      "sync_off_delete": 154.458,
+      "sync_off_wal": 71.652
+    },
+    "blocks": 10,
+    "block_wins": {
+      "sync_normal_wal": 8,
+      "sync_off_wal": 2
+    },
+    "min_max_mean": {
+      "sync_off_wal": [
+        45.279,
+        95.699,
+        64.324
+      ],
+      "sync_normal_wal": [
+        41.329,
+        114.05,
+        61.69
+      ],
+      "sync_off_delete": [
+        110.46,
+        205.441,
+        139.513
+      ],
+      "sync_normal_delete": [
+        1314.097,
+        2490.016,
+        1944.999
+      ]
+    }
+  },
+  "selector": "sync_off_wal",
+  "test_replay_vs_selector": {
+    "sync_normal_delete": [
+      3922.8,
+      499.8
+    ],
+    "sync_normal_wal": [
+      20.6,
+      26.7
+    ],
+    "sync_off_delete": [
+      200.2,
+      61.4
+    ],
+    "sync_off_wal": [
+      0.0,
+      0.0
+    ]
+  },
+  "test_mean_p95_us": {
+    "sync_normal_delete": 1887.055,
+    "sync_normal_wal": 56.029,
+    "sync_off_delete": 141.052,
+    "sync_off_wal": 47.357
+  },
+  "test_block_winners": {
+    "sync_off_wal": 7,
+    "sync_normal_wal": 3
+  },
+  "models": {
+    "Llama-3.3-70B": {
+      "full": [
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_normal_wal"
+      ],
+      "model_only": [
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal"
+      ]
+    },
+    "Qwen3-235B": {
+      "full": [
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_normal_wal"
+      ],
+      "model_only": [
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal"
+      ]
+    },
+    "DeepSeek-V3.2": {
+      "full": [
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_normal_wal"
+      ],
+      "model_only": [
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_normal_delete",
+        "sync_normal_delete",
+        "sync_off_wal"
+      ]
+    },
+    "Nemotron-3-Ultra-550B": {
+      "full": [
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_normal_wal"
+      ],
+      "model_only": [
+        "sync_off_wal",
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_off_wal"
+      ]
+    },
+    "Gemini-3.8-Flash": {
+      "full": [
+        "sync_normal_wal",
+        "sync_normal_wal",
+        "sync_off_wal"
+      ],
+      "model_only": [
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal"
+      ]
+    },
+    "Gemini-3.1-Pro": {
+      "full": [
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal"
+      ],
+      "model_only": [
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal",
+        "sync_off_wal"
+      ]
+    }
+  },
+  "invalid": 3,
+  "full_checks": {
+    "answers": 27,
+    "selector_choice": 6,
+    "retrieval_citations": 137,
+    "contrary_citations": 8,
+    "answers_citing_contrary": 4,
+    "evidence_citations": 137,
+    "contrary_evidence": 8,
+    "answers_citing_contrary_evidence": 4,
+    "answers_citing_summary": 0,
+    "overstated_explanations": 9,
+    "explanations_with_range_errors": 4,
+    "explanations_with_unsupported_numbers": 0,
+    "mean_chars": 375,
+    "first_half": 102
+  },
+  "reported_cost_usd": 0.2841
+}

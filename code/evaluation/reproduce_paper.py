@@ -141,6 +141,19 @@ def main():
                         ei[k]['explanations_with_range_errors']) for k in ('4ms', 'relabel', 'session'))
         check('Evidence instances: selector choice 24/30/30, contrary 6/0/0, proxy 13/18/13, range 6/0/4',
               got_ei == ((24, 6, 13, 6), (30, 0, 18, 0), (30, 0, 13, 4)), str(got_ei))
+        shutil.copytree(HERE/'results/domain-sqlite', tmp/'domain-sqlite')
+        run('domain_sqlite.py', 'score', '--out', tmp/'domain-sqlite', '--tex', tmp/'domain-sqlite.tex')
+        same_file('SQLite domain table (from saved measurements and API records)', tmp/'domain-sqlite.tex', 'domain-sqlite.tex')
+        sq = json.loads((tmp/'domain-sqlite/summary.json').read_text())
+        full = [c for m in sq['models'].values() for c in m['full']]
+        none_ = [c for m in sq['models'].values() for c in m['model_only']]
+        import csv as _csv
+        read = list(_csv.DictReader((HERE/'results/domain-sqlite/explanations-read.csv').open()))
+        got_sq = (sq['selector'], full.count('sync_normal_wal'), len(full), none_.count('sync_off_wal'), len(none_),
+                  sq['facts']['block_wins'].get('sync_normal_wal'), sq['test_block_winners'].get('sync_off_wal'),
+                  sum(r['reading_issue'] != 'none found' for r in read), sum('table' in r['reading_issue'] for r in read))
+        check('SQLite: selector O/W; 21/27 full answers N/W; 25/30 no-evidence O/W; runs 8/10 N/W, test 7/10 O/W; 13 and 9 read issues',
+              got_sq == ('sync_off_wal', 21, 27, 25, 30, 8, 7, 13, 9), str(got_sq))
         shutil.copytree(HERE/'results/reliance-redesign', tmp/'reliance-redesign')
         run('reliance_redesign.py', 'score', '--out', tmp/'reliance-redesign', '--tex', tmp/'reliance-redesign.tex')
         same_file('Redesigned reliance table (from saved API records)', tmp/'reliance-redesign.tex', 'reliance-redesign.tex')

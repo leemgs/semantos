@@ -1,0 +1,26 @@
+{
+  "models": [
+    "meta-llama/llama-3.3-70b-instruct",
+    "qwen/qwen3-235b-a22b-2507",
+    "deepseek/deepseek-v3.2",
+    "nvidia/nemotron-3-ultra-550b-a55b",
+    "google/gemini-3.8-flash",
+    "google/gemini-3.1-pro-preview"
+  ],
+  "seeds": [
+    4088,
+    4089,
+    4090,
+    4091,
+    4092
+  ],
+  "variants": [
+    "full",
+    "model_only"
+  ],
+  "system": "Select one allowed config to minimize SQLite write-transaction P95 commit latency. Return JSON with config (exact allowed name), cited_ids (evidence IDs), and explanation. Evidence contains measured training summaries and retrieval runs, not held-out test outcomes. Do not invent evidence.",
+  "temperature": 0,
+  "citation_cap": 6,
+  "source_sha256": "565ed178b1335dfbd7dabb4166d0b85bc7e54c3d8df6c8bc33917727962e854a",
+  "started_utc_ns": 1792537001184961067
+}

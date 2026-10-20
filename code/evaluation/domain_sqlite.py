@@ -240,9 +240,9 @@ def score(args):
                  f"Table selector & {short[f['selector']]} & -- \\\\"]
         for name, m in out['models'].items():
             lines.append(f"{name} & {fmt(m['full'])} & {fmt(m['model_only'])} \\\\")
-        lines += [r'\midrule', r'\multicolumn{3}{@{}l@{}}{Test P95 vs.\ selector (\%): ' +
-                  ', '.join(f"{short[c]} ${rep[c][0]:+.1f}\\pm{rep[c][1]:.1f}$" for c in CONFIGS if c != f['selector']) + r'} \\',
-                  r'\bottomrule', r'\end{tabular}']
+        lines += [r'\midrule', r"\multicolumn{3}{@{}l@{}}{Test P95 vs.\ selector's choice (\%):} \\"]
+        lines += [f"\\quad {short[c]} & ${rep[c][0]:+.1f}\\pm{rep[c][1]:.1f}$ & \\\\" for c in CONFIGS if c != f['selector']]
+        lines += [r'\bottomrule', r'\end{tabular}']
         args.tex.write_text('\n'.join(lines) + '\n')
         print(f'wrote {args.tex}')
 

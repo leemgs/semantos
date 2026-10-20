@@ -14,7 +14,7 @@ python3 code/evaluation/reproduce_paper.py
 The script copies `code/evaluation/results/` to a temporary directory, reruns
 every analysis on the raw logs, and compares the regenerated LaTeX tables
 byte for byte with the files the paper includes. It also recomputes the
-numbers quoted in the text. Expected output: `31 of 31 checks passed`
+numbers quoted in the text. Expected output: `33 of 33 checks passed`
 (about 20 seconds on a laptop CPU; no GPU, no API key, no network).
 
 ## 2. Where each claim in the paper comes from
@@ -37,6 +37,7 @@ numbers quoted in the text. Expected output: `31 of 31 checks passed`
 | §5.4, Limitations; Appendix H (Table 14): local models at higher precision | `results/model-audit-fp-llama3.1-8b/`, `results/model-audit-fp-phi-4/` (bf16, OpenRouter), `results/model-audit-q8-qwen2.5-7b/` (Q8\_0 GGUF, shard hashes match the official files) | `precision_check.py` |
 | §5.4, Limitations; Appendix I (Table 15): redesigned reliance test (split table; kind- and configuration-matched controls) | `results/reliance-redesign/` | `reliance_redesign.py score` (`run` needs `OPENROUTER_API_KEY`, 0.64 USD) |
 | §5.1, Limitations; Appendix J (Table 16): further evidence instances (4 ms runs, permuted labels, second session) | `results/evidence-instances/` (`plan.json`, `records.jsonl`, `explanations-for-review.csv`) | `evidence_instances.py score` (`run` needs `OPENROUTER_API_KEY`, 0.45 USD) |
+| §5.1, §5.3, Limitations; Appendix K (Table 17): second domain, SQLite synchronous × journal mode | `results/domain-sqlite/` (`plan.json`, `runs.jsonl`, `SHA256SUMS.json`, `records.jsonl`, `explanations-read.csv`) | `domain_sqlite.py score` (`measure` reruns the 120 SQLite runs; `run` needs `OPENROUTER_API_KEY`, 0.28 USD) |
 | Not in the paper: human-impact study materials (protocol, consent template, stimuli, static instrument and claude.ai online collection page; not yet run, no human data) | `paper/human-study/` | `human_study.py build`, `power`, `analyze` |
 | Appendix B local and temporal-holdout measurements | `results/local-2026-09-26/`, `results/kernel-local-2026-09-26/` | `analyze.py`, `analyze_kernel_local.py` |
 
