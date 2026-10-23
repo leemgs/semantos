@@ -7,7 +7,7 @@ We report the audit at four levels, from the decision to the text that justifies
 \label{subsec:decisions}
 \begin{table}[t]
 \centering\footnotesize\setlength{\tabcolsep}{2.5pt}
-\caption{LLM decisions with evidence (full, no graph, no retrieval), without it, and after deleting cited or matched uncited evidence; superscripts count seeds; n/e: non-estimable; $^\dagger$hosted. Paired test P95 change versus control at 5 and 8\,ms (\%, 95\% half-width): ctrl 0; \protect\input{model-audit-legend.tex}\unskip.}
+\caption{LLM decisions with evidence (full, no graph, no retrieval), without it, and after deleting cited or matched uncited evidence; superscripts count seeds (249 of 250 calls schema-valid); n/e: non-estimable; $^\dagger$hosted. Paired test P95 change versus control at 5 and 8\,ms (\%, 95\% half-width): ctrl 0; \protect\input{model-audit-legend.tex}\unskip.}
 \label{tab:model-audit}
 \begin{adjustbox}{max width=\columnwidth}
 \input{model-audit.tex}
@@ -75,4 +75,4 @@ Five models cite the single training table, so matched deletion is non-estimable
 \label{subsec:gate}
 A test run is \emph{unsafe} when more than 10\% of its 40 events exceed a predeclared 200\,$\mu$s deadline, a label computed from timing alone. For the gate, the score is a configuration's training deadline-miss fraction, fixed before calibration on 4\,ms runs only; all three prespecified $\alpha\in\{.05,.10,.20\}$ yield $\tau=.9225$ because the unsafe-score order statistics are tied. Every candidate is executed in an isolated process, so accepted and vetoed candidates both have observed outcomes (Figure~\ref{fig:gate-replay} in Appendix~\ref{app:measurements}).
 
-Unsafe acceptance is $5/25=20.0\%$ and $4/24=16.7\%$ among unsafe runs, significantly above the 5\% level for this calibration draw (one-sided binomial $p=.007$ and $.03$) but within sampling error of 10\% ($p=.10$, $.21$); unsafe fractions among accepted runs are $5/20$ and $4/20$, and veto precision is $20/20$ in each period. As with LLM explanations, a nominally calibrated signal is only as good as the exchangeability it assumes, and a period shift can be enough to break it. The bounded actuator restored both original settings in all 80 staged executions (Appendix~\ref{app:measurements}).
+Unsafe acceptance is $5/25=20.0\%$ and $4/24=16.7\%$ among unsafe runs, significantly above the 5\% level for this calibration draw (one-sided binomial $p=.007$ and $.03$) but within sampling error of 10\% ($p=.10$, $.21$); unsafe fractions among accepted runs are $5/20$ and $4/20$, and veto precision is $20/20$ in each period. A nominally calibrated signal is only as good as the exchangeability it assumes, and a period shift breaks it. The bounded actuator restored both original settings in all 80 staged executions (Appendix~\ref{app:measurements}).

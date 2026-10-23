@@ -35,7 +35,7 @@ The reasoner retrieves typed neighbors and lexically matched trace text~\cite{Le
 \node[tag, anchor=south east] at (cal.north east) {independent labels};
 \end{tikzpicture}
 \end{adjustbox}
-\caption{\sysname decision path. Evidence, generation and enforcement are separate components: the frozen evidence object can be given to a non-LLM selector, ablated or partially deleted, citations can be resolved against its item IDs, and gate errors can be counted against independently defined labels. The REST runtime is a dry run; a separate per-thread actuator applies, verifies and restores timer slack and affinity in owned child processes.}
+\caption{\sysname decision path. Evidence, generation and enforcement are separate, so the frozen evidence can be given to a non-LLM selector, ablated or deleted, and gate errors counted against independent labels. The REST runtime is a dry run; a separate actuator applies and restores settings in owned child processes.}
 \label{fig:runtime-path}
 \end{figure}
 

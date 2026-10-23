@@ -113,16 +113,19 @@ measurements (listed in `paper/claim-review-explanations.md`).
 domains, languages, and linguistic phenomena, demographic groups represented?**
 Yes. §4 and Appendices B–C document the task, data roles, evidence format,
 prompt and schema; `code/evaluation/README.md` documents every result
-directory. All prompts and responses are in English; the domain is Linux
-per-thread timing configuration on one host. No demographic information is
-involved.
+directory. All prompts and responses are in English. The main domain is Linux
+per-thread timing configuration on one host; Appendix K adds SQLite settings
+measured in one container. No demographic information is involved.
 
 **B6. Did you report relevant statistics like the number of examples, details
 of train/test/dev splits, etc.?**
 Yes. §4: 200 runs and 8,000 events split by wake-up period into training
 (2 ms), retrieval (3 ms), calibration (4 ms) and test (5 and 8 ms), ten blocks
-per period, 40 events per run; 250 LLM calls (249 valid); 97 audited claims
+per period, 40 events per run; 250 LLM calls (249 valid; Table 1 caption); 97 audited claims
 (28 local, 69 hosted); 50 full-context answers with 285 citations (§5.2).
+Appendix J: 90 calls on three further evidence instances. Appendix K: 120
+SQLite runs (training, retrieval and test, ten blocks each, 200 transactions
+per run) and 65 calls (60 plus five retries; 57 valid).
 
 ---
 
@@ -152,6 +155,9 @@ Yes. Parameter scale is given by the model names (7B–550B); Appendix C
 - Precision reruns (Appendix H): Llama-3.1-8B and Phi-4 with bf16 weights via
   OpenRouter (about 60 calls); Qwen2.5-7B Q8_0 GGUF on the same CPU container.
 - Redesigned reliance test (Appendix I): about 200 calls, 0.64 USD.
+- Further evidence instances (Appendix J): 90 calls, 0.45 USD.
+- SQLite domain (Appendix K): 120 measured runs on the CPU container (about
+  a minute) and 65 calls, 0.28 USD. Total: about 855 hosted calls.
 
 **C2. Did you discuss the experimental setup, including hyperparameter search
 and best-found hyperparameter values?**
