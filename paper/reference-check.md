@@ -51,3 +51,14 @@ bibliography.
 - Wallat2025Correctness: Crossref record 10.1145/3731120.3744592 (ICTIR 2025,
   pages 22-32; arXiv 2412.18004). Title, year and pages match; the only flag is
   the "de Rijke" surname particle.
+
+## Re-run 2026-10-23 (final pre-submission)
+
+All 68 bib entries (67 cited) were checked against their official records.
+57 cited entries match exactly. The 10 flagged entries are the cases already
+resolved above, and no new discrepancy was found:
+- name particles: Van Aken, Baldini Soares, de Rijke;
+- team authors: Qwen, DeepSeek-AI;
+- ACM article-number pages: Herodotou;
+- ICLR papers whose accepted record the OpenReview API search misses: Wang
+  2023, Kuhn 2023, Chen 2020, Quach 2024.
