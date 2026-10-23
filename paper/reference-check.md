@@ -45,3 +45,9 @@ accepted OpenReview record the API search does not return (Wang 2023, Kuhn
 2023, Chen 2020, Quach 2024; confirmed earlier on the venue pages). No new
 discrepancy was found. LinuxVM is not cited, so it does not appear in the
 bibliography.
+
+## Added 2026-10-23
+
+- Wallat2025Correctness: Crossref record 10.1145/3731120.3744592 (ICTIR 2025,
+  pages 22-32; arXiv 2412.18004). Title, year and pages match; the only flag is
+  the "de Rijke" surname particle.

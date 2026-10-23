@@ -204,6 +204,13 @@ Limitations and offer concrete additions for the camera-ready version.
 - To do before the response: an author or annotator verifies
   `explanations-read.csv`. A third domain with textual evidence remains open.
 
+## 17. "The headline claims are domain-specific."
+
+- Agreed, and now stated: the abstract, introduction and conclusion scope
+  necessity and sufficiency to the kernel task. In the database task
+  (Appendix K), the evidence moves choices away from the selector, and
+  explanations misreport contrary evidence.
+
 ## Quick additions possible during the response period (no new hardware runs)
 
 1. Adjudication of the disagreements, if asked.
