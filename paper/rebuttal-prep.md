@@ -211,6 +211,12 @@ Limitations and offer concrete additions for the camera-ready version.
   (Appendix K), the evidence moves choices away from the selector, and
   explanations misreport contrary evidence.
 
+## 18. "Appendix J/K readings are AI-made."
+
+- They are disclosed as unverified. `paper/author-verification.md` lists every
+  reading for sign-off (13 SQLite explanations, 7 J items). Complete it before
+  submission if possible, since the abstract mentions the database result.
+
 ## Quick additions possible during the response period (no new hardware runs)
 
 1. Adjudication of the disagreements, if asked.

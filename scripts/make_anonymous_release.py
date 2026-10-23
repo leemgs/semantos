@@ -40,6 +40,7 @@ EXCLUDE = [
     'paper/second-annotator-guidelines.md',# instructions for the second annotator
     'paper/arr-submission-form.md',        # mentions the earlier venue
     'paper/reference-check.md',            # internal bibliography check report
+    'paper/author-verification.md',        # internal sign-off sheet
     'scripts/check_references.py',         # internal bibliography checker
     'code/semantos_logo01.png',            # logo shows the public project name
     'scripts/make_anonymous_release.py',   # lists the identifying terms itself
