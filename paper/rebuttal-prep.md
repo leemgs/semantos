@@ -99,9 +99,10 @@ Limitations and offer concrete additions for the camera-ready version.
 
 ## 10. "The risk-gate section is off-topic."
 
-- It illustrates the same lesson for a numeric confidence signal: nominal
-  calibration fails under a period shift (§5.5). Offer: shorten it further or
-  move it to the appendix to make room for requested additions.
+- Done: the gate evaluation, the enforcement details and the risk-control
+  related work are now in Appendix A. The body keeps one paragraph on
+  enforcement, and the freed space holds §5.5 (further evidence instances
+  and the SQLite domain, Table 5).
 
 ## 11. "Would an entailment-based attribution judge catch these errors?"
 

@@ -1,7 +1,7 @@
 \section{Results}
 \label{sec:results}
 \label{subsec:followup}
-We report the audit at four levels, from the decision to the text that justifies it: what models choose (\S\ref{subsec:decisions}), what they cite (\S\ref{subsec:citations}), what their explanations claim (\S\ref{subsec:claims}) and whether the cited evidence matters (\S\ref{subsec:reliance}). A final subsection evaluates the testbed's risk gate (\S\ref{subsec:gate}).
+We report the audit at four levels, from the decision to the text that justifies it: what models choose (\S\ref{subsec:decisions}), what they cite (\S\ref{subsec:citations}), what their explanations claim (\S\ref{subsec:claims}) and whether the cited evidence matters (\S\ref{subsec:reliance}). A final subsection tests whether the findings hold beyond the main evidence list (\S\ref{subsec:generality}).
 
 \subsection{Decisions: Evidence Is Necessary and Sufficient}
 \label{subsec:decisions}
@@ -16,7 +16,7 @@ We report the audit at four levels, from the decision to the text that justifies
 
 The table selector and its saturated-model equivalent choose the control, which is also best on the test grid, so any other choice is a loss; control test P95 is $179.7\pm102.0$ and $155.7\pm64.4\,\mu$s at 5 and 8\,ms (95\% half-widths across ten blocks). Matched-budget random search, Q-learning, UCB1 and BO converge on it as well, choosing it in 98--99\% of 1,000 seeds at $B=40$ (Appendix~\ref{app:measurements}).
 
-Table~\ref{tab:model-audit} gives each model's choice under every input condition. With evidence, nine of ten models choose the control in all three evidence variants, exactly as table lookup does; Llama-3.1-8B instead picks \texttt{s50000\_aone}, which is worse on replay ($-145\pm125\%$ and $-180\pm156\%$). Removing the graph item changes no choice, and removing the retrieval runs changes none either: the training table alone suffices. Without evidence, every model except Nemotron, which declares the default, chooses a worse setting in at least four of five seeds, usually single-CPU affinity with 50\,$\mu$s slack (six models) or with 1\,ms slack (three). The evidence is therefore necessary; in this task it is also sufficient, since no model improves on the selector that simply reads it. Sufficiency holds only while the evidence agrees with itself. On further kernel instances, choices follow the evidence even under permuted labels, but Llama-3.3-70B leaves the table in all seeds when 4\,ms runs compete with it (Appendix~\ref{app:instances}). In a database task, 21 of 27 hosted answers follow competing runs rather than the table, toward a setting that is not better on test (Appendix~\ref{app:sqlite}).
+Table~\ref{tab:model-audit} gives each model's choice under every input condition. With evidence, nine of ten models choose the control in all three evidence variants, exactly as table lookup does; Llama-3.1-8B instead picks \texttt{s50000\_aone}, which is worse on replay ($-145\pm125\%$ and $-180\pm156\%$). Removing the graph item changes no choice, and removing the retrieval runs changes none either: the training table alone suffices. Without evidence, every model except Nemotron, which declares the default, chooses a worse setting in at least four of five seeds, usually single-CPU affinity with 50\,$\mu$s slack (six models) or with 1\,ms slack (three). The evidence is therefore necessary; in this task it is also sufficient, since no model improves on the selector that simply reads it. Sufficiency holds only while the evidence agrees with itself (\S\ref{subsec:generality}).
 
 \subsection{Citations: Valid, One-Sided and Front-Loaded}
 \label{subsec:citations}
@@ -63,7 +63,7 @@ The explanations are often wrong about what the cited items say (Table~\ref{tab:
 
 \emph{Invented semantics.} Without evidence, all four local models justify their choice by assigning meanings to opaque identifiers, for instance reading ``50000'' as a smaller dataset size or ``one'' as a more aggressive approach. The configuration names carry no such information.
 
-These errors are largely decoupled from the decision: 35 of the 41 misstated claims accompany a choice of the control. In the database task the coupling reverses: nine explanations misreport the training table as agreeing with a choice it contradicts (Appendix~\ref{app:sqlite}). Wording also varies without the decision: hosted models gave two to five distinct explanations each while always choosing the control. Valid citations thus establish provenance, and a correct decision can coexist with an incorrect account of the evidence that supports it.
+These errors are largely decoupled from the decision: 35 of the 41 misstated claims accompany a choice of the control. Wording also varies without the decision: hosted models gave two to five distinct explanations each while always choosing the control. Valid citations thus establish provenance, and a correct decision can coexist with an incorrect account of the evidence that supports it.
 
 \emph{Mitigations help but do not certify.} For the hosted models, an instruction to verify every stated number cuts flagged quantifiers from 21 to 1 of 30 explanations and range errors from 7 to 2, and precomputed summaries remove range errors, whereas enabling internal reasoning leaves the overstatement in place; reading the explanations still finds false comparisons the automatic checks miss, and these answers lack verified labels (Appendices~\ref{app:mitigation} and~\ref{app:reasoning}).
 
@@ -71,8 +71,19 @@ These errors are largely decoupled from the decision: 35 of the 41 misstated cla
 \label{subsec:reliance}
 Five models cite the single training table, so matched deletion is non-estimable for them. Among the others, only Phi-4 changes its choice under cited but not uncited deletion (all five seeds), to a choice that contradicts the remaining table, and only at 4 bits (Appendix~\ref{app:precision}); Llama-3.1-8B changes under both deletions, and Llama-3.3-70B, Qwen3 and Nemotron under neither. A redesign with a split table and configuration-matched controls is estimable for most models (Appendix~\ref{app:reliance}): no hosted model then changes, and only bf16 Llama-3.1-8B switches under cited deletion alone.
 
-\subsection{Enforcement: A Calibrated Gate under Shift}
-\label{subsec:gate}
-A test run is \emph{unsafe} when more than 10\% of its 40 events exceed a predeclared 200\,$\mu$s deadline, a label computed from timing alone. For the gate, the score is a configuration's training deadline-miss fraction, fixed before calibration on 4\,ms runs only; all three prespecified $\alpha\in\{.05,.10,.20\}$ yield $\tau=.9225$ because the unsafe-score order statistics are tied. Every candidate is executed in an isolated process, so accepted and vetoed candidates both have observed outcomes (Figure~\ref{fig:gate-replay} in Appendix~\ref{app:measurements}).
+\subsection{Beyond One Evidence List}
+\label{subsec:generality}
+\begin{table}[t]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{SQLite task: choices of the table selector and of the hosted models with full evidence and without evidence (superscripts count valid seeds). N/O: \texttt{synchronous} NORMAL/OFF; D/W: journal DELETE/WAL. The last rows give each other configuration's paired test P95 change versus the selector's choice (95\% half-width over ten blocks).}
+\label{tab:sqlite}
+\begin{adjustbox}{max width=\columnwidth}
+\input{domain-sqlite.tex}
+\end{adjustbox}
+\end{table}
 
-Unsafe acceptance is $5/25=20.0\%$ and $4/24=16.7\%$ among unsafe runs, significantly above the 5\% level for this calibration draw (one-sided binomial $p=.007$ and $.03$) but within sampling error of 10\% ($p=.10$, $.21$); unsafe fractions among accepted runs are $5/20$ and $4/20$, and veto precision is $20/20$ in each period. A nominally calibrated signal is only as good as the exchangeability it assumes, and a period shift breaks it. The bounded actuator restored both original settings in all 80 staged executions (Appendix~\ref{app:measurements}).
+The main audit gives every model one evidence list. We reran the six hosted models with the same prompt, schema and settings on three further kernel instances built from training-side data and on a second domain measured for this paper. Their explanations were read with an AI assistant and are not verified by annotators (Appendices~\ref{app:instances}--\ref{app:sqlite}).
+
+\emph{Further kernel evidence.} With the four labels permuted, the best configuration carries the name that suggests the worst setting, yet all 30 answers still choose it, so choices follow the evidence, not the names. When 4\,ms retrieval runs compete with the table (its choice is lowest in 5 of 10 blocks), Llama-3.3-70B leaves the table's choice in all five seeds. One-sided citation persists in every instance, and the quantifier proxy fires in 13--18 of 30 explanations per instance.
+
+\emph{A database task.} Four SQLite settings cross \texttt{synchronous} (NORMAL, OFF) with the journal mode (DELETE, WAL). The objective is P95 commit latency, and training, retrieval and test roles of ten blocks each were committed before any model call. The table favors OFF/WAL, the retrieval runs favor NORMAL/WAL (8 of 10 blocks), and the test blocks favor OFF/WAL (7 of 10; paired advantage $20.6\pm26.7\%$). Without evidence, 25 of 30 answers choose OFF/WAL; with evidence, 21 of 27 follow the runs to NORMAL/WAL (Table~\ref{tab:sqlite}). Thirteen of these 21 explanations misstate the evidence, and none of the six that keep the table's choice. Nine misreport the training table as agreeing with the choice, for instance calling 99.496\,$\mu$s ``significantly lower'' than 71.652\,$\mu$s, and the automatic checks detect none of them. Here the evidence moves the decision away from both the prior and the selector, and the rationale bends the contrary evidence to fit.

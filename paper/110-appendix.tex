@@ -1,6 +1,40 @@
 \appendix
 \section{\sysname Testbed Details}
 \label{app:testbed}
+\begin{figure}[h]
+\centering
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tikzpicture}[font=\scriptsize, >={Stealth[length=1.6mm]}, x=1mm, y=1mm,
+  box/.style={draw, rounded corners=1.2pt, align=center, inner sep=1.8pt, minimum height=7mm},
+  ev/.style={box, fill=black!6}, en/.style={box, fill=black!16, line width=0.6pt},
+  tag/.style={font=\scriptsize\itshape, text=black!60}]
+\node[ev, text width=33mm] (tel) at (-19.5,0) {Workload telemetry\\(validity-checked)};
+\node[ev, text width=33mm] (kb)  at (19.5,0)  {Frozen typed graph\\+ retrieved traces};
+\node[box, text width=76mm] (rsn) at (0,-12) {\textbf{Reasoner}: $k{=}3$ model samples $\rightarrow$ one \emph{observed} complete bundle,\\heuristic score $u$ = max over members; abstains on invalid input};
+\node[en, text width=50mm] (val) at (-13,-24) {\textbf{Runtime}: validate the whole bundle\\(allowlist, bounds, joint constraints)};
+\node[ev, text width=20mm] (cal) at (29,-24) {Calibration\\labels $\rightarrow$ $\tau$};
+\node[box, text width=30mm] (veto)  at (-23,-36) {Veto every member\\($u{\ge}\tau$ or invalid)};
+\node[box, text width=40mm] (stage) at (17,-36) {Stage $5{\to}25{\to}50{\to}100\%$\\in memory only (dry run)};
+\node[box, text width=76mm] (trace) at (0,-48) {Decision trace: inputs, prompt hash, raw samples, $u$, $\tau$, decision};
+\draw[->] (tel) -- (tel |- rsn.north);
+\draw[->] (kb) -- (kb |- rsn.north);
+\draw[->] (rsn.south -| val) -- (val.north);
+\draw[->] (cal) -- (val);
+\draw[->] (val.south -| veto) -- (veto.north);
+\draw[->] (val.south) ++(12,0) -- (stage.north -| {$(val.south)+(12,0)$});
+\draw[->] (veto) -- (veto |- trace.north);
+\draw[->] (stage) -- (stage |- trace.north);
+\node[tag, anchor=south west] at (tel.north west) {evidence};
+\node[tag, anchor=south east] at (cal.north east) {independent labels};
+\end{tikzpicture}
+\end{adjustbox}
+\caption{\sysname decision path. Evidence, generation and enforcement are separate, so the frozen evidence can be given to a non-LLM selector, ablated or deleted, and gate errors counted against independent labels. The REST runtime is a dry run; a separate actuator applies and restores settings in owned child processes.}
+\label{fig:runtime-path}
+\end{figure}
+
+\paragraph{Enforcement.}
+The runtime treats a proposal as a unit: it validates every member (allowlisted knobs, bounds, joint constraints, no duplicates) and, if any member score satisfies $u\ge\tau$, vetoes all of them; otherwise the proposal enters a staged rollout. The REST runtime is a dry run that never writes kernel settings. The threshold $\tau$ comes from a rank gate, a selective-prediction rule~\cite{Geifman2017Selective} calibrated on unsafe examples only, where $Y=1$ marks an unsafe outcome defined from raw observations, never from whether a veto or rollback occurred. If unsafe calibration and test scores are exchangeable, the gate accepts an unsafe action with probability at most $\alpha$ (Proposition~\ref{prop:recal}); this bounds misses among unsafe actions, not the unsafe fraction among accepted ones.
+
 \paragraph{Design hypotheses.}
 \sysname is motivated by three hypotheses. First, a configuration's utility may depend on workload and hardware. Second, joint knob effects may be non-additive. Third, performance, failure probability and intervention cost may conflict. Each hypothesis requires measured interventions with explicit baselines.
 
@@ -13,13 +47,21 @@ For lower-is-better loss, negative $I_{ab}$ indicates a beneficial non-additive 
 A \textsc{depends-on} edge requires a validated admissibility rule or measured range conditioning; it cannot be inferred solely from the sign of $I_{ab}$. The seed graph is empty until edges pass this test. The principal question is whether a reasoner can use independently acquired evidence more effectively than an optimizer with the same inputs, after charging the cost of acquiring that evidence.
 
 \paragraph{Restricted rank gate.}
-The gate of \S\ref{sec:testbed} sets $\tau$ as follows; $Y=1$ marks an unsafe outcome.
+The gate sets $\tau$ as follows; $Y=1$ marks an unsafe outcome.
 \begin{proposition}[Restricted rank gate]\label{prop:recal}
 Fix a score function before calibration. Suppose $n$ unsafe calibration scores and the next unsafe test score are jointly exchangeable. Set $j=\lfloor\alpha(n+1)\rfloor$ for $0<\alpha<1$. If $j=0$, veto all; otherwise let $\tau$ be the $j$th smallest unsafe calibration score and accept only when $u<\tau$. Then the unsafe-class acceptance probability, marginal over calibration and test scores, is at most $j/(n+1)\le\alpha$.
 \end{proposition}
 \noindent\emph{Proof.} By exchangeability the test score's rank among the $n+1$ scores is uniform; it falls below the $j$th calibration score only in the first $j$ ranks, and ties only reduce this.\hfill$\square$
 
-The bound controls misses among unsafe actions, $\Pr(A=1\mid Y=1)$, not the unsafe fraction among accepted actions; a cost-selected threshold is capped at the rank threshold, and no unsafe calibration example implies veto-all. The gate accepts any fixed score; \S\ref{subsec:gate} evaluates it with a measured risk score rather than $u$.
+The bound controls misses among unsafe actions, $\Pr(A=1\mid Y=1)$, not the unsafe fraction among accepted actions; a cost-selected threshold is capped at the rank threshold, and no unsafe calibration example implies veto-all. The gate accepts any fixed score; the evaluation below uses it with a measured risk score rather than $u$.
+
+\paragraph{Related work on risk control.}
+Self-consistency aggregates sampled outputs~\cite{Wang2023SelfConsistency}; LLMs can partly predict their own correctness~\cite{Kadavath2022Know}, verbalized confidence can be better calibrated than token probabilities for RLHF models~\cite{Tian2023JustAsk} yet remains overconfident~\cite{Xiong2024ExpressUncertainty}, and semantic entropy measures uncertainty over meanings~\cite{Kuhn2023SemanticUncertainty}. Selective classification abstains to meet a target risk~\cite{Geifman2017Selective}, and conformal methods give guarantees for language-model outputs~\cite{Quach2024ConformalLM}, their factuality~\cite{Mohri2024ConformalFactuality} and monotone losses~\cite{Angelopoulos2024CRC}, with extensions for non-exchangeable or drifting data~\cite{Farinhas2024NCRC,Barber2023Beyond,Gibbs2021ACI}; none implies that a window reset after a detected change~\cite{Bifet2007ADWIN} restores a fixed risk level. Our rank gate is a restricted class-conditional instance of this family, and we report where its assumptions fail (below).
+
+\paragraph{Gate evaluation under shift.}\label{subsec:gate}
+A test run is \emph{unsafe} when more than 10\% of its 40 events exceed a predeclared 200\,$\mu$s deadline, a label computed from timing alone. For the gate, the score is a configuration's training deadline-miss fraction, fixed before calibration on 4\,ms runs only; all three prespecified $\alpha\in\{.05,.10,.20\}$ yield $\tau=.9225$ because the unsafe-score order statistics are tied. Every candidate is executed in an isolated process, so accepted and vetoed candidates both have observed outcomes (Figure~\ref{fig:gate-replay} in Appendix~\ref{app:measurements}).
+
+Unsafe acceptance is $5/25=20.0\%$ and $4/24=16.7\%$ among unsafe runs, significantly above the 5\% level for this calibration draw (one-sided binomial $p=.007$ and $.03$) but within sampling error of 10\% ($p=.10$, $.21$); unsafe fractions among accepted runs are $5/20$ and $4/20$, and veto precision is $20/20$ in each period. A nominally calibrated signal is only as good as the exchangeability it assumes, and a period shift breaks it. The bounded actuator restored both original settings in all 80 staged executions (Appendix~\ref{app:measurements}).
 
 \paragraph{Disagreement score.}
 For a knob--value pair proposed in $v$ of $k$ samples, the reasoner's score is $u=0.7(1-v/k)+0.3(1-w)$, clipped to $[0.02,1]$, where $w$ is the strongest retrieved synergy weight (zero when absent). It is neither predictive entropy nor a calibrated probability. Failed samples stay in the denominator, and repeated copies of a fallback are not counted as independent votes.
@@ -304,11 +346,3 @@ The six hosted models answered the main audit's prompt and schema, with only the
 
 We read all 27 explanations against the evidence with an AI assistant; the reading has not been independently verified (\texttt{explanations-read.csv}). Thirteen contain at least one misstatement, all among the 21 answers choosing \texttt{sync\_normal\_wal}, and none were found in the six answers that keep the table's choice. The dominant error is new. Nine explanations misreport the training table so that it agrees with the choice: three Nemotron answers call \texttt{sync\_normal\_wal} lowest ``across both training and retrieval evidence'', two Nemotron answers call 99.496\,$\mu$s ``significantly lower'' than 71.652\,$\mu$s, and four Qwen3 or DeepSeek-V3.2 answers call it the table's lowest or better than \texttt{sync\_off\_wal}. Other errors repeat the kernel task's patterns. Five explanations claim the choice is ``consistently'' lowest (it wins 8 of 10 blocks). Four give a wrong range for \texttt{sync\_normal\_wal}, each omitting its 114.05\,$\mu$s run in block~3. One states a wrong median and one uses milliseconds. The automatic checks see only part of this: the quantifier proxy flags 9 explanations and the range check 4. The range check partly flags ranges that are correct for the stated blocks and misses one wrong range, and neither check detects the misreported table. In this domain, then, the decision departs from the equally informed selector, and the rationales misreport the evidence that contradicts the decision.
 
-\begin{table}[h]
-\centering\footnotesize\setlength{\tabcolsep}{3pt}
-\caption{SQLite task: choices of the table selector and of the hosted models with full evidence and without evidence (superscripts count valid seeds). N/O: \texttt{synchronous} NORMAL/OFF; D/W: journal DELETE/WAL. The last rows give each other configuration's paired test P95 change versus the selector's choice (95\% half-width over ten blocks).}
-\label{tab:sqlite}
-\begin{adjustbox}{max width=\columnwidth}
-\input{domain-sqlite.tex}
-\end{adjustbox}
-\end{table}
