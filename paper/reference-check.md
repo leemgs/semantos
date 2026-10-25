@@ -62,3 +62,9 @@ resolved above, and no new discrepancy was found:
 - ACM article-number pages: Herodotou;
 - ICLR papers whose accepted record the OpenReview API search misses: Wang
   2023, Kuhn 2023, Chen 2020, Quach 2024.
+
+## Re-run 2026-10-25 (after the restructure)
+
+The cited set is unchanged (67 entries). The re-run gives the same result: 57
+cited entries match exactly, and the same 10 known, resolved flags appear. No
+new discrepancy.
