@@ -68,3 +68,8 @@ resolved above, and no new discrepancy was found:
 The cited set is unchanged (67 entries). The re-run gives the same result: 57
 cited entries match exactly, and the same 10 known, resolved flags appear. No
 new discrepancy.
+
+## Re-run 2026-10-25 (second)
+
+Same result as the previous run: 57 cited entries match exactly, and the same
+10 known, resolved flags appear (identical details). No new discrepancy.
