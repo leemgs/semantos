@@ -446,7 +446,8 @@ Hosted runs (2026-09-27, OpenRouter, `--response-format json_schema`,
   and test roles); `run` queries the hosted models with full and no evidence;
   `score` scores choices by test replay and explanations by the automatic
   checks. `explanations-read.csv` holds an AI-assisted reading of the 27
-  full-evidence explanations; it is not verified.
+  full-evidence explanations; an author verified every reported misstatement
+  (`paper/author-verification.md`).
 * `human_study.py` (not in the paper; study not yet run): materials for a
   human-impact study ready for pre-registration (`paper/human-study/protocol.md`). `build`
   writes the stimuli (verbatim misstated explanations, minimally corrected

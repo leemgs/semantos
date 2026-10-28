@@ -186,9 +186,9 @@ Limitations and offer concrete additions for the camera-ready version.
   choice in all five seeds, so sufficiency is qualified.
 - One-sided citation persists (only Gemini Flash cites competitors), and the
   quantifier proxy fires in 13-18 of 30 explanations per instance.
-- These are automatic checks; an author should verify
-  `results/evidence-instances/explanations-for-review.csv` before the response.
-- Still the same host and workload family; another domain remains open.
+- The counts come from automatic checks; an author verified the readings of
+  the flagged explanations (`paper/author-verification.md`).
+- Still the same host and workload family; Appendix K adds a second domain.
 
 ## 16. "Only one domain."
 
@@ -199,11 +199,11 @@ Limitations and offer concrete additions for the camera-ready version.
   test favours OFF/WAL (7/10 blocks; paired +20.6 ± 26.7 %, not significant).
 - Choices: 21/27 evidence answers follow the runs; without evidence 25/30
   choose OFF/WAL.
-- Explanations: 13/27 contain a misstatement on an AI-assisted reading, 9 of
+- Explanations: 13/27 contain a misstatement (AI-drafted reading, author-verified), 9 of
   which misreport the training table as agreeing with the choice. Selective
   citation persists.
-- To do before the response: an author or annotator verifies
-  `explanations-read.csv`. A third domain with textual evidence remains open.
+- An author verified every reported misstatement (2026-10-28). A third
+  domain with textual evidence remains open.
 
 ## 17. "The headline claims are domain-specific."
 
@@ -214,9 +214,9 @@ Limitations and offer concrete additions for the camera-ready version.
 
 ## 18. "Appendix J/K readings are AI-made."
 
-- They are disclosed as unverified. `paper/author-verification.md` lists every
-  reading for sign-off (13 SQLite explanations, 7 J items). Complete it before
-  submission if possible, since the abstract mentions the database result.
+- AI-drafted, and an author verified every reported reading on 2026-10-28
+  (`paper/author-verification.md`). Unlike the main audit, there are no blind
+  annotators; offer to add one during the response period.
 
 ## Quick additions possible during the response period (no new hardware runs)
 

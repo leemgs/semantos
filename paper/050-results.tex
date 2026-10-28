@@ -82,7 +82,7 @@ Five models cite the single training table, so matched deletion is non-estimable
 \end{adjustbox}
 \end{table}
 
-The main audit gives every model one evidence list. We reran the six hosted models with the same prompt, schema and settings on three further kernel instances built from training-side data and on a second domain measured for this paper. Their explanations were read with an AI assistant and are not verified by annotators (Appendices~\ref{app:instances}--\ref{app:sqlite}).
+The main audit gives every model one evidence list. We reran the six hosted models with the same prompt, schema and settings on three further kernel instances built from training-side data and on a second domain measured for this paper. Their explanations were read with an AI assistant, and an author verified every reported misstatement; no blind annotators were used here (Appendices~\ref{app:instances}--\ref{app:sqlite}).
 
 \emph{Further kernel evidence.} With the four labels permuted, the best configuration carries the name that suggests the worst setting, yet all 30 answers still choose it, so choices follow the evidence, not the names. When 4\,ms retrieval runs compete with the table (its choice is lowest in 5 of 10 blocks), Llama-3.3-70B leaves the table's choice in all five seeds. One-sided citation persists in every instance, and the quantifier proxy fires in 13--18 of 30 explanations per instance.
 
