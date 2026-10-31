@@ -448,7 +448,14 @@ Hosted runs (2026-09-27, OpenRouter, `--response-format json_schema`,
   checks. `explanations-read.csv` holds an AI-assisted reading of the 27
   full-evidence explanations; an author verified every reported misstatement
   (`paper/author-verification.md`).
-* `human_study.py` (not in the paper; study not yet run): materials for a
+* `blind_round3.py` (not in the paper; not yet run): blind sheets for a third
+  annotator in `paper/annotation-round3/`. Task A has the annotator extract claims
+  from the 27 full-context explanations, so claim extraction is checked
+  independently. Task B has the annotator label the 27 SQLite explanations,
+  the only check of §5.5 not done by an author. `score` reports extraction
+  recall/precision with an adjudication list, and Cohen's kappa against the
+  author-verified SQLite readings. No annotations exist yet.
+ (not in the paper; study not yet run): materials for a
   human-impact study ready for pre-registration (`paper/human-study/protocol.md`). `build`
   writes the stimuli (verbatim misstated explanations, minimally corrected
   versions, probes with answers computed from the evidence) and a static

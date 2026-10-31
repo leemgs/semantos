@@ -1,0 +1,137 @@
+[
+  {
+    "id": "S01",
+    "model": "Llama-3.3-70B",
+    "seed": "4088"
+  },
+  {
+    "id": "S02",
+    "model": "Llama-3.3-70B",
+    "seed": "4089"
+  },
+  {
+    "id": "S03",
+    "model": "Llama-3.3-70B",
+    "seed": "4090"
+  },
+  {
+    "id": "S04",
+    "model": "Llama-3.3-70B",
+    "seed": "4091"
+  },
+  {
+    "id": "S05",
+    "model": "Llama-3.3-70B",
+    "seed": "4092"
+  },
+  {
+    "id": "S06",
+    "model": "Qwen3-235B",
+    "seed": "4088"
+  },
+  {
+    "id": "S07",
+    "model": "Qwen3-235B",
+    "seed": "4089"
+  },
+  {
+    "id": "S08",
+    "model": "Qwen3-235B",
+    "seed": "4090"
+  },
+  {
+    "id": "S09",
+    "model": "Qwen3-235B",
+    "seed": "4091"
+  },
+  {
+    "id": "S10",
+    "model": "Qwen3-235B",
+    "seed": "4092"
+  },
+  {
+    "id": "S11",
+    "model": "DeepSeek-V3.2",
+    "seed": "4088"
+  },
+  {
+    "id": "S12",
+    "model": "DeepSeek-V3.2",
+    "seed": "4090"
+  },
+  {
+    "id": "S13",
+    "model": "DeepSeek-V3.2",
+    "seed": "4091"
+  },
+  {
+    "id": "S14",
+    "model": "DeepSeek-V3.2",
+    "seed": "4092"
+  },
+  {
+    "id": "S15",
+    "model": "Nemotron-3-Ultra-550B",
+    "seed": "4088"
+  },
+  {
+    "id": "S16",
+    "model": "Nemotron-3-Ultra-550B",
+    "seed": "4089"
+  },
+  {
+    "id": "S17",
+    "model": "Nemotron-3-Ultra-550B",
+    "seed": "4090"
+  },
+  {
+    "id": "S18",
+    "model": "Nemotron-3-Ultra-550B",
+    "seed": "4091"
+  },
+  {
+    "id": "S19",
+    "model": "Nemotron-3-Ultra-550B",
+    "seed": "4092"
+  },
+  {
+    "id": "S20",
+    "model": "Gemini-3.8-Flash",
+    "seed": "4088"
+  },
+  {
+    "id": "S21",
+    "model": "Gemini-3.8-Flash",
+    "seed": "4089"
+  },
+  {
+    "id": "S22",
+    "model": "Gemini-3.8-Flash",
+    "seed": "4092"
+  },
+  {
+    "id": "S23",
+    "model": "Gemini-3.1-Pro",
+    "seed": "4088"
+  },
+  {
+    "id": "S24",
+    "model": "Gemini-3.1-Pro",
+    "seed": "4089"
+  },
+  {
+    "id": "S25",
+    "model": "Gemini-3.1-Pro",
+    "seed": "4090"
+  },
+  {
+    "id": "S26",
+    "model": "Gemini-3.1-Pro",
+    "seed": "4091"
+  },
+  {
+    "id": "S27",
+    "model": "Gemini-3.1-Pro",
+    "seed": "4092"
+  }
+]

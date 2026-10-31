@@ -218,6 +218,13 @@ Limitations and offer concrete additions for the camera-ready version.
   (`paper/author-verification.md`). Unlike the main audit, there are no blind
   annotators; offer to add one during the response period.
 
+## 19. "Claim extraction and the SQLite readings lack an independent check."
+
+- Prepared but not yet run: `paper/annotation-round3/` holds the blind sheets
+  for one more annotator (Task A extraction, Task B SQLite readings) and
+  `blind_round3.py score` computes recall/precision and kappa. Report results
+  only after real annotations exist.
+
 ## Quick additions possible during the response period (no new hardware runs)
 
 1. Adjudication of the disagreements, if asked.

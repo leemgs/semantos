@@ -41,6 +41,7 @@ EXCLUDE = [
     'paper/arr-submission-form.md',        # mentions the earlier venue
     'paper/reference-check.md',            # internal bibliography check report
     'paper/author-verification.md',        # internal sign-off sheet
+    'paper/annotation-round3/*',           # blind sheets and key for the third annotator
     'scripts/check_references.py',         # internal bibliography checker
     'code/semantos_logo01.png',            # logo shows the public project name
     'scripts/make_anonymous_release.py',   # lists the identifying terms itself

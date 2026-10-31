@@ -1,0 +1,45 @@
+item,config,block,p95_us
+training-table (mean),sync_normal_delete,,2404.271
+training-table (mean),sync_normal_wal,,99.496
+training-table (mean),sync_off_delete,,154.458
+training-table (mean),sync_off_wal,,71.652
+retrieval-0-sync_off_wal,sync_off_wal,0,53.592
+retrieval-0-sync_normal_wal,sync_normal_wal,0,48.361
+retrieval-0-sync_off_delete,sync_off_delete,0,126.757
+retrieval-0-sync_normal_delete,sync_normal_delete,0,1974.338
+retrieval-1-sync_off_wal,sync_off_wal,1,47.927
+retrieval-1-sync_normal_wal,sync_normal_wal,1,43.456
+retrieval-1-sync_normal_delete,sync_normal_delete,1,1970.529
+retrieval-1-sync_off_delete,sync_off_delete,1,169.124
+retrieval-2-sync_normal_wal,sync_normal_wal,2,43.88
+retrieval-2-sync_off_wal,sync_off_wal,2,64.783
+retrieval-2-sync_off_delete,sync_off_delete,2,205.441
+retrieval-2-sync_normal_delete,sync_normal_delete,2,1850.743
+retrieval-3-sync_off_delete,sync_off_delete,3,125.534
+retrieval-3-sync_normal_delete,sync_normal_delete,3,1984.705
+retrieval-3-sync_off_wal,sync_off_wal,3,95.699
+retrieval-3-sync_normal_wal,sync_normal_wal,3,114.05
+retrieval-4-sync_off_delete,sync_off_delete,4,115.911
+retrieval-4-sync_normal_delete,sync_normal_delete,4,1934.887
+retrieval-4-sync_off_wal,sync_off_wal,4,61.892
+retrieval-4-sync_normal_wal,sync_normal_wal,4,54.163
+retrieval-5-sync_normal_wal,sync_normal_wal,5,102.838
+retrieval-5-sync_off_wal,sync_off_wal,5,68.231
+retrieval-5-sync_normal_delete,sync_normal_delete,5,1314.097
+retrieval-5-sync_off_delete,sync_off_delete,5,110.46
+retrieval-6-sync_off_delete,sync_off_delete,6,137.687
+retrieval-6-sync_off_wal,sync_off_wal,6,46.04
+retrieval-6-sync_normal_wal,sync_normal_wal,6,43.716
+retrieval-6-sync_normal_delete,sync_normal_delete,6,1887.64
+retrieval-7-sync_normal_wal,sync_normal_wal,7,43.905
+retrieval-7-sync_off_delete,sync_off_delete,7,141.83
+retrieval-7-sync_normal_delete,sync_normal_delete,7,2407.991
+retrieval-7-sync_off_wal,sync_off_wal,7,64.319
+retrieval-8-sync_off_wal,sync_off_wal,8,95.479
+retrieval-8-sync_off_delete,sync_off_delete,8,131.817
+retrieval-8-sync_normal_delete,sync_normal_delete,8,2490.016
+retrieval-8-sync_normal_wal,sync_normal_wal,8,81.203
+retrieval-9-sync_off_delete,sync_off_delete,9,130.565
+retrieval-9-sync_normal_wal,sync_normal_wal,9,41.329
+retrieval-9-sync_normal_delete,sync_normal_delete,9,1635.041
+retrieval-9-sync_off_wal,sync_off_wal,9,45.279
